@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use zxbodya\yii2\galleryManager\GalleryManager;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -13,8 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="product-view">
 
     <div class="box box-primary">
-        <div class="box-body">
-
+        <div class="box-header with-border">
             <p>
                 <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
@@ -27,6 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::a('Атрибуты', ['attribute', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Создать товар', ['create'], ['class' => 'btn btn-default']) ?>
             </p>
+        </div>
+
+        <div class="box-body">
+
 
             <?= DetailView::widget([
                 'model' => $model,
@@ -50,6 +54,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]) ?>
+        </div>
+    </div>
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Изображения товара</h3>
+        </div>
+        <div class="box-body">
+            <? if ($model->isNewRecord) {
+                echo 'Нельзя загружать изображения до создания галлереи';
+            } else {
+                echo GalleryManager::widget(
+                    [
+                        'model' => $model,
+                        'behaviorName' => 'galleryBehavior',
+                        'apiRoute' => 'product/galleryApi'
+                    ]
+                );
+            }?>
         </div>
     </div>
 
