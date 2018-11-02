@@ -22,6 +22,7 @@
                         'icon' => 'cogs',
                         'url' => '#',
                         'items' => [
+                            ['label' => 'Карта', 'icon' => 'map', 'url' => ['/ya-map'], "active" => Yii::$app->controller->id === 'slider',],
                             ['label' => 'Слайдер', 'icon' => 'picture-o', 'url' => ['/slider'], "active" => Yii::$app->controller->id === 'slider',],
                             ['label' => 'Сертификаты', 'icon' => 'certificate', 'url' => ['/certificate'], "active" => Yii::$app->controller->id === 'certificate',],
                             ['label' => 'Документы', 'icon' => 'file-text', 'url' => ['/we-docs'], "active" => Yii::$app->controller->id === 'we-docs',],

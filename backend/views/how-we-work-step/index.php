@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
 //                    'houWeWork_id',
                     'title',
-                    'description:ntext',
+//                    'description:ntext',
                     'rank',
                     [
                         'attribute' => 'publish',

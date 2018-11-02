@@ -2,7 +2,9 @@
 
 namespace common\models;
 
+use Imagine\Image\ImageInterface;
 use Yii;
+use zxbodya\yii2\galleryManager\GalleryBehavior;
 
 /**
  * This is the model class for table "howWeWork".
@@ -29,6 +31,41 @@ class HowWeWork extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'galleryBehavior' => [
+                'class' => GalleryBehavior::className(),
+                'type' => 'weWork',
+                'extension' => 'jpg',
+                'directory' => Yii::getAlias('@uploads') . '/images/we-work',
+                'url' => '/uploads/images/we-work',
+                'versions' => [
+                    'small' => function ($img) {
+                        /** @var ImageInterface $img */
+                        return $img
+                            ->copy()
+                            ->thumbnail(new \Imagine\Image\Box(500, 500));
+                    },
+                    'medium' => function ($img) {
+                        /** @var ImageInterface $img */
+                        $dstSize = $img->getSize();
+                        $maxWidth = 1024;
+                        if ($dstSize->getWidth() > $maxWidth) {
+                            $dstSize = $dstSize->widen($maxWidth);
+                        }
+                        return $img
+                            ->copy()
+                            ->resize($dstSize);
+                    },
+                ]
+            ]
         ];
     }
 

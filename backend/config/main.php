@@ -43,11 +43,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<controller:\w+>' => '<controller>/index',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '<action:\w+>' => 'site/<action>',
+                '/ya-map' => 'site/ya-map',
                 '<controller>' => '<controller>/index',
                 '<controller>/<id:\d+>' => '<controller>/view',
                 '<controller>/<action>/<id:\d+>' => '<controller>/<action>',

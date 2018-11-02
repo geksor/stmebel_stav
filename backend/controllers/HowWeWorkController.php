@@ -8,6 +8,7 @@ use common\models\HowWeWorkSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use zxbodya\yii2\galleryManager\GalleryManagerAction;
 
 /**
  * HowWeWorkController implements the CRUD actions for HowWeWork model.
@@ -28,6 +29,23 @@ class HowWeWorkController extends Controller
             ],
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function actions()
+    {
+        return [
+            'galleryApi' => [
+                'class' => GalleryManagerAction::className(),
+                // mappings between type names and model classes (should be the same as in behaviour)
+                'types' => [
+                    'weWork' => HowWeWork::className()
+                ]
+            ],
+        ];
+    }
+
 
     /**
      * Lists all HowWeWork models.

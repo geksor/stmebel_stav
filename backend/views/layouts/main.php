@@ -36,6 +36,12 @@ if (Yii::$app->controller->action->id === 'login') {
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+        <style>
+            .workarea-cropbox{width: 100%!important;}
+            .bg-cropbox{width: 100%!important;}
+            .image-form .workarea-cropbox{height: 600px!important;}
+            .image-form .bg-cropbox{height: 600px!important;}
+        </style>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
     <?php $this->beginBody() ?>

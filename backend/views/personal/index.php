@@ -27,9 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
 //                    'id',
+                    [
+                        'attribute' => 'image',
+                        'headerOptions' => ['width' => 100],
+                        'filter' => false,
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Personal */
+                            return Html::img($data->getPhotos('personal')['thumb_image'], ['style' => 'max-width: 100px;']);
+                        }
+                    ],
                     'name',
                     'position',
-                    'image',
                     [
                         'attribute' => 'publish',
                         'label' => 'Состояние',

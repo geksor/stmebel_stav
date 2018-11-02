@@ -2,12 +2,15 @@
 
 namespace backend\controllers;
 
+use common\models\ImageUpload;
 use Yii;
 use common\models\Personal;
 use common\models\PersonalSearch;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PersonalController implements the CRUD actions for Personal model.
@@ -144,6 +147,35 @@ class PersonalController extends Controller
             }
         }
         return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\Exception
+     */
+    public function actionSetPhoto($id)
+    {
+        $model = new ImageUpload();
+        $imageFrom = $this->findModel($id);
+
+        if (Yii::$app->request->isPost && Yii::$app->request->post('ImageUpload')['crop_info'])
+        {
+            $file = UploadedFile::getInstance($model, 'image');
+            $cropInfo = Yii::$app->request->post('ImageUpload')['crop_info'];
+            $dir = $this->id;
+
+            if ($imageFrom->savePhoto($model->uploadFile($file, $imageFrom->image, $cropInfo, $dir)))
+            {
+                return $this->redirect(['view', 'id' => $imageFrom->id]);
+            }
+        }
+
+        return $this->render('set-photo', [
+            'model' => $model,
+            'imageFrom' => $imageFrom,
+        ]);
     }
 
 }

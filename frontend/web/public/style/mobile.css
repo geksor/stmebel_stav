@@ -1,0 +1,53 @@
+@media (min-width: 1px) and (max-width: 1119px) {
+    .navbar{
+        font-size: 13px;
+    }
+    .phone{
+        font-size: 14px;
+    }
+    .max-h-lg-350{
+        max-height: 350px;
+    }
+}
+
+@media (min-width: 1px) and (max-width: 991px) {
+    .navbar{
+        font-size: inherit;
+    }
+    .phone{
+        font-size: 27px;
+    }
+    .max-h-lg-350{
+        max-height: none;
+    }
+}
+
+@media (min-width: 1px) and (max-width: 576px) {
+    h1{
+        font-size: 35px;
+    }
+
+    .navbar img {
+        width: 160px;
+        height: auto;
+    }
+
+    #professionals h2{
+        font-size: 25px;
+    }
+    #houses span{
+        font-size: 8px;
+    }
+    .s-300{
+        width: 300px;
+        height: 300px;
+    }
+    .s-90{
+        width: 90px;
+        height: 90px;
+    }
+    .s-45{
+        width: 45px;
+        height: 45px;
+    }
+}

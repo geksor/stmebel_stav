@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
+                <?= Html::a('Создать шаг', ['create', 'par_id' => $model->houWeWork_id], ['class' => 'btn btn-default']) ?>
             </p>
 
             <?= DetailView::widget([

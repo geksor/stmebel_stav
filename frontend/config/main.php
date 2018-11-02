@@ -13,6 +13,9 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'homeUrl' => '/',
     'components' => [
+        'view' => [
+            'class' => 'frontend\components\View',
+        ],
         'request' => [
             'baseUrl' => '',
             'csrfParam' => '_csrf-frontend',
@@ -42,8 +45,16 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'site/index',
+                '<action:\w+>' => 'site/<action>',
+                '<controller>' => '<controller>/index',
+                '<controller>/<id:\d+>' => '<controller>/view',
+                '<controller>/<action>/<id:\d+>' => '<controller>/<action>',
+                '<controller>/<action>/<parentId:\d+>' => '<controller>/<action>',
+                '<controller>/<action>' => '<controller>/<action>',
             ],
         ],
     ],
     'params' => $params,
+    'language' => 'ru-RU',
 ];

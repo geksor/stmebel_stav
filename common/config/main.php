@@ -11,5 +11,8 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'yandexMapsApi' => [
+            'class' => 'mirocow\yandexmaps\Api',
+        ],
     ],
 ];

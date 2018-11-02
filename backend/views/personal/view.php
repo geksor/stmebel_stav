@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
+                <?= Html::a('Выбрать фото', ['set-photo', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Создать', ['create'], ['class' => 'btn btn-default']) ?>
             </p>
 
             <?= DetailView::widget([
@@ -32,7 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'name',
                     'position',
-                    'image',
+                    [
+                        'attribute' => 'image',
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Personal */
+                            return Html::img($data->getPhotos('personal')['thumb_image'], ['style' => 'max-width: 200px;']);
+                        }
+                    ],
                     [
                         'attribute' => 'publish',
                         'label' => 'Состояние',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8e987b4732ec24808a1823f80bfc61d",
+    "content-hash": "3067719ab673e74e09c39a5f0038d467",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -972,6 +972,49 @@
                 "yii"
             ],
             "time": "2014-11-19T22:04:08+00:00"
+        },
+        {
+            "name": "mirocow/yii2-yandex-maps",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mirocow/yii2-yandex-maps.git",
+                "reference": "360cf55f1f46edf6bb7b1ad1f1a258fcd1e2f387"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mirocow/yii2-yandex-maps/zipball/360cf55f1f46edf6bb7b1ad1f1a258fcd1e2f387",
+                "reference": "360cf55f1f46edf6bb7b1ad1f1a258fcd1e2f387",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-0": {
+                    "mirocow\\yandexmaps\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mirocow",
+                    "email": "mr.mirocow@gmail.com",
+                    "homepage": "http://www.mirocow.com"
+                }
+            ],
+            "description": "Yii 2 yandex map module",
+            "keywords": [
+                "map",
+                "yandex",
+                "yii",
+                "yii2"
+            ],
+            "time": "2017-09-27T23:38:24+00:00"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -4047,7 +4090,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "zxbodya/yii2-gallery-manager": 20
     },
