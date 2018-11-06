@@ -2,12 +2,15 @@
 
 namespace backend\controllers;
 
+use common\models\DocumentUpload;
+use common\models\ImageUpload;
 use Yii;
 use common\models\WeDocs;
 use common\models\WeDocsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * WeDocsController implements the CRUD actions for WeDocs model.
@@ -124,4 +127,60 @@ class WeDocsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUploadDocument($id)
+    {
+        $model = new DocumentUpload();
+        $link = $this->findModel($id);
+
+        if (Yii::$app->request->isPost)
+        {
+            $file = UploadedFile::getInstance($model, 'document');
+
+            if ($link->saveDocument($model->uploadFile($file, $link->docNameReal)))
+            {
+                return $this->redirect(['view', 'id' => $link->id]);
+            }
+        }
+
+        return $this->render('upload-document', [
+            'model' => $model,
+            'link' => $link,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\Exception
+     */
+    public function actionSetImage($id)
+    {
+        $model = new ImageUpload();
+        $imageFrom = $this->findModel($id);
+
+        if (Yii::$app->request->isPost && Yii::$app->request->post('ImageUpload')['crop_info'])
+        {
+            $file = UploadedFile::getInstance($model, 'image');
+            $cropInfo = Yii::$app->request->post('ImageUpload')['crop_info'];
+            $dir = 'we-docs';
+
+            if ($imageFrom->saveImage($model->uploadFile($file, $imageFrom->itemImage, $cropInfo, $dir)))
+            {
+                return $this->redirect(['view', 'id' => $imageFrom->id]);
+            }
+        }
+
+        return $this->render('set-image', [
+            'model' => $model,
+            'imageFrom' => $imageFrom,
+        ]);
+    }
+
 }

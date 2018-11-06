@@ -27,9 +27,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'id',
-                    'docNameReal',
+                    [
+                        'attribute' => 'docNameReal',
+                        'format' => 'raw',
+                        'filter' => false,
+                        'value' => function ($data){
+                            /* @var $data \common\models\WeDocs*/
+                            if ($data->docNameReal){
+                                return Html::a('Открыть документ', $data->documentLink, ['target' => '_blank', 'data-pjax' => 0]);
+                            }
+                            return 'Не загружен';
+                        },
+                    ],
                     'docNameView',
-                    'itemImage',
+                    [
+                        'attribute' => 'itemImage',
+                        'format' => 'raw',
+                        'filter' => false,
+                        'value' => function ($data){
+                            /* @var $data \common\models\WeDocs */
+                            return Html::img($data->getImages('we-docs')['thumb_image'], ['style' => 'max-width: 100px;']);
+                        }
+                    ],
                     'itemDescription:ntext',
 
                     ['class' => 'yii\grid\ActionColumn'],

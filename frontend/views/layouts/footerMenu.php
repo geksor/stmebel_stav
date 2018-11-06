@@ -9,12 +9,12 @@
 
     <a href="#">Производство мебели</a><br>
     <a href="#">Документы</a><br>
-    <a href="#">Партнеры</a><br>
+    <a href="partner">Партнеры</a><br>
 
 </div>
 <div class="col-12 col-sm-4 col-lg-2 text-center text-lg-left foot-href align-self-center mt-3 mt-lg-0">
 
-    <a href="#">Контакты</a><br>
+    <a href="contact">Контакты</a><br>
     <a href="about">О компании</a><br>
     <a href="reviews">Отзывы</a><br>
 

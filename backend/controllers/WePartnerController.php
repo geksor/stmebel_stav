@@ -8,6 +8,7 @@ use common\models\WePartnerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use zxbodya\yii2\galleryManager\GalleryManagerAction;
 
 /**
  * WePartnerController implements the CRUD actions for WePartner model.
@@ -28,6 +29,23 @@ class WePartnerController extends Controller
             ],
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function actions()
+    {
+        return [
+            'galleryApi' => [
+                'class' => GalleryManagerAction::className(),
+                // mappings between type names and model classes (should be the same as in behaviour)
+                'types' => [
+                    'we-partner' => WePartner::className()
+                ]
+            ],
+        ];
+    }
+
 
     /**
      * Lists all WePartner models.

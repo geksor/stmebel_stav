@@ -22,7 +22,6 @@
                         'icon' => 'cogs',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Карта', 'icon' => 'map', 'url' => ['/ya-map'], "active" => Yii::$app->controller->id === 'slider',],
                             ['label' => 'Слайдер', 'icon' => 'picture-o', 'url' => ['/slider'], "active" => Yii::$app->controller->id === 'slider',],
                             ['label' => 'Сертификаты', 'icon' => 'certificate', 'url' => ['/certificate'], "active" => Yii::$app->controller->id === 'certificate',],
                             ['label' => 'Документы', 'icon' => 'file-text', 'url' => ['/we-docs'], "active" => Yii::$app->controller->id === 'we-docs',],
@@ -30,6 +29,10 @@
                             ['label' => 'Сотрудники', 'icon' => 'users', 'url' => ['/personal'], "active" => Yii::$app->controller->id === 'personal',],
                             ['label' => 'Как мы работаем', 'icon' => 'wrench', 'url' =>['/how-we-work'],
                                 "active" => Yii::$app->controller->id === 'how-we-work' || Yii::$app->controller->id === 'how-we-work-step',],
+                            ['label' => 'Контакты', 'icon' => 'address-card', 'url' => ['/site/contact']],
+                            ['label' => 'О нас на главной', 'icon' => 'info', 'url' => ['/site/about-home']],
+                            ['label' => 'О нас', 'icon' => 'info', 'url' => ['/site/about-page']],
+                            ['label' => 'Приемущества', 'icon' => 'thumbs-up', 'url' => ['/site/advantage']],
                         ],
                     ],
                     [

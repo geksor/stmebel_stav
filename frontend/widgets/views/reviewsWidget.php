@@ -2,7 +2,6 @@
 
 /* @var $model \common\models\Comment */
 
-
 ?>
 
 <div id="reviews" class="container mw-1200 mt-5">

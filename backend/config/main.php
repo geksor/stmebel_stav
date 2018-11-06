@@ -43,13 +43,15 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/ya-map' => 'site/ya-map',
+                'ya-map' => 'site/ya-map',
+                'contact' => 'site/contact',
+                'about-home' => 'site/about-home',
+                'about-page' => 'site/about-page',
+                'advantage' => 'site/advantage',
                 '<controller>' => '<controller>/index',
                 '<controller>/<id:\d+>' => '<controller>/view',
                 '<controller>/<action>/<id:\d+>' => '<controller>/<action>',
-                '<controller>/<action>/<parentId:\d+>' => '<controller>/<action>',
                 '<controller>/<action>' => '<controller>/<action>',
-
             ],
         ],
     ],
