@@ -38,6 +38,13 @@
     url('../fonts/montserrat-v12-cyrillic_latin-700.svg#Montserrat') format('svg'); /* Legacy iOS */
 }
 
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
 .mw-1200{
     max-width: 1200px;
 }

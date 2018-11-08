@@ -42,14 +42,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'docNameView',
                     [
                         'attribute' => 'itemImage',
-                        'format' => 'raw',
+                        'format' => 'html',
                         'filter' => false,
                         'value' => function ($data){
                             /* @var $data \common\models\WeDocs */
                             return Html::img($data->getImages('we-docs')['thumb_image'], ['style' => 'max-width: 100px;']);
                         }
                     ],
-                    'itemDescription:ntext',
+                    [
+                        'attribute' => 'itemDescription',
+                        'contentOptions' => ['style' => 'white-space: normal;'],
+                    ],
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],

@@ -76,4 +76,23 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= $model->addBlockTitle ?></h3>
+        </div>
+        <div class="box-body">
+            <? if ($model->isNewRecord) {
+                echo 'Нельзя загружать изображения до создания галлереи';
+            } else {
+                echo GalleryManager::widget(
+                    [
+                        'model' => $model,
+                        'behaviorName' => 'galleryBehaviorAddBlock',
+                        'apiRoute' => 'product/galleryApiAddBlock'
+                    ]
+                );
+            }?>
+        </div>
+    </div>
+
 </div>

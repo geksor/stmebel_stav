@@ -47,11 +47,17 @@ return [
             'rules' => [
                 '/' => 'site/index',
                 '<action:\w+>' => 'site/<action>',
-                '<controller>' => '<controller>/index',
+
+                'catalog/<alias>/<child>/page/<page:\d+>' => 'catalog/index',
+                'catalog/<alias>/<child>' => 'catalog/index',
+                'catalog/<alias>/<child>/<item>' => 'catalog/item',
+
+                '<controller>/index/<id:\d+>' => '<controller>/index',
                 '<controller>/<id:\d+>' => '<controller>/view',
                 '<controller>/<action>/<id:\d+>' => '<controller>/<action>',
                 '<controller>/<action>/<parentId:\d+>' => '<controller>/<action>',
                 '<controller>/<action>' => '<controller>/<action>',
+                '<controller>' => '<controller>/index',
             ],
         ],
     ],

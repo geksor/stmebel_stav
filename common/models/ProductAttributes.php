@@ -33,8 +33,8 @@ class ProductAttributes extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'attributes_id'], 'required'],
-            [['product_id', 'attributes_id', 'attrList_id', 'attrColor_id'], 'integer'],
-            [['attrString'], 'string', 'max' => 255],
+            [['product_id', 'attributes_id', 'attrList_id'], 'integer'],
+            [['attrString', 'attrColor_id'], 'string', 'max' => 255],
             [['product_id', 'attributes_id'], 'unique', 'targetAttribute' => ['product_id', 'attributes_id']],
             [['attributes_id'], 'exist', 'skipOnError' => true, 'targetClass' => Attributes::className(), 'targetAttribute' => ['attributes_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],

@@ -2,56 +2,18 @@
 namespace frontend\controllers;
 
 use backend\models\Contact;
+use common\models\Certificate;
 use common\models\Comment;
+use common\models\WeDocs;
 use common\models\WePartner;
 use Yii;
-use yii\base\InvalidParamException;
-use yii\helpers\VarDumper;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * {@inheritdoc}
@@ -125,6 +87,17 @@ class SiteController extends Controller
 
         return $this->render('partner', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionDocuments()
+    {
+        $modelDoc = WeDocs::find()->all();
+        $modelCert = Certificate::findOne(['id' => 1]);
+
+        return $this->render('documents', [
+            'modelDoc' => $modelDoc,
+            'modelCert' => $modelCert,
         ]);
     }
 }

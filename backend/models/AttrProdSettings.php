@@ -8,6 +8,7 @@ use yii\base\Model;
 /**
  *
  * @property string $attrString
+ * @property string $viewAttr
  * @property int $attrList
  * @property int $attrColor
  *
@@ -17,7 +18,7 @@ class AttrProdSettings extends Model
     public $attrString;
     public $attrList;
     public $attrColor;
-    public $loadTest;
+    public $viewAttr;
 
     /**
      * {@inheritdoc}
@@ -25,7 +26,7 @@ class AttrProdSettings extends Model
     public function rules()
     {
         return [
-            [['attrList', 'attrColor', 'attrString'], 'safe'],
+            [['attrList', 'attrColor', 'attrString', 'viewAttr',], 'safe'],
         ];
     }
 

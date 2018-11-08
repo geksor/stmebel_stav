@@ -16,48 +16,52 @@ use yii\widgets\ActiveForm;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($attrSet, 'loadTest')->hiddenInput()->label(false) ?>
+        <? foreach ($attributes as $attribute) {/* @var $attribute \common\models\Attributes */?>
 
-            <? foreach ($attributes as $attribute) {/* @var $attribute \common\models\Attributes */?>
+            <? if ($attribute->type === 1) {?>
 
-                <? if ($attribute->type === 1) {?>
+                <?= $form->field($attrSet, 'attrString')
+                ->textInput([
+                    'name' => "attrString[$attribute->id]",
+                    'value' => $attribute->getValueFromDropDown($model->id, 'attrString'),
+                    'placeholder' => 'Введите значение',
+                ])
+                ->label($attribute->title) ?>
 
-                    <?= $form->field($attrSet, 'attrString')
-                    ->textInput([
-                        'name' => "attrString[$attribute->id]",
-                        'value' => $attribute->getValueFromDropDown($model->id, 'attrString'),
-                        'placeholder' => 'Введите значение',
-                    ])
-                    ->label($attribute->title) ?>
-
-                <?}?>
-                <? if ($attribute->type === 2) {?>
-
-                    <?= $form->field($attrSet, 'attrList')
-                    ->dropDownList($attribute->getListDropDown() ,[
-                        'name' => "attrList[$attribute->id]",
-                        'prompt' => 'Не выбран',
-                        'options' => [
-                            $attribute->getValueFromDropDown($model->id, 'attrList_id') => ['Selected' => true]
-                        ],
-                    ])
-                    ->label($attribute->title) ?>
-
-                <?}?>
-                <? if ($attribute->type === 3) {?>
-
-                    <?= $form->field($attrSet, 'attrColor')
-                    ->dropDownList($attribute->getColorsDropDown() ,[
-                        'name' => "attrColor[$attribute->id]",
-                        'prompt' => 'Не выбран',
-                        'options' => [
-                            $attribute->getValueFromDropDown($model->id, 'attrColor_id') => ['Selected' => true]
-                        ],
-                    ])
-                    ->label($attribute->title) ?>
-
-                <?}?>
             <?}?>
+            <? if ($attribute->type === 2) {?>
+
+                <?= $form->field($attrSet, 'attrList')
+                ->dropDownList($attribute->getListDropDown() ,[
+                    'name' => "attrList[$attribute->id]",
+                    'prompt' => 'Не выбран',
+                    'options' => [
+                        $attribute->getValueFromDropDown($model->id, 'attrList_id') => ['Selected' => true]
+                    ],
+                ])
+                ->label($attribute->title) ?>
+
+            <?}?>
+            <? if ($attribute->type === 3) {?>
+
+<!--                --><?// \yii\helpers\VarDumper::dump($attribute->getValueFromDropDown($model->id, 'attrColor_id', true),20,true);die; ?>
+
+                <?= $form->field($attrSet, 'attrColor')
+                ->dropDownList($attribute->getColorsDropDown() ,[
+                    'name' => "attrColor[$attribute->id]",
+                    'multiple' => true,
+                    'size' => 15,
+                    'options' => $attribute->getValueFromDropDown($model->id, 'attrColor_id', true),
+                ])
+                ->label($attribute->title) ?>
+
+            <?}?>
+        <?}?>
+
+        <?= $form->field($attrSet, 'viewAttr')->dropDownList($model->getCatAttributes(true), [
+            'multiple' => true,
+            'size' => 15,
+        ])->label('Показвать в превью товара') ?>
 
         <div class="form-group">
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

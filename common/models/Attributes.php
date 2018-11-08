@@ -13,7 +13,7 @@ use yii\helpers\VarDumper;
  * @property int $id
  * @property string $title
  * @property string $viewName
- * @property int $type
+ * @property int $type (1 - string, 2 - list, 3 - color)
  *
  * @property AttrColor[] $attrColors
  * @property AttrList[] $attrLists
@@ -117,9 +117,41 @@ class Attributes extends \yii\db\ActiveRecord
         return $this->hasMany(ProductAttributes::className(), ['attributes_id' => 'id']);
     }
 
-    public function getValueFromDropDown($prod_id, $selectColumn)
+    public function getAttrValue($id)
+    {
+        switch ($this->type){
+            case 1:
+                $val = ProductAttributes::find()
+                    ->where(['product_id' => $id, 'attributes_id' => $this->id])
+                    ->one();
+                return $val->attrString;
+            case 2:
+                $listId = ProductAttributes::find()
+                    ->where(['product_id' => $id, 'attributes_id' => $this->id])
+                    ->one();
+                $val = AttrList::findOne(['id' => $listId->attrList_id]);
+                return $val->title;
+            case 3:
+                $colorId = ProductAttributes::find()
+                    ->where(['product_id' => $id, 'attributes_id' => $this->id])
+                    ->one();
+                $val = AttrColor::findAll(['id' => json_decode($colorId->attrColor_id)]);
+                return $val;
+
+        }
+        return null;
+    }
+
+    public function getValueFromDropDown($prod_id, $selectColumn, $json = null)
     {
         $model =  ProductAttributes::find()->where(['product_id' => $prod_id, 'attributes_id' => $this->id])->select($selectColumn)->one();
+        if ($json && $model->$selectColumn){
+            $return = [];
+            foreach (json_decode($model->$selectColumn) as $item){
+                $return[$item] = ['Selected' => true];
+            }
+            return $return;
+        }
         return $model->$selectColumn;
     }
 

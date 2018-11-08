@@ -20,7 +20,7 @@ class m181009_133350_create_junction_table_for_product_and_attributes_tables ext
             'product_id' => $this->integer(),
             'attributes_id' => $this->integer(),
             'attrList_id' => $this->integer(),
-            'attrColor_id' => $this->integer(),
+            'attrColor_id' => $this->string(),
             'attrString' => $this->string(),
             'PRIMARY KEY(product_id, attributes_id)',
         ]);

@@ -46,7 +46,14 @@ class ProductController extends Controller
                 'class' => GalleryManagerAction::className(),
                 // mappings between type names and model classes (should be the same as in behaviour)
                 'types' => [
-                    'product' => Product::className()
+                    'product' => Product::className(),
+                ]
+            ],
+            'galleryApiAddBlock' => [
+                'class' => GalleryManagerAction::className(),
+                // mappings between type names and model classes (should be the same as in behaviour)
+                'types' => [
+                    'productAddBlock' => Product::className(),
                 ]
             ],
         ];
@@ -97,9 +104,10 @@ class ProductController extends Controller
         $attributes = $model->catAttributes;
 
         $attrSet = new AttrProdSettings();
+        $attrSet->viewAttr = $model->getViewAttr();
 
         if ($attrSet->load(Yii::$app->request->post())) {
-            $model->saveAttr(Yii::$app->request->post('attrList'), Yii::$app->request->post('attrColor'), Yii::$app->request->post('attrString'));
+            $model->saveAttr(Yii::$app->request->post('attrList'), Yii::$app->request->post('attrColor'), Yii::$app->request->post('attrString'), $attrSet->viewAttr);
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -211,10 +219,12 @@ class ProductController extends Controller
                 $model = $this->findModel($id);
 
                 $model->rank = (integer) $order;
+                $model->selectCategory = $model->selectedCategories;
 
                 while (!$modelReplace = Product::find()->where(['rank' => $order])->one()){
                     $up ? $order-- : $order++;
                 }
+                $modelReplace->selectCategory = $modelReplace->selectedCategories;
 
                 $modelReplace->rank = $up ? ++$modelReplace->rank : --$modelReplace->rank;
                 if ($modelReplace->rank === $model->rank){
@@ -222,12 +232,12 @@ class ProductController extends Controller
                 }
 
                 if ($model->save() && $modelReplace->save()){
-                    return $this->redirect(['index']);
+                    return $this->redirect(Yii::$app->request->referrer);
                 }
             }
-            return $this->redirect(['index']);
+            return $this->redirect(Yii::$app->request->referrer);
         }
-        return false;
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -243,6 +253,7 @@ class ProductController extends Controller
             $model = $this->findModel($id);
 
             $model->publish = (integer) $publish;
+            $model->selectCategory = $model->selectedCategories;
 
             if ($model->save()){
                 return $this->redirect(Yii::$app->request->referrer);

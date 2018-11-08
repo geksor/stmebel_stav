@@ -8,6 +8,7 @@ use common\models\CertificateSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use zxbodya\yii2\galleryManager\GalleryManagerAction;
 
 /**
  * CertificateController implements the CRUD actions for Certificate model.
@@ -25,6 +26,22 @@ class CertificateController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function actions()
+    {
+        return [
+            'galleryApi' => [
+                'class' => GalleryManagerAction::className(),
+                // mappings between type names and model classes (should be the same as in behaviour)
+                'types' => [
+                    'certificate' => Certificate::className()
+                ]
             ],
         ];
     }

@@ -90,8 +90,9 @@ AppAsset::register($this);
         </div>
     </div>
 <?}?>
-
-<?= $content ?>
+<main style="flex: 1">
+    <?= $content ?>
+</main>
 
 <div id="footer" class="container-fluid mt-5">
     <div class="container mw-1200">

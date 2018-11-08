@@ -37,10 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //                    'id',
                     'user_name',
-                    'text:ntext',
+                    [
+                        'attribute' => 'text',
+                        'contentOptions' => ['style' => 'white-space: normal;'],
+                    ],
                     [
                         'attribute' => 'created_at',
-                        'headerOptions' => ['width' => '150'],
+                        'headerOptions' => ['width' => 150],
                         'format' => ['date', 'php:d.m.Y - H:i:s'],
                     ],
                     [

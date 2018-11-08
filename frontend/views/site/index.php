@@ -84,57 +84,10 @@ $this->title = 'Главная - Bro & Bro в Ставрополе';
     </div>
 </div>
 
-<div id="examples" class="container mw-1200 mt-5 pt-5">
-    <div class="row justify-content-center">
-        <div class="col-12 mb-5 text-center text-md-left">
-            <h2 class="text-center text-lg-left">Примеры нашей мебели</h2>
-        </div>
-        <div class="item col-lg-3 col-sm-6 col-12 mt-2 mt-lg-0">
-            <div class="bg-gray furniture">
-                <div class="pl-4 pt-2">
-                    <span class="gray mr-1">Артикул:</span><span>292891</span><br>
-                </div>
-                <img src="/public/images/sofa.jpg" class="mt-5 pt-3 mx-auto d-block" alt="">
-            </div>
-            <p class="furniture-name text-center my-2">Диван «Престиж»</p>
-            <a class="btn btn-outline-primary my-2 my-sm-0 mx-auto hovered d-block w-140 rounded-0"
-               href="#">Подробнее</a>
-        </div>
-        <div class="item col-lg-3 col-sm-6 col-12 mt-2 mt-lg-0">
-            <div class="bg-gray furniture">
-                <div class="pl-4 pt-2">
-                    <span class="gray mr-1">Артикул:</span><span>292891</span><br>
-                </div>
-                <img src="/public/images/sofa.jpg" class="mt-5 pt-3 mx-auto d-block" alt="">
-            </div>
-            <p class="furniture-name text-center my-2">Диван «Престиж»</p>
-            <a class="btn btn-outline-primary my-2 my-sm-0 mx-auto hovered d-block w-140 rounded-0"
-               href="#">Подробнее</a>
-        </div>
-        <div class="item col-lg-3 col-sm-6 col-12 mt-2 mt-lg-0">
-            <div class="bg-gray furniture">
-                <div class="pl-4 pt-2">
-                    <span class="gray mr-1">Артикул:</span><span>292891</span><br>
-                </div>
-                <img src="/public/images/sofa.jpg" class="mt-5 pt-3 mx-auto d-block" alt="">
-            </div>
-            <p class="furniture-name text-center my-2">Диван «Престиж»</p>
-            <a class="btn btn-outline-primary my-2 my-sm-0 mx-auto hovered d-block w-140 rounded-0"
-               href="#">Подробнее</a>
-        </div>
-        <div class="item col-lg-3 col-sm-6 col-12 mt-2 mt-lg-0">
-            <div class="bg-gray furniture">
-                <div class="pl-4 pt-2">
-                    <span class="gray mr-1">Артикул:</span><span>292891</span><br>
-                </div>
-                <img src="/public/images/sofa.jpg" class="mt-5 pt-3 mx-auto d-block" alt="">
-            </div>
-            <p class="furniture-name text-center my-2">Диван «Престиж»</p>
-            <a class="btn btn-outline-primary my-2 my-sm-0 mx-auto hovered d-block w-140 rounded-0"
-               href="#">Подробнее</a>
-        </div>
-    </div>
-</div>
+<?= \frontend\widgets\ExamplesWidget::widget([
+        'title' => 'Примеры нашей мебели',
+        'category' => 3,
+]) ?>
 
 <?= ReviewsWidget::widget() ?>
 

@@ -2,7 +2,9 @@
 
 namespace common\models;
 
+use Imagine\Image\ImageInterface;
 use Yii;
+use zxbodya\yii2\galleryManager\GalleryBehavior;
 
 /**
  * This is the model class for table "certificate".
@@ -28,6 +30,41 @@ class Certificate extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'galleryBehavior' => [
+                'class' => GalleryBehavior::className(),
+                'type' => 'certificate',
+                'extension' => 'jpg',
+                'directory' => Yii::getAlias('@uploads') . '/images/certificate',
+                'url' => '/uploads/images/certificate',
+                'versions' => [
+                    'small' => function ($img) {
+                        /** @var ImageInterface $img */
+                        return $img
+                            ->copy()
+                            ->thumbnail(new \Imagine\Image\Box(260, 361));
+                    },
+                    'medium' => function ($img) {
+                        /** @var ImageInterface $img */
+                        $dstSize = $img->getSize();
+                        $maxWidth = 800;
+                        if ($dstSize->getWidth() > $maxWidth) {
+                            $dstSize = $dstSize->widen($maxWidth);
+                        }
+                        return $img
+                            ->copy()
+                            ->resize($dstSize);
+                    },
+                ]
+            ]
         ];
     }
 

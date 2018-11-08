@@ -63,7 +63,7 @@ class WeDocs extends \yii\db\ActiveRecord
     {
         return ($this->docNameReal)
             ? '/uploads/documents/' . $this->docNameReal
-            : 'Не загружен';
+            : '#';
     }
 
     public function deleteDocument()

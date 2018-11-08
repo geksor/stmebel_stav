@@ -6,6 +6,7 @@ use Imagine\Image\ImageInterface;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
+use yii\helpers\VarDumper;
 use zxbodya\yii2\galleryManager\GalleryBehavior;
 
 /**
@@ -15,9 +16,13 @@ use zxbodya\yii2\galleryManager\GalleryBehavior;
  * @property string $title
  * @property string $short_description
  * @property string $description
+ * @property string $meta_title
+ * @property string $meta_description
  * @property string $alias
  * @property int $rank
  * @property int $publish
+ * @property string $viewAttr
+ * @property string $addBlockTitle
  * @property array $selectCategory
  * @property array $selectedAttributes
  * @property array $catAttributes
@@ -51,12 +56,12 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
+            [['title', 'addBlockTitle'], 'required'],
             [['alias'], 'unique'],
             [['selectCategory', 'filterCat', 'selectAttr'], 'safe'],
             [['description'], 'string'],
             [['rank', 'publish'], 'integer'],
-            [['title', 'short_description', 'alias'], 'string', 'max' => 255],
+            [['title', 'short_description', 'meta_title', 'meta_description', 'alias', 'viewAttr', 'addBlockTitle'], 'string', 'max' => 255],
         ];
     }
 
@@ -77,7 +82,7 @@ class Product extends \yii\db\ActiveRecord
                         /** @var ImageInterface $img */
                         return $img
                             ->copy()
-                            ->thumbnail(new \Imagine\Image\Box(300, 300));
+                            ->thumbnail(new \Imagine\Image\Box(360, 239));
                     },
                     'medium' => function ($img) {
                         /** @var ImageInterface $img */
@@ -91,7 +96,33 @@ class Product extends \yii\db\ActiveRecord
                             ->resize($dstSize);
                     },
                 ]
-            ]
+            ],
+            'galleryBehaviorAddBlock' => [
+                'class' => GalleryBehavior::className(),
+                'type' => 'productAddBlock',
+                'extension' => 'jpg',
+                'directory' => Yii::getAlias('@uploads') . '/images/product/add-block',
+                'url' => '/uploads/images/product/add-block',
+                'versions' => [
+                    'small' => function ($img) {
+                        /** @var ImageInterface $img */
+                        return $img
+                            ->copy()
+                            ->thumbnail(new \Imagine\Image\Box(374, 249));
+                    },
+                    'medium' => function ($img) {
+                        /** @var ImageInterface $img */
+                        $dstSize = $img->getSize();
+                        $maxWidth = 800;
+                        if ($dstSize->getWidth() > $maxWidth) {
+                            $dstSize = $dstSize->widen($maxWidth);
+                        }
+                        return $img
+                            ->copy()
+                            ->resize($dstSize);
+                    },
+                ]
+            ],
         ];
     }
 
@@ -106,12 +137,16 @@ class Product extends \yii\db\ActiveRecord
             'title' => 'Название',
             'short_description' => 'Короткое описание',
             'description' => 'Полное описание',
+            'meta_title' => 'Meta Title',
+            'meta_description' => 'Meta Description',
             'alias' => 'Псевдоним',
             'rank' => 'Сортировка',
             'publish' => 'Публикация',
             'selectCategory' => 'Выбор категории',
             'filterCat' => 'Категории',
             'selectAttr' => 'Выбор атрибутов',
+            'viewAttr' => 'Выводить в превью товара',
+            'addBlockTitle' => 'Заголовок дополнительного блока',
         ];
     }
 
@@ -129,6 +164,42 @@ class Product extends \yii\db\ActiveRecord
     public function getCategories()
     {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('category_product', ['product_id' => 'id']);
+    }
+
+    public function getLink($id = 0)
+    {
+        /* @var $tmpParent Category */
+        if ($id){
+            $parent = Category::findOne([ 'id' => $id]);
+        }else{
+            $catArr = $this->categories;
+            if ($catArr){
+                $parent = Category::findOne([ 'id' => $catArr[0]->id]);
+            }
+        }
+
+        $arrAlias = [];
+        $arrAlias[] = $this->alias;
+
+        if ($parent){
+            $arrAlias[] =  $parent->alias;
+
+            $tmpParent = $parent->parent;
+
+            while ($tmpParent){
+                $arrAlias[] =  $tmpParent->alias;
+                $tmpParent = $tmpParent->parent;
+            }
+        }else{
+            $arrAlias[] =  'not-category';
+        }
+
+        $link = '';
+        foreach ($arrAlias as $alias){
+            $link = '/' . $alias . $link;
+        }
+
+        return '/catalog'.$link;
     }
 
 
@@ -166,18 +237,29 @@ class Product extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return array
+     * @param bool $dropDown
+     * @return array|Attributes[]|Category[]|CategoryAttributes[]|CategoryProduct[]|Product[]|\yii\db\ActiveRecord[]
      */
-    public function getCatAttributes()
+    public function getCatAttributes($dropDown = false)
     {
         $prodCat = CategoryProduct::find()->where(['product_id' => $this->id])->select('category_id')->asArray()->all();
         $cat = ArrayHelper::getColumn($prodCat, 'category_id');
         $attrCat = CategoryAttributes::find()->where(['category_id' => $cat])->select('attributes_id')->asArray()->all();
         $attr = ArrayHelper::getColumn($attrCat, 'attributes_id');
 
-        return Attributes::find()->with('attrColors', 'attrLists')->where(['id' => $attr])->all();
+        $attributes = Attributes::find()->with('attrColors', 'attrLists')->where(['id' => $attr])->all();
+
+        if ($dropDown){
+            return ArrayHelper::map($attributes, 'id', 'title');
+        }
+
+        return $attributes;
     }
 
+    public function getViewAttr()
+    {
+        return json_decode($this->viewAttr);
+    }
 
     /**
      * @return int
@@ -209,34 +291,47 @@ class Product extends \yii\db\ActiveRecord
                 $this->link('categories', $cat);
             }
         }
+        $delAttr = ArrayHelper::getColumn($this->catAttributes, 'id');
+        ProductAttributes::deleteAll(['AND', 'product_id' => $this->id, ['not in', 'attributes_id', $delAttr]]);
     }
 
-    public function saveAttr($attrList = null, $attrColor = null, $attrString = null)
+    public function saveAttr($attrList = null, $attrColor = null, $attrString = null, $viewAttr = null)
     {
         ProductAttributes::deleteAll(['product_id' => $this->id]);
         if (is_array($attrList))
         {
             foreach ($attrList as $attrId => $attrList_id)
             {
-                $attr = Attributes::findOne($attrId);
-                $this->link('attributes0', $attr, ['attrList_id' => $attrList_id]);
+                if ($attrList_id){
+                    $attr = Attributes::findOne($attrId);
+                    $this->link('attributes0', $attr, ['attrList_id' => $attrList_id]);
+                }
             }
         }
         if (is_array($attrColor))
         {
             foreach ($attrColor as $attrId => $attrColor_id)
             {
-                $attr = Attributes::findOne($attrId);
-                $this->link('attributes0', $attr, ['attrColor_id' => $attrColor_id]);
+                if ($attrColor_id){
+                    $attr = Attributes::findOne($attrId);
+                    $this->link('attributes0', $attr, ['attrColor_id' => json_encode($attrColor_id)]);
+                }
             }
         }
         if (is_array($attrString))
         {
             foreach ($attrString as $attrId => $attrStringVal)
             {
-                $attr = Attributes::findOne($attrId);
-                $this->link('attributes0', $attr, ['attrString' => $attrStringVal]);
+                if ($attrStringVal){
+                    $attr = Attributes::findOne($attrId);
+                    $this->link('attributes0', $attr, ['attrString' => $attrStringVal]);
+                }
             }
+        }
+
+        if ($viewAttr){
+            $this->viewAttr = json_encode($viewAttr);
+            $this->save(false);
         }
     }
 
@@ -259,7 +354,9 @@ class Product extends \yii\db\ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        $this->saveCategories($this->selectCategory);
+        if ($this->selectCategory){
+            $this->saveCategories($this->selectCategory);
+        }
         parent::afterSave($insert, $changedAttributes); // TODO: Change the autogenerated stub
     }
 }
