@@ -182,4 +182,26 @@ class CategoryController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    /**
+     * @param $alias
+     * @param $rank
+     * @return \yii\web\Response
+     */
+    public function actionRank($alias, $rank)
+    {
+        if (Yii::$app->request->isAjax){
+
+            $model = Category::findOne(['alias' => $alias]);
+
+            if ($model){
+                $model->rank = (integer) $rank;
+
+                if ($model->save()){
+                    return $this->redirect(Yii::$app->request->referrer);
+                }
+            }
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
 }

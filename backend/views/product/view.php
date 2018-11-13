@@ -38,8 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'title',
                     'alias',
-                    'short_description',
-                    'description:ntext',
+                    [
+                        'attribute' => 'short_description',
+                        'format' => 'html'
+                    ],
+                    [
+                        'attribute' => 'description',
+                        'format' => 'html'
+                    ],
                     'rank',
                     [
                         'attribute' => 'publish',

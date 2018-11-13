@@ -27,7 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-//                    'id',
+                    [
+                        'attribute' => 'id',
+                        'headerOptions' => ['width' => 70],
+                    ],
 //                    'categoryType_id',
                     [
                         'attribute' => 'parent_id',
@@ -39,11 +42,26 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $data->getParentName();
                         },
                     ],
-                    'title',
+                    [
+                        'attribute' => 'title',
+                        'content' => function($data){
+                            /* @var $data \common\models\Category */
+                            return "<strong> $data->title </strong>";
+                        }
+                    ],
                     'description:ntext',
                     //'alias',
                     //'meta_title',
                     //'meta_description',
+                    [
+                        'attribute' => 'rank',
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Category */
+                            return Html::input('number', 'rank' ,$data->rank, ['class' => 'form-control', 'id' => $data->alias]);
+                        }
+
+                    ],
                     [
                         'attribute' => 'publish',
                         'label' => 'Состояние',
@@ -52,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'headerOptions' => ['width' => '170'],
                         'format' => 'raw',
                         'value' => function ($data){
-                            /* @var $data \common\models\Comment */
+                            /* @var $data \common\models\Category */
                             if ($data->publish){
                                 return Html::a('Снять с публикации',
                                     ['publish', 'id' => $data->id, 'publish' => false],
@@ -67,6 +85,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]); ?>
+            <?
+            $js = <<< JS
+    $('[name = rank]').keypress(function(e){
+        if(e.keyCode==13){
+            $.ajax({
+                type: "GET",
+                url: "/admin/category/rank",
+                data: 'alias='+ $(this).attr('id') +'&rank='+ $(this).val(),
+            })
+        }
+    });
+JS;
+
+            $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+            ?>
             <?php Pjax::end(); ?>
         </div>
     </div>

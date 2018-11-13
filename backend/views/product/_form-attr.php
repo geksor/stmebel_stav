@@ -63,6 +63,11 @@ use yii\widgets\ActiveForm;
             'size' => 15,
         ])->label('Показвать в превью товара') ?>
 
+        <?= $form->field($attrSet, 'viewOnWidget')->dropDownList($model->getCatAttributes(true), [
+            'multiple' => true,
+            'size' => 15,
+        ])->label('Показвать в Виджете') ?>
+
         <div class="form-group">
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         </div>

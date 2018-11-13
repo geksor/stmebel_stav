@@ -378,7 +378,7 @@ span.date{
 
 /* Partners page */
 .header-partners{
-    background-image: url("../images/partners/head.jpg");
+    background-image: url('../images/partners/head.jpg');
 }
 
 /* reviews page */
@@ -489,3 +489,76 @@ span.date-review{
     width: 350px;
     height: 350px;
 }
+
+/* Geksor Style */
+
+.catalogMenu{
+    display: none;
+    background: url("../images/cat_menu_bgnd.png") right bottom no-repeat;
+    background-color: #0a0712;
+    z-index: 10;
+}
+.catalogMenu__headLine{
+    margin-top: 70px;
+    margin-bottom: 118px;
+}
+.catalogMenu__headLine h2{
+    font-family: Montserrat, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #3b3941;
+}
+.catalogMenu__close{
+    cursor: pointer;
+}
+.catalogMenu__close:hover path{
+    fill: rgb(102, 99, 108);
+}
+.catalogMenu__itemHeader{
+    font-size: 16px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.8)!important;
+    font-weight: 600;
+}
+.catalogMenu__navItem.active{
+    border-bottom: 2px solid #1d4ac7;
+}
+
+.slider__img{
+    object-fit: cover;
+    object-position: bottom right;
+}
+.slider__imageWrap{
+    height: 595px;
+}
+.slick-dots{
+    position: absolute;
+    list-style: none;
+    bottom: 60px;
+    left: 0;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+.slick-dots li{
+    width: 16px;
+    height: 16px;
+    border: solid 1px #ffffff;
+    border-radius: 50%;
+    margin-right: 32px;
+    cursor: pointer;
+}
+.slick-dots li button{
+     display: none;
+}.slick-dots li.slick-active{
+     background-color: #ffffff;
+}
+.help-block{
+    font-size: 12px;
+}
+:focus {outline:none;}

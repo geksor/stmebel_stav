@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \frontend\components\View */
+
 /* @var $content string */
 
 use yii\helpers\Html;
@@ -28,7 +29,9 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<? if (Yii::$app->request->url === Yii::$app->homeUrl) {?>
+<?= \frontend\widgets\CategoriesMenuWidget::widget() ?>
+
+<? if (Yii::$app->request->url === Yii::$app->homeUrl) { ?>
     <div id="header" class="container-fluid">
         <div class="container mw-1200">
             <div class="row justify-content-between pt-4">
@@ -40,22 +43,12 @@ AppAsset::register($this);
                     <span class="navbar-text"><a href="tel:89876739815" style="color: #ffffff; text-decoration: none">8(987)673 98 15</a></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-lg-7 text-center text-lg-left align-self-center pr-lg-0">
-                    <h1>
-                        СТРОИМ ЛУЧШЕ ВСЕХ<br>
-                        ЗА КАЧЕСТВО ОТВЕЧАЕМ!
-                    </h1>
-                    <p>а также производим мебель</p>
-                </div>
-                <div class="col-12 col-lg-5 text-center">
-                    <img src="/public/images/man.jpg" class="img-fluid" alt="">
-                </div>
-            </div>
+            <?= \frontend\widgets\SliderWidget::widget() ?>
         </div>
     </div>
-<?}else{?>
-    <div class="container-fluid <?= $this->headerClass ?> pb-lg-5" style="background-size: cover">
+<? } else { ?>
+    <div class="container-fluid <?= $this->headerClass ?> pb-lg-5"
+         style="background-size: cover; background-color: #302e39;">
         <div class="container mw-1200">
             <div class="row justify-content-between pt-4">
 
@@ -89,7 +82,8 @@ AppAsset::register($this);
             </div>
         </div>
     </div>
-<?}?>
+<? } ?>
+
 <main style="flex: 1">
     <?= $content ?>
 </main>
@@ -98,7 +92,7 @@ AppAsset::register($this);
     <div class="container mw-1200">
         <div class="row justify-content-between py-4">
             <div class="col-12 col-lg-2 text-center mr-0 align-self-center">
-                <a class="navbar-brand mr-0" href="<?= Yii::$app->homeUrl?>">
+                <a class="navbar-brand mr-0" href="<?= Yii::$app->homeUrl ?>">
                     <img src="/public/images/logo.png" alt="" class="img-fluid">
                 </a>
             </div>
@@ -106,24 +100,25 @@ AppAsset::register($this);
             <?= $this->render('footerMenu') ?>
 
             <div class="col-12 col-lg-2 text-center text-lg-left foot-href align-self-center mt-3 mt-lg-0">
-                <a href="#">
+                <a href="<?= Yii::$app->params['Contact']['insta'] ?>" target="_blank">
                     <i class="fab fa-instagram icons inst-icon"></i>
                 </a>
-                <a href="#">
+                <a href="<?= Yii::$app->params['Contact']['vk'] ?>" target="_blank">
                     <i class="fab fa-vk icons vk-icon"></i>
                 </a>
-                <a href="#">
+                <a href="<?= Yii::$app->params['Contact']['face'] ?>" target="_blank">
                     <i class="fab fa-facebook-f icons f-icon"></i>
                 </a>
             </div>
             <div class="col-12 col-lg-2 align-self-center text-center mt-3 mt-lg-0">
                 <p>Все права защищены (с) 2018</p>
-                <p class="gray-p mb-0">design by ELIT-IT</p>
+                <p class="gray-p mb-0"><a href="http://web-elitit.ru/" target="_blank" style="color: inherit">design by ELIT-IT</a></p>
             </div>
         </div>
     </div>
 </div>
 
+<?= $this->render('modals')?>
 <?php $this->endBody() ?>
 </body>
 </html>

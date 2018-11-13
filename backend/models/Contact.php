@@ -22,6 +22,9 @@ use Yii;
  * @property string $kpp
  * @property string $ogrn
  * @property string $bank
+ * @property string $insta
+ * @property string $face
+ * @property string $vk
  */
 class Contact extends Model
 {
@@ -39,6 +42,10 @@ class Contact extends Model
     public $kpp;
     public $ogrn;
     public $bank;
+
+    public $insta;
+    public $face;
+    public $vk;
 
 
 
@@ -60,6 +67,9 @@ class Contact extends Model
                     'kpp',
                     'ogrn',
                     'bank',
+                    'insta',
+                    'face',
+                    'vk',
                 ],
                 'safe'
             ],
@@ -85,6 +95,10 @@ class Contact extends Model
             'kpp' => 'КПП',
             'ogrn' => 'ОГРН',
             'bank' => 'Банк',
+            'insta' => 'Инстаграмм',
+            'face' => 'Фэйбук',
+            'vk' => 'Вконтакте',
+
         ];
     }
 

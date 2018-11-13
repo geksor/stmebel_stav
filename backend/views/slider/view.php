@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use zxbodya\yii2\galleryManager\GalleryManager;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Slider */
@@ -34,6 +35,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
 
+        </div>
+    </div>
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Слайды</h3>
+        </div>
+        <div class="box-body">
+            <? if ($model->isNewRecord) {
+                echo 'Нельзя загружать изображения до создания галлереи';
+            } else {
+                echo GalleryManager::widget(
+                    [
+                        'model' => $model,
+                        'behaviorName' => 'galleryBehavior',
+                        'apiRoute' => 'slider/galleryApi'
+                    ]
+                );
+            }?>
         </div>
     </div>
 

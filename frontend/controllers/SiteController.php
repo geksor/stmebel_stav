@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use backend\models\Contact;
+use common\models\CallBack;
 use common\models\Certificate;
 use common\models\Comment;
 use common\models\WeDocs;
@@ -38,6 +39,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         return $this->render('index');
     }
 
@@ -50,8 +52,23 @@ class SiteController extends Controller
     {
         $model = Comment::find()->where(['publish' => 1])->orderBy(['created_at' => SORT_ASC])->all();
 
+        $formModel = new Comment();
+
+        if ($formModel->load(Yii::$app->request->post())){
+            if ($formModel->name){
+                return $this->redirect('reviews');
+            }
+            if ($formModel->save()){
+                Yii::$app->session->setFlash('popUp', 'Благодарим Вас за отзыв.');
+            }else{
+                Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз.');
+            }
+            return $this->redirect('reviews');
+        }
+
         return $this->render('reviews', [
             'model' => $model,
+            'formModel' => $formModel,
         ]);
     }
 
@@ -99,5 +116,22 @@ class SiteController extends Controller
             'modelDoc' => $modelDoc,
             'modelCert' => $modelCert,
         ]);
+    }
+
+    public function actionCallBack()
+    {
+        $model = new CallBack();
+
+        if ($model->load(Yii::$app->request->post())){
+            if ($model->lastName){
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            if ($model->save()){
+                \Yii::$app->session->setFlash('popUp', 'Ваша заявка принята');
+            }else{
+                \Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз');
+            }
+        }
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }

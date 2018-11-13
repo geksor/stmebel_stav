@@ -43,7 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
                     'title',
-                    'short_description',
+                    [
+                        'attribute' => 'short_description',
+                        'format' => 'html'
+                    ],
 //                    'description:ntext',
                     [
                         'attribute' => 'rank',

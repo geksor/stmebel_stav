@@ -9,6 +9,7 @@ use yii\base\Model;
  *
  * @property string $attrString
  * @property string $viewAttr
+ * @property string $viewOnWidget
  * @property int $attrList
  * @property int $attrColor
  *
@@ -19,6 +20,7 @@ class AttrProdSettings extends Model
     public $attrList;
     public $attrColor;
     public $viewAttr;
+    public $viewOnWidget;
 
     /**
      * {@inheritdoc}
@@ -26,7 +28,7 @@ class AttrProdSettings extends Model
     public function rules()
     {
         return [
-            [['attrList', 'attrColor', 'attrString', 'viewAttr',], 'safe'],
+            [['attrList', 'attrColor', 'attrString', 'viewAttr', 'viewOnWidget',], 'safe'],
         ];
     }
 

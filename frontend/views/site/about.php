@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row justify-content-center py-5 mx-0 review">
         <h2 class="col-11 text-center mb-5">Остались вопросы?</h2>
         <div class="col-12 text-center">
-            <a class="btn btn-outline-light my-2 my-sm-0 rounded-0" href="#">Заказать обратный звонок</a>
+            <button class="btn btn-outline-light my-2 my-sm-0 rounded-0" data-toggle="modal" data-target="#callBack">Заказать обратный звонок</button>
         </div>
     </div>
 </div>

@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if(!$model->viewed){
                         return ['class' => 'newRow'];
                     }
-                    if ($model->viewed === 2){
+                    if ($model->viewed === 1){
                         return ['class' => 'noReadRow'];
                     }
                     return null;
@@ -47,13 +47,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'viewed',
                         'label' => 'Состояние',
-                        'filter'=>[0=>"Не обработанные",1=>"Обработанные"],
+                        'filter'=>[0=>"Не обработанные",2=>"Обработанные"],
+                        'filterInputOptions' => ['prompt' => 'Все', 'class' => 'form-control form-control-sm'],
                         'headerOptions' => ['width' => '170'],
                         'format' => 'raw',
                         'value' => function ($data){
-                            if (!$data->viewed){
+                            /* @var $data \common\models\CallBack */
+                            if (!$data->viewed || $data->viewed === 1){
                                 return Html::a('Обработать',
-                                    ['success', 'id' => $data->id, 'success' => true],
+                                    ['success', 'id' => $data->id, 'success' => 2],
                                     ['class' => 'btn btn-success col-xs-12']);
                             }
                             return 'Обработано';
@@ -72,3 +74,18 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+
+<?php
+$css= <<< CSS
+
+.newRow{
+    background-color: #ffdcdc!important;    
+}
+.noReadRow{
+    background-color: #fffdce!important;    
+}
+
+CSS;
+
+$this->registerCss($css, ["type" => "text/css"], "callBack" );
+?>​

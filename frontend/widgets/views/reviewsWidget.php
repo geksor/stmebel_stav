@@ -19,7 +19,7 @@
             <?= $model->text ?>
         </p>
         <div class="col-6 text-right">
-            <a class="btn btn-outline-light my-2 my-sm-0 rounded-0" href="#">Написать отзыв</a>
+            <a class="btn btn-outline-light my-2 my-sm-0 rounded-0" href="/reviews#reviews-form">Написать отзыв</a>
         </div>
         <div class="col-6 text-left">
             <a class="btn btn-outline-light my-2 my-sm-0 rounded-0" href="reviews">Посмотреть все</a>

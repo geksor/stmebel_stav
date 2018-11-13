@@ -118,6 +118,12 @@ JS
             <?= $form->field($model, 'ogrn') ?>
             <?= $form->field($model, 'bank') ?>
 
+            <h2>Соцсети</h2>
+
+            <?= $form->field($model, 'insta') ?>
+            <?= $form->field($model, 'vk') ?>
+            <?= $form->field($model, 'face') ?>
+
 
             <div class="form-group">
                 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

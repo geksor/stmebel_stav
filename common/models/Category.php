@@ -20,6 +20,7 @@ use yii\helpers\Inflector;
  * @property int $publish
  * @property array $selectedAttributes
  * @property array $catAttr
+ * @property int $rank
  *
  * @property CategoryType $categoryType
  * @property CategoryAttributes[] $categoryAttributes
@@ -47,8 +48,8 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['categoryType_id', 'parent_id', 'publish'], 'integer'],
-            [['parent_id'], 'default', 'value' => 0],
+            [['categoryType_id', 'parent_id', 'publish', 'rank'], 'integer'],
+            [['parent_id', 'rank',], 'default', 'value' => 0],
             [['description'], 'string'],
             [['catAttr'], 'safe'],
             [['title', 'alias', 'meta_title', 'meta_description'], 'string', 'max' => 255],
@@ -72,6 +73,7 @@ class Category extends \yii\db\ActiveRecord
             'meta_description' => 'Meta Description',
             'publish' => 'Публикация',
             'catAttr' => 'Атрибуты',
+            'rank' => 'Порядок вывода',
         ];
     }
 
@@ -159,6 +161,7 @@ class Category extends \yii\db\ActiveRecord
     {
         $parents = Category::find()
             ->select(['id', 'title'])
+            ->where(['parent_id' => 0])
             ->asArray()
             ->all();
 

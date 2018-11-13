@@ -28,6 +28,7 @@ use zxbodya\yii2\galleryManager\GalleryBehavior;
  * @property array $catAttributes
  * @property array $selectAttr
  * @property int $filterCat
+ * @property string $viewOnWidget
 
  *
  * @property CategoryProduct[] $categoryProducts
@@ -61,7 +62,7 @@ class Product extends \yii\db\ActiveRecord
             [['selectCategory', 'filterCat', 'selectAttr'], 'safe'],
             [['description'], 'string'],
             [['rank', 'publish'], 'integer'],
-            [['title', 'short_description', 'meta_title', 'meta_description', 'alias', 'viewAttr', 'addBlockTitle'], 'string', 'max' => 255],
+            [['title', 'short_description', 'meta_title', 'meta_description', 'alias', 'viewAttr', 'addBlockTitle', 'viewOnWidget'], 'string', 'max' => 255],
         ];
     }
 
@@ -147,6 +148,7 @@ class Product extends \yii\db\ActiveRecord
             'selectAttr' => 'Выбор атрибутов',
             'viewAttr' => 'Выводить в превью товара',
             'addBlockTitle' => 'Заголовок дополнительного блока',
+            'viewOnWidget' => 'Выводить в виджете',
         ];
     }
 
@@ -261,6 +263,11 @@ class Product extends \yii\db\ActiveRecord
         return json_decode($this->viewAttr);
     }
 
+    public function getViewOnWidget()
+    {
+        return json_decode($this->viewOnWidget);
+    }
+
     /**
      * @return int
      */
@@ -295,7 +302,7 @@ class Product extends \yii\db\ActiveRecord
         ProductAttributes::deleteAll(['AND', 'product_id' => $this->id, ['not in', 'attributes_id', $delAttr]]);
     }
 
-    public function saveAttr($attrList = null, $attrColor = null, $attrString = null, $viewAttr = null)
+    public function saveAttr($attrList = null, $attrColor = null, $attrString = null, $viewAttr = null, $viewOnWidget = null)
     {
         ProductAttributes::deleteAll(['product_id' => $this->id]);
         if (is_array($attrList))
@@ -331,6 +338,11 @@ class Product extends \yii\db\ActiveRecord
 
         if ($viewAttr){
             $this->viewAttr = json_encode($viewAttr);
+            $this->save(false);
+        }
+
+        if ($viewOnWidget){
+            $this->viewOnWidget = json_encode($viewOnWidget);
             $this->save(false);
         }
     }

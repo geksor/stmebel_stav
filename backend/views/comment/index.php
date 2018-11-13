@@ -40,6 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'text',
                         'contentOptions' => ['style' => 'white-space: normal;'],
+                        'content' => function ($data){
+                            /* @var $data \common\models\Comment */
+                            return "<p class='reviewText'>$data->text</p>";
+                        }
                     ],
                     [
                         'attribute' => 'created_at',
@@ -55,7 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'publish',
                         'label' => 'Состояние',
-                        'filter'=>[''=>'Все',0=>"Не опубликованные",1=>"Опубликованные"],
+                        'filter'=>[0=>"Не опубликованные",1=>"Опубликованные"],
+                        'filterInputOptions' => ['prompt' => 'Все', 'class' => 'form-control form-control-sm'],
                         'headerOptions' => ['width' => '170'],
                         'format' => 'raw',
                         'value' => function ($data){
@@ -79,3 +84,22 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+<?php
+$css= <<< CSS
+
+.newRow{
+    background-color: #ffdcdc!important;    
+}
+.noReadRow{
+    background-color: #fffdce!important;    
+}
+.reviewText{
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+CSS;
+
+$this->registerCss($css, ["type" => "text/css"], "callBack" );
+?>​

@@ -42,7 +42,7 @@ class CatalogController extends Controller
             ->where(['alias' => $alias])
             ->with([
                 'child' => function (\yii\db\ActiveQuery $query){
-                    $query->andWhere(['publish' => 1]);
+                    $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
                 },
             ])
             ->one();

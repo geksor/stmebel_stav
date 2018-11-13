@@ -15,12 +15,26 @@
             <div class="item col-lg-3 col-sm-6 col-12 mt-2 mt-lg-0">
                 <div class="bg-gray furniture">
                     <div class="pl-4 pt-2">
-                        <span class="gray mr-1">Артикул:</span><span>292891</span><br>
+                        <? foreach ($item->attributes0 as $attr) {
+                        /* @var $attr \common\models\Attributes */ ?>
+                            <? if (in_array($attr->id, $item->getViewOnWidget())) {?>
+
+                                <span class="gray mr-1"><?= $attr->viewName ?>:</span>
+                                <span>
+                                    <? if ($attr->type >= 1 && $attr->type < 3) { ?>
+                                        <?= $attr->getAttrValue($item->id) ?>
+                                    <? } else if ($attr->type === 3) { ?>
+                                        <?= $attr->getAttrValue($item->id)->title ?>
+                                    <? } ?>
+                                </span><br>
+
+                            <?}?>
+                        <?}?>
                     </div>
                     <? $image = $item->getBehavior('galleryBehavior')->getImages()[0]; /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */?>
                     <div class="mt-5 mx-auto d-bloc position-relative" style="height: 150px; width: 200px">
                         <img
-                                src="<?= $image->getUrl('small') ?>"
+                                src="<?= $image ? $image->getUrl('small') : '/no_image.png' ?>"
                                 class="position-absolute w-100 h-100"
                                 alt="<?= $item->title ?>"
                                 style="

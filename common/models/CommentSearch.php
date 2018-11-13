@@ -41,7 +41,7 @@ class CommentSearch extends Comment
      */
     public function search($params)
     {
-        $query = Comment::find();
+        $query = Comment::find()->orderBy(['viewed' => SORT_ASC]);
 
         // add conditions that should always apply here
 

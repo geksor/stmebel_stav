@@ -105,9 +105,10 @@ class ProductController extends Controller
 
         $attrSet = new AttrProdSettings();
         $attrSet->viewAttr = $model->getViewAttr();
+        $attrSet->viewOnWidget = $model->getViewOnWidget();
 
         if ($attrSet->load(Yii::$app->request->post())) {
-            $model->saveAttr(Yii::$app->request->post('attrList'), Yii::$app->request->post('attrColor'), Yii::$app->request->post('attrString'), $attrSet->viewAttr);
+            $model->saveAttr(Yii::$app->request->post('attrList'), Yii::$app->request->post('attrColor'), Yii::$app->request->post('attrString'), $attrSet->viewAttr, $attrSet->viewOnWidget);
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -146,7 +147,11 @@ class ProductController extends Controller
      */
     public function getCategories()
     {
-        return ArrayHelper::map(Category::find()->all(), 'id', 'title');
+        $categoryIdArr = ArrayHelper::getColumn(
+            CategoryProduct::find()->groupBy('category_id')->select('category_id')->asArray()->all(),
+            'category_id'
+        );
+        return ArrayHelper::map(Category::find()->where(['id' => $categoryIdArr])->all(), 'id', 'title');
     }
 
 

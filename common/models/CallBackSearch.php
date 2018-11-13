@@ -41,7 +41,7 @@ class CallBackSearch extends CallBack
      */
     public function search($params)
     {
-        $query = CallBack::find();
+        $query = CallBack::find()->orderBy(['viewed' => SORT_ASC]);
 
         // add conditions that should always apply here
 

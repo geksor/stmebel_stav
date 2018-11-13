@@ -12,6 +12,7 @@ use Yii;
  * @property int $attrList_id
  * @property int $attrColor_id
  * @property string $attrString
+ * @property int $rank
  *
  * @property Attributes $attributes0
  * @property Product $product
@@ -33,7 +34,7 @@ class ProductAttributes extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'attributes_id'], 'required'],
-            [['product_id', 'attributes_id', 'attrList_id'], 'integer'],
+            [['product_id', 'attributes_id', 'attrList_id', 'rank'], 'integer'],
             [['attrString', 'attrColor_id'], 'string', 'max' => 255],
             [['product_id', 'attributes_id'], 'unique', 'targetAttribute' => ['product_id', 'attributes_id']],
             [['attributes_id'], 'exist', 'skipOnError' => true, 'targetClass' => Attributes::className(), 'targetAttribute' => ['attributes_id' => 'id']],
@@ -52,6 +53,7 @@ class ProductAttributes extends \yii\db\ActiveRecord
             'attrList_id' => 'Attr List ID',
             'attrColor_id' => 'Attr Color ID',
             'attrString' => 'Attr String',
+            'rank' => 'Rank',
         ];
     }
 

@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]) ?>
                 <?= Html::a('Атрибуты', ['attribute', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Создать категорию', ['create'], ['class' => 'btn btn-default']) ?>
             </p>
 
             <?= DetailView::widget([

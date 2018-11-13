@@ -8,6 +8,7 @@ use common\models\SliderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use zxbodya\yii2\galleryManager\GalleryManagerAction;
 
 /**
  * SliderController implements the CRUD actions for Slider model.
@@ -28,6 +29,20 @@ class SliderController extends Controller
             ],
         ];
     }
+
+    public function actions()
+    {
+        return [
+            'galleryApi' => [
+                'class' => GalleryManagerAction::className(),
+                // mappings between type names and model classes (should be the same as in behaviour)
+                'types' => [
+                    'slider' => Slider::className(),
+                ]
+            ],
+        ];
+    }
+
 
     /**
      * Lists all Slider models.
