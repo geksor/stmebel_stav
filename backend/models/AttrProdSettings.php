@@ -12,6 +12,7 @@ use yii\base\Model;
  * @property string $viewOnWidget
  * @property int $attrList
  * @property int $attrColor
+ * @property int $attrRank
  *
  */
 class AttrProdSettings extends Model
@@ -21,6 +22,7 @@ class AttrProdSettings extends Model
     public $attrColor;
     public $viewAttr;
     public $viewOnWidget;
+    public $attrRank;
 
     /**
      * {@inheritdoc}

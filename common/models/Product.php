@@ -35,7 +35,9 @@ use zxbodya\yii2\galleryManager\GalleryBehavior;
  * @property Category[] $categories
  * @property Category[] $selectedCategories
  * @property ProductAttributes[] $productAttributes
+ * @property ProductAttributes[] $productAttributesRank
  * @property Attributes[] $attributes0
+ * @property Attributes[] $attributesOrder
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -218,7 +220,19 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getProductAttributes()
     {
-        return $this->hasMany(ProductAttributes::className(), ['product_id' => 'id']);
+        return $this->hasMany(ProductAttributes::className(), ['product_id' => 'id'])->orderBy(['rank' => SORT_ASC]);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductAttributesRank()
+    {
+        $modelsArr = $this
+            ->hasMany(ProductAttributes::className(), ['product_id' => 'id'])
+            ->select('attributes_id')
+            ->orderBy(['rank' => SORT_ASC])
+            ->asArray();
+        return $modelsArr;
     }
 
     /**
@@ -226,7 +240,19 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getAttributes0()
     {
-        return $this->hasMany(Attributes::className(), ['id' => 'attributes_id'])->viaTable('product_attributes', ['product_id' => 'id']);
+        return $this
+            ->hasMany(Attributes::className(), ['id' => 'attributes_id'])
+            ->viaTable('product_attributes', ['product_id' => 'id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAttributesOrder()
+    {
+        return $this
+            ->hasMany(Attributes::className(), ['id' => 'attributes_id'])
+            ->via('productAttributes')
+            ->indexBy('id');
     }
 
     /**
@@ -302,7 +328,7 @@ class Product extends \yii\db\ActiveRecord
         ProductAttributes::deleteAll(['AND', 'product_id' => $this->id, ['not in', 'attributes_id', $delAttr]]);
     }
 
-    public function saveAttr($attrList = null, $attrColor = null, $attrString = null, $viewAttr = null, $viewOnWidget = null)
+    public function saveAttr($attrList = null, $attrColor = null, $attrString = null, $viewAttr = null, $viewOnWidget = null, $rank=null)
     {
         ProductAttributes::deleteAll(['product_id' => $this->id]);
         if (is_array($attrList))
@@ -332,6 +358,19 @@ class Product extends \yii\db\ActiveRecord
                 if ($attrStringVal){
                     $attr = Attributes::findOne($attrId);
                     $this->link('attributes0', $attr, ['attrString' => $attrStringVal]);
+                }
+            }
+        }
+        if (is_array($rank))
+        {
+            foreach ($rank as $attrId => $rankVal)
+            {
+                if ($rankVal){
+                    $attr = ProductAttributes::findOne([ 'attributes_id' => $attrId]);
+                    if ($attr){
+                        $attr->rank = $rankVal;
+                        $attr->save(false);
+                    }
                 }
             }
         }

@@ -1,6 +1,9 @@
 <?php
 
 /* @var $this \frontend\components\View */
+
+use yii\helpers\ArrayHelper;
+
 /* @var $model \common\models\Product */
 /* @var $modelCat \common\models\Category */
 /* @var $alias \frontend\controllers\CatalogController */
@@ -48,7 +51,20 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="mb-4">
                 <?= $model->description ?>
             </div>
-            <? foreach ($model->attributes0 as $attribute) {
+            <?
+            $tempModels = $model->attributesOrder;
+
+            $orderArr = ArrayHelper::getColumn($model->productAttributesRank, 'attributes_id');
+
+            $resArr = [];
+
+            if ($tempModels){
+                foreach ($orderArr as $item){
+                    $resArr[] = $tempModels[$item];
+                }
+            }
+            ?>
+            <? foreach ($resArr as $attribute) {
                 /* @var $attribute \common\models\Attributes */
                 ?>
                 <? if ($attribute->type >= 1 && $attribute->type < 3) { ?>

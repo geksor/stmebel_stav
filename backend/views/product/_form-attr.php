@@ -27,6 +27,14 @@ use yii\widgets\ActiveForm;
                     'placeholder' => 'Введите значение',
                 ])
                 ->label($attribute->title) ?>
+                <?= $form->field($attrSet, 'attrRank')
+                    ->textInput([
+                        'name' => "attrRank[$attribute->id]",
+                        'value' => $attribute->getValueFromDropDown($model->id, 'rank'),
+                        'placeholder' => 'Порядок вывода',
+                    ])
+                    ->label(false)
+                ?>
 
             <?}?>
             <? if ($attribute->type === 2) {?>
@@ -40,6 +48,15 @@ use yii\widgets\ActiveForm;
                     ],
                 ])
                 ->label($attribute->title) ?>
+                <?= $form->field($attrSet, 'attrRank')
+                    ->textInput([
+                        'name' => "attrRank[$attribute->id]",
+                        'value' => $attribute->getValueFromDropDown($model->id, 'rank'),
+                        'placeholder' => 'Порядок вывода',
+                    ])
+                    ->label(false)
+                ?>
+
 
             <?}?>
             <? if ($attribute->type === 3) {?>
@@ -54,6 +71,15 @@ use yii\widgets\ActiveForm;
                     'options' => $attribute->getValueFromDropDown($model->id, 'attrColor_id', true),
                 ])
                 ->label($attribute->title) ?>
+                <?= $form->field($attrSet, 'attrRank')
+                    ->textInput([
+                        'name' => "attrRank[$attribute->id]",
+                        'value' => $attribute->getValueFromDropDown($model->id, 'rank'),
+                        'placeholder' => 'Порядок вывода',
+                    ])
+                    ->label(false)
+                ?>
+
 
             <?}?>
         <?}?>

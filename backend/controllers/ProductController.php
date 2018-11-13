@@ -108,7 +108,14 @@ class ProductController extends Controller
         $attrSet->viewOnWidget = $model->getViewOnWidget();
 
         if ($attrSet->load(Yii::$app->request->post())) {
-            $model->saveAttr(Yii::$app->request->post('attrList'), Yii::$app->request->post('attrColor'), Yii::$app->request->post('attrString'), $attrSet->viewAttr, $attrSet->viewOnWidget);
+            $model->saveAttr(
+                Yii::$app->request->post('attrList'),
+                Yii::$app->request->post('attrColor'),
+                Yii::$app->request->post('attrString'),
+                $attrSet->viewAttr,
+                $attrSet->viewOnWidget,
+                Yii::$app->request->post('attrRank')
+            );
 
             return $this->redirect(['view', 'id' => $model->id]);
         }

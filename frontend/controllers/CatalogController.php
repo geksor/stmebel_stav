@@ -77,7 +77,10 @@ class CatalogController extends Controller
     public function actionItem($alias, $child, $item)
     {
         $modelCat = Category::findOne(['alias' => $child]);
-        $model = Product::find()->where(['alias' => $item])->with(['attributes0'])->one();
+        $model = Product::find()
+            ->where(['alias' => $item])
+            ->with('attributesOrder')
+            ->one();
 
         return $this->render('item', [
             'model' => $model,

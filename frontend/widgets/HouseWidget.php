@@ -40,7 +40,11 @@ class HouseWidget extends Widget
      */
     public function run()
     {
-        $query = Product::find()->limit($this->limit)->orderBy(['rank' => SORT_ASC])->where(['publish' => 1])->with('attributes0');
+        $query = Product::find()
+            ->limit($this->limit)
+            ->orderBy(['rank' => SORT_ASC])
+            ->where(['publish' => 1])
+            ->with('attributes0');
 
         if ($this->category) {
             $category = Category::findOne($this->category);
