@@ -185,11 +185,11 @@ class ProductController extends Controller
      */
     public function getCategories()
     {
-        $categoryIdArr = ArrayHelper::getColumn(
-            CategoryProduct::find()->groupBy('category_id')->select('category_id')->asArray()->all(),
-            'category_id'
-        );
-        return ArrayHelper::map(Category::find()->where(['id' => $categoryIdArr])->all(), 'id', 'title');
+//        $categoryIdArr = ArrayHelper::getColumn(
+//            CategoryProduct::find()->groupBy('category_id')->select('category_id')->asArray()->all(),
+//            'category_id'
+//        );
+        return ArrayHelper::map(Category::find()->where(['>', 'parent_id', 0])->all(), 'id', 'title');
     }
 
     /**

@@ -10,7 +10,6 @@ use yii\helpers\Inflector;
  * This is the model class for table "category".
  *
  * @property int $id
- * @property int $categoryType_id
  * @property int $parent_id
  * @property string $title
  * @property string $description
@@ -22,7 +21,6 @@ use yii\helpers\Inflector;
  * @property array $catAttr
  * @property int $rank
  *
- * @property CategoryType $categoryType
  * @property CategoryAttributes[] $categoryAttributes
  * @property Attributes[] $attributes0
  * @property CategoryProduct[] $categoryProducts
@@ -48,12 +46,11 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['categoryType_id', 'parent_id', 'publish', 'rank'], 'integer'],
+            [['parent_id', 'publish', 'rank'], 'integer'],
             [['parent_id', 'rank',], 'default', 'value' => 0],
             [['description'], 'string'],
             [['catAttr'], 'safe'],
             [['title', 'alias', 'meta_title', 'meta_description'], 'string', 'max' => 255],
-            [['categoryType_id'], 'exist', 'skipOnError' => true, 'targetClass' => CategoryType::className(), 'targetAttribute' => ['categoryType_id' => 'id']],
         ];
     }
 
@@ -64,7 +61,6 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'categoryType_id' => 'Тип категории',
             'parent_id' => 'Родительская категория',
             'title' => 'Название',
             'description' => 'Описание',
@@ -75,14 +71,6 @@ class Category extends \yii\db\ActiveRecord
             'catAttr' => 'Атрибуты',
             'rank' => 'Порядок вывода',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategoryType()
-    {
-        return $this->hasOne(CategoryType::className(), ['id' => 'categoryType_id']);
     }
 
     /**

@@ -11,7 +11,6 @@
         <div class="col-12 mb-4 text-center text-md-left">
             <h2 class="text-center text-lg-left"><?= $title ?></h2>
         </div>
-
         <? foreach ($models as $key => $model) {
             /* @var $model \common\models\Product */ ?>
             <? $images = $model->getBehavior('galleryBehavior')->getImages(); /* @var $images \zxbodya\yii2\galleryManager\GalleryImage */ ?>
@@ -235,6 +234,7 @@
                 </div>
             <? } ?>
         <? } ?>
+
     </div>
     <div class="row mt-4"></div>
 </div>

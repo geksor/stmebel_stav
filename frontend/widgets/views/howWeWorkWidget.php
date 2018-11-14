@@ -4,6 +4,8 @@
 
 ?>
 
+<? if ($model) {?>
+
 <div id="how-we-work" class="container mw-1200 mt-5 pt-5">
     <div class="row justify-content-center justify-content-lg-between">
         <div class="col-12 mb-5 text-center text-md-left">
@@ -29,3 +31,5 @@
         </div>
     </div>
 </div>
+
+<?}?>

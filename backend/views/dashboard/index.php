@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'ip_address',
                                 'visits',
                                 'created_at',
-                                ['class' => 'yii\grid\ActionColumn'],
+//                                ['class' => 'yii\grid\ActionColumn'],
                             ],
                         ]); ?>
                     <?php } ?>

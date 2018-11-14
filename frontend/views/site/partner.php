@@ -9,6 +9,7 @@ $this->title = 'Партнеры';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<? if ($model) {?>
 <div id="partners" class="container mw-1200 mt-5 pt-5">
     <div class="row justify-content-between">
         <? foreach ($model->getBehavior('galleryBehavior')->getImages() as $image) {/* @var $image \zxbodya\yii2\galleryManager\GalleryImage */?>
@@ -20,3 +21,4 @@ $this->params['breadcrumbs'][] = $this->title;
         <?}?>
     </div>
 </div>
+<?}?>

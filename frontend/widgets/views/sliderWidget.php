@@ -6,7 +6,7 @@
 ?>
 
 <div class="mainSlider">
-
+<? if ($model) {?>
     <? foreach ($model->getBehavior('galleryBehavior')->getImages() as $image) {
     /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */ ?>
 
@@ -30,5 +30,5 @@
         </div>
 
     <?}?>
-
+<?}?>
 </div>

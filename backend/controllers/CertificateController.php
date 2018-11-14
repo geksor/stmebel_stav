@@ -42,7 +42,7 @@ class CertificateController extends Controller
                             'create',
                             'update',
                             'delete',
-                            'galleryApy'
+                            'galleryApi'
                         ],
                         'allow' => true,
                         'roles' => ['@'],

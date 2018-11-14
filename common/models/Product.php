@@ -62,9 +62,9 @@ class Product extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['alias'], 'unique'],
             [['selectCategory', 'filterCat', 'selectAttr'], 'safe'],
-            [['description'], 'string'],
+            [['description','short_description',], 'string'],
             [['rank', 'publish'], 'integer'],
-            [['title', 'short_description', 'meta_title', 'meta_description', 'alias', 'viewAttr', 'addBlockTitle', 'viewOnWidget'], 'string', 'max' => 255],
+            [['title', 'meta_title', 'meta_description', 'alias', 'viewAttr', 'addBlockTitle', 'viewOnWidget'], 'string', 'max' => 255],
         ];
     }
 
