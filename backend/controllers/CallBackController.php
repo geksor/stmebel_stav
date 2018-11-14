@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\CallBack;
 use common\models\CallBackSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,10 +21,36 @@ class CallBackController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'login',
+                            'error',
+                        ],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [
+                            'logout',
+                            'error',
+                            'index',
+                            'view',
+                            'create',
+                            'update',
+                            'delete',
+                            'success',
+                        ],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -110,7 +137,6 @@ class CallBackController extends Controller
         }
         return $this->redirect(['index']);
     }
-
 
     /**
      * @param \yii\base\Action $action

@@ -9,6 +9,7 @@ use common\models\CategoryProduct;
 use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -27,10 +28,40 @@ class ProductController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'login',
+                            'error',
+                        ],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [
+                            'logout',
+                            'error',
+                            'index',
+                            'view',
+                            'create',
+                            'update',
+                            'delete',
+                            'attribute',
+                            'order',
+                            'publish',
+                            'galleryApi',
+                            'galleryApiAddBlock'
+                        ],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -113,9 +144,9 @@ class ProductController extends Controller
                 Yii::$app->request->post('attrColor'),
                 Yii::$app->request->post('attrString'),
                 $attrSet->viewAttr,
-                $attrSet->viewOnWidget,
-                Yii::$app->request->post('attrRank')
+                $attrSet->viewOnWidget
             );
+            $model->saveAttrRank(Yii::$app->request->post('attrRank'));
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -160,7 +191,6 @@ class ProductController extends Controller
         );
         return ArrayHelper::map(Category::find()->where(['id' => $categoryIdArr])->all(), 'id', 'title');
     }
-
 
     /**
      * Updates an existing Product model.

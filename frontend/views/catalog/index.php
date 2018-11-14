@@ -1,6 +1,9 @@
 <?php
 
 /* @var $this \frontend\components\View */
+
+use yii\helpers\ArrayHelper;
+
 /* @var $model \common\models\Category */
 /* @var $products \common\models\Product */
 /* @var $pages \yii\data\Pagination */
@@ -73,7 +76,9 @@ $this->params['breadcrumbs'][] = $breadCrumb;
 
                                         <div class="card-body d-flex flex-column justify-content-between">
                                             <h5 class="card-title"><?= $product->title ?></h5>
-                                            <? foreach ($product->attributes0 as $key => $attr) {
+                                            <?
+                                            $resArr = $product->getAttributesOrderRes($product->attributesOrder, $product->productAttributesRank);
+                                            foreach ($resArr as $key => $attr) {
                                                 /* @var $attr \common\models\Attributes */ ?>
                                                 <? if (in_array($attr->id, $product->getViewAttr())) {?>
                                                     <p class="card-text mb-0">

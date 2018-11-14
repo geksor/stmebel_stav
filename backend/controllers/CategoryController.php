@@ -6,6 +6,7 @@ use common\models\Attributes;
 use Yii;
 use common\models\Category;
 use common\models\CategorySearch;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -23,10 +24,38 @@ class CategoryController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'login',
+                            'error',
+                        ],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [
+                            'logout',
+                            'error',
+                            'index',
+                            'view',
+                            'create',
+                            'update',
+                            'delete',
+                            'attribute',
+                            'publish',
+                            'rank',
+                        ],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -97,39 +126,6 @@ class CategoryController extends Controller
             'model' => $model,
         ]);
     }
-
-    /**
-     * Attribute an existing Category model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionAttribute($id)
-    {
-        $model = $this->findModel($id);
-        $model->catAttr = $model->selectedAttributes;
-        $attributes = $this->getAttributes();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->saveAttr($model->catAttr);
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('attribute', [
-            'model' => $model,
-            'attributes' => $attributes,
-        ]);
-    }
-
-    /**
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return ArrayHelper::map(Attributes::find()->all(), 'id', 'title');
-    }
-
 
     /**
      * Deletes an existing Category model.
@@ -204,4 +200,35 @@ class CategoryController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    /**
+     * Attribute an existing Category model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionAttribute($id)
+    {
+        $model = $this->findModel($id);
+        $model->catAttr = $model->selectedAttributes;
+        $attributes = $this->getAttributes();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->saveAttr($model->catAttr);
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('attribute', [
+            'model' => $model,
+            'attributes' => $attributes,
+        ]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return ArrayHelper::map(Attributes::find()->all(), 'id', 'title');
+    }
 }

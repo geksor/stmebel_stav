@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <h2>Контакты</h2>
             <script>
-                var n = <?= $model->coordinate_N ?>;
-                var e = <?= $model->coordinate_E ?>;
+                var n = <?= $model->coordinate_N?$model->coordinate_N:45.044521 ?>;
+                var e = <?= $model->coordinate_E?$model->coordinate_E:41.969083 ?>;
                 var address = '<?= $model->address ?>';
             </script>
 

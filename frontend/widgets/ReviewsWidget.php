@@ -8,9 +8,11 @@ class ReviewsWidget extends Widget
 {
     public function run()
     {
-        $model = Comment::find()
-            ->where(['done_at' => (integer) Comment::find()->max('done_at')])
-            ->andWhere(['publish' => 1])
+        $query = Comment::find()->where(['publish' => 1]);
+        $queryMax = clone $query;
+
+        $model = $query
+            ->andWhere(['done_at' => (integer) $queryMax->max('done_at')])
             ->one();
 
         return $this->render('reviewsWidget', [

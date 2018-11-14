@@ -110,7 +110,7 @@ class SiteController extends Controller
     public function actionDocuments()
     {
         $modelDoc = WeDocs::find()->all();
-        $modelCert = Certificate::findOne(['id' => 1]);
+        $modelCert = Certificate::findOne(['id' => Yii::$app->params['SiteSettings']['certificate_id']]);
 
         return $this->render('documents', [
             'modelDoc' => $modelDoc,

@@ -43,7 +43,7 @@ class ExamplesWidget extends Widget
             ->limit($this->limit)
             ->orderBy(['rank' => SORT_ASC])
             ->where(['publish' => 1])
-            ->with('attributesOrder');
+            ->with(['attributesOrder', 'productAttributesRank']);
 
         if ($this->category){
             $category = Category::findOne($this->category);

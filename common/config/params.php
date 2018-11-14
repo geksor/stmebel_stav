@@ -23,6 +23,12 @@ if (!is_file($advantageFile)){
 }
 $advantage = json_decode(file_get_contents($advantageFile), true);
 
+$siteSettingsFile = __DIR__. '/site-settings.json';
+if (!is_file($siteSettingsFile)){
+    file_put_contents($siteSettingsFile, '{}');
+}
+$siteSettings = json_decode(file_get_contents($siteSettingsFile), true);
+
 return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
@@ -31,4 +37,5 @@ return [
     'AboutHome' => $aboutHome,
     'AboutPage' => $aboutPage,
     'Advantage' => $advantage,
+    'SiteSettings' => $siteSettings,
 ];

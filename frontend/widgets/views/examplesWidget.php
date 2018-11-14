@@ -1,6 +1,9 @@
 <?
 
 /* @var $model \common\models\Product */
+
+use yii\helpers\ArrayHelper;
+
 /* @var $title \frontend\widgets\ExamplesWidget */
 /* @var $category \frontend\widgets\ExamplesWidget */
 
@@ -15,7 +18,9 @@
             <div class="item col-lg-3 col-sm-6 col-12 mt-2 mt-lg-0">
                 <div class="bg-gray furniture">
                     <div class="pl-4 pt-2">
-                        <? foreach ($item->attributes0 as $attr) {
+                        <?
+                            $resArr = $item->getAttributesOrderRes($item->attributesOrder, $item->productAttributesRank);
+                            foreach ($resArr as $attr) {
                         /* @var $attr \common\models\Attributes */ ?>
                             <? if (in_array($attr->id, $item->getViewOnWidget())) {?>
 

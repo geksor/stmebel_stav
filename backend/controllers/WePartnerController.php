@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\SiteSettings;
 use Yii;
 use common\models\WePartner;
 use common\models\WePartnerSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,10 +23,36 @@ class WePartnerController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'login',
+                            'error',
+                        ],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [
+                            'logout',
+                            'error',
+                            'index',
+                            'view',
+                            'create',
+                            'update',
+                            'delete',
+                            'galleryApi',
+                        ],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -46,7 +74,6 @@ class WePartnerController extends Controller
         ];
     }
 
-
     /**
      * Lists all WePartner models.
      * @return mixed
@@ -56,9 +83,16 @@ class WePartnerController extends Controller
         $searchModel = new WePartnerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $settingsModel = new SiteSettings();
+
+        if ($settingsModel->load(Yii::$app->request->post()) && $settingsModel->save($settingsModel)){
+            return $this->redirect('index');
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'settingsModel' => $settingsModel,
         ]);
     }
 

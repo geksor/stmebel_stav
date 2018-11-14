@@ -24,6 +24,6 @@ $this->title = 'Главная - Bro & Bro в Ставрополе';
 <?= ReviewsWidget::widget() ?>
 
 <?= \frontend\widgets\PartnerWidget::widget([
-    'modelId' => 1,
-    'imageCount' => 4,
+    'modelId' => Yii::$app->params['SiteSettings']['homePagePartner_id'],
+    'imageCount' => Yii::$app->params['SiteSettings']['homePagePartner_count'],
 ]) ?>

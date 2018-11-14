@@ -52,19 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $model->description ?>
             </div>
             <?
-            $tempModels = $model->attributesOrder;
-
-            $orderArr = ArrayHelper::getColumn($model->productAttributesRank, 'attributes_id');
-
-            $resArr = [];
-
-            if ($tempModels){
-                foreach ($orderArr as $item){
-                    $resArr[] = $tempModels[$item];
-                }
-            }
-            ?>
-            <? foreach ($resArr as $attribute) {
+                $resArr = $model->getAttributesOrderRes($model->attributesOrder, $model->productAttributesRank);
+                foreach ($resArr as $attribute) {
                 /* @var $attribute \common\models\Attributes */
                 ?>
                 <? if ($attribute->type >= 1 && $attribute->type < 3) { ?>
@@ -82,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <? } ?>
             <p class="mt-4"></p>
-            <? foreach ($model->attributes0 as $attribute) {
+            <? foreach ($resArr as $attribute) {
                 /* @var $attribute \common\models\Attributes */ ?>
                 <? if ($attribute->type === 3) { ?>
 
@@ -107,24 +96,27 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-<div id="interior" class="container mw-1200 mt-5 pt-5">
-    <div class="row justify-content-center">
-        <div class="col-12 mb-5 text-center text-md-left">
-            <h2 class="text-center text-lg-left"><?= $model->addBlockTitle ?></h2>
-        </div>
-
-        <? foreach ($model->getBehavior('galleryBehaviorAddBlock')->getImages() as $image) {
-        /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */ ?>
-
-            <div class="col-11 col-md-6 col-lg-3 text-center mt-4 mt-lg-0">
-
-                <a href="<?=$image->getUrl('original')?>" data-fancybox="<?= $model->addBlockTitle ?>" data-caption="<?=$image->name?>">
-                    <?= \yii\helpers\Html::img($image->getUrl('medium'), ['class' => 'img-fluid', 'alt' => $image->name]) ?>
-                </a>
-
+<? $imagesAddBlock = $model->getBehavior('galleryBehaviorAddBlock')->getImages() ?>
+<? if ($imagesAddBlock) {?>
+    <div id="interior" class="container mw-1200 mt-5 pt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 mb-5 text-center text-md-left">
+                <h2 class="text-center text-lg-left"><?= $model->addBlockTitle ?></h2>
             </div>
 
-        <?}?>
+            <? foreach ($imagesAddBlock as $image) {
+            /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */ ?>
 
+                <div class="col-11 col-md-6 col-lg-3 text-center mt-4 mt-lg-0">
+
+                    <a href="<?=$image->getUrl('original')?>" data-fancybox="<?= $model->addBlockTitle ?>" data-caption="<?=$image->name?>">
+                        <?= \yii\helpers\Html::img($image->getUrl('medium'), ['class' => 'img-fluid', 'alt' => $image->name]) ?>
+                    </a>
+
+                </div>
+
+            <?}?>
+
+        </div>
     </div>
-</div>
+<?}?>

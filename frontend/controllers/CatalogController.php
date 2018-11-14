@@ -61,7 +61,7 @@ class CatalogController extends Controller
         $pages->pageSizeParam = false;
         $pages->forcePageParam = false;
 
-        $products = $query->with(['attributes0'])
+        $products = $query->with(['attributesOrder', 'productAttributesRank'])
             ->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
@@ -79,7 +79,7 @@ class CatalogController extends Controller
         $modelCat = Category::findOne(['alias' => $child]);
         $model = Product::find()
             ->where(['alias' => $item])
-            ->with('attributesOrder')
+            ->with(['attributesOrder', 'productAttributesRank'])
             ->one();
 
         return $this->render('item', [

@@ -59,7 +59,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'addBlockTitle'], 'required'],
+            [['title'], 'required'],
             [['alias'], 'unique'],
             [['selectCategory', 'filterCat', 'selectAttr'], 'safe'],
             [['description'], 'string'],
@@ -220,19 +220,16 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getProductAttributes()
     {
-        return $this->hasMany(ProductAttributes::className(), ['product_id' => 'id'])->orderBy(['rank' => SORT_ASC]);
+        return $this->hasMany(ProductAttributes::className(), ['product_id' => 'id']);
     }
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getProductAttributesRank()
     {
-        $modelsArr = $this
+        return $this
             ->hasMany(ProductAttributes::className(), ['product_id' => 'id'])
-            ->select('attributes_id')
-            ->orderBy(['rank' => SORT_ASC])
-            ->asArray();
-        return $modelsArr;
+            ->orderBy(['rank' => SORT_ASC]);
     }
 
     /**
@@ -253,6 +250,23 @@ class Product extends \yii\db\ActiveRecord
             ->hasMany(Attributes::className(), ['id' => 'attributes_id'])
             ->via('productAttributes')
             ->indexBy('id');
+    }
+
+    public function getAttributesOrderRes($attrModels, $orderModels)
+    {
+        $tempModels = $attrModels;
+
+        $orderArr = ArrayHelper::getColumn($orderModels, 'attributes_id');
+
+        $resArr = [];
+
+        if ($tempModels){
+            foreach ($orderArr as $value){
+                $resArr[] = $tempModels[$value];
+            }
+        }
+
+        return $resArr;
     }
 
     /**
@@ -286,12 +300,18 @@ class Product extends \yii\db\ActiveRecord
 
     public function getViewAttr()
     {
-        return json_decode($this->viewAttr);
+        if ($this->viewAttr){
+            return json_decode($this->viewAttr);
+        }
+        return [];
     }
 
     public function getViewOnWidget()
     {
-        return json_decode($this->viewOnWidget);
+        if ($this->viewOnWidget){
+            return json_decode($this->viewOnWidget);
+        }
+        return [];
     }
 
     /**
@@ -328,7 +348,7 @@ class Product extends \yii\db\ActiveRecord
         ProductAttributes::deleteAll(['AND', 'product_id' => $this->id, ['not in', 'attributes_id', $delAttr]]);
     }
 
-    public function saveAttr($attrList = null, $attrColor = null, $attrString = null, $viewAttr = null, $viewOnWidget = null, $rank=null)
+    public function saveAttr($attrList = null, $attrColor = null, $attrString = null, $viewAttr = null, $viewOnWidget = null)
     {
         ProductAttributes::deleteAll(['product_id' => $this->id]);
         if (is_array($attrList))
@@ -361,19 +381,6 @@ class Product extends \yii\db\ActiveRecord
                 }
             }
         }
-        if (is_array($rank))
-        {
-            foreach ($rank as $attrId => $rankVal)
-            {
-                if ($rankVal){
-                    $attr = ProductAttributes::findOne([ 'attributes_id' => $attrId]);
-                    if ($attr){
-                        $attr->rank = $rankVal;
-                        $attr->save(false);
-                    }
-                }
-            }
-        }
 
         if ($viewAttr){
             $this->viewAttr = json_encode($viewAttr);
@@ -383,6 +390,26 @@ class Product extends \yii\db\ActiveRecord
         if ($viewOnWidget){
             $this->viewOnWidget = json_encode($viewOnWidget);
             $this->save(false);
+        }
+    }
+
+    /**
+     * @param $rank array
+     */
+    public function saveAttrRank($rank)
+    {
+        if (is_array($rank))
+        {
+            foreach ($rank as $attrId => $rankVal)
+            {
+                if ($rankVal){
+                    $attr = ProductAttributes::findOne([ 'attributes_id' => $attrId, 'product_id' => $this->id]);
+                    if ($attr){
+                        $attr->rank = $rankVal;
+                        $attr->save(false);
+                    }
+                }
+            }
         }
     }
 

@@ -31,17 +31,21 @@ class SiteController extends Controller
                         'actions' => [
                             'login',
                             'error',
+                        ],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [
+                            'logout',
+                            'error',
+                            'index',
                             'ya-map',
                             'contact',
                             'about-home',
                             'about-page',
                             'advantage',
                             'set-image',
-                            ],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index', ],
+                        ],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

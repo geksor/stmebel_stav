@@ -71,7 +71,9 @@
                                         <h3 class="col-12 my-2 my-lg-4 text-center text-lg-left"><?= $model->title ?></h3>
                                         <? $i = 1 ?>
 
-                                        <? foreach ($model->attributes0 as $keyAttr => $attr) {
+                                        <?
+                                        $resArr = $model->getAttributesOrderRes($model->attributesOrder, $model->productAttributesRank);
+                                        foreach ($resArr as $keyAttr => $attr) {
                                         /* @var $attr \common\models\Attributes */ ?>
                                         <? if (in_array($attr->id, $model->getViewOnWidget())) {?>
 
@@ -160,7 +162,9 @@
                                 <h3 class="col-12 my-2 my-lg-4 text-center text-lg-left"><?= $model->title ?></h3>
                                 <? $i = 1 ?>
 
-                                <? foreach ($model->attributes0 as $keyAttr => $attr) {
+                                <?
+                                $resArr = $model->getAttributesOrderRes($model->attributesOrder, $model->productAttributesRank);
+                                foreach ($resArr as $keyAttr => $attr) {
                                     /* @var $attr \common\models\Attributes */ ?>
                                     <? if (in_array($attr->id, $model->getViewOnWidget())) {?>
 
