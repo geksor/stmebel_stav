@@ -19,6 +19,7 @@ class AppAsset extends AssetBundle
         'public/style/style.css',
         'public/style/mobile.css',
         'public/style/slick.css',
+        'public/style/xzoom.css',
     ];
     public $js = [
         'public/js/jquery.fancybox.min.js',
@@ -26,7 +27,8 @@ class AppAsset extends AssetBundle
         'public/js/mask.lib.js',
         'public/js/main.js',
         'public/js/bootstrap.min.js',
-        'public/js/bootstrap.bundle.min.js'
+        'public/js/bootstrap.bundle.min.js',
+        'public/js/xzoom.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

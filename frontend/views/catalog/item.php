@@ -28,23 +28,32 @@ $this->params['breadcrumbs'][] = $this->title;
 <div id="item-block" class="container mw-1200 mt-5 pt-5">
     <div class="row justify-content-center justify-content-lg-between">
         <div class="d-flex flex-column flex-md-row justify-content-between max-h-lg-350  align-self-start">
-            <div class="d-flex flex-row flex-md-column justify-content-between pl-lg-3">
+            <div class="d-flex flex-row flex-md-column justify-content-between pl-lg-3 xzoom-thumbs">
                 <?
                 $imgSrc = '/no_image.png';
                 $imgAlt = 'Нет изображения';
                 foreach ($model->getBehavior('galleryBehavior')->getImages() as $key => $image) {
                     /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */ ?>
                     <? if ($key !== 0) { ?>
-                        <img src="<?= $image->getUrl('small') ?>" class="s-100 s-90" alt="<?= $image->name ?>">
+                        <a href="<?= $image->getUrl('original') ?>">
+                            <img src="<?= $image->getUrl('small') ?>"
+                                 class="s-100 s-90 xzoom-gallery"
+                                 alt="<?= $image->name ?>"
+                                 xpreview="<?= $image->getUrl('medium') ?>"
+                            >
+                        </a>
                     <? } else {
                         $imgSrc = $image->getUrl('medium');
+                        $imgOriginal = $image->getUrl('original');
                         $imgAlt = $image->name;
                     } ?>
                 <? } ?>
             </div>
             <div class="mt-3 mt-md-0 ml-md-4 s-350 s-300 position-relative">
-                <img src="<?= $imgSrc ?>" class="position-absolute w-100 h-100" alt="<?= $imgAlt ?>"
-                     style="object-fit: cover">
+                <img src="<?= $imgSrc ?>" class="position-absolute w-100 h-100 xzoom" alt="<?= $imgAlt ?>"
+                     style="object-fit: cover"
+                     xoriginal="<?= $imgOriginal ?>"
+                >
             </div>
         </div>
         <div class="col-11 col-lg-6 mt-4 mt-lg-0 text-justify text-lg-left">
@@ -120,3 +129,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 <?}?>
+<?
+    $js = <<< JS
+    $(".xzoom").xzoom();
+JS;
+
+    $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+?>
+

@@ -26,7 +26,8 @@
         "mihaildev/yii2-ckeditor": "*",
         "zxbodya/yii2-gallery-manager": "*@dev",
         "mirocow/yii2-yandex-maps": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "akiraz2/yii2-stat": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

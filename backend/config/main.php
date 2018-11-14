@@ -1,4 +1,7 @@
 <?php
+
+use yii\filters\AccessControl;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -11,7 +14,31 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'stat' => [
+            // размещаем нашу админ панель на backend с проверкой доступа или ролями (здесь используется dektrium/user)
+            'controllerMap' => [
+                'dashboard' => [
+                    'class' => 'akiraz2\stat\controllers\DashboardController',
+                    'as access' => [
+                        'class' => AccessControl::className(),
+                        'rules' => [
+                            [
+                                'actions' => [
+                                    'logout',
+                                    'error',
+                                    'index',
+                                    'forms',
+                                ],
+                                'allow' => true,
+                                'roles' => ['@'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
     'homeUrl' => '/admin',
     'components' => [
         'request' => [

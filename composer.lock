@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3067719ab673e74e09c39a5f0038d467",
+    "content-hash": "fe50e6f0a353f885626d3733cf3088bf",
     "packages": [
+        {
+            "name": "akiraz2/yii2-stat",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akiraz2/yii2-stat.git",
+                "reference": "96177a73b0d2050427c50967d1bfb40f8ca8ccd6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akiraz2/yii2-stat/zipball/96177a73b0d2050427c50967d1bfb40f8ca8ccd6",
+                "reference": "96177a73b0d2050427c50967d1bfb40f8ca8ccd6",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.15"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "akiraz2\\stat\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "akiraz2\\stat\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "akiraz",
+                    "email": "akiraz@bk.ru",
+                    "homepage": "https://github.com/akiraz2/yii2-stat",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Multi Statistic and Analytic Yii2 Module for your website. Yandex, Google, Liveinternet, Mail, Bigmir, Alexa, Hotlog, Rambler, Openstat and Own stat by IP",
+            "keywords": [
+                "IP",
+                "bigmir",
+                "google-analytic",
+                "module",
+                "openstat",
+                "statistics",
+                "yandex-metrika",
+                "yii2"
+            ],
+            "time": "2018-04-14T22:15:09+00:00"
+        },
         {
             "name": "almasaeed2010/adminlte",
             "version": "v2.4.8",
@@ -4092,12 +4143,14 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "zxbodya/yii2-gallery-manager": 20
+        "zxbodya/yii2-gallery-manager": 20,
+        "akiraz2/yii2-stat": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

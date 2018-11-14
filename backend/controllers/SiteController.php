@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use akiraz2\stat\models\WebVisitor;
 use backend\models\AboutHome;
 use backend\models\AboutPage;
 use backend\models\Advantage;
@@ -79,7 +80,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $counter_direct = WebVisitor::getStat(WebVisitor::TYPE_DIRECT);
+        $counter_ads = WebVisitor::getStat(WebVisitor::TYPE_ADS);
+        $counter_search = WebVisitor::getStat(WebVisitor::TYPE_SEARCH);
+
+        return $this->render('index', [
+            'counter_direct' => $counter_direct,
+            'counter_ads' => $counter_ads,
+            'counter_search' => $counter_search
+        ]);
     }
 
     /**
