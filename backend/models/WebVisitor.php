@@ -88,12 +88,17 @@ class WebVisitor extends \yii\db\ActiveRecord
     }
 
     public static function getStat($source) {
-        return self::find()->where(['source' => $source])->andWhere(['not like', 'url', 'public'])->count('id');
+        return self::find()
+            ->where(['source' => $source])
+            ->andWhere(['not like', 'url', 'public'])
+            ->andwhere(['not like', 'url', 'uploads'])
+            ->count('id');
     }
 
     public static function getBrowserStat() {
         return self::find()
             ->where(['not like', 'url', 'public'])
+            ->andwhere(['not like', 'url', 'uploads'])
             ->andWhere(['!=', 'source', 1])
             ->addSelect(['*', 'COUNT(user_agent) as visits'])
             ->groupBy(['user_agent'])

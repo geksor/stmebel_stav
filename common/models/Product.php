@@ -175,7 +175,9 @@ class Product extends \yii\db\ActiveRecord
         /* @var $tmpParent Category */
         if ($id){
             $parent = Category::findOne([ 'id' => $id]);
-        }else{
+        }
+
+        if (!$parent){
             $catArr = $this->categories;
             if ($catArr){
                 $parent = Category::findOne([ 'id' => $catArr[0]->id]);

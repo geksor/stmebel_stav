@@ -18,7 +18,7 @@ $this->title = 'Главная - Bro & Bro в Ставрополе';
 
 <?= \frontend\widgets\ExamplesWidget::widget([
         'title' => 'Примеры нашей мебели',
-        'category' => 3,
+        'category' => 2,
 ]) ?>
 
 <?= ReviewsWidget::widget() ?>

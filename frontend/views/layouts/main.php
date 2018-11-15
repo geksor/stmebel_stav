@@ -40,7 +40,7 @@ AppAsset::register($this);
 
                 <div class="phone p-3 col-12 col-lg-2 text-center text-lg-right">
                     <i class="fas fa-mobile-alt mr-2"></i>
-                    <span class="navbar-text"><a href="tel:89876739815" style="color: #ffffff; text-decoration: none">8(987)673 98 15</a></span>
+                    <span class="navbar-text"><a href="tel:<?= Yii::$app->params['Contact']['phone_1'] ?>" style="color: #ffffff; text-decoration: none"><?= Yii::$app->params['Contact']['phone_1'] ?></a></span>
                 </div>
             </div>
             <?= \frontend\widgets\SliderWidget::widget() ?>

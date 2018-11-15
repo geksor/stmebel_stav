@@ -1,6 +1,11 @@
 <?php
 use yii\helpers\Html;
-
+$css=<<< CSS
+.main-header .sidebar-toggle:before {
+    content: none;
+}
+CSS;
+$this->registerCss($css, ["type" => "text/css"], "callBackWidget" );
 /* @var $this \yii\web\View */
 /* @var $content string */
 ?>
@@ -12,6 +17,7 @@ use yii\helpers\Html;
     <nav class="navbar navbar-static-top" role="navigation">
 
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="fas fa-bars"></span>
             <span class="sr-only">Toggle navigation</span>
         </a>
 

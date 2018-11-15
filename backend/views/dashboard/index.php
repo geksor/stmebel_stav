@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'columns' => [
                                 'url',
 //
-                                'user_agent',
+//                                'user_agent',
                                 [
                                     'attribute' => 'source',
                                     'value' => function ($model) {

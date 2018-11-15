@@ -14,7 +14,7 @@ $totalAlert = $callBackToday + $callBackOver + $callBackNotSuccessToday + $revie
 <!-- Messages: style can be found in dropdown.less-->
 <li class="dropdown notifications-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-bell-o"></i>
+        <i class="far fa-bell"></i>
         <? if ($totalAlert > 0) {?>
             <span class="label label-warning"><?= $totalAlert ?></span>
         <?}?>
@@ -28,42 +28,42 @@ $totalAlert = $callBackToday + $callBackOver + $callBackNotSuccessToday + $revie
                 <? if ($callBackToday) {?>
                 <li>
                     <a href="/admin/call-back">
-                        <i class="fa fa-phone-square text-aqua"></i> <?= $callBackToday ?> новых заявок на звонок сегодня
+                        <i class="fas fa-phone-square text-aqua"></i> <?= $callBackToday ?> новых заявок на звонок сегодня
                     </a>
                 </li>
                 <?}?>
                 <? if ($callBackNotSuccessToday) {?>
                 <li>
                     <a href="/admin/call-back">
-                        <i class="fa fa-phone-square text-yellow"></i> <?= $callBackNotSuccessToday ?> не обработанных заявок сегодня
+                        <i class="fas fa-phone-square text-yellow"></i> <?= $callBackNotSuccessToday ?> не обработанных заявок сегодня
                     </a>
                 </li>
                 <?}?>
                 <? if ($callBackOver) {?>
                 <li>
                     <a href="/admin/call-back">
-                        <i class="fa fa-phone-square text-red"></i> <?= $callBackOver ?> просроченных заявок на звонок
+                        <i class="fas fa-phone-square text-red"></i> <?= $callBackOver ?> просроченных заявок на звонок
                     </a>
                 </li>
                 <?}?>
                 <? if ($reviewToday) {?>
                 <li>
                     <a href="/admin/comment">
-                        <i class="fa fa-comments-o text-aqua"></i> <?= $reviewToday ?> новых отзывов сегодня
+                        <i class="far fa-comments text-aqua"></i> <?= $reviewToday ?> новых отзывов сегодня
                     </a>
                 </li>
                 <?}?>
                 <? if ($reviewNotSuccessToday) {?>
                 <li>
                     <a href="/admin/comment">
-                        <i class="fa fa-comments-o text-yellow"></i> <?= $reviewNotSuccessToday ?> не обработанных отзывов сегодня
+                        <i class="far fa-comments text-yellow"></i> <?= $reviewNotSuccessToday ?> не обработанных отзывов сегодня
                     </a>
                 </li>
                 <?}?>
                 <? if ($reviewOver) {?>
                 <li>
                     <a href="/admin/comment">
-                        <i class="fa fa-comments-o text-red"></i> <?= $reviewOver ?> не обработанных отзывов
+                        <i class="far fa-comments text-red"></i> <?= $reviewOver ?> не обработанных отзывов
                     </a>
                 </li>
                 <?}?>

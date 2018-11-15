@@ -14,7 +14,7 @@
                         'url' => '#',
                         'items' => [
                             ['label' => 'Обратный звонок', 'icon' => 'phone-square', 'url' => ['/call-back'], "active" => Yii::$app->controller->id === 'call-back',],
-                            ['label' => 'Отзывы', 'icon' => 'comments-o', 'url' => ['/comment'], "active" => Yii::$app->controller->id === 'comment',],
+                            ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/comment'], "active" => Yii::$app->controller->id === 'comment',],
                         ],
                     ],
                     [
@@ -22,10 +22,10 @@
                         'icon' => 'cogs',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Слайдер', 'icon' => 'picture-o', 'url' => ['/slider'], "active" => Yii::$app->controller->id === 'slider',],
+                            ['label' => 'Слайдер', 'icon' => 'images', 'url' => ['/slider'], "active" => Yii::$app->controller->id === 'slider',],
                             ['label' => 'Сертификаты', 'icon' => 'certificate', 'url' => ['/certificate'], "active" => Yii::$app->controller->id === 'certificate',],
-                            ['label' => 'Документы', 'icon' => 'file-text', 'url' => ['/we-docs'], "active" => Yii::$app->controller->id === 'we-docs',],
-                            ['label' => 'Партнеры', 'icon' => 'handshake-o', 'url' => ['/we-partner'], "active" => Yii::$app->controller->id === 'we-partner',],
+                            ['label' => 'Документы', 'icon' => 'file-pdf', 'url' => ['/we-docs'], "active" => Yii::$app->controller->id === 'we-docs',],
+                            ['label' => 'Партнеры', 'icon' => 'handshake', 'url' => ['/we-partner'], "active" => Yii::$app->controller->id === 'we-partner',],
                             ['label' => 'Сотрудники', 'icon' => 'users', 'url' => ['/personal'], "active" => Yii::$app->controller->id === 'personal',],
                             ['label' => 'Как мы работаем', 'icon' => 'wrench', 'url' =>['/how-we-work'],
                                 "active" => Yii::$app->controller->id === 'how-we-work' || Yii::$app->controller->id === 'how-we-work-step',],

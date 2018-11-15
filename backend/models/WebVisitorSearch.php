@@ -40,6 +40,7 @@ class WebVisitorSearch extends WebVisitor
     {
         $query = WebVisitor::find()
             ->where(['not like', 'url', 'public'])
+            ->andwhere(['not like', 'url', 'uploads'])
             ->addSelect(['*', 'COUNT(url) as visits'])
             ->groupBy(['url', 'source'])
             ->orderBy(['visits' => SORT_DESC, 'url' => SORT_ASC]);

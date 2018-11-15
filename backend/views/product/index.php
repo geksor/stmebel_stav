@@ -43,10 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
                     'title',
-                    [
-                        'attribute' => 'short_description',
-                        'format' => 'html'
-                    ],
 //                    'description:ntext',
                     [
                         'attribute' => 'rank',
@@ -112,3 +108,17 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+<?php
+$css= <<< CSS
+
+.prodDesc{
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+CSS;
+
+$this->registerCss($css, ["type" => "text/css"], "callBack" );
+?>​
+
