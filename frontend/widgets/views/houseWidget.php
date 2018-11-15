@@ -77,7 +77,7 @@
                                         <? if (in_array($attr->id, $model->getViewOnWidget())) {?>
 
                                         <? if ($i === 1) { ++$i?>
-                                            <div class="col-6 col-md-4 mt-2 text-center text-md-left">
+                                        <div class="col-6 col-md-4 mt-2 text-center text-md-left">
                                             <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                             <span>
                                                 <? if ($attr->type >= 1 && $attr->type < 3) { ?>
@@ -86,7 +86,7 @@
                                                     <?= $attr->getAttrValue($model->id)->title ?>
                                                 <? } ?>
                                             </span><br>
-                                            <? if ($keyAttr === count($model->attributes0) - 1) {?>
+                                            <? if ($keyAttr === count($resArr) - 1) {?>
                                                 </div>
                                             <?}?>
                                         <?}elseif ($i === 2) { ++$i?>
@@ -98,7 +98,7 @@
                                                 <?= $attr->getAttrValue($model->id)->title ?>
                                             <? } ?>
                                         </span><br>
-                                        <? if ($keyAttr === count($model->attributes0) - 1) {?>
+                                        <? if ($keyAttr === count($resArr) - 1) {?>
                                             </div>
                                         <?}?>
                                     <?}elseif ($i === 3) { $i = 1?>

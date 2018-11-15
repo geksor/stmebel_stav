@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class WebVisitorViewSearch extends WebVisitor
+class WebVisitorSearch extends WebVisitor
 {
     public function rules()
     {
@@ -38,7 +38,11 @@ class WebVisitorViewSearch extends WebVisitor
      */
     public function search($params)
     {
-        $query = WebVisitor::find();
+        $query = WebVisitor::find()
+            ->where(['not like', 'url', 'public'])
+            ->addSelect(['*', 'COUNT(url) as visits'])
+            ->groupBy(['url', 'source'])
+            ->orderBy(['visits' => SORT_DESC, 'url' => SORT_ASC]);
 
         // add conditions that should always apply here
 

@@ -8,13 +8,14 @@
 
 use akiraz2\stat\models\WebVisitor;
 use akiraz2\stat\Module;
-use yii\grid\GridView;
+use backend\widgets\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel \akiraz2\stat\models\WebVisitorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $counter_direct */
+/* @var $counter_inner */
 /* @var $counter_search */
 /* @var $counter_ads */
 
@@ -31,13 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="content-top-1">
                         <h3><?= Module::t('stat', 'Own Counter');?></h3>
                         <p><?= Module::t('stat', 'Direct');?>: <?= $counter_direct;?></p>
+                        <p><?= Module::t('stat', 'Inner');?>: <?= $counter_inner;?></p>
                         <p><?= Module::t('stat', 'Search');?>: <?= $counter_search;?></p>
                         <p><?= Module::t('stat', 'Ads');?>: <?= $counter_ads;?></p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="content-top-1">
-
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -52,8 +53,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'dataProvider' => $dataProvider,
                             'filterModel' => $searchModel,
                             'columns' => [
-                                'cookie_id',
-                                'user_id',
+                                'url',
+//
+                                'user_agent',
                                 [
                                     'attribute' => 'source',
                                     'value' => function ($model) {
@@ -64,9 +66,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         $searchModel, 'source', WebVisitor::getSourceList(), ['class' => 'form-control', 'prompt' => 'Все']
                                     ),
                                 ],
-                                'ip_address',
+//                                'ip_address',
                                 'visits',
-                                'created_at',
+//                                'created_at',
 //                                ['class' => 'yii\grid\ActionColumn'],
                             ],
                         ]); ?>

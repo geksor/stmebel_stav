@@ -41,19 +41,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="box box-primary">
-        <div class="box-body">
-            <?php if ($searchModel->getModule()->ownStat) { ?>
-                <?= GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'filterModel' => $searchModel,
-                    'columns' => [
-                        'url',
-                        'created_at',
-                    ],
-                ]); ?>
-            <?php } ?>
-        </div>
-    </div>
-
 </div>

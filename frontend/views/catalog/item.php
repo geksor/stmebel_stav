@@ -27,33 +27,41 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div id="item-block" class="container mw-1200 mt-5 pt-5">
     <div class="row justify-content-center justify-content-lg-between">
-        <div class="d-flex flex-column flex-md-row justify-content-between max-h-lg-350  align-self-start">
-            <div class="d-flex flex-row flex-md-column justify-content-between pl-lg-3 xzoom-thumbs">
+        <div class="d-flex flex-md-row-reverse flex-column-reverse justify-content-between max-h-lg-350  align-self-start">
                 <?
                 $imgSrc = '/no_image.png';
                 $imgAlt = 'Нет изображения';
-                foreach ($model->getBehavior('galleryBehavior')->getImages() as $key => $image) {
+
+                $images = $model->getBehavior('galleryBehavior')->getImages();
+
+                if ($images){
+                    $imgSrc = $images[0]->getUrl('medium');
+                    $imgOriginal = $images[0]->getUrl('original');
+                    $imgAlt = $images[0]->name;
+                }
+
+                ?>
+                <div class="mt-3 mt-md-0 ml-md-4 s-350 s-300 position-relative">
+                    <a href="<?= $imgOriginal ?>" data-fancybox="Изображения товара" data-caption="<?= $imgAlt ?>">
+                        <img src="<?= $imgSrc ?>" class="position-absolute w-100 h-100 xzoom shadow-none" alt="<?= $imgAlt ?>"
+                             style="object-fit: cover"
+                             xoriginal="<?= $imgOriginal ?>"
+                        >
+                    </a>
+                </div>
+            <div class="d-flex flex-row flex-md-column justify-content-between pl-lg-3">
+                <? foreach ($images as $key => $image) {
                     /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */ ?>
-                    <? if ($key !== 0) { ?>
-                        <a href="<?= $image->getUrl('original') ?>">
+                    <? if ($key !== 0 && $key < 4) { ?>
+                        <a href="<?= $image->getUrl('original') ?>" data-fancybox="Изображения товара" data-caption="<?= $image->name ?>">
                             <img src="<?= $image->getUrl('small') ?>"
-                                 class="s-100 s-90 xzoom-gallery"
+                                 class="s-100 s-90 m-0 border-0 xzoom-gallery"
                                  alt="<?= $image->name ?>"
                                  xpreview="<?= $image->getUrl('medium') ?>"
                             >
                         </a>
-                    <? } else {
-                        $imgSrc = $image->getUrl('medium');
-                        $imgOriginal = $image->getUrl('original');
-                        $imgAlt = $image->name;
-                    } ?>
+                    <? } ?>
                 <? } ?>
-            </div>
-            <div class="mt-3 mt-md-0 ml-md-4 s-350 s-300 position-relative">
-                <img src="<?= $imgSrc ?>" class="position-absolute w-100 h-100 xzoom" alt="<?= $imgAlt ?>"
-                     style="object-fit: cover"
-                     xoriginal="<?= $imgOriginal ?>"
-                >
             </div>
         </div>
         <div class="col-11 col-lg-6 mt-4 mt-lg-0 text-justify text-lg-left">
@@ -85,19 +93,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 <? if ($attribute->type === 3) { ?>
 
                     <p class="mb-4 text-muted text-center text-lg-left"><?= $attribute->viewName ?>:</p>
-                    <? foreach ($attribute->getAttrValue($model->id) as $item) {
-                        /* @var $item \common\models\AttrColor */ ?>
-                        <div class="s-45 mr-lg-3"
-                             style="
-                                     display: inline-block;
-                                     width: 60px;
-                                     height: 60px;
-                                     border-radius: 50%;
-                                     background-color: <?= $item->color ?>
-                                     "
-                             aria-label="<?= $item->title ?>"></div>
-                    <? } ?>
-
+                    <div class="d-flex justify-content-center justify-content-lg-start">
+                        <? foreach ($attribute->getAttrValue($model->id) as $item) {
+                            /* @var $item \common\models\AttrColor */ ?>
+                            <div class="s-45 mr-3"
+                                 style="
+                                         width: 60px;
+                                         height: 60px;
+                                         border-radius: 50%;
+                                         background-color: <?= $item->color ?>
+                                         "
+                                 aria-label="<?= $item->title ?>"></div>
+                        <? } ?>
+                    </div>
                 <? } ?>
 
             <? } ?>
@@ -131,7 +139,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <?}?>
 <?
     $js = <<< JS
-    $(".xzoom").xzoom();
+    $(document).ready(function (){
+        $(".xzoom, .xzoom-gallery").xzoom({tint: '#000', Xoffset: 15});
+    });
 JS;
 
     $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
