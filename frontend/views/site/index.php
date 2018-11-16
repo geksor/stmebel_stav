@@ -13,12 +13,12 @@ $this->title = 'Главная';
 
 <?= \frontend\widgets\HouseWidget::widget([
     'title' => 'Строим на века',
-    'category' => 14,
+    'category' => 4,
 ]) ?>
 
 <?= \frontend\widgets\ExamplesWidget::widget([
         'title' => 'Примеры нашей мебели',
-        'category' => 2,
+        'category' => 3,
 ]) ?>
 
 <?= ReviewsWidget::widget() ?>

@@ -20,6 +20,7 @@ use yii\helpers\Inflector;
  * @property array $selectedAttributes
  * @property array $catAttr
  * @property int $rank
+ * @property int $fromWidget
  *
  * @property CategoryAttributes[] $categoryAttributes
  * @property Attributes[] $attributes0
@@ -46,7 +47,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['parent_id', 'publish', 'rank'], 'integer'],
+            [['parent_id', 'publish', 'rank', 'fromWidget'], 'integer'],
             [['parent_id', 'rank',], 'default', 'value' => 0],
             [['description'], 'string'],
             [['catAttr'], 'safe'],
@@ -70,6 +71,7 @@ class Category extends \yii\db\ActiveRecord
             'publish' => 'Публикация',
             'catAttr' => 'Атрибуты',
             'rank' => 'Порядок вывода',
+            'fromWidget' => 'Категория для виджета',
         ];
     }
 

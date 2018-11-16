@@ -189,7 +189,7 @@ class ProductController extends Controller
 //            CategoryProduct::find()->groupBy('category_id')->select('category_id')->asArray()->all(),
 //            'category_id'
 //        );
-        return ArrayHelper::map(Category::find()->where(['>', 'parent_id', 0])->all(), 'id', 'title');
+        return ArrayHelper::map(Category::find()->where(['>', 'parent_id', 0])->orWhere(['fromWidget' => 1])->all(), 'id', 'title');
     }
 
     /**
