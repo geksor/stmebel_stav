@@ -4,7 +4,7 @@ use frontend\widgets\ReviewsWidget;
 
 /* @var $this \frontend\components\View */
 
-$this->title = 'Главная - Bro & Bro в Ставрополе';
+$this->title = 'Главная';
 ?>
 
 <?= \frontend\widgets\AboutHomeWidget::widget()?>
