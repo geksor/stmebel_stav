@@ -5,7 +5,7 @@
     <a href="/partner">Партнеры</a><br>
 
 </div>
-<div class="col-12 col-sm-4 col-lg-2 text-center text-lg-left foot-href align-self-center mt-3 mt-lg-0">
+<div class="col-6 col-sm-4 col-lg-2 text-center text-lg-left foot-href align-self-center mt-3 mt-lg-0">
 
     <a href="/contact">Контакты</a><br>
     <a href="/about">О компании</a><br>
