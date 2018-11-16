@@ -120,18 +120,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h2 class="text-center text-lg-left"><?= $model->addBlockTitle ?></h2>
             </div>
 
-            <? foreach ($imagesAddBlock as $image) {
-            /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */ ?>
+            <div class="addBlockSlick col-12">
+                <div class="row">
+                    <? foreach ($imagesAddBlock as $image) {
+                        /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */ ?>
 
-                <div class="col-11 col-md-6 col-lg-3 text-center mt-4 mt-lg-0">
+                        <div class="col-11 col-md-6 col-lg-3 text-center mt-4">
 
-                    <a href="<?=$image->getUrl('original')?>" data-fancybox="<?= $model->addBlockTitle ?>" data-caption="<?=$image->name?>">
-                        <?= \yii\helpers\Html::img($image->getUrl('medium'), ['class' => 'img-fluid', 'alt' => $image->name]) ?>
-                    </a>
+                            <a href="<?=$image->getUrl('original')?>" data-fancybox="<?= $model->addBlockTitle ?>" data-caption="<?=$image->name?>">
+                                <?= \yii\helpers\Html::img($image->getUrl('medium'), ['class' => 'img-fluid', 'alt' => $image->name]) ?>
+                            </a>
 
+                        </div>
+
+                    <?}?>
                 </div>
-
-            <?}?>
+            </div>
 
         </div>
     </div>
