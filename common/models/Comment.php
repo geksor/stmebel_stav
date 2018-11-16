@@ -83,8 +83,8 @@ class Comment extends \yii\db\ActiveRecord
 
         return Yii::$app->mailer->compose()
             ->setTo(Yii::$app->params['Contact']['email'])
-            ->setFrom(['info@smak05.ru' => 'SMAK'])
-            ->setSubject('Заявка на запись от: '. $this->name)
+            ->setFrom(['info@broandbro.ru' => 'Bro&Bro'])
+            ->setSubject('Заявка на запись от: '. $this->user_name)
             ->setHtmlBody($body)
             ->send();
     }
