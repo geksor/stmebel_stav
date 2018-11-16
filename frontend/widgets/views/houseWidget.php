@@ -68,15 +68,15 @@
                                 <div class="col-12 mt-4">
                                     <div class="row bg-gray mx-0 pt-lg-3 pb-lg-5 py-2">
                                         <h3 class="col-12 my-2 my-lg-4 text-center text-lg-left"><?= $model->title ?></h3>
-                                        <? $i = 1 ?>
-
                                         <?
+                                        $i = 1;
+                                        $iClose = 1;
                                         $resArr = $model->getAttributesOrderRes($model->attributesOrder, $model->productAttributesRank);
                                         foreach ($resArr as $keyAttr => $attr) {
                                         /* @var $attr \common\models\Attributes */ ?>
                                         <? if (in_array($attr->id, $model->getViewOnWidget())) {?>
 
-                                        <? if ($i === 1) { ++$i?>
+                                        <? if ($i === 1) { ++$i; ++$iClose?>
                                         <div class="col-6 col-md-4 mt-2 text-center text-md-left">
                                             <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                             <span>
@@ -86,10 +86,10 @@
                                                     <?= $attr->getAttrValue($model->id)->title ?>
                                                 <? } ?>
                                             </span><br>
-                                            <? if ($keyAttr === count($resArr) - 1) {?>
+                                            <? if ($iClose === count($model->getViewOnWidget())) {?>
                                                 </div>
                                             <?}?>
-                                        <?}elseif ($i === 2) { ++$i?>
+                                        <?}elseif ($i === 2) { ++$i; ++$iClose?>
                                         <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                         <span>
                                             <? if ($attr->type >= 1 && $attr->type < 3) { ?>
@@ -98,10 +98,10 @@
                                                 <?= $attr->getAttrValue($model->id)->title ?>
                                             <? } ?>
                                         </span><br>
-                                        <? if ($keyAttr === count($resArr) - 1) {?>
+                                        <? if ($iClose === count($model->getViewOnWidget())) {?>
                                             </div>
                                         <?}?>
-                                    <?}elseif ($i === 3) { $i = 1?>
+                                    <?}elseif ($i === 3) { $i = 1; ++$iClose?>
                                         <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                         <span>
                                             <? if ($attr->type >= 1 && $attr->type < 3) { ?>
@@ -159,15 +159,15 @@
                         <div class="col-12 mt-4">
                             <div class="row bg-gray mx-0 pt-lg-3 pb-lg-5 py-2">
                                 <h3 class="col-12 my-2 my-lg-4 text-center text-lg-left"><?= $model->title ?></h3>
-                                <? $i = 1 ?>
-
                                 <?
+                                $i = 1;
+                                $iClose = 1;
                                 $resArr = $model->getAttributesOrderRes($model->attributesOrder, $model->productAttributesRank);
                                 foreach ($resArr as $keyAttr => $attr) {
                                     /* @var $attr \common\models\Attributes */ ?>
                                     <? if (in_array($attr->id, $model->getViewOnWidget())) {?>
 
-                                        <? if ($i === 1) { ++$i?>
+                                        <? if ($i === 1) { ++$i; ++$iClose?>
                                             <div class="col-6 col-md-4 mt-2 text-center text-md-left">
                                                 <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                                 <span>
@@ -177,10 +177,10 @@
                                                     <?= $attr->getAttrValue($model->id)->title ?>
                                                 <? } ?>
                                             </span><br>
-                                            <? if ($keyAttr === count($model->attributes0) - 1) {?>
+                                            <? if ($iClose === count($model->getViewOnWidget())) {?>
                                                 </div>
                                             <?}?>
-                                        <?}elseif ($i === 2) { ++$i?>
+                                        <?}elseif ($i === 2) { ++$i; ++$iClose?>
                                                 <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                                 <span>
                                                     <? if ($attr->type >= 1 && $attr->type < 3) { ?>
@@ -189,10 +189,10 @@
                                                         <?= $attr->getAttrValue($model->id)->title ?>
                                                     <? } ?>
                                                 </span><br>
-                                                <? if ($keyAttr === count($model->attributes0) - 1) {?>
+                                                <? if ($iClose === count($model->getViewOnWidget())) {?>
                                                     </div>
                                                 <?}?>
-                                        <?}elseif ($i === 3) { $i = 1?>
+                                        <?}elseif ($i === 3) { $i = 1; ++$iClose?>
                                             <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                             <span>
                                                 <? if ($attr->type >= 1 && $attr->type < 3) { ?>
