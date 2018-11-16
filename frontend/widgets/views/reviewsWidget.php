@@ -20,7 +20,7 @@
         <p class="mb-5 col-11 col-lg-10 fs-13 text-center">
             <?= $model?$model->text:'Отзывов пока нет. Вы можете стать первым!' ?>
         </p>
-        <div class="col-6 text-right <?= $model?'':'col-offset-3' ?>">
+        <div class="col-6 text-<?= $model?'right':'center' ?>">
             <a class="btn btn-outline-light my-2 my-sm-0 rounded-0" href="/reviews#reviews-form">Написать отзыв</a>
         </div>
         <? if ($model) {?>
