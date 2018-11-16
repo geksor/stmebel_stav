@@ -50,6 +50,7 @@ return [
 
                 'catalog/<alias>/<child>/page/<page:\d+>' => 'catalog/index',
                 'catalog/<alias>/<child>' => 'catalog/index',
+                'catalog/<item>' => 'catalog/item-widget',
                 'catalog/<alias>/<child>/<item>' => 'catalog/item',
             ],
         ],

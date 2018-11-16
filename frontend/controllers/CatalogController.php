@@ -89,4 +89,16 @@ class CatalogController extends Controller
         ]);
     }
 
+    public function actionItemWidget($item)
+    {
+        $model = Product::find()
+            ->where(['alias' => $item])
+            ->with(['attributesOrder', 'productAttributesRank'])
+            ->one();
+
+        return $this->render('item-widget', [
+            'model' => $model,
+        ]);
+    }
+
 }

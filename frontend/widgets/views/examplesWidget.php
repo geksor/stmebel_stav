@@ -51,7 +51,7 @@ use yii\helpers\ArrayHelper;
                 </div>
                 <p class="furniture-name text-center my-2"><?= $item->title ?></p>
                 <a class="btn btn-outline-primary my-2 my-sm-0 mx-auto hovered d-block w-140 rounded-0"
-                   href="<?= $item->getLink($category) ?>">Подробнее</a>
+                   href="<?= $item->getLink(0, true) ?>">Подробнее</a>
             </div>
         <?}?>
     </div>

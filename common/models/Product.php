@@ -170,8 +170,11 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('category_product', ['product_id' => 'id']);
     }
 
-    public function getLink($id = 0)
+    public function getLink($id = 0, $onlyThisAlias = false)
     {
+        if ($onlyThisAlias){
+            return '/catalog/'.$this->alias;
+        }
         /* @var $tmpParent Category */
         if ($id){
             $parent = Category::findOne([ 'id' => $id]);

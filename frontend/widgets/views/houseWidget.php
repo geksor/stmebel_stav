@@ -117,7 +117,7 @@
 
                                 <div class="col-12 col-md-4 mt-2 text-center align-self-center">
                                     <a class="btn btn-outline-primary my-2 my-sm-0 rounded-0"
-                                       href="<?= $model->getLink($category) ?>">Подробнее</a>
+                                       href="<?= $model->getLink(0, true) ?>">Подробнее</a>
                                 </div>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
 
                                 <div class="col-12 col-md-4 mt-2 text-center align-self-center">
                                     <a class="btn btn-outline-primary my-2 my-sm-0 rounded-0"
-                                       href="<?= $model->getLink($category) ?>">Подробнее</a>
+                                       href="<?= $model->getLink(0, true) ?>">Подробнее</a>
                                 </div>
                             </div>
                         </div>
