@@ -76,7 +76,7 @@
                                         /* @var $attr \common\models\Attributes */ ?>
                                         <? if (in_array($attr->id, $model->getViewOnWidget())) {?>
 
-                                        <? if ($i === 1) { ++$i; ++$iClose?>
+                                        <? if ($i === 1) { ++$i;?>
                                         <div class="col-6 col-md-4 mt-2 text-center text-md-left">
                                             <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                             <span>
@@ -86,10 +86,10 @@
                                                     <?= $attr->getAttrValue($model->id)->title ?>
                                                 <? } ?>
                                             </span><br>
-                                            <? if ($iClose === count($model->getViewOnWidget())) {?>
-                                                </div>
-                                            <?}?>
-                                        <?}elseif ($i === 2) { ++$i; ++$iClose?>
+                                    <? if ($iClose === count($model->getViewOnWidget())) {?>
+                                        </div>
+                                    <?} ++$iClose?>
+                                        <?}elseif ($i === 2) { ++$i;?>
                                         <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                         <span>
                                             <? if ($attr->type >= 1 && $attr->type < 3) { ?>
@@ -100,8 +100,8 @@
                                         </span><br>
                                         <? if ($iClose === count($model->getViewOnWidget())) {?>
                                             </div>
-                                        <?}?>
-                                    <?}elseif ($i === 3) { $i = 1; ++$iClose?>
+                                        <?} ++$iClose?>
+                                    <?}elseif ($i === 3) { $i = 1;?>
                                         <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                         <span>
                                             <? if ($attr->type >= 1 && $attr->type < 3) { ?>
@@ -167,7 +167,7 @@
                                     /* @var $attr \common\models\Attributes */ ?>
                                     <? if (in_array($attr->id, $model->getViewOnWidget())) {?>
 
-                                        <? if ($i === 1) { ++$i; ++$iClose?>
+                                        <? if ($i === 1) { ++$i;?>
                                             <div class="col-6 col-md-4 mt-2 text-center text-md-left">
                                                 <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                                 <span>
@@ -179,8 +179,8 @@
                                             </span><br>
                                             <? if ($iClose === count($model->getViewOnWidget())) {?>
                                                 </div>
-                                            <?}?>
-                                        <?}elseif ($i === 2) { ++$i; ++$iClose?>
+                                            <?} ++$iClose?>
+                                        <?}elseif ($i === 2) { ++$i;?>
                                                 <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                                 <span>
                                                     <? if ($attr->type >= 1 && $attr->type < 3) { ?>
@@ -191,8 +191,8 @@
                                                 </span><br>
                                                 <? if ($iClose === count($model->getViewOnWidget())) {?>
                                                     </div>
-                                                <?}?>
-                                        <?}elseif ($i === 3) { $i = 1; ++$iClose?>
+                                                <?} ++$iClose?>
+                                        <?}elseif ($i === 3) { $i = 1;?>
                                             <span class="gray mr-1"><?= $attr->viewName ?>:</span>
                                             <span>
                                                 <? if ($attr->type >= 1 && $attr->type < 3) { ?>
