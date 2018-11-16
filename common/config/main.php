@@ -14,22 +14,18 @@ return [
         'yandexMapsApi' => [
             'class' => 'mirocow\yandexmaps\Api',
         ],
+        'formatter' => [
+            'dateFormat' => 'dd.MM.yyyy',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'ru-RU',
+//            'defaultTimeZone' => 'Europe/Moscow',
+            'timeZone' => 'Europe/Astrakhan',
+        ],
     ],
     'modules' => [
         'stat' => [
             'class' => akiraz2\stat\Module::className(),
-//            'yandexMetrika' => [ // false by default
-//                'id' => 13788753,
-//                'params' => [
-//                    'clickmap' => true,
-//                    'trackLinks' => true,
-//                    'accurateTrackBounce' => true,
-//                    'webvisor' => true
-//                ]
-//            ],
-//            'googleAnalytics' => [ // false by default
-//                'id' => 'UA-114443409-2',
-//            ],
             'ownStat' => true, //false by default
             'ownStatCookieId' => 'yii2_counter_id', // 'yii2_counter_id' default
             'onlyGuestUsers' => false, // true default

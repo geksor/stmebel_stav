@@ -60,6 +60,7 @@ class SiteController extends Controller
             }
             if ($formModel->save()){
                 Yii::$app->session->setFlash('popUp', 'Благодарим Вас за отзыв.');
+                $formModel->sendEmail();
             }else{
                 Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз.');
             }
@@ -128,6 +129,7 @@ class SiteController extends Controller
             }
             if ($model->save()){
                 \Yii::$app->session->setFlash('popUp', 'Ваша заявка принята');
+                $model->sendEmail();
             }else{
                 \Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз');
             }

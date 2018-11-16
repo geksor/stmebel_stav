@@ -53,6 +53,32 @@ class CallBack extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Sends an email to the specified email address using the information collected by this model.
+     *
+     * @param string $email the target email address
+     * @return bool whether the email was sent
+     */
+    public function sendEmail()
+    {
+        $body = '<h1>Запрос обратного звонка</h1>
+                <p>
+                    <a href="'. Yii::$app->request->hostInfo .'/admin/call-back/view/'. $this->id .'">Ссылка на запрос</a>
+                </p>
+                <h2>Информация</h2>
+                <p> Дата запроса: '.Yii::$app->formatter->asDate($this->created_at, 'long').'</p>
+                <p> Время запроса: '.Yii::$app->formatter->asTime($this->created_at).'</p>
+                <p> Имя: '.$this->name.'</p>
+                <p> Телефон: '.$this->phone . '</p>';
+
+        return Yii::$app->mailer->compose()
+            ->setTo(Yii::$app->params['Contact']['email'])
+            ->setFrom(['info@smak05.ru' => 'SMAK'])
+            ->setSubject('Заявка на запись от: '. $this->name)
+            ->setHtmlBody($body)
+            ->send();
+    }
+
     public function beforeSave($insert)
     {
         if ($this->created_at){

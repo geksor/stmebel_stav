@@ -65,6 +65,30 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Sends an email to the specified email address using the information collected by this model.
+     *
+     * @param string $email the target email address
+     * @return bool whether the email was sent
+     */
+    public function sendEmail()
+    {
+        $body = '<h1>Новый отзыв</h1>
+                <p>
+                    <a href="'. Yii::$app->request->hostInfo .'/admin/comment/view/'. $this->id .'">Ссылка на отзыв</a>
+                </p>
+                <h2>Информация</h2>
+                <p> ФИО: '.$this->user_name.'</p>
+                <p> Текст отзыва: <br>'.$this->text . '</p>';
+
+        return Yii::$app->mailer->compose()
+            ->setTo(Yii::$app->params['Contact']['email'])
+            ->setFrom(['info@smak05.ru' => 'SMAK'])
+            ->setSubject('Заявка на запись от: '. $this->name)
+            ->setHtmlBody($body)
+            ->send();
+    }
+
     public function beforeSave($insert)
     {
         if ($this->created_at){
