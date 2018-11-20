@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b6caf473286b791f11a702a855ad862",
+    "content-hash": "5b760fb46ece86eb90289714da277c6a",
     "packages": [
         {
             "name": "akiraz2/yii2-stat",
@@ -1271,6 +1271,51 @@
             "time": "2018-04-01T12:51:52+00:00"
         },
         {
+            "name": "sonko-dmitry/yii2-telegram-bot-api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SonkoDmitry/yii2-telegram-bot-api.git",
+                "reference": "5d8a202edfb74a7ade2473f76bd4d22abdaf1cf9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SonkoDmitry/yii2-telegram-bot-api/zipball/5d8a202edfb74a7ade2473f76bd4d22abdaf1cf9",
+                "reference": "5d8a202edfb74a7ade2473f76bd4d22abdaf1cf9",
+                "shasum": ""
+            },
+            "require": {
+                "telegram-bot/api": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "SonkoDmitry\\Yii\\TelegramBot\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sonko Dmitry",
+                    "email": "st.difor@gmail.com"
+                }
+            ],
+            "description": "Telegram bot api component for Yii2",
+            "homepage": "http://github.com/SonkoDmitry/yii2-telegram-bot-api",
+            "keywords": [
+                "api",
+                "bot",
+                "telegram",
+                "yii",
+                "yii2"
+            ],
+            "time": "2015-07-31T13:21:10+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "dev-master",
             "source": {
@@ -1328,6 +1373,61 @@
                 "mailer"
             ],
             "time": "2018-09-11T07:13:26+00:00"
+        },
+        {
+            "name": "telegram-bot/api",
+            "version": "v1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TelegramBot/Api.git",
+                "reference": "a0bd3bea39a6f01a0e8a79d054d596b6ededbc3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TelegramBot/Api/zipball/a0bd3bea39a6f01a0e8a79d054d596b6ededbc3a",
+                "reference": "a0bd3bea39a6f01a0e8a79d054d596b6ededbc3a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "*",
+                "phpunit/phpunit": "4.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TelegramBot\\Api\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ilya Gusev",
+                    "email": "mail@igusev.ru",
+                    "homepage": "https://php-cat.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Wrapper for Telegram Bot API",
+            "homepage": "https://github.com/TelegramBot/Api",
+            "keywords": [
+                "bot",
+                "bot api",
+                "php",
+                "telegram"
+            ],
+            "time": "2015-08-17T11:55:00+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -4416,7 +4516,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "zxbodya/yii2-gallery-manager": 20,
-        "akiraz2/yii2-stat": 20
+        "akiraz2/yii2-stat": 20,
+        "telegram-bot/api": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

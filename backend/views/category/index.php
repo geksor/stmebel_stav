@@ -85,8 +85,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]); ?>
-            <?
-            $js = <<< JS
+<?
+$js = <<< JS
     $('[name = rank]').keypress(function(e){
         if(e.keyCode==13){
             $.ajax({
@@ -98,8 +98,8 @@ $this->params['breadcrumbs'][] = $this->title;
     });
 JS;
 
-            $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
-            ?>
+$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+?>
             <?php Pjax::end(); ?>
         </div>
     </div>

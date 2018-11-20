@@ -17,6 +17,17 @@ class SiteController extends Controller
 {
 
     /**
+     * @param $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function beforeAction($action)//Обязательно нужно отключить Csr валидацию, так не будет работать
+    {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function actions()
@@ -129,6 +140,7 @@ class SiteController extends Controller
             }
             if ($model->save()){
                 \Yii::$app->session->setFlash('popUp', 'Ваша заявка принята');
+                \Yii::$app->bot->sendMessage(452044855, 'Hello world!');
                 $model->sendEmail();
             }else{
                 \Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз');

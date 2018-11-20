@@ -28,7 +28,9 @@
         "mirocow/yii2-yandex-maps": "*",
         "ext-json": "*",
         "akiraz2/yii2-stat": "dev-master",
-        "nox-it/yii2-nox-user-agent-parser": "*"
+        "nox-it/yii2-nox-user-agent-parser": "*",
+        "telegram-bot/api": "^1.0@dev",
+        "sonko-dmitry/yii2-telegram-bot-api": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

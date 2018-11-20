@@ -22,6 +22,10 @@ return [
 //            'defaultTimeZone' => 'Europe/Moscow',
             'timeZone' => 'Europe/Moscow',
         ],
+        'bot' => [
+            'class' => 'SonkoDmitry\Yii\TelegramBot\Component',
+            'apiToken' => '742874088:AAGT0FiSS1CQL7TtaJ1KOqS9i_g-lLrAKuQ',
+        ],
     ],
     'modules' => [
         'stat' => [
