@@ -71,6 +71,8 @@ class SiteController extends Controller
             }
             if ($formModel->save()){
                 Yii::$app->session->setFlash('popUp', 'Благодарим Вас за отзыв.');
+                $message = "Новый отзыв\n Имя: $formModel->user_name \n Текст отзыва: $formModel->text";
+                \Yii::$app->bot->sendMessage(452044855, $message);
                 $formModel->sendEmail();
             }else{
                 Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз.');
