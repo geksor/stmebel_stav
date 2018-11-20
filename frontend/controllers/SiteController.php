@@ -140,7 +140,8 @@ class SiteController extends Controller
             }
             if ($model->save()){
                 \Yii::$app->session->setFlash('popUp', 'Ваша заявка принята');
-                \Yii::$app->bot->sendMessage(452044855, 'Hello world!');
+                $message = "Запрос обратного звонка\n Имя: $model->name \n Телефон: $model->phone";
+                \Yii::$app->bot->sendMessage(452044855, $message);
                 $model->sendEmail();
             }else{
                 \Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз');
