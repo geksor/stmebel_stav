@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="d-flex flex-row flex-md-column justify-content-between pl-lg-3">
                 <? foreach ($images as $key => $image) {
                     /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */ ?>
-                    <? if ($key !== 0 && $key < 4) { ?>
+                    <? if ($key < 3) { ?>
                         <a href="<?= $image->getUrl('original') ?>" data-fancybox="Изображения товара" data-caption="<?= $image->name ?>">
                             <img src="<?= $image->getUrl('small') ?>"
                                  class="s-100 s-90 m-0 border-0 xzoom-gallery"
@@ -127,9 +127,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <div class="col-11 col-md-6 col-lg-3 text-center mt-4">
 
-                            <a href="<?=$image->getUrl('original')?>" data-fancybox="<?= $model->addBlockTitle ?>" data-caption="<?=$image->name?>">
-                                <?= \yii\helpers\Html::img($image->getUrl('medium'), ['class' => 'img-fluid', 'alt' => $image->name]) ?>
-                            </a>
+                            <div class="position-relative imgWrap">
+                                <a href="<?=$image->getUrl('original')?>" data-fancybox="<?= $model->addBlockTitle ?>" data-caption="<?=$image->name?>">
+                                    <?= \yii\helpers\Html::img($image->getUrl('medium'), ['class' => 'imgFit img-fluid position-absolute', 'alt' => $image->name]) ?>
+                                </a>
+                            </div>
 
                         </div>
 
@@ -140,6 +142,24 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 <?}?>
+<?php
+$css= <<< CSS
+
+.imgWrap{
+    padding-top: 66.66%;    
+}
+.imgFit{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;    
+}
+
+CSS;
+
+$this->registerCss($css, ["type" => "text/css"], "callBack" );
+?>
 <?
     $js = <<< JS
     $(document).ready(function (){
