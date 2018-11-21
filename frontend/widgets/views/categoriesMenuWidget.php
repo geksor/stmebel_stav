@@ -26,7 +26,7 @@
                     'style' => 'margin-right:-3rem;'
                 ],
                 'labelTemplate' =>'{label} Label',
-                'linkTemplate' => '<a class="nav-link px-1 py-1" href="{url}">{label}</a>',
+                'linkTemplate' => '<a class="nav-link px-1 py-1" methods="POST" href="{url}">{label}</a>',
                 'itemOptions'=>['class'=>'nav-item mr-5 mb-5'],
                 'submenuTemplate' => "\n<ul class='navbar-nav flex-column' role='menu'>\n{items}\n</ul>\n",
             ]) ?>

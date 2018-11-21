@@ -36,17 +36,36 @@ class CatalogController extends Controller
      * @return string
      *
      */
-    public function actionIndex($alias, $child)
+    public function actionIndex($alias = null, $child = null)
     {
-        $model = Category::find()
+        if (!$alias){
+            return $this->redirect('/');
+        }
+        if (!$model = Category::find()
             ->where(['alias' => $alias])
             ->with([
                 'child' => function (\yii\db\ActiveQuery $query){
                     $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
                 },
             ])
-            ->one();
+            ->one())
+        {
+            if (!$model = Product::find()
+                ->where(['alias' => $alias])
+                ->with(['attributesOrder', 'productAttributesRank'])
+                ->one())
+            {
+                return $this->redirect('/');
+            }
 
+            return $this->render('item-widget', [
+                'model' => $model,
+            ]);
+        }
+
+        if ($child === null){
+            $child = $model->child[0]->alias;
+        }
         if (!$openCat = Category::find()->where(['alias' => $child])->with('categoryProducts')->one()){
             return $this->redirect('/');
         }
@@ -89,16 +108,19 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function actionItemWidget($item)
-    {
-        $model = Product::find()
-            ->where(['alias' => $item])
-            ->with(['attributesOrder', 'productAttributesRank'])
-            ->one();
-
-        return $this->render('item-widget', [
-            'model' => $model,
-        ]);
-    }
+//    public function actionItemWidget($item)
+//    {
+//        if (!$model = Product::find()
+//            ->where(['alias' => $item])
+//            ->with(['attributesOrder', 'productAttributesRank'])
+//            ->one())
+//        {
+//            return $this->redirect('/');
+//        }
+//
+//        return $this->render('item-widget', [
+//            'model' => $model,
+//        ]);
+//    }перенес в индекс
 
 }
