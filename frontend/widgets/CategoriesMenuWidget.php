@@ -11,7 +11,9 @@ class CategoriesMenuWidget extends Widget
         $models = Category::find()
             ->where(['parent_id' => 0, 'publish' =>1])
             ->orderBy(['rank' => SORT_ASC])
-            ->with('child')
+            ->with(['child' => function (\yii\db\ActiveQuery $query) {
+                $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
+            },])
             ->all();
 
         $items = [];
