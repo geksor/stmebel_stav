@@ -156,7 +156,7 @@ $css=<<< CSS
   -webkit-border-radius: 4px;
   position: fixed;
   bottom: -100px;
-  right: 10px;
+  left: 10px;
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
