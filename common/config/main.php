@@ -24,7 +24,7 @@ return [
         ],
         'bot' => [
             'class' => 'SonkoDmitry\Yii\TelegramBot\Component',
-            'apiToken' => '742874088:AAGT0FiSS1CQL7TtaJ1KOqS9i_g-lLrAKuQ',
+            'apiToken' => Yii::$app->params['Contact']['apiToken'],
         ],
     ],
     'modules' => [

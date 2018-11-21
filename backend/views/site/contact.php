@@ -124,6 +124,11 @@ JS
             <?= $form->field($model, 'vk') ?>
             <?= $form->field($model, 'face') ?>
 
+            <h2>Прочие настройки</h2>
+
+            <?= $form->field($model, 'apiToken') ?>
+            <?= $form->field($model, 'chatId') ?>
+
 
             <div class="form-group">
                 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

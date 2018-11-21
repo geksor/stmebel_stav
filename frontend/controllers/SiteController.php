@@ -72,7 +72,7 @@ class SiteController extends Controller
             if ($formModel->save()){
                 Yii::$app->session->setFlash('popUp', 'Благодарим Вас за отзыв.');
                 $message = "Новый отзыв\n Имя: $formModel->user_name \n Текст отзыва: $formModel->text";
-                \Yii::$app->bot->sendMessage(452044855, $message);
+                \Yii::$app->bot->sendMessage(Yii::$app->params['Contact']['chatId'], $message);
                 $formModel->sendEmail();
             }else{
                 Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз.');
@@ -143,7 +143,7 @@ class SiteController extends Controller
             if ($model->save()){
                 \Yii::$app->session->setFlash('popUp', 'Ваша заявка принята');
                 $message = "Запрос обратного звонка\n Имя: $model->name \n Телефон: $model->phone";
-                \Yii::$app->bot->sendMessage(452044855, $message);
+                \Yii::$app->bot->sendMessage(Yii::$app->params['Contact']['chatId'], $message);
                 $model->sendEmail();
             }else{
                 \Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз');

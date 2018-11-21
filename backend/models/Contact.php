@@ -25,6 +25,8 @@ use Yii;
  * @property string $insta
  * @property string $face
  * @property string $vk
+ * @property string $apiToken
+ * @property string $chatId
  */
 class Contact extends Model
 {
@@ -46,6 +48,9 @@ class Contact extends Model
     public $insta;
     public $face;
     public $vk;
+
+    public $apiToken;
+    public $chatId;
 
 
 
@@ -70,6 +75,8 @@ class Contact extends Model
                     'insta',
                     'face',
                     'vk',
+                    'apiToken',
+                    'chatId',
                 ],
                 'safe'
             ],
@@ -98,6 +105,8 @@ class Contact extends Model
             'insta' => 'Инстаграмм',
             'face' => 'Фэйбук',
             'vk' => 'Вконтакте',
+            'apiToken' => 'Токен Telegram',
+            'chatId' => 'ID чата',
 
         ];
     }
