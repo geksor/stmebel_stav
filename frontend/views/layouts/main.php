@@ -225,6 +225,11 @@ $('#buttonUp').click(function () {
         } else { f(); }
     })(document, window, "yandex_metrika_callbacks2");
 <!-- /Yandex.Metrika counter -->
+
+var __REPLAIN_ = 'd4abdf8e-4ad4-4af5-857d-9b7aa6e8e28d';
+(function(u){var s=document.createElement('script');s.type='text/javascript';s.async=true;s.src=u;
+var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
+})('https://widget.replain.cc/dist/client.js');
 JS;
 
     $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
