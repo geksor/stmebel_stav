@@ -26,7 +26,7 @@ use Yii;
  * @property string $face
  * @property string $vk
  * @property string $apiToken
- * @property string $chatId
+ * @property int $chatId
  */
 class Contact extends Model
 {

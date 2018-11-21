@@ -22,10 +22,6 @@ return [
 //            'defaultTimeZone' => 'Europe/Moscow',
             'timeZone' => 'Europe/Moscow',
         ],
-        'bot' => [
-            'class' => 'SonkoDmitry\Yii\TelegramBot\Component',
-            'apiToken' => Yii::$app->params['Contact']['apiToken'],
-        ],
     ],
     'modules' => [
         'stat' => [
