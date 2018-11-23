@@ -5,7 +5,7 @@ return [
         '@npm'   => '@vendor/npm-asset',
         '@uploads'   => '@frontend/web/uploads',
     ],
-    'name' => 'Bro & Bro',
+    'name' => 'Став-Мебель',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [

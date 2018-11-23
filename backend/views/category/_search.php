@@ -20,21 +20,29 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'categoryType_id') ?>
-
     <?= $form->field($model, 'parent_id') ?>
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'meta_title') ?>
+
+    <?= $form->field($model, 'meta_description') ?>
+
+    <?php // echo $form->field($model, 'description') ?>
 
     <?php // echo $form->field($model, 'alias') ?>
 
-    <?php // echo $form->field($model, 'meta_title') ?>
+    <?php // echo $form->field($model, 'image') ?>
 
-    <?php // echo $form->field($model, 'meta_description') ?>
+    <?php // echo $form->field($model, 'rank') ?>
 
     <?php // echo $form->field($model, 'publish') ?>
+
+    <?php // echo $form->field($model, 'show_opt_to_product_list') ?>
+
+    <?php // echo $form->field($model, 'show_opt_to_product_card') ?>
+
+    <?php // echo $form->field($model, 'show_opt_to_cart') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

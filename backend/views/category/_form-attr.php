@@ -16,7 +16,12 @@ use yii\widgets\ActiveForm;
 
 <!--    --><?//= $form->field($model, 'categoryType_id')->textInput() ?>
 
-    <?= $form->field($model, 'catAttr')->dropDownList($attributes, [
+    <?= $form->field($model, 'catAttr')->dropDownList($model::getAttrFromDropDown(), [
+        'multiple' => true,
+        'size' => 15,
+    ]) ?>
+
+    <?= $form->field($model, 'catOpt')->dropDownList($model::getOptFromDropDown(), [
         'multiple' => true,
         'size' => 15,
     ]) ?>

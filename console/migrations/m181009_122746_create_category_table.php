@@ -19,11 +19,16 @@ class m181009_122746_create_category_table extends Migration
             'id' => $this->primaryKey(),
             'parent_id' => $this->integer()->defaultValue(0),
             'title' => $this->string()->notNull(),
-            'description' => $this->text(),
-            'alias' => $this->string(),
             'meta_title' => $this->string(),
             'meta_description' => $this->string(),
-            'publish' => $this->integer(1)->defaultValue(0),
+            'description' => $this->text(),
+            'alias' => $this->string(),
+            'image' => $this->text(),
+            'rank' => $this->integer()->defaultValue(1),
+            'publish' => $this->integer()->defaultValue(0),
+            'show_opt_to_product_list' => $this->text(),
+            'show_opt_to_product_card' => $this->text(),
+            'show_opt_to_cart' => $this->text(),
         ]);
     }
 

@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Category;
@@ -18,8 +17,8 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'publish'], 'integer'],
-            [['title', 'description', 'alias', 'meta_title', 'meta_description'], 'safe'],
+            [['id', 'parent_id', 'rank', 'publish'], 'integer'],
+            [['title', 'meta_title', 'meta_description', 'description', 'alias', 'image', 'show_opt_to_product_list', 'show_opt_to_product_card', 'show_opt_to_cart'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class CategorySearch extends Category
      */
     public function search($params)
     {
-        $query = Category::find()->orderBy(['parent_id' => SORT_ASC, 'title' => SORT_ASC]);
+        $query = Category::find();
 
         // add conditions that should always apply here
 
@@ -61,14 +60,19 @@ class CategorySearch extends Category
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
+            'rank' => $this->rank,
             'publish' => $this->publish,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'meta_title', $this->meta_title])
+            ->andFilterWhere(['like', 'meta_description', $this->meta_description])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'alias', $this->alias])
-            ->andFilterWhere(['like', 'meta_title', $this->meta_title])
-            ->andFilterWhere(['like', 'meta_description', $this->meta_description]);
+            ->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'show_opt_to_product_list', $this->show_opt_to_product_list])
+            ->andFilterWhere(['like', 'show_opt_to_product_card', $this->show_opt_to_product_card])
+            ->andFilterWhere(['like', 'show_opt_to_cart', $this->show_opt_to_cart]);
 
         return $dataProvider;
     }

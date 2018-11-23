@@ -49,7 +49,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             return "<strong> $data->title </strong>";
                         }
                     ],
-                    'description:ntext',
+                    [
+                        'attribute' => 'image',
+                        'filter' => false,
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Category */
+                            return "<div style=\"max-width: 30px; margin: 0 auto\"> $data->image </div>";
+                        },
+                        'headerOptions' => ['width' => 60]
+                    ],
+//                    'description:html',
                     //'alias',
                     //'meta_title',
                     //'meta_description',

@@ -24,7 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
-                <?= Html::a('Атрибуты', ['attribute', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Добавить изображение', ['set-image', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Атрибуты/Характеристики', ['attribute', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Создать категорию', ['create'], ['class' => 'btn btn-default']) ?>
             </p>
 
@@ -41,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
                     'title',
-                    'description:ntext',
+                    'description:html',
                     'alias',
                     'meta_title',
                     'meta_description',
@@ -49,11 +50,19 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'publish',
                         'label' => 'Состояние',
                         'value' => function ($data){
-                            /* @var $data \common\models\Comment */
+                            /* @var $data \common\models\Category */
                             if ($data->publish){
                                 return 'Опубликован';
                             }
                             return 'Не опубликован';
+                        }
+                    ],
+                    [
+                        'attribute' => 'image',
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Category */
+                            return "<div style=\"max-width: 100px\"> $data->image </div>";
                         }
                     ],
                 ],
@@ -63,3 +72,5 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+
+<?php //echo file_get_contents("https://s.cdpn.io/3/kiwi.svg"); ?>

@@ -12,18 +12,26 @@ use yii\helpers\Inflector;
  * @property int $id
  * @property int $parent_id
  * @property string $title
- * @property string $description
- * @property string $alias
  * @property string $meta_title
  * @property string $meta_description
- * @property int $publish
- * @property array $selectedAttributes
- * @property array $catAttr
+ * @property string $description
+ * @property string $alias
+ * @property string $image
  * @property int $rank
- * @property int $fromWidget
+ * @property int $publish
+ * @property string $show_opt_to_product_list
+ * @property string $show_opt_to_product_card
+ * @property string $show_opt_to_cart
+ * @property array $selectedAttrs
+ * @property array $selectedOptions
+ * @property array $catAttr
+ * @property array $catOpt
+ * @property array $uploadImage
  *
- * @property CategoryAttributes[] $categoryAttributes
- * @property Attributes[] $attributes0
+ * @property CategoryAttr[] $categoryAttrs
+ * @property Attr[] $attrs
+ * @property CategoryOptions[] $categoryOptions
+ * @property Options[] $options
  * @property CategoryProduct[] $categoryProducts
  * @property Product[] $products
  * @property Category[] $parent
@@ -31,7 +39,17 @@ use yii\helpers\Inflector;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    public $uploadImage;
     public $catAttr;
+    public $catOpt;
+
+    public function afterFind()
+    {
+        $this->catAttr = $this->selectedAttrs;
+        $this->catOpt = $this->selectedOptions;
+        parent::afterFind();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -46,12 +64,14 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['parent_id', 'rank', 'publish'], 'integer'],
+            [['rank'], 'default', 'value' => 1],
             [['title'], 'required'],
-            [['parent_id', 'publish', 'rank', 'fromWidget'], 'integer'],
-            [['parent_id', 'rank',], 'default', 'value' => 0],
-            [['description'], 'string'],
-            [['catAttr'], 'safe'],
-            [['title', 'alias', 'meta_title', 'meta_description'], 'string', 'max' => 255],
+            [['image'], 'string'],
+            [['catAttr', 'catOpt'], 'safe'],
+            [['uploadImage'], 'image', 'extensions' => ['svg']],
+            [['description', 'show_opt_to_product_list', 'show_opt_to_product_card', 'show_opt_to_cart'], 'string'],
+            [['title', 'meta_title', 'meta_description', 'alias'], 'string', 'max' => 255],
         ];
     }
 
@@ -62,42 +82,69 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Родительская категория',
-            'title' => 'Название',
-            'description' => 'Описание',
-            'alias' => 'Псевдоним',
+            'parent_id' => 'Parent ID',
+            'title' => 'Title',
             'meta_title' => 'Meta Title',
             'meta_description' => 'Meta Description',
-            'publish' => 'Публикация',
-            'catAttr' => 'Атрибуты',
-            'rank' => 'Порядок вывода',
-            'fromWidget' => 'Категория для виджета',
+            'description' => 'Description',
+            'alias' => 'Alias',
+            'image' => 'Image',
+            'rank' => 'Rank',
+            'publish' => 'Publish',
+            'show_opt_to_product_list' => 'Show Opt To Product List',
+            'show_opt_to_product_card' => 'Show Opt To Product Card',
+            'show_opt_to_cart' => 'Show Opt To Cart',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategoryAttributes()
+    public function getCategoryAttrs()
     {
-        return $this->hasMany(CategoryAttributes::className(), ['category_id' => 'id']);
+        return $this->hasMany(CategoryAttr::className(), ['category_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAttributes0()
+    public function getAttrs()
     {
-        return $this->hasMany(Attributes::className(), ['id' => 'attributes_id'])->viaTable('category_attributes', ['category_id' => 'id']);
+        return $this->hasMany(Attr::className(), ['id' => 'attr_id'])->viaTable('category_attr', ['category_id' => 'id']);
     }
 
     /**
      * @return array
      */
-    public function getSelectedAttributes()
+    public function getSelectedAttrs()
     {
-        $selectedAttributes = $this->getAttributes0()->select('id')->asArray()->all();
-        return ArrayHelper::getColumn($selectedAttributes, 'id');
+        $selectedAttrs = $this->getAttrs()->select('id')->asArray()->all();
+        return ArrayHelper::getColumn($selectedAttrs, 'id');
+    }
+
+    /**
+     * @return array
+     */
+    public function getSelectedOptions()
+    {
+        $selectedOptions = $this->getOptions()->select('id')->asArray()->all();
+        return ArrayHelper::getColumn($selectedOptions, 'id');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategoryOptions()
+    {
+        return $this->hasMany(CategoryOptions::className(), ['category_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOptions()
+    {
+        return $this->hasMany(Options::className(), ['id' => 'options_id'])->viaTable('category_options', ['category_id' => 'id']);
     }
 
     /**
@@ -165,13 +212,26 @@ class Category extends \yii\db\ActiveRecord
 
     public function saveAttr($attrs)
     {
-        CategoryAttributes::deleteAll(['category_id' => $this->id]);
+        CategoryAttr::deleteAll(['category_id' => $this->id]);
         if (is_array($attrs))
         {
             foreach ($attrs as $attr_id)
             {
-                $attr = Attributes::findOne($attr_id);
-                $this->link('attributes0', $attr);
+                $attr = Attr::findOne($attr_id);
+                $this->link('attrs', $attr);
+            }
+        }
+    }
+
+    public function saveOpt($options)
+    {
+        CategoryOptions::deleteAll(['category_id' => $this->id]);
+        if (is_array($options))
+        {
+            foreach ($options as $options_id)
+            {
+                $opt = Options::findOne($options_id);
+                $this->link('options', $opt);
             }
         }
     }
@@ -191,5 +251,20 @@ class Category extends \yii\db\ActiveRecord
         return parent::beforeValidate();
     }
 
+    /**
+     * @return array
+     */
+    public static function getAttrFromDropDown()
+    {
+        return ArrayHelper::map(Attr::find()->all(), 'id', 'title');
+    }
+
+    /**
+     * @return array
+     */
+    public static function getOptFromDropDown()
+    {
+        return ArrayHelper::map(Options::find()->all(), 'id', 'title');
+    }
 
 }

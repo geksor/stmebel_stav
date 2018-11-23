@@ -2,16 +2,16 @@
 
 namespace backend\controllers;
 
-use common\models\Attributes;
+use common\models\Attr;
 use Yii;
 use common\models\Category;
 use common\models\CategorySearch;
-use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -24,38 +24,10 @@ class CategoryController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => [
-                            'login',
-                            'error',
-                        ],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => [
-                            'logout',
-                            'error',
-                            'index',
-                            'view',
-                            'create',
-                            'update',
-                            'delete',
-                            'attribute',
-                            'publish',
-                            'rank',
-                        ],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -159,6 +131,29 @@ class CategoryController extends Controller
 
     /**
      * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionSetImage($id)
+    {
+        $model = $this->findModel($id);
+
+        if (Yii::$app->request->isPost){
+            if ($file = UploadedFile::getInstance($model, 'uploadImage')){
+                $model->image = file_get_contents($file->tempName);
+                if ($model->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            }
+        }
+
+        return $this->render('set-image', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @param $id
      * @param $publish
      * @return \yii\web\Response
      * @throws NotFoundHttpException
@@ -210,25 +205,17 @@ class CategoryController extends Controller
     public function actionAttribute($id)
     {
         $model = $this->findModel($id);
-        $model->catAttr = $model->selectedAttributes;
-        $attributes = $this->getAttributes();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->saveAttr($model->catAttr);
+            $model->saveOpt($model->catOpt);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('attribute', [
             'model' => $model,
-            'attributes' => $attributes,
         ]);
     }
 
-    /**
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return ArrayHelper::map(Attributes::find()->all(), 'id', 'title');
-    }
+
 }
