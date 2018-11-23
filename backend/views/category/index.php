@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                         'value' => function ($data){
                             /* @var $data \common\models\Category */
-                            return Html::input('number', 'rank' ,$data->rank, ['class' => 'form-control', 'id' => $data->alias]);
+                            return Html::input('number', 'rank' ,$data->rank, ['class' => 'form-control', 'id' => $data->id]);
                         }
 
                     ],
@@ -102,7 +102,7 @@ $js = <<< JS
             $.ajax({
                 type: "GET",
                 url: "/admin/category/rank",
-                data: 'alias='+ $(this).attr('id') +'&rank='+ $(this).val(),
+                data: 'id='+ $(this).attr('id') +'&rank='+ $(this).val(),
             })
         }
     });

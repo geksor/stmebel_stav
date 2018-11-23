@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AttributesSearch */
+/* @var $model common\models\AttrSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="attributes-search">
+<div class="attr-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -22,9 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'viewName') ?>
+    <?= $form->field($model, 'all_cats') ?>
 
-    <?= $form->field($model, 'type') ?>
+    <?= $form->field($model, 'rank') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

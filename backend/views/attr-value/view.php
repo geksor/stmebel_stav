@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AttrList */
+/* @var $model common\models\AttrValue */
 
-$this->title = $model->title;
+$this->title = $model->value;
 $this->params['breadcrumbs'][] = ['label' => 'Заполнение списка', 'url' => ['index', 'par_id' => $model->attr_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "attr".
@@ -11,6 +12,8 @@ use Yii;
  * @property string $title
  * @property int $all_cats
  * @property int $rank
+ * @property array $attrCat
+ * @property array $selectedCats
  *
  * @property AttrValue[] $attrValues
  * @property CategoryAttr[] $categoryAttrs
@@ -20,6 +23,13 @@ use Yii;
  */
 class Attr extends \yii\db\ActiveRecord
 {
+    public $attrCat;
+
+    public function afterFind()
+    {
+        $this->attrCat = $this->selectedCats;
+        parent::afterFind();
+    }
     /**
      * {@inheritdoc}
      */
@@ -36,7 +46,9 @@ class Attr extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['all_cats', 'rank'], 'integer'],
+            [['rank'], 'default', 'value' => 1],
             [['title'], 'string', 'max' => 255],
+            [['attrCat'], 'safe']
         ];
     }
 
@@ -52,6 +64,25 @@ class Attr extends \yii\db\ActiveRecord
             'rank' => 'Rank',
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function getSelectedCats()
+    {
+        $selectedCats = $this->getCategories()->select('id')->asArray()->all();
+        return ArrayHelper::getColumn($selectedCats, 'id');
+    }
+
+    /**
+     * @return array
+     */
+    public static function getCatFromDropDown()
+    {
+        return ArrayHelper::map(Category::find()->all(), 'id', 'title');
+    }
+
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -91,5 +122,29 @@ class Attr extends \yii\db\ActiveRecord
     public function getProducts()
     {
         return $this->hasMany(Product::className(), ['id' => 'product_id'])->viaTable('product_attr', ['attr_id' => 'id']);
+    }
+
+    public function saveCategories($cats = null)
+    {
+        CategoryAttr::deleteAll(['attr_id' => $this->id]);
+        if (is_array($cats))
+        {
+            $categoryModels = Category::find()->where(['id' => $cats])->all();
+        }else{
+            $categoryModels = Category::find()->all();
+        }
+        foreach ($categoryModels as $category)
+        {
+            $this->link('categories', $category);
+        }
+
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($this->all_cats){
+            $this->saveCategories();
+        }
+        return parent::beforeSave($insert);
     }
 }

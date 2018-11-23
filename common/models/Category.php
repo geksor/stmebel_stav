@@ -27,6 +27,7 @@ use yii\helpers\Inflector;
  * @property array $catAttr
  * @property array $catOpt
  * @property array $uploadImage
+ * @property bool $newRecord
  *
  * @property CategoryAttr[] $categoryAttrs
  * @property Attr[] $attrs
@@ -42,6 +43,7 @@ class Category extends \yii\db\ActiveRecord
     public $uploadImage;
     public $catAttr;
     public $catOpt;
+    public $newRecord;
 
     public function afterFind()
     {
@@ -249,6 +251,31 @@ class Category extends \yii\db\ActiveRecord
         $this->alias = Inflector::slug($this->alias);
 
         return parent::beforeValidate();
+    }
+
+    public function beforeSave($insert)
+    {
+        $this->isNewRecord?$this->newRecord = true:$this->newRecord = false;
+        return parent::beforeSave($insert);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($this->newRecord){
+            $attrModels = Attr::findAll(['all_cats' => 1]);
+            if ($attrModels){
+                foreach ($attrModels as $attrModel){
+                    $this->link('attrs', $attrModel);
+                }
+            }
+            $optionModels = Options::findAll(['allCats' => 1]);
+            if ($optionModels){
+                foreach ($optionModels as $optionModel){
+                    $this->link('options', $optionModel);
+                }
+            }
+        }
+        parent::afterSave($insert, $changedAttributes);
     }
 
     /**

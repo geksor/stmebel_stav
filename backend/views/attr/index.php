@@ -30,21 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'id',
                     'title',
-                    'viewName',
+                    'all_cats:boolean',
                     [
-                        'attribute' => 'type',
-                        'value' => function ($data) {
-                            /* @var $data \common\models\Attributes */
-                            switch ($data->type){
-                                case 1:
-                                    return 'Строка';
-                                case 2:
-                                    return 'Список';
-                                case 3:
-                                    return 'Цвет';
-                            }
-                            return 'Не задан';
+                        'attribute' => 'rank',
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Category */
+                            return Html::input('number', 'rank' ,$data->rank, ['class' => 'form-control', 'id' => $data->id]);
                         }
+
                     ],
 
                     ['class' => 'yii\grid\ActionColumn'],
@@ -54,3 +48,18 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+<?
+$js = <<< JS
+    $('[name = rank]').keypress(function(e){
+        if(e.keyCode==13){
+            $.ajax({
+                type: "GET",
+                url: "/admin/category/rank",
+                data: 'id='+ $(this).attr('id') +'&rank='+ $(this).val(),
+            })
+        }
+    });
+JS;
+
+$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+?>

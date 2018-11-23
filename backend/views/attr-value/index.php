@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use backend\widgets\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\AttrListSearch */
+/* @var $searchModel common\models\AttrValue */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Заполнение списка';
+$this->title = 'Значения атрибута';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="attr-list-index">

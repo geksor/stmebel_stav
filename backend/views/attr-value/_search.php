@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AttrListSearch */
+/* @var $model common\models\AttrValueSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="attr-list-search">
+<div class="attr-value-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -22,7 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'attr_id') ?>
 
-    <?= $form->field($model, 'title') ?>
+    <?= $form->field($model, 'value') ?>
+
+    <?= $form->field($model, 'rank') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

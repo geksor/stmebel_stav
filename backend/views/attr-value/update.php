@@ -2,15 +2,15 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
-/* @var $model common\models\AttrList */
+/* @var $model common\models\AttrValue */
 
-$this->title = 'Создание пункта';
+$this->title = 'Редактирование: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Заполнение списка', 'url' => ['index', 'par_id' => $model->attr_id]];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
-<div class="attr-list-create">
+<div class="attr-list-update">
 
     <div class="box box-primary">
         <div class="box-body">

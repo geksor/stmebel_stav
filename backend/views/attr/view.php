@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Attributes */
+/* @var $model common\models\Attr */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Атрибуты', 'url' => ['index']];
@@ -24,9 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
-                <? if ($model->type > 1 && $model->type < 4) {?>
-                    <?= Html::a('Значения атрибута', [$model->type === 2?'attr-list/index':'attr-color/index', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <? if (!$model->all_cats) {?>
+                    <?= Html::a('Для категорий', ['categories', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?}?>
+                <?= Html::a('Значения атрибута', ['attr-value', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
+
             </p>
 
             <?= DetailView::widget([
@@ -34,22 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'title',
-                    'viewName',
-                    [
-                        'attribute' => 'type',
-                        'value' => function ($data) {
-                            /* @var $data \common\models\Attributes */
-                            switch ($data->type){
-                                case 1:
-                                    return 'Строка';
-                                case 2:
-                                    return 'Список';
-                                case 3:
-                                    return 'Цвет';
-                            }
-                            return 'Не задан';
-                        }
-                    ],
+                    'rank',
+                    'all_cats:boolean'
                 ],
             ]) ?>
         </div>

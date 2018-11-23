@@ -45,10 +45,9 @@
                             [
                                 'label' => 'Атрибуты',
                                 'icon' => 'tags',
-                                'url' => ['/attributes'],
-                                "active" => Yii::$app->controller->id === 'attributes'
-                                    || Yii::$app->controller->id === 'attr-list'
-                                    || Yii::$app->controller->id === 'attr-color',
+                                'url' => ['/attr'],
+                                "active" => Yii::$app->controller->id === 'attr'
+                                    || Yii::$app->controller->id === 'attr-value',
                             ],
                         ],
                     ],

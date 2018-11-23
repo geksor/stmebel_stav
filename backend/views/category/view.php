@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]) ?>
                 <?= Html::a('Добавить изображение', ['set-image', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-                <?= Html::a('Атрибуты/Характеристики', ['attribute', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+<!--                --><?//= Html::a('Атрибуты/Характеристики', ['attribute', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Создать категорию', ['create'], ['class' => 'btn btn-default']) ?>
             </p>
 
