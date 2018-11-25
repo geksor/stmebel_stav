@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AttrValue */
+/* @var $model common\models\OptionsValue */
 
-$this->title = 'Редактирование: ' . $model->value;
-$this->params['breadcrumbs'][] = ['label' => 'Значения атрибута', 'url' => ['index', 'par_id' => $model->attr_id]];
+$this->title = 'Update Options Value: '.$model->value;
+$this->params['breadcrumbs'][] = ['label' => 'Options Values', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->value, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Редактирование';
+$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="attr-list-update">
+<div class="options-value-update">
 
     <div class="box box-primary">
         <div class="box-body">

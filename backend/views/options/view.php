@@ -4,13 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Attr */
+/* @var $model common\models\Options */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Атрибуты', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Характеристики', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+\yii\web\YiiAsset::register($this);
 ?>
-<div class="attributes-view">
+<div class="options-view">
 
     <div class="box box-primary">
         <div class="box-body">
@@ -25,10 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
-                <? if (!$model->all_cats) {?>
+                <? if (!$model->allCats) {?>
                     <?= Html::a('Для категорий', ['categories', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?}?>
-                <?= Html::a('Значения атрибута', ['/attr-value', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <? if ($model->type) {?>
+                    <?= Html::a('Значения характеристики', ['/options-value', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <?}?>
 
             </p>
 
@@ -37,10 +40,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'title',
+                    [
+                        'attribute' => 'type',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Options */
+                            return $data->type?'Список':'Строка';
+                        }
+                    ],
+                    'allCats:boolean',
                     'rank',
-                    'all_cats:boolean'
                 ],
             ]) ?>
+
         </div>
     </div>
 

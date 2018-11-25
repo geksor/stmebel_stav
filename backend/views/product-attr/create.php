@@ -4,19 +4,21 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AttrValue */
+/* @var $model common\models\ProductAttr */
+/* @var $attrValue */
 
-$this->title = 'Создание значения';
-$this->params['breadcrumbs'][] = ['label' => 'Значения атрибута', 'url' => ['index', 'par_id' => $model->attr_id]];
+$this->title = 'Create Product Attr';
+$this->params['breadcrumbs'][] = ['label' => 'Product Attrs', 'url' => ['index', 'par_id' => $model->product_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="attr-list-create">
+<div class="product-attr-create">
 
     <div class="box box-primary">
         <div class="box-body">
 
             <?= $this->render('_form', [
                 'model' => $model,
+                'attrValue' => $attrValue,
             ]) ?>
 
         </div>

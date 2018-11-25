@@ -4,19 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AttrValue */
+/* @var $model common\models\OptionsValue */
 
-$this->title = $model->value;
-$this->params['breadcrumbs'][] = ['label' => 'Значения атрибута', 'url' => ['index', 'par_id' => $model->attr_id]];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Options Values', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+\yii\web\YiiAsset::register($this);
 ?>
-<div class="attr-list-view">
+<div class="options-value-view">
 
     <div class="box box-primary">
         <div class="box-body">
 
             <p>
-                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['index', 'par_id' => $model->attr_id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['index', 'par_id' => $model->options_id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
@@ -33,10 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'value',
                     [
-                        'attribute' => 'attr_id',
+                        'attribute' => 'options_id',
                         'value' => function ($data){
-                            /* @var $data \common\models\AttrValue */
-                            return $data->attr->title;
+                            /* @var $data \common\models\OptionsValue */
+                            return $data->options->title;
                         }
                     ],
                 ],
@@ -44,5 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </div>
     </div>
+
 
 </div>

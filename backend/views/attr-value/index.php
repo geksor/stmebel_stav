@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php Pjax::begin(); ?>
 
             <p>
-                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['attributes/view', 'id' => $searchModel->attr_id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['attr/view', 'id' => $searchModel->attr_id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Создать', ['create', 'par_id' => $searchModel->attr_id], ['class' => 'btn btn-success']) ?>
             </p>
 
@@ -28,7 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'id',
-                    'title',
+                    'value',
+                    [
+                        'attribute' => 'rank',
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Category */
+                            return Html::input('number', 'rank' ,$data->rank, ['class' => 'form-control', 'id' => $data->id]);
+                        }
+
+                    ],
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
@@ -36,4 +45,22 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php Pjax::end(); ?>
         </div>
     </div>
+
 </div>
+
+<?
+$js = <<< JS
+    $('[name = rank]').keypress(function(e){
+        if(e.keyCode==13){
+            $.ajax({
+                type: "GET",
+                url: "/admin/attr-value/rank",
+                data: 'id='+ $(this).attr('id') +'&rank='+ $(this).val(),
+            })
+        }
+    });
+JS;
+
+$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+?>
+

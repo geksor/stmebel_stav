@@ -33,9 +33,10 @@ class AttrValueController extends Controller
      * Lists all AttrValue models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($par_id)
     {
         $searchModel = new AttrValueSearch();
+        $searchModel->attr_id = $par_id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -62,9 +63,10 @@ class AttrValueController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($par_id)
     {
         $model = new AttrValue();
+        $model->attr_id = $par_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -123,5 +125,28 @@ class AttrValueController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * @param $id
+     * @param $rank
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionRank($id, $rank)
+    {
+        if (Yii::$app->request->isAjax){
+
+            $model = $this->findModel($id);
+
+            if ($model){
+                $model->rank = (integer) $rank;
+
+                if ($model->save()){
+                    return $this->redirect(Yii::$app->request->referrer);
+                }
+            }
+        }
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }

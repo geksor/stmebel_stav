@@ -2,21 +2,17 @@
 
 namespace backend\controllers;
 
-use common\models\Attr;
 use Yii;
-use common\models\Category;
-use common\models\CategorySearch;
-use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
+use common\models\Options;
+use common\models\OptionsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * CategoryController implements the CRUD actions for Category model.
+ * OptionsController implements the CRUD actions for Options model.
  */
-class CategoryController extends Controller
+class OptionsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -34,12 +30,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Category models.
+     * Lists all Options models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CategorySearch();
+        $searchModel = new OptionsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +45,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Displays a single Category model.
+     * Displays a single Options model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,13 +58,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Creates a new Category model.
+     * Creates a new Options model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Category();
+        $model = new Options();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -80,7 +76,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Updates an existing Category model.
+     * Updates an existing Options model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -100,7 +96,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes an existing Category model.
+     * Deletes an existing Options model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,63 +110,19 @@ class CategoryController extends Controller
     }
 
     /**
-     * Finds the Category model based on its primary key value.
+     * Finds the Options model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Category the loaded model
+     * @return Options the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = Options::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    /**
-     * @param $id
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function actionSetImage($id)
-    {
-        $model = $this->findModel($id);
-
-        if (Yii::$app->request->isPost){
-            if ($file = UploadedFile::getInstance($model, 'uploadImage')){
-                $model->image = file_get_contents($file->tempName);
-                if ($model->save()){
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
-            }
-        }
-
-        return $this->render('set-image', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * @param $id
-     * @param $publish
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function actionPublish($id, $publish)
-    {
-        if (Yii::$app->request->isAjax){
-
-            $model = $this->findModel($id);
-
-            $model->publish = (integer) $publish;
-
-            if ($model->save()){
-                return $this->redirect(Yii::$app->request->referrer);
-            }
-        }
-        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -197,26 +149,21 @@ class CategoryController extends Controller
     }
 
     /**
-     * Attribute an existing Category model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
-    public function actionAttribute($id)
+    public function actionCategories($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->saveAttr($model->catAttr);
-            $model->saveOpt($model->catOpt);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->saveCategories($model->optCat);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('attribute', [
+        return $this->render('categories', [
             'model' => $model,
         ]);
     }
-
-
 }

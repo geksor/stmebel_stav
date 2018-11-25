@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use zxbodya\yii2\galleryManager\GalleryManager;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -16,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box box-primary">
         <div class="box-header with-border">
             <p>
+                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['index'], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
@@ -24,7 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
-                <?= Html::a('Атрибуты', ['attribute', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Категории', ['categories', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Атрибуты', ['/product-attr', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Характеристики', ['/product-options', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Создать товар', ['create'], ['class' => 'btn btn-default']) ?>
             </p>
         </div>
@@ -51,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'publish',
                         'label' => 'Состояние',
                         'value' => function ($data){
-                            /* @var $data \common\models\Comment */
+                            /* @var $data \common\models\Product */
                             if ($data->publish){
                                 return 'Опубликован';
                             }
@@ -60,44 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]) ?>
-        </div>
-    </div>
-
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">Изображения товара</h3>
-        </div>
-        <div class="box-body">
-            <? if ($model->isNewRecord) {
-                echo 'Нельзя загружать изображения до создания галлереи';
-            } else {
-                echo GalleryManager::widget(
-                    [
-                        'model' => $model,
-                        'behaviorName' => 'galleryBehavior',
-                        'apiRoute' => 'product/galleryApi'
-                    ]
-                );
-            }?>
-        </div>
-    </div>
-
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title"><?= $model->addBlockTitle ?></h3>
-        </div>
-        <div class="box-body">
-            <? if ($model->isNewRecord) {
-                echo 'Нельзя загружать изображения до создания галлереи';
-            } else {
-                echo GalleryManager::widget(
-                    [
-                        'model' => $model,
-                        'behaviorName' => 'galleryBehaviorAddBlock',
-                        'apiRoute' => 'product/galleryApiAddBlock'
-                    ]
-                );
-            }?>
         </div>
     </div>
 

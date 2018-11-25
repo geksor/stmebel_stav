@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AttrValue */
+/* @var $model common\models\OptionsValue */
 
-$this->title = 'Создание значения';
-$this->params['breadcrumbs'][] = ['label' => 'Значения атрибута', 'url' => ['index', 'par_id' => $model->attr_id]];
+$this->title = 'Create Options Value';
+$this->params['breadcrumbs'][] = ['label' => 'Options Values', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="attr-list-create">
+<div class="options-value-create">
 
     <div class="box box-primary">
         <div class="box-body">

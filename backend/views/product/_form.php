@@ -7,7 +7,6 @@ use mihaildev\ckeditor\CKEditor;
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $categories array */
 ?>
 
 <div class="product-form">
@@ -18,20 +17,24 @@ use mihaildev\ckeditor\CKEditor;
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'price')->textInput() ?>
+
+    <?= $form->field($model, 'sale')->textInput() ?>
+
     <?= $form->field($model, 'short_description')->widget(CKEditor::className(),[
         'editorOptions' => [
-            'preset' => 'basic', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+            'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
             'inline' => false, //по умолчанию false
-            'height' => 400,
+            'height' => 300,
             'resize_enabled' => true,
         ],
     ]) ?>
 
     <?= $form->field($model, 'description')->widget(CKEditor::className(),[
         'editorOptions' => [
-            'preset' => 'basic', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+            'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
             'inline' => false, //по умолчанию false
-            'height' => 400,
+            'height' => 300,
             'resize_enabled' => true,
         ],
     ]) ?>
@@ -40,12 +43,19 @@ use mihaildev\ckeditor\CKEditor;
 
     <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'selectCategory')->dropDownList($categories, [
-        'multiple' => true,
-        'size' => 15,
-    ]) ?>
+    <?= $form->field($model, 'code')->textInput() ?>
 
-    <?= $form->field($model, 'addBlockTitle')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'avail')->checkbox() ?>
+
+    <?= $form->field($model, 'unlimited')->checkbox() ?>
+
+    <?= $form->field($model, 'count')->textInput() ?>
+
+    <?= $form->field($model, 'hot')->checkbox() ?>
+
+    <?= $form->field($model, 'new')->checkbox() ?>
+
+    <?= $form->field($model, 'rank')->textInput() ?>
 
     <?= $form->field($model, 'publish')->checkbox() ?>
 

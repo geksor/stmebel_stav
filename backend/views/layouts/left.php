@@ -41,13 +41,26 @@
                         'url' => '#',
                         'items' => [
                             ['label' => 'Категории', 'icon' => 'th', 'url' => ['/category'], "active" => Yii::$app->controller->id === 'category',],
-                            ['label' => 'Товары', 'icon' => 'archive', 'url' => ['/product'], "active" => Yii::$app->controller->id === 'product',],
+                            [
+                                'label' => 'Товары',
+                                'icon' => 'archive',
+                                'url' => ['/product'],
+                                "active" => Yii::$app->controller->id === 'product'
+                                    || Yii::$app->controller->id === 'product-attr',
+                                ],
                             [
                                 'label' => 'Атрибуты',
                                 'icon' => 'tags',
                                 'url' => ['/attr'],
                                 "active" => Yii::$app->controller->id === 'attr'
                                     || Yii::$app->controller->id === 'attr-value',
+                            ],
+                            [
+                                'label' => 'Характеристики',
+                                'icon' => 'tags',
+                                'url' => ['/options'],
+                                "active" => Yii::$app->controller->id === 'options'
+                                    || Yii::$app->controller->id === 'options-value',
                             ],
                         ],
                     ],

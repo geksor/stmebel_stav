@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Attr;
-use common\models\AttrSearch;
-use yii\helpers\VarDumper;
+use common\models\OptionsValue;
+use common\models\OptionsValueSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AttrController implements the CRUD actions for Attr model.
+ * OptionsValueController implements the CRUD actions for OptionsValue model.
  */
-class AttrController extends Controller
+class OptionsValueController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +30,13 @@ class AttrController extends Controller
     }
 
     /**
-     * Lists all Attr models.
+     * Lists all OptionsValue models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($par_id)
     {
-        $searchModel = new AttrSearch();
+        $searchModel = new OptionsValueSearch();
+        $searchModel->options_id = $par_id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +46,7 @@ class AttrController extends Controller
     }
 
     /**
-     * Displays a single Attr model.
+     * Displays a single OptionsValue model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,13 +59,14 @@ class AttrController extends Controller
     }
 
     /**
-     * Creates a new Attr model.
+     * Creates a new OptionsValue model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($par_id)
     {
-        $model = new Attr();
+        $model = new OptionsValue();
+        $model->options_id = $par_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,7 +78,7 @@ class AttrController extends Controller
     }
 
     /**
-     * Updates an existing Attr model.
+     * Updates an existing OptionsValue model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,7 +98,7 @@ class AttrController extends Controller
     }
 
     /**
-     * Deletes an existing Attr model.
+     * Deletes an existing OptionsValue model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -111,61 +112,18 @@ class AttrController extends Controller
     }
 
     /**
-     * Finds the Attr model based on its primary key value.
+     * Finds the OptionsValue model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Attr the loaded model
+     * @return OptionsValue the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Attr::findOne($id)) !== null) {
+        if (($model = OptionsValue::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    /**
-     * @param $id
-     * @param $rank
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function actionRank($id, $rank)
-    {
-        if (Yii::$app->request->isAjax){
-
-            $model = $this->findModel($id);
-
-            if ($model){
-                $model->rank = (integer) $rank;
-
-                if ($model->save()){
-                    return $this->redirect(Yii::$app->request->referrer);
-                }
-            }
-        }
-        return $this->redirect(Yii::$app->request->referrer);
-    }
-
-    /**
-     * @param $id
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function actionCategories($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post())) {
-            $model->saveCategories($model->attrCat);
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('categories', [
-            'model' => $model,
-        ]);
-    }
-
 }

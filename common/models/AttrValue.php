@@ -31,6 +31,7 @@ class AttrValue extends \yii\db\ActiveRecord
     {
         return [
             [['attr_id', 'value'], 'required'],
+            [['rank'], 'default', 'value' => 1],
             [['attr_id', 'rank'], 'integer'],
             [['value'], 'string', 'max' => 255],
             [['attr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Attr::className(), 'targetAttribute' => ['attr_id' => 'id']],

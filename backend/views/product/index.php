@@ -6,7 +6,6 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $categories array */
 
 $this->title = 'Товары';
 $this->params['breadcrumbs'][] = $this->title;
@@ -35,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'filterCat',
-                        'filter'=>$categories,
+                        'filter'=> $searchModel::getCatFromDropDown(),
                         'filterInputOptions' => ['prompt' => 'Все', 'class' => 'form-control form-control-sm'],
                         'headerOptions' => ['width' => 170],
                         'value' => function ($data){
@@ -47,39 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'rank',
                         'format' => 'raw',
-                        'headerOptions' => ['width' => 50],
-                        'filter' => false,
                         'value' => function ($data){
                             /* @var $data \common\models\Product */
-                            $intDown = $data->rank > 1 ? 1 : 0;
-                            $up = Html::a(
-                                '&#9650;',
-                                [
-                                    'order',
-                                    'id' => $data->id,
-                                    'order' => $data->rank - $intDown,
-                                    'up' => true,
-                                ],
-                                ['class'=>'btn btn-default']);
-
-                            $down = Html::a(
-                                '&#9660;',
-                                [
-                                    'order',
-                                    'id' => $data->id,
-                                    'order' => $data->rank + 1,
-                                    'up' => false,
-                                ],
-                                ['class'=>'btn btn-default']);
-
-                            if ($data->getMaxRank() === $data->rank){
-                                return $up;
-                            }
-                            if ($data->getMinRank() === $data->rank){
-                                return $down;
-                            }
-                            return $up.$down;
+                            return Html::input('number', 'rank' ,$data->rank, ['class' => 'form-control', 'id' => $data->id]);
                         }
+
                     ],
                     [
                         'attribute' => 'publish',
@@ -89,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'headerOptions' => ['width' => 50],
                         'format' => 'raw',
                         'value' => function ($data){
-                            /* @var $data \common\models\Comment */
+                            /* @var $data \common\models\Product */
                             if ($data->publish){
                                 return Html::a('Снять с публикации',
                                     ['publish', 'id' => $data->id, 'publish' => false],
@@ -108,6 +79,22 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+<?
+$js = <<< JS
+    $('[name = rank]').keypress(function(e){
+        if(e.keyCode==13){
+            $.ajax({
+                type: "GET",
+                url: "/admin/product/rank",
+                data: 'id='+ $(this).attr('id') +'&rank='+ $(this).val(),
+            })
+        }
+    });
+JS;
+
+$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+?>
 
 <?php
 $css= <<< CSS
