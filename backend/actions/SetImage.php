@@ -33,6 +33,7 @@ class SetImage extends Action
     public $width;
     public $height;
 
+
     public function run($id)
     {
         $model = new ImageUpload();

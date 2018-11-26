@@ -2,9 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Pjax;
+use backend\widgets\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
+/* @var $searchModel common\models\RecommendedProductSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['index']];
@@ -24,10 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
+                <?= Html::a('Создать товар', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Изображения', ['/product-images', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Категории', ['categories', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Атрибуты', ['/product-attr', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Характеристики', ['/product-options', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
-                <?= Html::a('Создать товар', ['create'], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Рекомендуемые товары', ['recomm-view', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
             </p>
         </div>
 
@@ -38,17 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'title',
-                    'alias',
-                    [
-                        'attribute' => 'short_description',
-                        'format' => 'html'
-                    ],
-                    [
-                        'attribute' => 'description',
-                        'format' => 'html'
-                    ],
-                    'rank',
                     [
                         'attribute' => 'publish',
                         'label' => 'Состояние',
@@ -60,9 +55,24 @@ $this->params['breadcrumbs'][] = $this->title;
                             return 'Не опубликован';
                         }
                     ],
+                    'title',
+                    'alias',
+                    'code',
+                    'short_description:html',
+                    'description:html',
+                    'price:decimal',
+                    'sale:decimal',
+                    'hot:boolean',
+                    'new:boolean',
+                    'avail:boolean',
+                    'unlimited:boolean',
+                    'count:decimal',
+                    'rank',
+
                 ],
             ]) ?>
         </div>
     </div>
+
 
 </div>

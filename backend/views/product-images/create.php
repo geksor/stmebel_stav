@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Attr */
+/* @var $model common\models\ProductImages */
 
-$this->title = 'Создание атрибута';
-$this->params['breadcrumbs'][] = ['label' => 'Атрибуты', 'url' => ['index']];
+$this->title = 'Create Product Images';
+$this->params['breadcrumbs'][] = ['label' => 'Product Images', 'url' => ['index', 'par_id' => $model->product_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="attributes-create">
+<div class="product-images-create">
 
     <div class="box box-primary">
         <div class="box-body">

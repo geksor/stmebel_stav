@@ -6,6 +6,9 @@ use common\models\Attr;
 use common\models\AttrValue;
 use common\models\ProductAttr;
 use common\models\ProductAttrSearch;
+use common\models\ProductSearchRecomm;
+use common\models\RecommendedProduct;
+use common\models\RecommendedProductSearch;
 use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
@@ -49,6 +52,36 @@ class ProductController extends Controller
         ]);
     }
 
+    public function actionAddRecomm($par_id)
+    {
+        $searchModel = new ProductSearchRecomm();
+        $searchModel->fromId = $par_id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('add-recomm', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'fromId' => $searchModel->fromId,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @param $from_id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionSetRecomm($id, $from_id)
+    {
+        if (Yii::$app->request->isAjax){
+
+            $model = $this->findModel($from_id);
+
+            $model->saveRecomm($id);
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
     /**
      * Displays a single Product model.
      * @param integer $id
@@ -57,8 +90,26 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new RecommendedProductSearch();
+        $searchModel->product_id = $id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionRecommView($id)
+    {
+        $searchModel = new RecommendedProductSearch();
+        $searchModel->product_id = $id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('recomm-view', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -107,11 +158,19 @@ class ProductController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id = null, $product_id = null, $recommProduct_id = null)
     {
-        $this->findModel($id)->delete();
+        if ($id){
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }
+        if ($product_id && $recommProduct_id){
+            RecommendedProduct::findOne(['product_id' => $product_id, 'recommProduct_id' => $recommProduct_id])->delete();
+            return $this->redirect(['view', 'id' => $product_id]);
+        }
+        Yii::$app->session->setFlash('error', 'Ошибка. Обратитель к администратору');
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**

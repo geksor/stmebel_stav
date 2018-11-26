@@ -46,7 +46,9 @@
                                 'icon' => 'archive',
                                 'url' => ['/product'],
                                 "active" => Yii::$app->controller->id === 'product'
-                                    || Yii::$app->controller->id === 'product-attr',
+                                    || Yii::$app->controller->id === 'product-attr'
+                                    || Yii::$app->controller->id === 'product-options'
+                                    || Yii::$app->controller->id === 'product-images',
                                 ],
                             [
                                 'label' => 'Атрибуты',

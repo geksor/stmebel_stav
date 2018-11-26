@@ -11,6 +11,7 @@ namespace common\models;
 
 use Imagine\Image\Box;
 use Imagine\Image\Point;
+use phpDocumentor\Reflection\File;
 use yii\base\Model;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
@@ -156,6 +157,7 @@ class ImageUpload extends Model
 
     /**
      * @param $fileName
+     * @throws \yii\base\Exception
      */
     private function saveThumbnailImage($fileName)
     {

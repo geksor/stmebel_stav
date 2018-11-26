@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
+                <?= Html::a('Создать', ['create', 'par_id' => $model->attr_id], ['class' => 'btn btn-success']) ?>
             </p>
 
             <?= DetailView::widget([

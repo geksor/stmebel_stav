@@ -140,11 +140,12 @@ class Attr extends \yii\db\ActiveRecord
 
     }
 
-    public function beforeSave($insert)
+    public function afterSave($insert, $changedAttributes)
     {
         if ($this->all_cats){
             $this->saveCategories();
         }
-        return parent::beforeSave($insert);
+
+        parent::afterSave($insert, $changedAttributes);
     }
 }

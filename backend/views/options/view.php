@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
+                <?= Html::a('Создать характеристику', ['create'], ['class' => 'btn btn-success']) ?>
                 <? if (!$model->allCats) {?>
                     <?= Html::a('Для категорий', ['categories', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?}?>
