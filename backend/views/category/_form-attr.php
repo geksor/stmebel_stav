@@ -16,12 +16,17 @@ use yii\widgets\ActiveForm;
 
 <!--    --><?//= $form->field($model, 'categoryType_id')->textInput() ?>
 
-    <?= $form->field($model, 'catAttr')->dropDownList($model::getAttrFromDropDown(), [
+    <?= $form->field($model, 'optForList')->dropDownList($model->getSelectedOptFromDropDown(), [
         'multiple' => true,
         'size' => 15,
     ]) ?>
 
-    <?= $form->field($model, 'catOpt')->dropDownList($model::getOptFromDropDown(), [
+    <?= $form->field($model, 'optShort')->dropDownList($model->getSelectedOptFromDropDown(), [
+        'multiple' => true,
+        'size' => 15,
+    ]) ?>
+
+    <?= $form->field($model, 'optFromCart')->dropDownList($model->getSelectedOptFromDropDown(), [
         'multiple' => true,
         'size' => 15,
     ]) ?>

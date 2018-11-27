@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "category".
@@ -27,6 +28,9 @@ use yii\helpers\Inflector;
  * @property array $catAttr
  * @property array $catOpt
  * @property array $uploadImage
+ * @property array $optForList
+ * @property array $optFromCart
+ * @property array $optShort
  * @property bool $newRecord
  *
  * @property CategoryAttr[] $categoryAttrs
@@ -44,12 +48,40 @@ class Category extends \yii\db\ActiveRecord
     public $catAttr;
     public $catOpt;
     public $newRecord;
+    public $optForList;
+    public $optFromCart;
+    public $optShort;
 
     public function afterFind()
     {
         $this->catAttr = $this->selectedAttrs;
         $this->catOpt = $this->selectedOptions;
+        $this->optForList = Json::decode($this->show_opt_to_product_list);
+        $this->optFromCart = Json::decode($this->show_opt_to_cart);
+        $this->optShort = Json::decode($this->show_opt_to_product_card);
         parent::afterFind();
+    }
+
+    /**
+     * @return false|int
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function saveShowOptions()
+    {
+        $this->show_opt_to_product_list = Json::encode($this->optForList);
+        $this->show_opt_to_product_card = Json::encode($this->optShort);
+        $this->show_opt_to_cart = Json::encode($this->optFromCart);
+        return $this->update(false);
+    }
+
+    /**
+     * @return array
+     */
+    public function getSelectedOptFromDropDown()
+    {
+        $optsId = $this->getSelectedOptions();
+        return ArrayHelper::map(Options::findAll(['id' => $optsId]), 'id', 'title');
     }
 
     /**
@@ -70,7 +102,7 @@ class Category extends \yii\db\ActiveRecord
             [['rank'], 'default', 'value' => 1],
             [['title'], 'required'],
             [['image'], 'string'],
-            [['catAttr', 'catOpt'], 'safe'],
+            [['catAttr', 'catOpt', 'optShort', 'optForList', 'optFromCart'], 'safe'],
             [['uploadImage'], 'image', 'extensions' => ['svg']],
             [['description', 'show_opt_to_product_list', 'show_opt_to_product_card', 'show_opt_to_cart'], 'string'],
             [['title', 'meta_title', 'meta_description', 'alias'], 'string', 'max' => 255],
@@ -96,6 +128,9 @@ class Category extends \yii\db\ActiveRecord
             'show_opt_to_product_list' => 'Show Opt To Product List',
             'show_opt_to_product_card' => 'Show Opt To Product Card',
             'show_opt_to_cart' => 'Show Opt To Cart',
+            'optShort' => 'Показывать в разделе с ценой',
+            'optForList' => 'Показывать в списке товаров',
+            'optFromCart' => 'Показывать в корзине',
         ];
     }
 

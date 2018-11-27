@@ -197,23 +197,21 @@ class CategoryController extends Controller
     }
 
     /**
-     * Attribute an existing Category model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
-    public function actionAttribute($id)
+    public function actionOptionsShow($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->saveAttr($model->catAttr);
-            $model->saveOpt($model->catOpt);
+        if ($model->load(Yii::$app->request->post()) && $model->saveShowOptions()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('attribute', [
+        return $this->render('options-show', [
             'model' => $model,
         ]);
     }

@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body">
 
             <p>
+                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['index'], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
@@ -24,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
+                <?= Html::a('Создать категорию', ['create'], ['class' => 'btn btn-success']) ?>
                 <?= Html::a('Добавить изображение', ['set-image', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-<!--                --><?//= Html::a('Атрибуты/Характеристики', ['attribute', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-                <?= Html::a('Создать категорию', ['create'], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('Настройка характеристик', ['options-show', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
             </p>
 
             <?= DetailView::widget([
