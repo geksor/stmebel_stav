@@ -36,6 +36,8 @@ use mihaildev\ckeditor\CKEditor;
 
     <?= $form->field($model, 'publish')->checkbox() ?>
 
+    <?= $form->field($model, 'view_from_main')->checkbox() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

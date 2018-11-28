@@ -32,6 +32,7 @@ use yii\helpers\Json;
  * @property array $optFromCart
  * @property array $optShort
  * @property bool $newRecord
+ * @property int $view_from_main
  *
  * @property CategoryAttr[] $categoryAttrs
  * @property Attr[] $attrs
@@ -98,7 +99,7 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'rank', 'publish'], 'integer'],
+            [['parent_id', 'rank', 'publish', 'view_from_main',], 'integer'],
             [['rank'], 'default', 'value' => 1],
             [['title'], 'required'],
             [['image'], 'string'],
@@ -131,6 +132,7 @@ class Category extends \yii\db\ActiveRecord
             'optShort' => 'Показывать в разделе с ценой',
             'optForList' => 'Показывать в списке товаров',
             'optFromCart' => 'Показывать в корзине',
+            'view_from_main' => 'Показывать на главной'
         ];
     }
 

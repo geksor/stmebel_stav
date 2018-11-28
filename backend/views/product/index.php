@@ -38,7 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filterInputOptions' => ['prompt' => 'Все', 'class' => 'form-control form-control-sm'],
                         'headerOptions' => ['width' => 170],
                         'value' => function ($data){
-                            return '';
+                            /* @var $data \common\models\Product */
+                            return $data->mainCat->title;
                         },
                     ],
                     [

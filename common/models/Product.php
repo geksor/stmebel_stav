@@ -2,9 +2,11 @@
 
 namespace common\models;
 
+use phpDocumentor\Reflection\Types\This;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "product".
@@ -33,13 +35,18 @@ use yii\helpers\Inflector;
  * @property int $filterCat
  * @property array $selectCat
  * @property array $selectedCats
+ * @property int $optList
+ * @property int $main_category
+ * @property int $oldMainCat
  *
  * @property CategoryProduct[] $categoryProducts
  * @property Category[] $categories
+ * @property Category[] $mainCat
  * @property ProductImages[] $productImages
  * @property ProductAttr[] $productAttrs
  * @property Attr[] $attrs
  * @property ProductOptions[] $productOptions
+ * @property ProductOptions[] $productOptionsList
  * @property Options[] $options
  * @property Reviews[] $reviews
  * @property RecommendedProduct[] $recommendedProducts
@@ -51,11 +58,28 @@ class Product extends \yii\db\ActiveRecord
 {
     public $selectCat;
     public $filterCat;
+    public $optList;
+    public $oldMainCat;
 
     public function afterFind()
     {
         $this->selectCat = $this->selectedCats;
+        $this->oldMainCat = $this->main_category;
         parent::afterFind();
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        $this->saveMainCategory();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMainCat()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'main_category']);
     }
 
     /**
@@ -80,15 +104,23 @@ class Product extends \yii\db\ActiveRecord
      */
     public function saveCategories($cats)
     {
-        CategoryProduct::deleteAll(['product_id' => $this->id]);
         if (is_array($cats))
         {
+            CategoryProduct::deleteAll(['product_id' => $this->id]);
+
             $categoryModels = Category::find()->where(['id' => $cats])->all();
             foreach ($categoryModels as $category)
             {
                 $this->link('categories', $category);
             }
+            $this->saveMainCategory();
         }
+    }
+
+    public function saveMainCategory()
+    {
+        CategoryProduct::deleteAll(['product_id' => $this->id, 'category_id' => $this->main_category]);
+        $this->link('categories', Category::findOne(['id' => $this->main_category]));
     }
 
     public function saveRecomm($id)
@@ -110,10 +142,10 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'price'], 'required'],
+            [['title', 'price', 'main_category'], 'required'],
             [['selectCat', 'filterCat'], 'safe'],
             [['short_description', 'description'], 'string'],
-            [['price', 'code', 'avail', 'unlimited', 'count', 'sale', 'hot', 'new', 'rank', 'publish', 'rating', 'reviews_count', 'hits'], 'integer'],
+            [['price', 'code', 'avail', 'unlimited', 'count', 'sale', 'hot', 'new', 'rank', 'publish', 'rating', 'reviews_count', 'hits', 'main_category'], 'integer'],
             [['title', 'meta_title', 'meta_description', 'alias', 'main_image'], 'string', 'max' => 255],
             [['rank'], 'default', 'value' => 1],
         ];
@@ -146,6 +178,7 @@ class Product extends \yii\db\ActiveRecord
             'reviews_count' => 'Reviews Count',
             'main_image' => 'Main Image',
             'hits' => 'Hits',
+            'main_category' => 'Основная категория',
         ];
     }
 
@@ -195,6 +228,45 @@ class Product extends \yii\db\ActiveRecord
     public function getProductOptions()
     {
         return $this->hasMany(ProductOptions::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategoryProductOptions()
+    {
+        $categories = ArrayHelper::getColumn($this->categories, 'id');
+
+        $optionsId = ArrayHelper::getColumn(CategoryOptions::find()->where(['category_id' => $categories])->groupBy('options_id')->all(), 'options_id');
+
+        return $this->hasMany(ProductOptions::className(), ['product_id' => 'id'])->filterWhere(['options_id' => $optionsId]);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductOptionsList()
+    {
+        $categories = ArrayHelper::getColumn($this->categories, 'id');
+
+        $categoriesModel = Category::find()->where(['id' => $categories])->all();
+
+        $optionsId = [];
+
+        if ($categoriesModel){
+            foreach ($categoriesModel as $model){
+                $listArr = $model->optForList;
+                if ($listArr){
+                    foreach ($listArr as $item){
+                        $optionsId[] = $item;
+                    }
+                }
+            }
+            $this->optList = array_unique($optionsId);
+        }
+
+        return $this->hasMany(ProductOptions::className(), ['product_id' => 'id'])->filterWhere(['options_id' => $this->optList]);
     }
 
     /**
@@ -270,5 +342,10 @@ class Product extends \yii\db\ActiveRecord
     public function getProducts()
     {
         return $this->hasMany(RecommendedProduct::className(), ['id' => 'product_id'])->viaTable('recommended_product', ['recommProduct_id' => 'id']);
+    }
+
+    public function getNewPrice()
+    {
+        return $this->price - ($this->price*$this->sale/100);
     }
 }

@@ -1,0 +1,201 @@
+@media (min-width: 1px) and (max-width: 1100px) {
+    .left_menu{
+        display: none;
+    }
+    .right_content{
+        width: 100%;
+    }
+    .product_left {
+        width: 50%;
+    }
+    .product_right {
+        width: 50%;
+    }
+}
+@media (min-width: 1px) and (max-width: 1000px) {
+    .requisites {
+        padding: 20px;
+    }
+    .category{
+        width: 23%;
+        margin: 1%;
+    }
+}
+@media (min-width: 1px) and (max-width: 750px) {
+    .category{
+        width: 31%;
+        margin: 1%;
+    }
+    .product_left {
+        width: 100%;
+    }
+    .product_right {
+        width: 100%;
+        padding: 10px;
+    }
+    .usluga {
+        width: 98%;
+        margin-bottom: 50px;
+    }
+    .product_left h1 {
+        font-size: 20px;
+        line-height: 20px;
+        color: #424242;
+        margin-bottom: 10px;
+    }
+    .number input, .minus, .plus {
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-color: #ffffff;
+        border: 1px solid #dee3e1;
+        text-align: center;
+        line-height: 40px;
+    }
+    .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+        float: left;
+        padding: 10px 4px;
+        text-decoration: none;
+        width: 100%;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+        border-radius: 0;
+        font-family: 'RobotoBold';
+        font-size: 16px;
+        width: auto;
+        line-height: 1.5;
+        letter-spacing: 0.4px;
+        text-align: center;
+    }
+    .slider1 .owl-nav {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+    .slider1 .owl-stage-outer {
+        padding: 50px 1px;
+        width: calc(100% + 2px);
+        height: 400px;
+    }
+    .slider2 .owl-nav {
+        position: absolute;
+        right: 0;
+        width: 100%;
+        bottom: 32%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 10px;
+    }
+    .usluga h4 {
+        font-size: 14px;
+        font-family: 'RobotoBold';
+        letter-spacing: 0.6px;
+        margin-bottom: 15px;
+        color: #424242;
+    }
+    .usluga p {
+        font-size: 12px;
+        line-height: 1.5;
+        letter-spacing: 0.4px;
+        color: #9da19f;
+    }
+    .usluga {
+        width: 98%;
+        margin-bottom: 20px;
+    }
+    .usluga img{
+        width: 30%;
+    }
+    .footer{
+        padding: 20px 0;
+    }
+    .footer_menu {
+        width: 100%;
+        padding: 20px 0;
+    }
+    .footer_menu ul li a {
+        font-size: 12px;
+    }
+    .footer_adress h5 {
+        font-size: 16px;
+    }
+    .footer_adress {
+        font-size: 12px;
+    }
+    .footer_logo{
+        max-width: 100% !important;
+        margin-bottom: 10px;
+    }
+}
+@media (min-width: 1px) and (max-width: 600px) {
+    .category{
+        width: 48%;
+        margin: 1%;
+    }
+    .product_in {
+        width: 49.4%;
+    }
+    .right_content_head h1{
+        padding: 10px;
+        width: 100%;
+        margin-left: 0;
+        border-bottom: 1px solid #bbc0be;
+    }
+    .sorting{
+        width: 100%;
+    }
+    .sorting p{
+        padding-left: 10px;
+    }
+    .sticky{
+        position: sticky;
+        z-index: 2;
+        top: 0;
+        background: #fff;
+    }
+    .header-fixed{
+        position: fixed;
+        box-shadow: 0px 0px 80px rgba(0, 0, 0, 0.2);
+    }
+    .head_3{
+        border-top: 1px solid #00d17d;
+        border-bottom: 1px solid #00d17d;
+        background: #fff;
+    }
+    .head_soc{
+        width: 100%;
+    }
+    .head_cart{
+        width: 18%;
+        padding: 5px 15px;
+        border-left: 1px solid #bbc0be;
+    }
+    .head_cart svg{
+        margin-right: 0;
+        width: 100%;
+    }
+    .head_mobile{
+        display: block;
+    }
+    .head_logo{
+        max-width: 20%;
+        margin-right: 2%;
+    }
+    .head_catalog{
+        width: 100%;
+    }
+    .head_search, .head_menu, .head_name, .head_adres, .head_phone, .head_cart_2{
+        display: none;
+    }
+}
+@media (min-width: 1px) and (max-width: 450px) {
+    .category{
+        height: 150px;
+    }
+    .category h2{
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}

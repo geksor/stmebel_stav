@@ -17,7 +17,7 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'rank', 'publish'], 'integer'],
+            [['id', 'parent_id', 'rank', 'publish', 'view_from_main'], 'integer'],
             [['title', 'meta_title', 'meta_description', 'description', 'alias', 'image', 'show_opt_to_product_list', 'show_opt_to_product_card', 'show_opt_to_cart'], 'safe'],
         ];
     }
@@ -62,6 +62,7 @@ class CategorySearch extends Category
             'parent_id' => $this->parent_id,
             'rank' => $this->rank,
             'publish' => $this->publish,
+            'view_from_main' => $this->view_from_main,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

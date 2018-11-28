@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     [
-                        'attribute' => 'product_id',
+                        'attribute' => 'options_id',
                         'filter' => $searchModel::getOptionsFromDropDown($searchModel->product_id),
                         'value' => function ($data){
                             /* @var $data \common\models\ProductOptions */

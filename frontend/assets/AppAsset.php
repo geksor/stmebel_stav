@@ -12,23 +12,25 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'public/style/bootstrap-grid.min.css',
-        'public/style/bootstrap-reboot.min.css',
-        'public/style/bootstrap.min.css',
-        'public/style/jquery.fancybox.min.css',
-        'public/style/style.css',
-        'public/style/mobile.css',
-        'public/style/slick.css',
-        'public/style/xzoom.css',
+        'public/css/jquery-ui.css',
+        'public/css/style.css',
+        'public/css/style_menu.css',
+        'public/css/mobile.css',
+        'public/css/jquery.fancybox.min.css',
+        'public/css/owl.carousel.min.css',
+
     ];
     public $js = [
         'public/js/jquery.fancybox.min.js',
-        'public/js/slick.min.js',
-        'public/js/mask.lib.js',
+        'public/js/owl.carousel.min.js',
+        'public/js/slideout.js',
+        'public/js/owl.carousel.min.js',
+        'public/js/modernizr.custom.js',
+        'public/js/modernizr.js',
+        'public/js/selectbox.js',
+        'public/js/jquery.menu-aim.js',
         'public/js/main.js',
-        'public/js/bootstrap.min.js',
-        'public/js/bootstrap.bundle.min.js',
-        'public/js/xzoom.min.js'
+        'public/js/mask.lib.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

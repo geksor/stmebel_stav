@@ -20,8 +20,9 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?> - Bro & Bro в Ставрополе</title>
+    <title><?= Html::encode($this->title) ?> - <?= Yii::$app->name ?></title>
     <?php $this->head() ?>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -37,105 +38,37 @@ AppAsset::register($this);
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#0a0712">
+    <meta name="msapplication-TileColor" content="#ecf0ee">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#0a0712">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <meta name="theme-color" content="#ecf0ee">
 </head>
 <body>
 <?php $this->beginBody() ?>
 
-<?= \frontend\widgets\CategoriesMenuWidget::widget() ?>
+<div class="wrapper">
 
-<? if (Yii::$app->request->url === Yii::$app->homeUrl) { ?>
-    <div id="header" class="container-fluid">
-        <div class="container mw-1200">
-            <div class="row justify-content-between pt-4">
+    <?= $this->render('header') ?>
 
-                <?= $this->render('headerNavBar') ?>
-
-                <div class="phone p-3 col-12 col-lg-2 text-center text-lg-right">
-                    <i class="fas fa-mobile-alt mr-2"></i>
-                    <span class="navbar-text"><a href="tel:<?= Yii::$app->params['Contact']['phone_1'] ?>" style="color: #ffffff; text-decoration: none"><?= Yii::$app->params['Contact']['phone_1'] ?></a></span>
-                </div>
+    <div class="head_4 flex">
+        <div class="slider2 owl-carousel owl-theme flex">
+            <div class="head_slide item">
+                <img src="public/img/slide.jpg" alt="">
             </div>
-            <?= \frontend\widgets\SliderWidget::widget() ?>
-        </div>
-    </div>
-<? } else { ?>
-    <div class="container-fluid <?= $this->headerClass ?> pb-lg-5"
-         style="background-size: cover; background-color: #302e39;">
-        <div class="container mw-1200">
-            <div class="row justify-content-between pt-4">
-
-                <?= $this->render('headerNavBar') ?>
-
-                <div class="phone p-lg-3 col-12 col-lg-2 text-center text-lg-right">
-                    <i class="fas fa-mobile-alt mr-2"></i>
-                    <span class="navbar-text"><a href="tel:<?= Yii::$app->params['Contact']['phone_1'] ?>" style="color: #ffffff; text-decoration: none"><?= Yii::$app->params['Contact']['phone_1'] ?></a></span>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <nav aria-label="breadcrumb">
-                        <?=
-                        Breadcrumbs::widget(
-                            [
-                                'options' => [
-                                    'class' => 'breadcrumb pl-0',
-                                ],
-                                'itemTemplate' => '<li class="breadcrumb-item">{link}</li>',
-                                'activeItemTemplate' => '<li class="breadcrumb-item active" aria-current="page">{link}</li>',
-                                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                            ]
-                        ) ?>
-                    </nav>
-                </div>
-            </div>
-            <div class="row text-center text-lg-left">
-                <h1 class="col mb-5"><?= $this->title ?></h1>
+            <div class="head_slide item">
+                <img src="public/img/slide.jpg" alt="">
             </div>
         </div>
-    </div>
-<? } ?>
+    </div><!--Код слайдера. Заменить на виджет-->
 
-<main style="flex: 1">
-    <?= $content ?>
-</main>
+    <main class="content">
+        <?= $content ?>
+    </main>
 
-<div id="footer" class="container-fluid mt-5">
-    <div class="container mw-1200">
-        <div class="row justify-content-between py-4">
-            <div class="col-12 col-lg-2 text-center mr-0 align-self-center">
-                <a class="navbar-brand mr-0" href="<?= Yii::$app->homeUrl ?>">
-                    <img src="/public/images/logo.png" alt="" class="img-fluid">
-                </a>
-            </div>
+    <?= $this->render('footer') ?>
 
-            <?= $this->render('footerMenu') ?>
-
-            <div class="col-12 col-lg-2 text-center text-lg-left foot-href align-self-center mt-3 mt-lg-0">
-                <a href="<?= Yii::$app->params['Contact']['insta'] ?>" target="_blank">
-                    <i class="fab fa-instagram icons inst-icon"></i>
-                </a>
-                <a href="<?= Yii::$app->params['Contact']['vk'] ?>" target="_blank">
-                    <i class="fab fa-vk icons vk-icon"></i>
-                </a>
-                <a href="<?= Yii::$app->params['Contact']['face'] ?>" target="_blank">
-                    <i class="fab fa-facebook-f icons f-icon"></i>
-                </a>
-            </div>
-            <div class="col-12 col-lg-2 align-self-center text-center mt-3 mt-lg-0">
-                <p>Все права защищены (с) 2018</p>
-                <p class="gray-p mb-0"><a href="http://web-elitit.ru/" target="_blank" style="color: inherit">design by ELIT-IT</a></p>
-            </div>
-        </div>
-    </div>
 </div>
 
-<?= $this->render('modals')?>
+<?//= $this->render('modals')?>
 
 <button id="buttonUp" class="buttonUp active">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -182,59 +115,84 @@ $css=<<< CSS
   bottom: 50px;
 }
 CSS;
+
 $this->registerCss($css, ["type" => "text/css"], "buttonUp" );
 
 $js = <<< JS
-$(window).scroll(function () {
-    if ($(this).scrollTop() > 200) {
-        $('#buttonUp').fadeIn().addClass('active');
-    } else {
-        $('#buttonUp').fadeOut().removeClass('active');
-    }
-});
-
-$('#buttonUp').click(function () {
-    $('body,html').animate({
-        scrollTop: 0
-    }, 500);
-    return false;
-});
-<!-- Yandex.Metrika counter -->
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter51172685 = new Ya.Metrika2({
-                    id:51172685,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                });
-            } catch(e) { }
-        });
-
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/tag.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks2");
-<!-- /Yandex.Metrika counter -->
-
-var __REPLAIN_ = 'd4abdf8e-4ad4-4af5-857d-9b7aa6e8e28d';
-(function(u){var s=document.createElement('script');s.type='text/javascript';s.async=true;s.src=u;
-var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
-})('https://widget.replain.cc/dist/client.js');
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 200) {
+            $('#buttonUp').fadeIn().addClass('active');
+        } else {
+            $('#buttonUp').fadeOut().removeClass('active');
+        }
+    });
+    
+    $('#buttonUp').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 500);
+        return false;
+    });
+    
+    $( function() {
+        $( "#tabs" ).tabs();
+    } );
+    $( function() {
+        $( "#tabs_1" ).tabs();
+    } );
+    $( function() {
+        $( "#tabs_2" ).tabs();
+    } );
+    
+    $('selector').selectbox();
+    
+    $('.slider1').owlCarousel({
+        loop:true,
+        margin:0,
+        nav:true,
+        responsive:{
+            0:{
+                items:2
+            },
+            500:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    });
+    $('.slider2').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            }
+        }
+    });
+    $('.slider3').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            700:{
+                items:2
+            },
+    
+            1000:{
+                items:4
+            }
+        }
+    });
 JS;
 
-    $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
 ?>
-
 
 <?php $this->endBody() ?>
 </body>

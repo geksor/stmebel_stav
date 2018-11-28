@@ -17,6 +17,8 @@ use mihaildev\ckeditor\CKEditor;
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'main_category')->dropDownList($model::getCatFromDropDown(), ['prompt' => 'Выбрать значение...']) ?>
+
     <?= $form->field($model, 'price')->textInput() ?>
 
     <?= $form->field($model, 'sale')->textInput() ?>
