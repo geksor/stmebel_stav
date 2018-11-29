@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                         'value' => function ($data){
                             /* @var $data \common\models\Category */
-                            return "<div style=\"max-width: 30px; margin: 0 auto\"> $data->image </div>";
+                            return "<div class='catImg' style=\"max-width: 30px; margin: 0 auto;\"> $data->image </div>";
                         },
                         'headerOptions' => ['width' => 60]
                     ],
@@ -106,6 +106,7 @@ $js = <<< JS
             })
         }
     });
+    
 JS;
 
 $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
@@ -114,3 +115,16 @@ $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
         </div>
     </div>
 </div>
+<?php
+$css= <<< CSS
+
+.catImg svg{
+    max-width: 30px;
+    max-height: 30px;
+}
+
+
+CSS;
+
+$this->registerCss($css, ["type" => "text/css"], "callBack" );
+?>​
