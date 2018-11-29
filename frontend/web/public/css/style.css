@@ -839,10 +839,10 @@ input {outline:none;}
 	width: 25px;
 	margin-right: 20px;
 }
-.left_menu ul li a .fill_category{
+.left_menu ul li a svg path{
 	fill: #5ee0ae;
 }
-.left_menu ul li a:hover .fill_category{
+.left_menu ul li a:hover svg path{
 	fill: #fff;
 }
 .breads {

@@ -36,42 +36,62 @@ class CatalogController extends Controller
      * @return string
      *
      */
-    public function actionIndex($alias = null, $child = null)
+    public function actionIndex($alias = null)
     {
-        if (!$alias){
-            return $this->redirect('/');
+        if ($alias) {
+            $model = Category::find()
+                ->where(['alias' => $alias])
+                ->with([
+                    'child' => function (\yii\db\ActiveQuery $query) {
+                        $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
+                    },
+                ])
+                ->one();
+
+
+            $prodArr = ArrayHelper::getColumn($model->categoryProducts, 'product_id');
+
+            $query = Product::find()->where(['publish' => 1, 'id' => $prodArr])->orderBy(['rank' => SORT_ASC]);
+        }else{
+            $model = null;
+            $query = Product::find()->where(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
         }
-        if (!$model = Category::find()
-            ->where(['alias' => $alias])
+
+        $modelsFromLeft = Category::find()
+            ->where(['parent_id' => 0, 'publish' => 1])
             ->with([
-                'child' => function (\yii\db\ActiveQuery $query){
+                'child' => function (\yii\db\ActiveQuery $query) {
                     $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
                 },
             ])
-            ->one())
-        {
-            if (!$model = Product::find()
-                ->where(['alias' => $alias])
-                ->with(['attributesOrder', 'productAttributesRank'])
-                ->one())
-            {
-                return $this->redirect('/');
+            ->orderBy(['rank' => SORT_ASC])
+            ->all();
+
+        $items = [];
+
+        foreach ($modelsFromLeft as $item){
+            /* @var $item Category */
+            $itemsChild = [];
+
+            if ($item->child){
+                foreach ($item->child as $itemChild){
+                    /* @var $itemChild Category */
+                    $itemsChild[] = [
+                        'label' => $itemChild->title,
+                        'url' => $itemChild->url,
+                    ];
+                }
             }
-
-            return $this->render('item-widget', [
-                'model' => $model,
-            ]);
+            $items[] = [
+                'label' => $item->title,
+                'url' => $item->url,
+                'template' => '<a href="{url}">'.$item->image.'<h3>{label}</h3></a>',
+                'items' => $itemsChild,
+            ];
         }
 
-        if ($child === null){
-            $child = $model->child[0]->alias;
-        }
-        if (!$openCat = Category::find()->where(['alias' => $child])->with('categoryProducts')->one()){
-            return $this->redirect('/');
-        }
-        $prodArr = ArrayHelper::getColumn($openCat->categoryProducts, 'product_id');
 
-        $query = Product::find()->where(['publish' => 1, 'id' => $prodArr])->orderBy(['rank' => SORT_ASC]);
+
         $countQuery = clone $query;
         $pages = new Pagination([
             'totalCount' => $countQuery->count(),
@@ -80,7 +100,12 @@ class CatalogController extends Controller
         $pages->pageSizeParam = false;
         $pages->forcePageParam = false;
 
-        $products = $query->with(['attributesOrder', 'productAttributesRank'])
+        $products = $query
+            ->with([
+                'productOptionsList'  => function (\yii\db\ActiveQuery $query) {
+                    $query->with(['options', 'optionsValue']);
+                },
+            ])
             ->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
@@ -89,11 +114,11 @@ class CatalogController extends Controller
             'model' => $model,
             'products' => $products,
             'pages' => $pages,
-            'child' => $child,
+            'items' => $items
         ]);
     }
 
-    public function actionItem($alias, $child, $item)
+    public function actionItem($alias, $item)
     {
         $modelCat = Category::findOne(['alias' => $child]);
         $model = Product::find()

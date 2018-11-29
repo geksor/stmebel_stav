@@ -149,4 +149,51 @@ class ProductOptionsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /**
+     * @param $id
+     * @param $value
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionValue($product_id, $options_id, $value)
+    {
+        if (Yii::$app->request->isAjax){
+
+            $model = $this->findModel($product_id, $options_id);
+
+            if ($model){
+                $model->options_value = $value;
+
+                if ($model->save()){
+                    return $this->redirect(Yii::$app->request->referrer);
+                }
+            }
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    /**
+     * @param $product_id
+     * @param $options_id
+     * @param $value_id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionValueId($product_id, $options_id, $value_id)
+    {
+        if (Yii::$app->request->isAjax){
+
+            $model = $this->findModel($product_id, $options_id);
+
+            if ($model){
+                $model->optionsValue_id = $value_id;
+
+                if ($model->save()){
+                    return $this->redirect(Yii::$app->request->referrer);
+                }
+            }
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
 }

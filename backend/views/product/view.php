@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['index']]
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-view">
-
+    <?= \common\widgets\Alert::widget() ?>
     <div class="box box-primary">
         <div class="box-header with-border">
             <p>
@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]) ?>
                 <?= Html::a('Создать товар', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Копировать товар', ['copy-product', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
                 <?= Html::a('Изображения', ['/product-images', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Категории', ['categories', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Атрибуты', ['/product-attr', 'par_id' => $model->id], ['class' => 'btn btn-default']) ?>

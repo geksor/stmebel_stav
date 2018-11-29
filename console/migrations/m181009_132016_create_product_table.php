@@ -21,7 +21,7 @@ class m181009_132016_create_product_table extends Migration
             'meta_description' => $this->string(),
             'alias' => $this->string(),
             'price' => $this->integer()->notNull(),
-            'code' => $this->integer(),
+            'code' => $this->string(),
             'avail' => $this->integer()->defaultValue(1),
             'unlimited' => $this->integer()->defaultValue(0),
             'count' => $this->integer(),

@@ -18,8 +18,8 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id', 'price', 'code', 'avail', 'unlimited', 'count', 'sale', 'hot', 'new', 'rank', 'publish', 'rating', 'reviews_count', 'hits', 'main_category'], 'integer'],
-            [['title', 'short_description', 'description', 'meta_title', 'meta_description', 'alias', 'main_image', 'filterCat'], 'safe'],
+            [['id', 'price', 'avail', 'unlimited', 'count', 'sale', 'hot', 'new', 'rank', 'publish', 'rating', 'reviews_count', 'hits', 'main_category', 'show_color',], 'integer'],
+            [['title', 'code', 'short_description', 'description', 'meta_title', 'meta_description', 'alias', 'main_image', 'filterCat'], 'safe'],
         ];
     }
 
@@ -71,7 +71,6 @@ class ProductSearch extends Product
         $query->andFilterWhere([
             'id' => $filterId,
             'price' => $this->price,
-            'code' => $this->code,
             'avail' => $this->avail,
             'unlimited' => $this->unlimited,
             'count' => $this->count,
@@ -92,7 +91,9 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'meta_title', $this->meta_title])
             ->andFilterWhere(['like', 'meta_description', $this->meta_description])
             ->andFilterWhere(['like', 'alias', $this->alias])
-            ->andFilterWhere(['like', 'main_image', $this->main_image]);
+            ->andFilterWhere(['like', 'main_image', $this->main_image])
+            ->andFilterWhere(['like', 'show_color', $this->show_color])
+            ->andFilterWhere(['like', 'code', $this->code]);
 
         return $dataProvider;
     }

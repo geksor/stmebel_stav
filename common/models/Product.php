@@ -19,7 +19,7 @@ use yii\helpers\Json;
  * @property string $meta_description
  * @property string $alias
  * @property int $price
- * @property int $code
+ * @property string $code
  * @property int $avail
  * @property int $unlimited
  * @property int $count
@@ -35,9 +35,12 @@ use yii\helpers\Json;
  * @property int $filterCat
  * @property array $selectCat
  * @property array $selectedCats
+ * @property array $selectRecommProd
+ * @property array $selectedRecommProd
  * @property int $optList
  * @property int $main_category
  * @property int $oldMainCat
+ * @property int $show_color
  *
  * @property CategoryProduct[] $categoryProducts
  * @property Category[] $categories
@@ -51,8 +54,8 @@ use yii\helpers\Json;
  * @property Reviews[] $reviews
  * @property RecommendedProduct[] $recommendedProducts
  * @property RecommendedProduct[] $recommendedProducts0
- * @property RecommendedProduct[] $recommProducts
- * @property RecommendedProduct[] $products
+ * @property Product[] $recommProducts
+ * @property Product[] $products
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -60,13 +63,72 @@ class Product extends \yii\db\ActiveRecord
     public $filterCat;
     public $optList;
     public $oldMainCat;
+    public $selectRecommProd;
 
     public function afterFind()
     {
         $this->selectCat = $this->selectedCats;
+        $this->selectRecommProd = $this->selectedRecommProd;
         $this->oldMainCat = $this->main_category;
         parent::afterFind();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'product';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['title', 'price', 'main_category'], 'required'],
+
+            [['selectCat', 'filterCat'], 'safe'],
+            [['short_description', 'description', 'code',], 'string'],
+            [['price', 'avail', 'unlimited', 'count', 'sale', 'hot', 'new', 'rank', 'publish', 'rating', 'reviews_count', 'hits', 'main_category', 'show_color',], 'integer'],
+            [['title', 'meta_title', 'meta_description', 'alias', 'main_image'], 'string', 'max' => 255],
+            [['rank'], 'default', 'value' => 1],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'title' => 'Название',
+            'short_description' => 'Короткое описание',
+            'description' => 'Описание',
+            'meta_title' => 'Meta Title',
+            'meta_description' => 'Meta Description',
+            'alias' => 'Название в адресной строке',
+            'price' => 'Цена',
+            'code' => 'Код товара',
+            'avail' => 'Наличие',
+            'unlimited' => 'Unlimited',
+            'count' => 'Count',
+            'sale' => 'Скидка %',
+            'hot' => 'Хит продаж',
+            'new' => 'Новинка',
+            'rank' => 'Сортировка',
+            'publish' => 'Публикация',
+            'rating' => 'Rating',
+            'reviews_count' => 'Reviews Count',
+            'main_image' => 'Основное изображение',
+            'hits' => 'Количество просмотров',
+            'main_category' => 'Основная категория',
+            'show_color' => 'Отключить выбор цвета'
+        ];
+    }
+
 
     public function afterSave($insert, $changedAttributes)
     {
@@ -94,92 +156,18 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return array
      */
+    public function getSelectedRecommProd()
+    {
+        $selectedRecom = $this->getRecommProducts()->select('id')->asArray()->all();
+        return ArrayHelper::getColumn($selectedRecom, 'id');
+    }
+
+    /**
+     * @return array
+     */
     public static function getCatFromDropDown()
     {
         return ArrayHelper::map(Category::find()->all(), 'id', 'title');
-    }
-
-    /**
-     * @param $cats
-     */
-    public function saveCategories($cats)
-    {
-        if (is_array($cats))
-        {
-            CategoryProduct::deleteAll(['product_id' => $this->id]);
-
-            $categoryModels = Category::find()->where(['id' => $cats])->all();
-            foreach ($categoryModels as $category)
-            {
-                $this->link('categories', $category);
-            }
-            $this->saveMainCategory();
-        }
-    }
-
-    public function saveMainCategory()
-    {
-        CategoryProduct::deleteAll(['product_id' => $this->id, 'category_id' => $this->main_category]);
-        $this->link('categories', Category::findOne(['id' => $this->main_category]));
-    }
-
-    public function saveRecomm($id)
-    {
-        $this->link('recommProducts', $this::findOne($id));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'product';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['title', 'price', 'main_category'], 'required'],
-            [['selectCat', 'filterCat'], 'safe'],
-            [['short_description', 'description'], 'string'],
-            [['price', 'code', 'avail', 'unlimited', 'count', 'sale', 'hot', 'new', 'rank', 'publish', 'rating', 'reviews_count', 'hits', 'main_category'], 'integer'],
-            [['title', 'meta_title', 'meta_description', 'alias', 'main_image'], 'string', 'max' => 255],
-            [['rank'], 'default', 'value' => 1],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'short_description' => 'Short Description',
-            'description' => 'Description',
-            'meta_title' => 'Meta Title',
-            'meta_description' => 'Meta Description',
-            'alias' => 'Alias',
-            'price' => 'Price',
-            'code' => 'Code',
-            'avail' => 'Avail',
-            'unlimited' => 'Unlimited',
-            'count' => 'Count',
-            'sale' => 'Sale',
-            'hot' => 'Hot',
-            'new' => 'New',
-            'rank' => 'Rank',
-            'publish' => 'Publish',
-            'rating' => 'Rating',
-            'reviews_count' => 'Reviews Count',
-            'main_image' => 'Main Image',
-            'hits' => 'Hits',
-            'main_category' => 'Основная категория',
-        ];
     }
 
     /**
@@ -333,7 +321,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getRecommProducts()
     {
-        return $this->hasMany(RecommendedProduct::className(), ['id' => 'recommProduct_id'])->viaTable('recommended_product', ['product_id' => 'id']);
+        return $this->hasMany(Product::className(), ['id' => 'recommProduct_id'])->viaTable('recommended_product', ['product_id' => 'id']);
     }
 
     /**
@@ -341,11 +329,125 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getProducts()
     {
-        return $this->hasMany(RecommendedProduct::className(), ['id' => 'product_id'])->viaTable('recommended_product', ['recommProduct_id' => 'id']);
+        return $this->hasMany(Product::className(), ['id' => 'product_id'])->viaTable('recommended_product', ['recommProduct_id' => 'id']);
     }
 
     public function getNewPrice()
     {
         return $this->price - ($this->price*$this->sale/100);
+    }
+
+    public function randCode()
+    {
+        $result = null;
+        for ($i = 0; $i<6; $i++){
+            if (!$result){
+                $result .= mt_rand(1,9);
+            }else{
+                $result .= mt_rand(0,9);
+            }
+        }
+
+        $this->code = (string)$result;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!$this->code){
+            if ($this->isNewRecord){
+                do
+                {
+                    $this->randCode();
+                } while (Product::find()->where(['code' => $this->code])->one());
+            }else {
+                do {
+                    $this->randCode();
+                } while (Product::find()->where(['code' => $this->code])->andWhere(['not in', 'id', $this->id])->one());
+            }
+        }
+
+        return parent::beforeSave($insert);
+    }
+
+    /**
+     * @param $cats
+     */
+    public function saveCategories($cats)
+    {
+        if (is_array($cats))
+        {
+            CategoryProduct::deleteAll(['product_id' => $this->id]);
+
+            $categoryModels = Category::find()->where(['id' => $cats])->all();
+            foreach ($categoryModels as $category)
+            {
+                $this->link('categories', $category);
+            }
+            $this->saveMainCategory();
+        }
+    }
+
+    public function saveMainCategory()
+    {
+        CategoryProduct::deleteAll(['product_id' => $this->id, 'category_id' => $this->main_category]);
+        $this->link('categories', Category::findOne(['id' => $this->main_category]));
+    }
+
+    public function saveRecomm($id)
+    {
+        $this->link('recommProducts', $this::findOne($id));
+    }
+
+    public function saveRecomms($ids)
+    {
+        if (is_array($ids)){
+            $prodModels = Product::find()->where(['id' => $ids])->all();
+
+            foreach ($prodModels as $prodModel){
+                $this->link('recommProducts', $prodModel);
+            }
+        }
+    }
+
+    public function copySave($copyModel, $options, $attrs)
+    {
+        /* @var $copyModel Product */
+        if ($copyModel){
+            $this->alias = null;
+            $this->title = 'Копия-'.$this->title;
+            $this->code = null;
+            $this->publish = 0;
+            $this->rating = null;
+            $this->reviews_count = null;
+            $this->main_image = null;
+            $this->hits = null;
+            $this->isNewRecord = true;
+
+            if ($this->save()){
+                $this->saveCategories($copyModel->selectCat);
+                $this->saveRecomms($copyModel->selectRecommProd);
+                if ($options){
+                    foreach ($options as $option){
+                        /* @var $option ProductOptions */
+                        $newOption = new ProductOptions();
+                        $newOption->attributes = $option->attributes;
+                        $newOption->product_id = $this->id;
+                        $newOption->save(false);
+                    }
+                }
+                if ($attrs){
+                    foreach ($attrs as $attr){
+                        /* @var $attr ProductOptions */
+                        $newAttr = new ProductAttr();
+                        $newAttr->attributes = $attr->attributes;
+                        $newAttr->product_id = $this->id;
+                        $newAttr->save(false);
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }

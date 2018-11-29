@@ -50,13 +50,29 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     [
-                        'attribute' => 'optionsValue_id',
+                        'label' => 'Значение',
+                        'format' => 'raw',
                         'value' => function ($data){
                             /* @var $data \common\models\ProductOptions */
-                            return $data->optionsValue->value;
+                            if ($data->optionsValue){
+                                return Html::dropDownList(
+                                    'optValueId',
+                                    $data->optionsValue_id,
+                                    $data::getOptionsValueFromDropDown($data->options_id),
+                                    ['class' => 'form-control', 'id' => $data->product_id, 'data-opt_id' => $data->options_id]
+                                );
+                            }
+                            if ($data->options_value){
+                                return Html::input(
+                                    'text',
+                                    'optValue',
+                                    $data->options_value,
+                                    ['class' => 'form-control', 'id' => $data->product_id, 'data-opt_id' => $data->options_id]
+                                );
+                            }
+                            return '';
                         }
                     ],
-                    'options_value',
 
                     [
                         'class' => 'yii\grid\ActionColumn',
@@ -64,6 +80,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]); ?>
+<?
+$js = <<< JS
+    $('[name = optValue]').keypress(function(e){
+        if(e.keyCode==13){
+            $.ajax({
+                type: "GET",
+                url: "/admin/product-options/value",
+                data: 'product_id='+ $(this).attr('id') +'&options_id='+ $(this).attr('data-opt_id') +'&value='+ $(this).val(),
+            })
+        }
+    });
+    $('[name = optValueId]').change(function(e){
+            $.ajax({
+                type: "GET",
+                url: "/admin/product-options/value-id",
+                data: 'product_id='+ $(this).attr('id') +'&options_id='+ $(this).attr('data-opt_id') +'&value_id='+ $(this).val(),
+            })
+    });
+JS;
+
+$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+?>
 
             <?php Pjax::end(); ?>
         </div>

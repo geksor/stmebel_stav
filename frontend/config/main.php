@@ -45,10 +45,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'catalog/<alias>/<child>/page/<page:\d+>' => 'catalog/index',
-                'catalog/<alias>/<child>' => 'catalog/index',
-                'catalog/<alias>' => 'catalog/index',
-                'catalog/<alias>/<child>/<item>' => 'catalog/item',
+                '/catalog/<alias>/page/<page:\d+>' => 'catalog/index',
+                '/catalog/<alias>' => 'catalog/index',
+                '/catalog/<alias>/<item>' => 'catalog/item',
                 '<controller:catalog>' => 'catalog/index',
 
                 '/' => 'site/index',

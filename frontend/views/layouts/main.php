@@ -49,18 +49,33 @@ AppAsset::register($this);
 
     <?= $this->render('header') ?>
 
-    <div class="head_4 flex">
-        <div class="slider2 owl-carousel owl-theme flex">
-            <div class="head_slide item">
-                <img src="public/img/slide.jpg" alt="">
+    <? if (Yii::$app->request->url === Yii::$app->homeUrl) {?>
+        <div class="head_4 flex">
+            <div class="slider2 owl-carousel owl-theme flex">
+                <div class="head_slide item">
+                    <img src="public/img/slide.jpg" alt="">
+                </div>
+                <div class="head_slide item">
+                    <img src="public/img/slide.jpg" alt="">
+                </div>
             </div>
-            <div class="head_slide item">
-                <img src="public/img/slide.jpg" alt="">
+        </div><!--Код слайдера. Заменить на виджет-->
+    <?}else{?>
+        <div class="content cont">
+            <div class="breads">
+                <?=
+                Breadcrumbs::widget(
+                    [
+                        'itemTemplate' => '<li>{link}</li>',
+                        'activeItemTemplate' => '<li>{link}</li>',
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]
+                ) ?>
             </div>
         </div>
-    </div><!--Код слайдера. Заменить на виджет-->
+    <?}?>
 
-    <main class="content">
+    <main class="content <? if (Yii::$app->request->url !== Yii::$app->homeUrl) {?>cont flex_3<?}?>">
         <?= $content ?>
     </main>
 

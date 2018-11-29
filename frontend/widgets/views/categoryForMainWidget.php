@@ -8,7 +8,7 @@
 <div class="content_catalog cont flex">
     <? foreach ($models as $model) {/* @var $model \common\models\Category */?>
 
-        <a class="category" href = "/catalog/<?= $model->alias ?>">
+        <a class="category" href = "<?= \yii\helpers\Url::to($model->url) ?>">
             <?= $model->image ?>
             <h2><?= $model->title ?></h2>
         </a>

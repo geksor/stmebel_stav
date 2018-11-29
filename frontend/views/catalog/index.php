@@ -7,129 +7,118 @@ use yii\helpers\ArrayHelper;
 /* @var $model \common\models\Category */
 /* @var $products \common\models\Product */
 /* @var $pages \yii\data\Pagination */
-/* @var $child \frontend\controllers\CatalogController */
+/* @var $modelsFromLeft \common\models\Category */
 
-$breadCrumb = '';
-foreach ($model->child as $category) {
-    if ($category->alias === $child) {
-        $breadCrumb = $category->title;
-        $this->registerMetaTag([
-            'name' => 'title',
-            'content' => $category->meta_title,
-        ]);
-        $this->registerMetaTag([
-            'name' => 'description',
-            'content' => $category->meta_description,
-        ]);
-    }
+if ($model){
+    $this->title = $model->title;
+
+    $this->registerMetaTag([
+        'name' => 'title',
+        'content' => $model->meta_title,
+    ]);
+    $this->registerMetaTag([
+        'name' => 'description',
+        'content' => $model->meta_description,
+    ]);
+}else{
+    $this->title = 'Каталог мебели';
 }
-$this->headerClass = 'catalog-house';
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = $breadCrumb;
+
+
+$this->params['breadcrumbs'][] = $this->title;
 //\yii\helpers\VarDumper::dump($model,10,true);die;
 ?>
-<div id="catalog" class="container mw-1200 mt-5 pt-5">
-    <div class="row justify-content-center justify-content-lg-between">
-        <div class="col-12 col-lg-3">
-            <div class="list-group">
-                <? foreach ($model->child as $key => $category) {
-                    /* @var $category \common\models\Category */ ?>
-                    <?
-                    $rounder = $key === 0 || $key === count($model->child) - 1 ? 'rounded-0' : '';
-                    $active = $category->alias === $child ? 'active' : '';
-                    ?>
-                    <a href="/catalog/<?= $model->alias ?>/<?= $category->alias ?>"
-                       class="list-group-item list-group-item-action <?= $active ?> <?= $rounder ?> text-center">
-                        <?= $category->title ?>
-                    </a>
-                <? } ?>
-            </div>
-        </div>
-        <div class="col-12 col-lg-9 mt-4 mt-lg-0">
-            <div class="row justify-content-center justify-content-lg-end">
-                <div class="col-12">
-                    <div class="row">
+<div class="left_menu" id = "nav">
+    <h2>Каталог мебели</h2>
+    <?= \yii\widgets\Menu::widget([
+        'items' => $items,
+        'activateItems' => true,
+        'activateParents' => true,
+        'activeCssClass' => 'active',
+        'labelTemplate' =>'{label} Label',
+        'linkTemplate' => '<a href="{url}">{label}</a>',
+        'submenuTemplate' => "\n<ul class='subs'>\n{items}\n</ul>\n",
+    ]) ?>
+</div>
 
-                        <? if ($products != null) { ?>
-                            <? foreach ($products as $product) {
-                                /* @var $product \common\models\Product */ ?>
-                                <div class="col-12 col-sm-6 col-lg-4 mb-4">
-                                    <div class="card rounded-0" style="height: 100%">
-                                        <?
-                                        $imgSrc = '/no_image.png';
-                                        if ($product->getBehavior('galleryBehavior')->getImages()) {
-                                            foreach ($product->getBehavior('galleryBehavior')->getImages() as $key => $image) {
-                                                /* @var $image \zxbodya\yii2\galleryManager\GalleryImage */
-                                                if ($key === 0) {
-                                                    $imgSrc = $image->getUrl('medium');
-                                                }
-                                            }
-                                        }
-                                        ?>
-                                        <div class="card-img-top rounded-0"
-                                             style="position: relative; padding-top: 66%">
-                                            <?= \yii\helpers\Html::img($imgSrc, [
-                                                'alt' => $product->title,
-                                                'style' => 'position: absolute; height: 100%; width:100%; object-fit:cover;top:0;left:0;'
-                                            ]) ?>
-                                        </div>
-
-                                        <div class="card-body d-flex flex-column justify-content-between">
-                                            <h5 class="card-title"><?= $product->title ?></h5>
-                                            <?
-                                            $resArr = $product->getAttributesOrderRes($product->attributesOrder, $product->productAttributesRank);
-                                            foreach ($resArr as $key => $attr) {
-                                                /* @var $attr \common\models\Attributes */ ?>
-                                                <? if (in_array($attr->id, $product->getViewAttr())) {?>
-                                                    <p class="card-text mb-0">
-                                                        <small class="text-muted"><?= $attr->viewName ?>:</small>
-                                                        <? if ($attr->type >= 1 && $attr->type < 3) { ?>
-                                                            <?= $attr->getAttrValue($product->id) ?>
-                                                        <? } else if ($attr->type === 3) { ?>
-                                                            <?= $attr->getAttrValue($product->id)->title ?>
-                                                        <? } ?>
-                                                    </p>
-                                                <?}?>
-                                            <? } ?>
-                                            <div class="text-center mt-3">
-                                                <a class="btn btn-outline-primary my-2 my-sm-0 rounded-0"
-                                                   href="/catalog/<?= $model->alias ?>/<?= $child ?>/<?= $product->alias ?>">
-                                                    Подробнее
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            <? } ?>
-                        <? } else { ?>
-                            <h2 class="product__name">Категория не содержит товаров</h2>
-                        <? } ?>
-
-                    </div>
-
-
-                    <div class="col-12 mt-4 pr-lg-0">
-                        <nav aria-label="...">
-                            <?= \yii\widgets\LinkPager::widget([
-                                'pagination' => $pages,
-                                'prevPageLabel' => false,
-                                'nextPageLabel' => false,
-                                'pageCssClass' => 'page-item',
-                                'activePageCssClass' => 'active',
-                                'options' => [
-                                    'class' => 'pagination justify-content-center justify-content-lg-end'
-                                ],
-                                'linkOptions' => [
-                                    'class' => 'page-link rounded-0',
-                                ],
-                                'maxButtonCount' => 4,
-                            ]); ?>
-                        </nav>
-                    </div>
-
-                </div>
+<div class="right_content flex">
+    <div class="right_content_head flex">
+        <h1><?= $this->title ?></h1>
+        <div class="sorting flex">
+            <p>Сортировать по цене</p>
+            <div class="sorting_img flex">
+                <img src="/public/img/up.svg" alt="по возрастанию">
+                <img src="/public/img/down.svg" alt="по убыванию">
             </div>
         </div>
     </div>
+    <? if ($products) {?>
+        <? foreach ($products as $product) {/* @var $product \common\models\Product */?>
+            <div class="product product_in">
+                <? if ($product->sale) {?>
+                    <div class="sale">
+                        <p>-<?= $product->sale ?>%</p>
+                    </div>
+                <?}?>
+                <? if ($product->hot) {?>
+                    <div class="sale hot">
+                        <p>Хит продаж</p>
+                    </div>
+                <?}?>
+                <? if ($product->new) {?>
+                    <div class="sale new">
+                        <p>Новинка</p>
+                    </div>
+                <?}?>
+                <div class="product_img">
+                    <img src="<?= $product->getThumbMainImage() ?>" alt="<?= $product->title ?>">
+                </div>
+                <div class="product_name">
+                    <?= $product->title ?>
+                </div>
+                <div class="product_description">
+                    <? if ($product->productOptionsList) {?>
+                        <? foreach ($product->productOptionsList as $productOption) {/* @var $productOption \common\models\ProductOptions */?>
+                            <?= $productOption->options->title ?>: <?= $productOption->options_value?$productOption->options_value:$productOption->optionsValue->value ?>
+                        <?}?>
+                    <?}?>
+                </div>
+                <div class="product_price flex">
+                    <? if ($product->sale) {?>
+                        <div class="price_1">
+                            <p><?= Yii::$app->formatter->asDecimal($product->getNewPrice()) ?> ₽</p>
+                        </div>
+                        <div class="price_2">
+                            <p><?= Yii::$app->formatter->asDecimal($product->price) ?> ₽</p>
+                        </div>
+                    <?}else{?>
+                        <div class="price_1">
+                            <p><?= Yii::$app->formatter->asDecimal($product->price) ?> ₽</p>
+                        </div>
+                    <?}?>
+                </div>
+                <div class="product_read">
+                    <? if ($model) {?>
+                        <?= \yii\helpers\Html::a('Подробнее',['item', 'alias' => $model->alias, 'item' => $product->alias]) ?>
+                    <?}else{?>
+                        <?= \yii\helpers\Html::a('Подробнее',['item', 'alias' => $product->mainCat->alias, 'item' => $product->alias]) ?>
+                    <?}?>
+                </div>
+            </div>
+        <?}?>
+    <?}else{?>
+        <h2>Нет товаров</h2>
+    <?}?>
+
+    <div class="nav_number">
+        <?= \yii\widgets\LinkPager::widget([
+            'pagination' => $pages,
+            'prevPageLabel' => false,
+            'nextPageLabel' => false,
+            'pageCssClass' => 'page-item',
+            'activePageCssClass' => 'active',
+            'maxButtonCount' => 5,
+        ]); ?>
+    </div>
 </div>
+

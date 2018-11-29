@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
             <p>
-                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['view', 'id' => $searchModel->fromId], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['recomm-view', 'id' => $searchModel->fromId], ['class' => 'btn btn-default']) ?>
             </p>
             <?php Pjax::begin(); ?>
             <?= GridView::widget([

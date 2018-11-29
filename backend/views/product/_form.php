@@ -23,15 +23,6 @@ use mihaildev\ckeditor\CKEditor;
 
     <?= $form->field($model, 'sale')->textInput() ?>
 
-    <?= $form->field($model, 'short_description')->widget(CKEditor::className(),[
-        'editorOptions' => [
-            'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-            'inline' => false, //по умолчанию false
-            'height' => 300,
-            'resize_enabled' => true,
-        ],
-    ]) ?>
-
     <?= $form->field($model, 'description')->widget(CKEditor::className(),[
         'editorOptions' => [
             'preset' => 'standard', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
@@ -49,9 +40,7 @@ use mihaildev\ckeditor\CKEditor;
 
     <?= $form->field($model, 'avail')->checkbox() ?>
 
-    <?= $form->field($model, 'unlimited')->checkbox() ?>
-
-    <?= $form->field($model, 'count')->textInput() ?>
+    <?= $form->field($model, 'show_color')->checkbox() ?>
 
     <?= $form->field($model, 'hot')->checkbox() ?>
 

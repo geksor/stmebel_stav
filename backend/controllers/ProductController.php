@@ -96,8 +96,6 @@ class ProductController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -152,11 +150,13 @@ class ProductController extends Controller
     }
 
     /**
-     * Deletes an existing Product model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param null $id
+     * @param null $product_id
+     * @param null $recommProduct_id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id = null, $product_id = null, $recommProduct_id = null)
     {
@@ -166,7 +166,10 @@ class ProductController extends Controller
             return $this->redirect(['index']);
         }
         if ($product_id && $recommProduct_id){
-            RecommendedProduct::findOne(['product_id' => $product_id, 'recommProduct_id' => $recommProduct_id])->delete();
+            $dellLink = RecommendedProduct::findOne(['product_id' => $product_id, 'recommProduct_id' => $recommProduct_id]);
+            if ($dellLink){
+                $dellLink->delete();
+            }
             return $this->redirect(['view', 'id' => $product_id]);
         }
         Yii::$app->session->setFlash('error', 'Ошибка. Обратитель к администратору');
@@ -250,6 +253,29 @@ class ProductController extends Controller
         return $this->render('categories', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionCopyProduct($id)
+    {
+        $copyModel = $this->findModel($id);
+
+        $options = $copyModel->productOptions;
+        $attrs = $copyModel->productAttrs;
+
+        $model = new Product();
+
+        $model->attributes = $copyModel->attributes;
+
+        if ($model->copySave($copyModel, $options, $attrs)){
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+        Yii::$app->session->setFlash('error', 'Ошибка. Обратитесь к системному администратору');
+        return $this->redirect(['view', 'id' => $id]);
     }
 
 }

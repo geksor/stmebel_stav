@@ -33,6 +33,7 @@ use yii\helpers\Json;
  * @property array $optShort
  * @property bool $newRecord
  * @property int $view_from_main
+ * @property string $url
  *
  * @property CategoryAttr[] $categoryAttrs
  * @property Attr[] $attrs
@@ -61,6 +62,21 @@ class Category extends \yii\db\ActiveRecord
         $this->optFromCart = Json::decode($this->show_opt_to_cart);
         $this->optShort = Json::decode($this->show_opt_to_product_card);
         parent::afterFind();
+    }
+
+    public function getParentsFromBread()
+    {
+        while ($this->getParent()){
+
+        }
+    }
+
+    public function getUrl()
+    {
+        return [
+            'catalog/index',
+            'alias' => $this->alias,
+        ];
     }
 
     /**
@@ -100,6 +116,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id', 'rank', 'publish', 'view_from_main',], 'integer'],
+            [['parent_id'], 'default', 'value' => 0],
             [['rank'], 'default', 'value' => 1],
             [['title'], 'required'],
             [['image'], 'string'],
@@ -237,7 +254,6 @@ class Category extends \yii\db\ActiveRecord
     {
         $parents = Category::find()
             ->select(['id', 'title'])
-            ->where(['parent_id' => 0])
             ->asArray()
             ->all();
 
