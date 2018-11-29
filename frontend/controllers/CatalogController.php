@@ -48,7 +48,6 @@ class CatalogController extends Controller
                 ])
                 ->one();
 
-
             $prodArr = ArrayHelper::getColumn($model->categoryProducts, 'product_id');
 
             $query = Product::find()->where(['publish' => 1, 'id' => $prodArr])->orderBy(['rank' => SORT_ASC]);
@@ -61,7 +60,13 @@ class CatalogController extends Controller
             ->where(['parent_id' => 0, 'publish' => 1])
             ->with([
                 'child' => function (\yii\db\ActiveQuery $query) {
-                    $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
+                    $query
+                        ->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC])
+                        ->with([
+                            'child' => function (\yii\db\ActiveQuery $query) {
+                                $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
+                            },
+                        ]);
                 },
             ])
             ->orderBy(['rank' => SORT_ASC])
@@ -76,9 +81,19 @@ class CatalogController extends Controller
             if ($item->child){
                 foreach ($item->child as $itemChild){
                     /* @var $itemChild Category */
+                    if ($itemChild->child){
+                        foreach ($itemChild->child as $itemChildChild){
+                            /* @var $itemChildChild Category */
+                            $itemsChildChild[] = [
+                                'label' => $itemChildChild->title,
+                                'url' => $itemChildChild->url,
+                            ];
+                        }
+                    }
                     $itemsChild[] = [
                         'label' => $itemChild->title,
                         'url' => $itemChild->url,
+                        'items' => $itemsChildChild,
                     ];
                 }
             }
@@ -120,32 +135,33 @@ class CatalogController extends Controller
 
     public function actionItem($alias, $item)
     {
-        $modelCat = Category::findOne(['alias' => $child]);
+        $modelCat = Category::findOne(['alias' => $alias]);
+
         $model = Product::find()
             ->where(['alias' => $item])
-            ->with(['attributesOrder', 'productAttributesRank'])
+            ->with([
+                'productOptionsShort'  => function (\yii\db\ActiveQuery $query) {
+                    $query->with(['options', 'optionsValue']);
+                },
+            ])
+            ->with([
+                'productOptionsAll'  => function (\yii\db\ActiveQuery $query) {
+                    $query->with(['options', 'optionsValue']);
+                },
+            ])
+            ->with(['productImages', 'recommProducts'  => function (\yii\db\ActiveQuery $query) {
+                $query->with([
+                    'productOptionsList'  => function (\yii\db\ActiveQuery $query) {
+                        $query->with(['options', 'optionsValue']);
+                    },
+                ]);
+            },])
             ->one();
+
 
         return $this->render('item', [
             'model' => $model,
             'modelCat' => $modelCat,
-            'alias' => $alias,
         ]);
     }
-
-//    public function actionItemWidget($item)
-//    {
-//        if (!$model = Product::find()
-//            ->where(['alias' => $item])
-//            ->with(['attributesOrder', 'productAttributesRank'])
-//            ->one())
-//        {
-//            return $this->redirect('/');
-//        }
-//
-//        return $this->render('item-widget', [
-//            'model' => $model,
-//        ]);
-//    }перенес в индекс
-
 }

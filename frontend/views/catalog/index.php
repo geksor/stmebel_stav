@@ -24,9 +24,17 @@ if ($model){
     $this->title = 'Каталог мебели';
 }
 
+$breads = $model?$model->getParentsFromBread():false;
+if ($model){
+    $this->params['breadcrumbs'][] = ['label' => 'Каталог мебели', 'url' => ['/catalog']];
+}
 
+if ($breads){
+    foreach ($breads as $bread){
+        $this->params['breadcrumbs'][] = ['label' => $bread['title'], 'url' => ['index', 'alias' => $bread['alias']]];
+    }
+}
 $this->params['breadcrumbs'][] = $this->title;
-//\yii\helpers\VarDumper::dump($model,10,true);die;
 ?>
 <div class="left_menu" id = "nav">
     <h2>Каталог мебели</h2>
@@ -52,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
+
     <? if ($products) {?>
         <? foreach ($products as $product) {/* @var $product \common\models\Product */?>
             <div class="product product_in">
@@ -86,14 +95,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="product_price flex">
                     <? if ($product->sale) {?>
                         <div class="price_1">
-                            <p><?= Yii::$app->formatter->asDecimal($product->getNewPrice()) ?> ₽</p>
+                            <p><?= Yii::$app->formatter->asInteger($product->getNewPrice()) ?> ₽</p>
                         </div>
                         <div class="price_2">
-                            <p><?= Yii::$app->formatter->asDecimal($product->price) ?> ₽</p>
+                            <p><?= Yii::$app->formatter->asInteger($product->price) ?> ₽</p>
                         </div>
                     <?}else{?>
                         <div class="price_1">
-                            <p><?= Yii::$app->formatter->asDecimal($product->price) ?> ₽</p>
+                            <p><?= Yii::$app->formatter->asInteger($product->price) ?> ₽</p>
                         </div>
                     <?}?>
                 </div>

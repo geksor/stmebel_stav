@@ -50,6 +50,8 @@ use yii\helpers\Json;
  * @property Attr[] $attrs
  * @property ProductOptions[] $productOptions
  * @property ProductOptions[] $productOptionsList
+ * @property ProductOptions[] $productOptionsShort
+ * @property ProductOptions[] $productOptionsAll
  * @property Options[] $options
  * @property Reviews[] $reviews
  * @property RecommendedProduct[] $recommendedProducts
@@ -245,6 +247,58 @@ class Product extends \yii\db\ActiveRecord
         if ($categoriesModel){
             foreach ($categoriesModel as $model){
                 $listArr = $model->optForList;
+                if ($listArr){
+                    foreach ($listArr as $item){
+                        $optionsId[] = $item;
+                    }
+                }
+            }
+            $this->optList = array_unique($optionsId);
+        }
+
+        return $this->hasMany(ProductOptions::className(), ['product_id' => 'id'])->filterWhere(['options_id' => $this->optList]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductOptionsShort()
+    {
+        $categories = ArrayHelper::getColumn($this->categories, 'id');
+
+        $categoriesModel = Category::find()->where(['id' => $categories])->all();
+
+        $optionsId = [];
+
+        if ($categoriesModel){
+            foreach ($categoriesModel as $model){
+                $listArr = $model->optShort;
+                if ($listArr){
+                    foreach ($listArr as $item){
+                        $optionsId[] = $item;
+                    }
+                }
+            }
+            $this->optList = array_unique($optionsId);
+        }
+
+        return $this->hasMany(ProductOptions::className(), ['product_id' => 'id'])->filterWhere(['options_id' => $this->optList]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductOptionsAll()
+    {
+        $categories = ArrayHelper::getColumn($this->categories, 'id');
+
+        $categoriesModel = Category::find()->where(['id' => $categories])->all();
+
+        $optionsId = [];
+
+        if ($categoriesModel){
+            foreach ($categoriesModel as $model){
+                $listArr = $model->catOpt;
                 if ($listArr){
                     foreach ($listArr as $item){
                         $optionsId[] = $item;

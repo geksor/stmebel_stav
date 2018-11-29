@@ -66,9 +66,20 @@ class Category extends \yii\db\ActiveRecord
 
     public function getParentsFromBread()
     {
-        while ($this->getParent()){
-
+        $breadArr = [];
+        if ($this->parent){
+            $tempModel = $this->parent;
+            /* @var $tempModel Category */
+            $breadArr[] = ['rank' => 1, 'alias' => $tempModel->alias, 'title' => $tempModel->title];
+            $rank = 2;
+            while ($tempModel->parent){
+                $tempModel = $tempModel->parent;
+                $breadArr[] = ['rank' => $rank, 'alias' => $tempModel->alias, 'title' => $tempModel->title];
+                $rank++;
+            }
+            ArrayHelper::multisort($breadArr, 'rank', SORT_DESC);
         }
+        return $breadArr;
     }
 
     public function getUrl()
