@@ -17,8 +17,16 @@ $this->registerMetaTag([
     'content' => $model->meta_description,
 ]);
 
+$breads = $modelCat?$modelCat->getParentsFromBread():false;
+
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Каталог мебели', 'url' => ['/catalog']];
+if ($breads){
+    foreach ($breads as $bread){
+        $this->params['breadcrumbs'][] = ['label' => $bread['title'], 'url' => ['index', 'alias' => $bread['alias']]];
+    }
+}
+
 $this->params['breadcrumbs'][] = ['label' => $modelCat->title, 'url' => ['index', 'alias' => $modelCat->alias]];
 $this->params['breadcrumbs'][] = $this->title;
 //\yii\helpers\VarDumper::dump($model,10,true);die;
@@ -127,202 +135,97 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="cont">
     <div id="tabs_1">
         <ul>
-            <li><a href="#tabs-1">ОПИСАНИЕ</a></li>
-            <li><a href="#tabs-2">Отзывы</a></li>
+            <? if ($model->productOptionsAll) {?>
+                <li><a href="#alloptions">Все характеристики</a></li>
+            <?}?>
+            <? if ($model->description) {?>
+                <li><a href="#description">ОПИСАНИЕ</a></li>
+            <?}?>
+            <li><a href="#reviews">Отзывы</a></li>
         </ul>
-        <div id="tabs-1">
-            <div class="product_full_description">
-                <h4>Упаковка:</h4>
-                <p>Коробка (ШхВхГ)6 590х580х280 мм</p>
-                <p>Общий вес: 9 кг</p>
+        <? if ($model->productOptionsAll) {?>
+            <div id="alloptions">
+                <? foreach ($model->productOptionsAll as $option) {/* @var $option \common\models\ProductOptions */?>
+                    <div class="product_full_description">
+                        <h4><?= $option->options->title ?>:</h4>
+                        <p><?= $option->optionsValue_id?$option->optionsValue->value:$option->options_value ?></p>
+                    </div>
+                <?}?>
             </div>
-            <div class="product_full_description">
-                <h4>Сидение и спинка:</h4>
-                <p>Мягкие, обитые сидение и спинка</p>
+        <?}?>
+        <? if ($model->description) {?>
+            <div id="description">
+                <?= $model->description ?>
             </div>
-            <div class="product_full_description">
-                <h4>Подлокотники:</h4>
-                <p>Пластиковые подлокотники</p>
-            </div>
-            <div class="product_full_description">
-                <h4>Механизм</h4>
-                <p>Обеспеччивает свободное качание. Возможность фиксации сидения и спинки в одном положении. Регулировка силы отклонения</p>
-            </div>
-            <div class="product_full_description">
-                <h4>База</h4>
-                <p>Металлическая с пластиковыми накладками</p>
-            </div>
-            <div class="product_full_description">
-                <h4>Ролики</h4>
-                <p>Предлагаются два типа роликов: для твердых поверхностей и ковровых покрытий</p>
-            </div>
-            <div class="product_full_description">
-                <h4>Другие свойства и опции</h4>
-                <p>Регулируемая высота сидения. На нерабочих поверхностях допускаяется использование искусственной кожи</p>
-            </div>
+        <?}?>
+        <div id="reviews"></div>
+
+
         </div>
-    </div>
-    <div class="products">
-        <div id="tabs">
-            <ul>
-                <li><a href="#tabs-1">РЕКОМЕНДУЕМОЕ ВАМ</a></li>
-            </ul>
-            <div id="tabs-1">
-                <div class="slider1 owl-carousel owl-theme flex">
-                    <div class="product item">
-                        <div class="sale">
-                            <p>-10%</p>
-                        </div>
-                        <div class="product_img">
-                            <img src="img/product.jpg" alt="">
-                        </div>
-                        <div class="product_name">
-                            Кресло «Бюджет»
-                        </div>
-                        <div class="product_description">
-                            Цвета: коричневый, чёрный, белый
-                        </div>
-                        <div class="product_price flex">
-                            <div class="price_1">
-                                <p>4 250 ₽</p>
+    <? if ($model->recommProducts) {?>
+        <div class="products">
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabs-1">РЕКОМЕНДУЕМЫЕ ТОВАРЫ</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <div class="slider1 owl-carousel owl-theme flex">
+                        <? $i = 1 ?>
+                        <? foreach ($model->recommProducts as $recommProduct) {?>
+                            <div class="product item<?= $i === 5?' product_border':'' ?>">
+                                <? if ($recommProduct->sale) {?>
+                                    <div class="sale">
+                                        <p>-<?= $recommProduct->sale ?>%</p>
+                                    </div>
+                                <?}?>
+                                <? if ($recommProduct->hot) {?>
+                                    <div class="sale hot">
+                                        <p>Хит продаж</p>
+                                    </div>
+                                <?}?>
+                                <? if ($recommProduct->new) {?>
+                                    <div class="sale new">
+                                        <p>Новинка</p>
+                                    </div>
+                                <?}?>
+                                <div class="product_img">
+                                    <img src="<?= $recommProduct->getThumbMainImage() ?>" alt="<?= $recommProduct->title ?>">
+                                </div>
+                                <div class="product_name">
+                                    <?= $recommProduct->title ?>
+                                </div>
+                                <div class="product_description">
+                                    <? if ($recommProduct->productOptionsList) {?>
+                                        <? foreach ($recommProduct->productOptionsList as $productOption) {/* @var $productOption \common\models\ProductOptions */?>
+                                            <?= $productOption->options->title ?>: <?= $productOption->options_value?$productOption->options_value:$productOption->optionsValue->value ?>
+                                        <?}?>
+                                    <?}?>
+                                </div>
+                                <div class="product_price flex">
+                                    <? if ($recommProduct->sale) {?>
+                                        <div class="price_1">
+                                            <p><?= Yii::$app->formatter->asInteger($recommProduct->getNewPrice()) ?> ₽</p>
+                                        </div>
+                                        <div class="price_2">
+                                            <p><?= Yii::$app->formatter->asInteger($recommProduct->price) ?> ₽</p>
+                                        </div>
+                                    <?}else{?>
+                                        <div class="price_1">
+                                            <p><?= Yii::$app->formatter->asDecimal($recommProduct->price) ?> ₽</p>
+                                        </div>
+                                    <?}?>
+                                </div>
+                                <div class="product_read">
+                                    <a href="/catalog/<?= $recommProduct->mainCat->alias ?>/<?= $recommProduct->alias ?>">Подробнее</a>
+                                </div>
                             </div>
-                            <div class="price_2">
-                                <p>5 130 ₽</p>
-                            </div>
-                        </div>
-                        <div class="product_read">
-                            <a href="/product.php">Подробнее</a>
-                        </div>
-                    </div>
-                    <div class="product item">
-                        <div class="sale">
-                            <p>-10%</p>
-                        </div>
-                        <div class="product_img">
-                            <img src="img/product.jpg" alt="">
-                        </div>
-                        <div class="product_name">
-                            Кресло «Бюджет»
-                        </div>
-                        <div class="product_description">
-                            Цвета: коричневый, чёрный, белый
-                        </div>
-                        <div class="product_price flex">
-                            <div class="price_1">
-                                <p>4 250 ₽</p>
-                            </div>
-                            <div class="price_2">
-                                <p>5 130 ₽</p>
-                            </div>
-                        </div>
-                        <div class="product_read">
-                            <a href="/product.php">Подробнее</a>
-                        </div>
-                    </div>
-                    <div class="product item">
-                        <div class="sale">
-                            <p>-10%</p>
-                        </div>
-                        <div class="product_img">
-                            <img src="img/product.jpg" alt="">
-                        </div>
-                        <div class="product_name">
-                            Кресло «Бюджет»
-                        </div>
-                        <div class="product_description">
-                            Цвета: коричневый, чёрный, белый
-                        </div>
-                        <div class="product_price flex">
-                            <div class="price_1">
-                                <p>4 250 ₽</p>
-                            </div>
-                            <div class="price_2">
-                                <p>5 130 ₽</p>
-                            </div>
-                        </div>
-                        <div class="product_read">
-                            <a href="/product.php">Подробнее</a>
-                        </div>
-                    </div>
-                    <div class="product item">
-                        <div class="sale">
-                            <p>-10%</p>
-                        </div>
-                        <div class="product_img">
-                            <img src="img/product.jpg" alt="">
-                        </div>
-                        <div class="product_name">
-                            Кресло «Бюджет»
-                        </div>
-                        <div class="product_description">
-                            Цвета: коричневый, чёрный, белый
-                        </div>
-                        <div class="product_price flex">
-                            <div class="price_1">
-                                <p>4 250 ₽</p>
-                            </div>
-                            <div class="price_2">
-                                <p>5 130 ₽</p>
-                            </div>
-                        </div>
-                        <div class="product_read">
-                            <a href="/product.php">Подробнее</a>
-                        </div>
-                    </div>
-                    <div class="product item product_border">
-                        <div class="sale">
-                            <p>-10%</p>
-                        </div>
-                        <div class="product_img">
-                            <img src="img/product.jpg" alt="">
-                        </div>
-                        <div class="product_name">
-                            Кресло «Бюджет»
-                        </div>
-                        <div class="product_description">
-                            Цвета: коричневый, чёрный, белый
-                        </div>
-                        <div class="product_price flex">
-                            <div class="price_1">
-                                <p>4 250 ₽</p>
-                            </div>
-                            <div class="price_2">
-                                <p>5 130 ₽</p>
-                            </div>
-                        </div>
-                        <div class="product_read">
-                            <a href="/product.php">Подробнее</a>
-                        </div>
-                    </div>
-                    <div class="product item">
-                        <div class="sale">
-                            <p>-10%</p>
-                        </div>
-                        <div class="product_img">
-                            <img src="img/product.jpg" alt="">
-                        </div>
-                        <div class="product_name">
-                            Кресло «Бюджет»
-                        </div>
-                        <div class="product_description">
-                            Цвета: коричневый, чёрный, белый
-                        </div>
-                        <div class="product_price flex">
-                            <div class="price_1">
-                                <p>4 250 ₽</p>
-                            </div>
-                            <div class="price_2">
-                                <p>5 130 ₽</p>
-                            </div>
-                        </div>
-                        <div class="product_read">
-                            <a href="/product.php">Подробнее</a>
-                        </div>
+                            <? $i === 5?$i=1:$i++ ?>
+                        <?}?>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?}?>
 </div>
 
 <?php

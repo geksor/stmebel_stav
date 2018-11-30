@@ -101,13 +101,20 @@ class CatalogController extends Controller
                         ];
                     }
                 }
+                $items[] = [
+                    'label' => $item->title,
+                    'url' => $item->url,
+                    'template' => '<a href="{url}">'.$item->image.'<h3>{label}</h3></a>',
+                    'items' => $itemsChild,
+                ];
+
+            }else{
+                $items[] = [
+                    'label' => $item->title,
+                    'url' => $item->url,
+                    'template' => '<a href="{url}">'.$item->image.'<h3>{label}</h3></a>',
+                ];
             }
-            $items[] = [
-                'label' => $item->title,
-                'url' => $item->url,
-                'template' => '<a href="{url}">'.$item->image.'<h3>{label}</h3></a>',
-                'items' => $itemsChild,
-            ];
         }
 
 
