@@ -89,12 +89,17 @@ class CatalogController extends Controller
                                 'url' => $itemChildChild->url,
                             ];
                         }
+                        $itemsChild[] = [
+                            'label' => $itemChild->title,
+                            'url' => $itemChild->url,
+                            'items' => $itemsChildChild,
+                        ];
                     }
                     $itemsChild[] = [
                         'label' => $itemChild->title,
                         'url' => $itemChild->url,
-                        'items' => $itemsChildChild,
                     ];
+
                 }
             }
             $items[] = [
