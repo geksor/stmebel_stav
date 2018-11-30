@@ -18,7 +18,7 @@ $this->registerMetaTag([
 ]);
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Каталог товаров', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Каталог мебели', 'url' => ['/catalog']];
 $this->params['breadcrumbs'][] = ['label' => $modelCat->title, 'url' => ['index', 'alias' => $modelCat->alias]];
 $this->params['breadcrumbs'][] = $this->title;
 //\yii\helpers\VarDumper::dump($model,10,true);die;

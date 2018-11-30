@@ -94,12 +94,12 @@ class CatalogController extends Controller
                             'url' => $itemChild->url,
                             'items' => $itemsChildChild,
                         ];
+                    }else{
+                        $itemsChild[] = [
+                            'label' => $itemChild->title,
+                            'url' => $itemChild->url,
+                        ];
                     }
-                    $itemsChild[] = [
-                        'label' => $itemChild->title,
-                        'url' => $itemChild->url,
-                    ];
-
                 }
             }
             $items[] = [
