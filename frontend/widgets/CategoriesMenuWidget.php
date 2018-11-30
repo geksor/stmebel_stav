@@ -12,34 +12,57 @@ class CategoriesMenuWidget extends Widget
             ->where(['parent_id' => 0, 'publish' =>1])
             ->orderBy(['rank' => SORT_ASC])
             ->with(['child' => function (\yii\db\ActiveQuery $query) {
-                $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
+                $query
+                    ->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC])
+                    ->with(['child' => function (\yii\db\ActiveQuery $query) {
+                        $query->andWhere(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
+                    },]);
             },])
             ->all();
 
         $items = [];
 
-        foreach ($models as $model){
-            if ($model->child){
-                $itemsChild = [];
-                foreach ($model->child as $item){
-                    /* @var $item Category */
-                    $itemsChild[] = [
-                        'label' => $item->title,
-                        'url' => [
-                            'catalog/index',
-                            'alias' => $model->alias,
-                            'child' => $item->alias,
-                        ],
-                        'options' => ['class' => 'nav-item catalogMenu__navItem'],
-                    ];
+        foreach ($models as $item){
+            /* @var $item Category */
+            $itemsChild = [];
+
+            if ($item->child){
+                foreach ($item->child as $itemChild){
+                    /* @var $itemChild Category */
+                    if ($itemChild->child){
+                        foreach ($itemChild->child as $itemChildChild){
+                            /* @var $itemChildChild Category */
+                            $itemsChildChild[] = [
+                                'label' => $itemChildChild->title,
+                                'url' => $itemChildChild->url,
+                            ];
+                        }
+                        $itemsChild[] = [
+                            'label' => $itemChild->title,
+                            'url' => $itemChild->url,
+                            'items' => $itemsChildChild,
+                        ];
+                    }else{
+                        $itemsChild[] = [
+                            'label' => $itemChild->title,
+                            'url' => $itemChild->url,
+                        ];
+                    }
                 }
                 $items[] = [
-                    'label' => $model->title,
-                    'template' => '<span class="nav-link px-1 catalogMenu__itemHeader" style="cursor: default">{label}</span>',
+                    'label' => $item->title,
+                    'url' => $item->url,
                     'items' => $itemsChild,
+                ];
+
+            }else{
+                $items[] = [
+                    'label' => $item->title,
+                    'url' => $item->url,
                 ];
             }
         }
+
 
         return $this->render('categoriesMenuWidget', [
             'items' => $items,

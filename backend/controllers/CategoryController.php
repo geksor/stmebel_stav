@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Attr;
+use common\models\Product;
 use Yii;
 use common\models\Category;
 use common\models\CategorySearch;
@@ -108,7 +109,12 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Product::findOne(['main_category' => $id]) || Category::findOne(['parent_id' => $id])){
+            Yii::$app->session->setFlash('error', 'Данная категория содержит подкатегории или товары.');
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', 'Категория успешно удалена.');
 
         return $this->redirect(['index']);
     }

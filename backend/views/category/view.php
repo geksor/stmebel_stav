@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['in
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-view">
-
+    <?= \common\widgets\Alert::widget() ?>
     <div class="box box-primary">
         <div class="box-body">
 

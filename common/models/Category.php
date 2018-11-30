@@ -358,4 +358,25 @@ class Category extends \yii\db\ActiveRecord
         return ArrayHelper::map(Options::find()->all(), 'id', 'title');
     }
 
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $products = Product::find()->where(['main_category' => $this->id])->with('categories')->all();
+        $defCat = Category::findOne(['publish' =>1]);
+        if ($products){
+            foreach ($products as $product){/* @var $product Product */
+                if ($product->categories){
+                    $product->main_category = $product->categories[0]->id;
+                }else{
+                    if ($defCat){
+                        $product->main_category = $defCat->id;
+                    }else{
+                        $product->main_category = null;
+                    }
+                }
+                $product->save(false);
+            }
+        }
+    }
+
 }

@@ -170,7 +170,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public static function getCatFromDropDown()
     {
-        return ArrayHelper::map(Category::find()->all(), 'id', 'title');
+        return ArrayHelper::map(Category::find()->orderBy(['rank' => SORT_ASC])->all(), 'id', 'title');
     }
 
     /**

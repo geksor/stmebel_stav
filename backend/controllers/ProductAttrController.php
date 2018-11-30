@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Product;
 use Yii;
 use common\models\ProductAttr;
 use common\models\ProductAttrSearch;

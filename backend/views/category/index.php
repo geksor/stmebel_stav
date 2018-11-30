@@ -12,7 +12,7 @@ $this->title = 'Категории';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
-
+    <?= \common\widgets\Alert::widget() ?>
     <div class="box box-primary">
         <div class="box-body">
             <?php Pjax::begin(); ?>
