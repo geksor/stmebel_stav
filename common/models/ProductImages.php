@@ -122,6 +122,15 @@ class ProductImages extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return string
+     * @throws \yii\base\Exception
+     */
+    public function getZoomImage()
+    {
+        return ($this->image) ? '/uploads/images/product/'.$this->product_id.'/'. 'zoom_' .$this->image : "/no_image.png";
+    }
+
+    /**
      * @throws \yii\base\ErrorException
      * @throws \yii\base\Exception
      */
@@ -235,6 +244,10 @@ class ProductImages extends \yii\db\ActiveRecord
         {
             unlink($this->getThumbImagePath() . $currentImage);
         }
+        if ($this->fileExists('zoom_'. $currentImage))
+        {
+            unlink($this->getZoomImagePath() . $currentImage);
+        }
         $dir = glob($this->getFolder().'*');
         if (empty($dir))
         {
@@ -267,6 +280,8 @@ class ProductImages extends \yii\db\ActiveRecord
 
         $this->saveThumbnailImage($fileName);
 
+        $this->saveZoomImage($fileName);
+
         $this->uploadImage->saveAs($this->getFolder() . $fileName);
 
         return $fileName;
@@ -295,6 +310,28 @@ class ProductImages extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param $fileName
+     * @throws \yii\base\Exception
+     */
+    private function saveZoomImage($fileName)
+    {
+        // open image
+        $image = Image::getImagine()->open($this->uploadImage->tempName);
+
+        // rendering information about crop of ONE option
+        $cropInfo = $this->getCropInfo();
+
+        //saving thumbnail
+        $newSizeThumb = new Box($cropInfo['dWidth']*3, $cropInfo['dHeight']*3);
+        $cropSizeThumb = new Box($cropInfo['width']*3, $cropInfo['height']*3); //frame size of crop
+        $cropPointThumb = new Point($cropInfo['x']*3, $cropInfo['y']*3);
+
+        $image->resize($newSizeThumb)
+            ->crop($cropPointThumb, $cropSizeThumb)
+            ->save($this->getZoomImagePath() . $fileName, ['quality' => 100]);
+    }
+
+    /**
      * @return mixed
      */
     private function getCropInfo()
@@ -317,5 +354,14 @@ class ProductImages extends \yii\db\ActiveRecord
     public function getThumbImagePath()
     {
         return $this->getFolder() . '/thumb_';
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\Exception
+     */
+    public function getZoomImagePath()
+    {
+        return $this->getFolder() . '/zoom_';
     }
 }

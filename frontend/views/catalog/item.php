@@ -20,6 +20,7 @@ $this->registerMetaTag([
 ]);
 
 $this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Каталог товаров', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $modelCat->title, 'url' => ['index', 'alias' => $modelCat->alias]];
 $this->params['breadcrumbs'][] = $this->title;
 //\yii\helpers\VarDumper::dump($model,10,true);die;
@@ -27,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="content flex_1">
     <div class="product_left">
-        <h1>Кресло «Бюджет-002723»</h1>
+        <h1><?= $model->title ?></h1>
         <div class="rewiev"><a href="">Отзывы</a><a href="">Оставить отзыв</a></div>
         <div class="product_left_img">
             <section id="magnific">
@@ -35,13 +36,35 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="large-5 column">
                         <div class="xzoom-container flex_img_product">
                             <div>
-                                <img class="xzoom5" id="xzoom-magnific" src="img/stul.jpg" xoriginal="img/stul_full.jpg" />
+                                <img class="xzoom5" id="xzoom-magnific" src="<?= $model->getThumbMainImage() ?>" xoriginal="<?= $model->getZoomMainImage() ?>" />
                             </div>
                             <div class="xzoom-thumbs">
-                                <a href="img/stul_full.jpg"><img class="xzoom-gallery5" width="80" src="img/stul.jpg"  xpreview="img/stul.jpg" title="The description goes here"></a>
-                                <a href="img/stul_full.jpg"><img class="xzoom-gallery5" width="80" src="img/stul.jpg"  xpreview="img/stul.jpg" title="The description goes here"></a>
-                                <a href="img/stul_full.jpg"><img class="xzoom-gallery5" width="80" src="img/stul.jpg"  xpreview="img/stul.jpg" title="The description goes here"></a>
-                                <a href="img/stul_full.jpg"><img class="xzoom-gallery5" width="80" src="img/stul.jpg"  xpreview="img/stul.jpg" title="The description goes here"></a>
+                                <? if ($model->productImages) {?>
+                                    <? foreach ($model->productImages as $productImage) {/* @var $productImage \common\models\ProductImages */?>
+                                        <? if ($productImage->image === $model->main_image) {?>
+                                            <a href="<?= $productImage->getZoomImage() ?>">
+                                                <img class="xzoom-gallery5"
+                                                     width="80"
+                                                     src="<?= $productImage->getThumbImage() ?>"
+                                                     xpreview="<?= $productImage->getThumbImage() ?>"
+                                                     title="<?= $productImage->title?$productImage->title:$model->title ?>"
+                                                >
+                                            </a>
+                                        <?}?>
+                                    <?}?>
+                                    <? foreach ($model->productImages as $productImage) {/* @var $productImage \common\models\ProductImages */?>
+                                        <? if ($productImage->image !== $model->main_image) {?>
+                                            <a href="<?= $productImage->getZoomImage() ?>">
+                                                <img class="xzoom-gallery5"
+                                                     width="80"
+                                                     src="<?= $productImage->getThumbImage() ?>"
+                                                     xpreview="<?= $productImage->getThumbImage() ?>"
+                                                     title="<?= $productImage->title?$productImage->title:$model->title ?>"
+                                                >
+                                            </a>
+                                        <?}?>
+                                    <?}?>
+                                <?}?>
                             </div>
                         </div>
                     </div>
@@ -53,16 +76,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="product_right">
         <div class="product_right_price">
             <p class="product_right_price_0">Цена</p>
-            <p class="product_right_price_1">7 976 ₽</p>
-            <p class="product_right_price_2">9 376 ₽</p>
+            <? if ($model->sale) {?>
+                <p class="product_right_price_1"><?= Yii::$app->formatter->asInteger($model->newPrice) ?> ₽</p>
+                <p class="product_right_price_2"><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+            <?}else{?>
+                <p class="product_right_price_1"><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+            <?}?>
         </div>
         <div class="product_right_material">
             <p>Материал: <a href="">Искусственная кожа</a></p>
             <p>Цвет: <a href="">Выбрать</a></p>
         </div>
         <div class="product_right_material">
-            <p>Наличие: <span>В наличии</span></p>
-            <p>Арт: <span>383983798234829</span></p>
+            <p>Наличие: <span><?= $model->avail?'В наличии':'Под заказ' ?></span></p>
+            <p>Арт: <span><?= $model->code ?></span></p>
             <p>Производитель: <span>Россия</span></p>
             <p>Гарантия: <span>12 мес.</span></p>
             <p>Коллекция: <span>Бюджет</span></p>
@@ -311,14 +338,34 @@ $css= <<< CSS
 CSS;
 
 $this->registerCss($css, ["type" => "text/css"], "callBack" );
+$this->registerCssFile('/public/css/xzoom.css');
 ?>
 <?
     $js = <<< JS
     $(document).ready(function (){
-        $(".xzoom, .xzoom-gallery").xzoom({tint: '#000', Xoffset: 15});
+        
+        $('.minus').click(function () {
+                var $input = $(this).parent().find('input');
+                var count = parseInt($input.val()) - 1;
+                count = count < 1 ? 1 : count;
+                $input.val(count);
+                $input.change();
+                return false;
+            });
+            $('.plus').click(function () {
+                var $input = $(this).parent().find('input');
+                $input.val(parseInt($input.val()) + 1);
+                $input.change();
+                return false;
+            });
+            
+        $('selector').selectbox();
     });
+
 JS;
 
     $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+    $this->registerJsFile('public/js/xzoom.min.js');
+    $this->registerJsFile('public/js/setup.js');
 ?>
 

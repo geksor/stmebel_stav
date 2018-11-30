@@ -41,6 +41,7 @@ use yii\helpers\Json;
  * @property int $main_category
  * @property int $oldMainCat
  * @property int $show_color
+ * @property int $newPrice
  *
  * @property CategoryProduct[] $categoryProducts
  * @property Category[] $categories
@@ -352,6 +353,11 @@ class Product extends \yii\db\ActiveRecord
     public function getThumbMainImage()
     {
         return ($this->main_image) ? '/uploads/images/product/'.$this->id.'/'. 'thumb_' .$this->main_image : "/no_image.png";
+    }
+
+    public function getZoomMainImage()
+    {
+        return ($this->main_image) ? '/uploads/images/product/'.$this->id.'/'. 'zoom_' .$this->main_image : "/no_image.png";
     }
 
     /**

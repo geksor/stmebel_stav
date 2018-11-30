@@ -31,6 +31,7 @@ class AppAsset extends AssetBundle
         'public/js/jquery.menu-aim.js',
         'public/js/main.js',
         'public/js/mask.lib.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',
