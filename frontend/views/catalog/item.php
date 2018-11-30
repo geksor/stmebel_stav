@@ -6,8 +6,6 @@ use yii\helpers\ArrayHelper;
 
 /* @var $model \common\models\Product */
 /* @var $modelCat \common\models\Category */
-/* @var $alias \frontend\controllers\CatalogController */
-/* @var $child \frontend\controllers\CatalogController */
 
 
 $this->registerMetaTag([
@@ -89,20 +87,26 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="product_right_material">
             <p>Наличие: <span><?= $model->avail?'В наличии':'Под заказ' ?></span></p>
-            <p>Арт: <span><?= $model->code ?></span></p>
-            <p>Производитель: <span>Россия</span></p>
-            <p>Гарантия: <span>12 мес.</span></p>
-            <p>Коллекция: <span>Бюджет</span></p>
-            <p>Размеры (ШхВхГ): <span>50х90(103)х58 см</span></p>
-            <p>Максимальная нагрузка: <span>90 кг</span></p>
+            <p>Код товара: <span><?= $model->code ?></span></p>
+            <? if ($model->productOptionsShort) {?>
+                <? foreach ($model->productOptionsShort as $option) {?>
+                    <p>
+                        <?= $option->options->title ?>:
+                        <span>
+                            <?= $option->optionsValue_id?$option->optionsValue->value:$option->options_value ?>
+                        </span>
+                    </p>
+                <?}?>
+            <?}?>
+
         </div>
         <div class="product_right_cart flex">
             <p class="product_right_cart_p">Количество:</p>
             <div>
                 <div class="number">
-                            <span class="minus">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="21"><path class="owl_fill" fill-rule="evenodd" d="M11.787 1.838l-8.79 8.646 8.79 8.647a.756.756 0 0 1 0 1.081l-.549.54a.787.787 0 0 1-1.099 0L.25 11.025a.758.758 0 0 1 0-1.081L10.139.217a.785.785 0 0 1 1.099 0l.549.54a.756.756 0 0 1 0 1.081z"></path></svg>
-                            </span>
+                    <span class="minus">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="21"><path class="owl_fill" fill-rule="evenodd" d="M11.787 1.838l-8.79 8.646 8.79 8.647a.756.756 0 0 1 0 1.081l-.549.54a.787.787 0 0 1-1.099 0L.25 11.025a.758.758 0 0 1 0-1.081L10.139.217a.785.785 0 0 1 1.099 0l.549.54a.756.756 0 0 1 0 1.081z"></path></svg>
+                    </span>
                     <input type="text" value="1" size="5"/>
                     <span class="plus">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="21"><path class="owl_fill" fill-rule="evenodd" d="M11.778 11.041l-9.913 9.742a.79.79 0 0 1-1.102 0l-.55-.542a.754.754 0 0 1 0-1.082L9.024 10.5.213 1.841a.755.755 0 0 1 0-1.083l.55-.541a.79.79 0 0 1 1.102 0l9.913 9.742a.754.754 0 0 1 0 1.082z"></path></svg>
@@ -345,17 +349,17 @@ $this->registerCssFile('/public/css/xzoom.css');
     $(document).ready(function (){
         
         $('.minus').click(function () {
-                var $input = $(this).parent().find('input');
-                var count = parseInt($input.val()) - 1;
+                var input = $(this).parent().find('input');
+                var count = parseInt(input.val()) - 1;
                 count = count < 1 ? 1 : count;
-                $input.val(count);
-                $input.change();
+                input.val(count);
+                input.change();
                 return false;
             });
             $('.plus').click(function () {
-                var $input = $(this).parent().find('input');
-                $input.val(parseInt($input.val()) + 1);
-                $input.change();
+                var input = $(this).parent().find('input');
+                input.val(parseInt(input.val()) + 1);
+                input.change();
                 return false;
             });
             
@@ -365,7 +369,5 @@ $this->registerCssFile('/public/css/xzoom.css');
 JS;
 
     $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
-    $this->registerJsFile('public/js/xzoom.min.js');
-    $this->registerJsFile('public/js/setup.js');
 ?>
 

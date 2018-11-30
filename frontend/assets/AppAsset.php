@@ -31,7 +31,8 @@ class AppAsset extends AssetBundle
         'public/js/jquery.menu-aim.js',
         'public/js/main.js',
         'public/js/mask.lib.js',
-
+        'public/js/xzoom.min.js',
+        'public/js/setup.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
