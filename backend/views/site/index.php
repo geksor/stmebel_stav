@@ -141,5 +141,5 @@ $js = <<< JS
     });
 JS;
 
-$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+//$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
 ?>

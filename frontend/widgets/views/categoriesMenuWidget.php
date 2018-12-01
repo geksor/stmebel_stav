@@ -14,7 +14,7 @@
             <ul class="cd-dropdown-content">
                 <? if ($items) {?>
                     <? foreach ($items as $item) {?>
-                        <? if ($item['items']) {?>
+                        <? if (array_key_exists('items', $item)) {?>
                             <li class="has-children">
                                 <a href="<?= \yii\helpers\Url::to($item['url']) ?>"><?= $item['label'] ?></a>
 
@@ -22,7 +22,7 @@
                                     <li class="go-back"><a href="#0">Каталог мебели</a></li>
                                     <li class="see-all"><a href="<?= \yii\helpers\Url::to($item['url']) ?>">Перейти в <?= $item['label'] ?></a></li>
                                     <? foreach ($item['items'] as $item1) {?>
-                                        <? if ($item1['items']) {?>
+                                        <? if (array_key_exists('items', $item1)) {?>
                                             <li class="has-children">
                                                 <a href="<?= \yii\helpers\Url::to($item1['url']) ?>"><?= $item1['label'] ?></a>
 
