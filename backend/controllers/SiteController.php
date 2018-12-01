@@ -91,18 +91,21 @@ class SiteController extends Controller
         $labelsChart = [];
         $dataChart = [];
         $tempArr = [];
-//        if ($browserStat){
-//            foreach ($browserStat as $item){
-//                /* @var $item WebVisitor */
-//                $browser = UserAgentParser::parse($item->user_agent)['browser'];
-//                $tempArr[$browser][0] = $tempArr[$browser][0]+$item->visits;
-//            }
-//            foreach ($tempArr as $key => $item){
-//                $labelsChart[] = $key;
-//                $dataChart[] = $item[0];
-//            }
-//        }
-//        VarDumper::dump($tempArr,20,true);die;
+        if ($browserStat){
+            foreach ($browserStat as $item){
+                /* @var $item WebVisitor */
+                $browser = UserAgentParser::parse($item->user_agent)['browser'];
+                if (array_key_exists($browser, $tempArr)){
+                    $tempArr[$browser][0] = $tempArr[$browser][0]+$item->visits;
+                }else{
+                    $tempArr[$browser][0] = $item->visits;
+                }
+            }
+            foreach ($tempArr as $key => $item){
+                $labelsChart[] = $key;
+                $dataChart[] = $item[0];
+            }
+        }
 
         return $this->render('index', [
             'counter_direct' => $counter_direct,
