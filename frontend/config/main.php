@@ -45,7 +45,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/catalog/add-cart' => 'catalog/add-cart',
                 '/catalog/<alias>/page/<page:\d+>' => 'catalog/index',
+                '/catalog/<alias>/sort/<orderPrice:\d+>' => 'catalog/index',
+                '/catalog/sort/<orderPrice:\d+>' => 'catalog/index',
+
                 '/catalog/<alias>' => 'catalog/index',
                 '/catalog/<alias>/<item>' => 'catalog/item',
                 '<controller:catalog>' => 'catalog/index',

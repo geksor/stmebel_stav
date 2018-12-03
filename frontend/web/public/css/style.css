@@ -774,8 +774,28 @@ input {outline:none;}
 	border-bottom: #dee3e1;
 	transition: all 0.2s ease-in-out;
 }
-.left_menu ul li>ul li a:hover{
+.left_menu ul li.active>ul li a:hover{
 	background: #cddcd5;
+	color: #424242;
+}
+.left_menu ul li.active>ul li.active a{
+	background: #cddcd5;
+	color: #424242;
+}
+.left_menu ul li.active>ul li a{
+	background: none;
+	color: #424242;
+}
+.left_menu ul li.active>ul li.active>ul li a:hover{
+	background: #cddcd5;
+	color: #424242;
+}
+.left_menu ul li.active>ul li.active>ul li.active a{
+	background: #cddcd5;
+	color: #424242;
+}
+.left_menu ul li.active>ul li.active>ul li a{
+	background: none;
 	color: #424242;
 }
 .left_menu ul li>ul li a{
@@ -836,6 +856,10 @@ input {outline:none;}
 	background: #5ee0ae;
 	color: #fff;
 }
+.left_menu ul li.active a{
+	background: #5ee0ae;
+	color: #fff;
+}
 .left_menu svg{
 	width: 25px;
 	margin-right: 20px;
@@ -844,6 +868,9 @@ input {outline:none;}
 	fill: #5ee0ae;
 }
 .left_menu ul li a:hover svg path{
+	fill: #fff;
+}
+.left_menu ul li.active a svg path{
 	fill: #fff;
 }
 .breads {
@@ -894,12 +921,14 @@ input {outline:none;}
 }
 .sorting_img img{
 	padding: 18px 13px;
-	width: 50%;
 	text-align: center;
 	border-left: 1px solid #bbc0be;
 	line-height: 0;
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
+}
+.sorting_img a{
+	line-height: 0;
 }
 .sorting_img img:hover{
 	background: #cddcd5;
