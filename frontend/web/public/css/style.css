@@ -110,6 +110,12 @@ input {outline:none;}
 	justify-content: space-between;
 	align-items: flex-start;
 }
+.flex_4{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: stretch;
+	align-items: stretch;
+}
 .flex_img_product{
 	display: flex;
 	flex-flow: row-reverse;
@@ -622,6 +628,10 @@ input {outline:none;}
 	border: 1px solid #bbc0be;
 	margin-top: -1px;
 	margin-left: -1px;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
+	align-items: stretch;
 }
 .product_in .product_read{
 	display: block;
@@ -684,6 +694,10 @@ input {outline:none;}
 	display: inline-block;
 	color: #ffffff;
 	background: #f34e4e;
+	text-align: center;
+	position: absolute;
+	top: 15px;
+	z-index: 2;
 }
 .ui-tabs .ui-tabs-panel {
 	display: block;

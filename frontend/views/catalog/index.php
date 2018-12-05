@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
+    <div class="flex_4">
     <? if ($products) {?>
         <? foreach ($products as $product) {/* @var $product \common\models\Product */?>
             <div class="product product_in">
@@ -80,7 +80,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 <?}?>
                 <div class="product_img">
-                    <img src="<?= $product->getThumbMainImage() ?>" alt="<?= $product->title ?>">
+                    <? if ($model) {?>
+                        <a href="<?= \yii\helpers\Url::to(['item', 'alias' => $model->alias, 'item' => $product->alias]) ?>"><img src="<?= $product->getThumbMainImage() ?>" alt="<?= $product->title ?>"></a>
+                    <?}else{?>
+                        <a href="<?= \yii\helpers\Url::to(['item', 'alias' => $product->mainCat->alias, 'item' => $product->alias]) ?>"><img src="<?= $product->getThumbMainImage() ?>" alt="<?= $product->title ?>"></a>
+                    <?}?>
                 </div>
                 <div class="product_name">
                     <?= $product->title ?>
@@ -118,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?}else{?>
         <h2>Нет товаров</h2>
     <?}?>
-
+    </div>
     <div class="nav_number">
         <?= \yii\widgets\LinkPager::widget([
             'pagination' => $pages,
