@@ -159,6 +159,12 @@ class CatalogController extends Controller
         $model = Product::find()
             ->where(['alias' => $item])
             ->with([
+                'productAttrsCats'  => function (\yii\db\ActiveQuery $query) {
+                    $query->with(['attrValue', 'attr']);
+                },
+            ])
+            ->with(['attrsCats'])
+            ->with([
                 'productOptionsShort'  => function (\yii\db\ActiveQuery $query) {
                     $query->with(['options', 'optionsValue']);
                 },
@@ -177,7 +183,6 @@ class CatalogController extends Controller
             },])
             ->one();
 
-
         return $this->render('item', [
             'model' => $model,
             'modelCat' => $modelCat,
@@ -188,7 +193,7 @@ class CatalogController extends Controller
     {
         $cart = Yii::$app->session->has('cart')
             ? Yii::$app->session->get('cart')
-            : ['items' => [], 'item_count' => '0', 'total_price' => '0'];
+            : ['items' => [], 'item_count' => '0', 'prod_count' => '0', 'total_price' => '0'];
 
         $prodAdd = true;
         foreach ($cart['items'] as $key => $item){
@@ -204,6 +209,7 @@ class CatalogController extends Controller
             $cart['items'][] = ['prod_id' => $prod_id, 'prod_price' => $prod_price, 'prod_count' => $prod_count];
         }
         $cart['item_count'] = $cart['item_count']+1;
+        $cart['prod_count'] = $cart['prod_count']+$prod_count;
 
         Yii::$app->session->set('cart', $cart);
 

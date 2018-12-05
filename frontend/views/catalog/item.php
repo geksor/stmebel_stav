@@ -89,15 +89,51 @@ $this->params['breadcrumbs'][] = $this->title;
             <?}?>
         </div>
         <div class="product_right_material">
-            <p>Материал:</p>
-            <!-- Руднев-->
-                <div class="flex_4">
-                    <span class="input_type_radio"><input type="radio" name="jshop_attr_id[1]" id="jshop_attr_id11" value="1" checked="checked" onclick="setAttrValue('1', this.value);"> <label for="jshop_attr_id11"><span class="radio_attr_label">Кожа</span></label></span>
-                    <span class="input_type_radio"><input type="radio" name="jshop_attr_id[1]" id="jshop_attr_id12" value="2" onclick="setAttrValue('1', this.value);"> <label for="jshop_attr_id12"><span class="radio_attr_label">Рожа</span></label></span>
-                    <span class="input_type_radio"><input type="radio" name="jshop_attr_id[1]" id="jshop_attr_id13" value="3" onclick="setAttrValue('1', this.value);"> <label for="jshop_attr_id13"><span class="radio_attr_label">Все</span></label></span>
-                    <span class="input_type_radio"><input type="radio" name="jshop_attr_id[1]" id="jshop_attr_id14" value="4" onclick="setAttrValue('1', this.value);"> <label for="jshop_attr_id14"><span class="radio_attr_label">Дела</span></label></span>
-                </div>
-            <!-- Руднев-->
+            <? if ($model->attrsCats) {?>
+                <? foreach ($model->attrsCats as $attr) {?>
+                    <p><?= $attr->title ?>:</p>
+                    <!-- Руднев-->
+                    <div class="flex_4">
+                        <? $i = 0; foreach ($model->productAttrsCats as $prodAttr) {?>
+                            <? if ($prodAttr->attr_id === $attr->id) {?>
+                                <span class="input_type_radio">
+                                    <input
+                                            type="radio"
+                                            name="attr_id[<?= $attr->id ?>]"
+                                            id="attr_id<?= $attr->id.$prodAttr->attrValue_id ?>"
+                                            value="<?
+                                                $price = $model->newPrice;
+                                                switch ($prodAttr->price_mod){
+                                                    case 0:
+                                                        $price = $price + $prodAttr->add_price;
+                                                        break;
+                                                    case 1:
+                                                        $price = $price - $prodAttr->add_price;
+                                                        break;
+                                                    case 2:
+                                                        $price = $price * $prodAttr->add_price;
+                                                        break;
+                                                    case 3:
+                                                        $price = $price / $prodAttr->add_price;
+                                                        break;
+                                                    case 4:
+                                                        $price = $prodAttr->add_price;
+                                                        break;
+                                                }
+                                                echo $price;
+                                            ?>"
+                                            <?= $i===0?'checked="checked"':'' ?>
+                                    >
+                                    <label for="attr_id<?= $attr->id.$prodAttr->attrValue_id ?>">
+                                        <span class="radio_attr_label"><?= $prodAttr->attrValue->value ?></span>
+                                    </label>
+                                </span>
+                            <?$i++;}?>
+                        <?}?>
+                    </div>
+                    <!-- Руднев-->
+                <?}?>
+            <?}?>
         </div>
         <div class="product_right_material">
             <p>Цвет: <img src="/public/img/gradien.jpeg" style="width: 20px; vertical-align: middle; margin: 5px;"><a id="opener">Выбрать</a></p>
@@ -156,7 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     id="addToCart"
                     class="fill_cart_by"
                     data-prod_id="<?= $model->id ?>"
-                    data-prod_price="<?= $model->sale?$model->newPrice:$model->price ?>"
+                    data-prod_price="<?= $model->newPrice ?>"
                     data-prod_count="1"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">

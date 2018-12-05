@@ -37,7 +37,8 @@ use yii\helpers\Json;
  * @property array $selectedCats
  * @property array $selectRecommProd
  * @property array $selectedRecommProd
- * @property int $optList
+ * @property array $optList
+ * @property array $attrList
  * @property int $main_category
  * @property int $oldMainCat
  * @property int $show_color
@@ -48,7 +49,9 @@ use yii\helpers\Json;
  * @property Category[] $mainCat
  * @property ProductImages[] $productImages
  * @property ProductAttr[] $productAttrs
+ * @property ProductAttr[] $productAttrsCats
  * @property Attr[] $attrs
+ * @property Attr[] $attrsCats
  * @property ProductOptions[] $productOptions
  * @property ProductOptions[] $productOptionsList
  * @property ProductOptions[] $productOptionsShort
@@ -67,6 +70,7 @@ class Product extends \yii\db\ActiveRecord
     public $optList;
     public $oldMainCat;
     public $selectRecommProd;
+    public $attrList;
 
     public function afterFind()
     {
@@ -213,6 +217,59 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Attr::className(), ['id' => 'attr_id'])->viaTable('product_attr', ['product_id' => 'id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAttrsCats()
+    {
+        $categories = ArrayHelper::getColumn($this->categories, 'id');
+
+        $categoriesModel = Category::find()->where(['id' => $categories])->all();
+
+        $attrsId = [];
+
+        if ($categoriesModel){
+            foreach ($categoriesModel as $model){
+                $listArr = $model->catAttr;
+                if ($listArr){
+                    foreach ($listArr as $item){
+                        $attrsId[] = $item;
+                    }
+                }
+            }
+            $this->attrList = array_unique($attrsId);
+        }
+
+        return $this->hasMany(Attr::className(), ['id' => 'attr_id'])->viaTable('product_attr', ['product_id' => 'id'])->filterWhere(['id' => $this->attrList]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductAttrsCats()
+    {
+        $categories = ArrayHelper::getColumn($this->categories, 'id');
+
+        $categoriesModel = Category::find()->where(['id' => $categories])->all();
+
+        $attrsId = [];
+
+        if ($categoriesModel){
+            foreach ($categoriesModel as $model){
+                $listArr = $model->catAttr;
+                if ($listArr){
+                    foreach ($listArr as $item){
+                        $attrsId[] = $item;
+                    }
+                }
+            }
+            $this->attrList = array_unique($attrsId);
+        }
+
+        return $this->hasMany(ProductAttr::className(), ['product_id' => 'id'])->filterWhere(['attr_id' => $this->attrList]);
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -395,7 +452,7 @@ class Product extends \yii\db\ActiveRecord
 
     public function getNewPrice()
     {
-        return $this->price - ($this->price*$this->sale/100);
+        return $this->sale?$this->price - ($this->price*$this->sale/100):$this->price;
     }
 
     public function randCode()
