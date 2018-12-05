@@ -56,14 +56,14 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> Р</p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
                                     </div>
                                 <?}?>
                             </div>
@@ -111,14 +111,14 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> Р</p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
                                     </div>
                                 <?}?>
                             </div>
@@ -166,14 +166,14 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> Р</p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
                                     </div>
                                 <?}?>
                             </div>
