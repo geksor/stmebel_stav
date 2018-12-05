@@ -36,8 +36,15 @@ class CatalogController extends Controller
      * @return string
      *
      */
-    public function actionIndex($alias = null)
+    public function actionIndex($alias = null, $orderPrice = null)
     {
+        $prodOrder = ['rank' => SORT_ASC];
+        if ((integer)$orderPrice === 1){
+            $prodOrder = ['price' => SORT_DESC];
+        }
+        if ((integer)$orderPrice === 2){
+            $prodOrder = ['price' => SORT_ASC];
+        }
         if ($alias) {
             $model = Category::find()
                 ->where(['alias' => $alias])
@@ -50,10 +57,10 @@ class CatalogController extends Controller
 
             $prodArr = ArrayHelper::getColumn($model->categoryProducts, 'product_id');
 
-            $query = Product::find()->where(['publish' => 1, 'id' => $prodArr])->orderBy(['rank' => SORT_ASC]);
+            $query = Product::find()->where(['publish' => 1, 'id' => $prodArr])->orderBy($prodOrder);
         }else{
             $model = null;
-            $query = Product::find()->where(['publish' => 1])->orderBy(['rank' => SORT_ASC]);
+            $query = Product::find()->where(['publish' => 1])->orderBy($prodOrder);
         }
 
         $modelsFromLeft = Category::find()
@@ -175,5 +182,31 @@ class CatalogController extends Controller
             'model' => $model,
             'modelCat' => $modelCat,
         ]);
+    }
+
+    public function actionAddCart($prod_id, $prod_price, $prod_count)
+    {
+        $cart = Yii::$app->session->has('cart')
+            ? Yii::$app->session->get('cart')
+            : ['items' => [], 'item_count' => '0', 'total_price' => '0'];
+
+        $prodAdd = true;
+        foreach ($cart['items'] as $key => $item){
+            if ($item['prod_id'] === $prod_id){
+                $prodAdd = false;
+                $cart['items'][$key]['prod_id'] = $item['prod_id'];
+                $cart['items'][$key]['prod_price'] = $item['prod_price'];
+                $cart['items'][$key]['prod_count'] = $item['prod_count'] + $prod_count;
+                break;
+            }
+        }
+        if ($prodAdd){
+            $cart['items'][] = ['prod_id' => $prod_id, 'prod_price' => $prod_price, 'prod_count' => $prod_count];
+        }
+        $cart['item_count'] = $cart['item_count']+1;
+
+        Yii::$app->session->set('cart', $cart);
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }
