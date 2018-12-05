@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = ['label' => $modelCat->title, 'url' => ['index'
 $this->params['breadcrumbs'][] = $this->title;
 //\yii\helpers\VarDumper::dump($model,10,true);die;
 ?>
-
 <div class="content flex_1">
     <div class="product_left">
         <h1><?= $model->title ?></h1>
@@ -90,9 +89,39 @@ $this->params['breadcrumbs'][] = $this->title;
             <?}?>
         </div>
         <div class="product_right_material">
-            <p>Материал: <a href="">Искусственная кожа</a></p>
-            <p>Цвет: <a href="">Выбрать</a></p>
+            <p>Материал:</p>
+            <!-- Руднев-->
+                <div class="flex_4">
+                    <span class="input_type_radio"><input type="radio" name="jshop_attr_id[1]" id="jshop_attr_id11" value="1" checked="checked" onclick="setAttrValue('1', this.value);"> <label for="jshop_attr_id11"><span class="radio_attr_label">Кожа</span></label></span>
+                    <span class="input_type_radio"><input type="radio" name="jshop_attr_id[1]" id="jshop_attr_id12" value="2" onclick="setAttrValue('1', this.value);"> <label for="jshop_attr_id12"><span class="radio_attr_label">Рожа</span></label></span>
+                    <span class="input_type_radio"><input type="radio" name="jshop_attr_id[1]" id="jshop_attr_id13" value="3" onclick="setAttrValue('1', this.value);"> <label for="jshop_attr_id13"><span class="radio_attr_label">Все</span></label></span>
+                    <span class="input_type_radio"><input type="radio" name="jshop_attr_id[1]" id="jshop_attr_id14" value="4" onclick="setAttrValue('1', this.value);"> <label for="jshop_attr_id14"><span class="radio_attr_label">Дела</span></label></span>
+                </div>
+            <!-- Руднев-->
         </div>
+        <div class="product_right_material">
+            <p>Цвет: <img src="/public/img/gradien.jpeg" style="width: 20px; vertical-align: middle; margin: 5px;"><a id="opener">Выбрать</a></p>
+        </div>
+        <!-- Руднев-->
+
+        <div class="picker picker_no" id="primary_block" >
+
+            <div id="line">
+                <div id="arrows">
+                    <div class="left_arrow"></div>
+                    <div class="right_arrow"></div>
+                </div>
+            </div>
+
+            <div id="block_picker">
+
+                <img src="https://lh3.googleusercontent.com/-8Dm4nhAOssQ/T_IqwyIFXmI/AAAAAAAAACA/4QKmS7s_otE/s256/bgGradient.png" class="bk_img"><div class="circle" id="circle"></div>
+            </div>
+            <div id="out_color" class="out_color">
+                <p id ="closer">Выбрать</p>
+            </div>
+        </div>
+        <!-- Руднев-->
         <div class="product_right_material">
             <p>Наличие: <span><?= $model->avail?'В наличии':'Под заказ' ?></span></p>
             <p>Код товара: <span><?= $model->code ?></span></p>
@@ -276,6 +305,13 @@ $this->registerCssFile('/public/css/xzoom.css');
         $('selector').selectbox();
     });
 
+picker.init();
+$('#opener').on('click',function() {
+$('#primary_block').addClass('picker_yes')
+});
+$('#closer').on('click',function() {
+$('#primary_block').removeClass('picker_yes')
+});
 JS;
 
     $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);

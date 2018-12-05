@@ -97,6 +97,7 @@ class Product extends \yii\db\ActiveRecord
             [['price', 'avail', 'unlimited', 'count', 'sale', 'hot', 'new', 'rank', 'publish', 'rating', 'reviews_count', 'hits', 'main_category', 'show_color',], 'integer'],
             [['title', 'meta_title', 'meta_description', 'alias', 'main_image'], 'string', 'max' => 255],
             [['rank'], 'default', 'value' => 1],
+            [['publish'],'default','value' => 1],
         ];
     }
 

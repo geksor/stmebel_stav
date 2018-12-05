@@ -33,6 +33,8 @@ class AppAsset extends AssetBundle
         'public/js/mask.lib.js',
         'public/js/xzoom.min.js',
         'public/js/setup.js',
+        'public/js/Lib.js',
+        'public/js/picker.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
