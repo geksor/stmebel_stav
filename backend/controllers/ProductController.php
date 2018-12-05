@@ -119,6 +119,7 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $model = new Product();
+        $model->publish = 1;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
