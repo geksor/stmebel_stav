@@ -787,6 +787,7 @@ input[type=radio] {
 	color: #9da19f;
 }
 .product_in{
+	position: relative;
 	width: 33%;
 	border: 1px solid #bbc0be;
 	margin-top: -1px;

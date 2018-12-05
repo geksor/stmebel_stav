@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content flex_1">
     <div class="product_left">
         <h1><?= $model->title ?></h1>
-        <div class="rewiev"><a href="">Отзывы</a><a href="">Оставить отзыв</a></div>
+        <div class="rewiev"><a href="">Оставить отзыв</a></div>
         <div class="product_left_img">
             <section id="magnific">
                 <div class="row">
@@ -82,10 +82,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="product_right_price">
             <p class="product_right_price_0">Цена</p>
             <? if ($model->sale) {?>
-                <p class="product_right_price_1"><?= Yii::$app->formatter->asInteger($model->newPrice) ?> ₽</p>
-                <p class="product_right_price_2"><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+                <p class="product_right_price_1"><?= Yii::$app->formatter->asInteger($model->newPrice) ?> Р</p>
+                <p class="product_right_price_2"><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
             <?}else{?>
-                <p class="product_right_price_1"><?= Yii::$app->formatter->asInteger($model->price) ?> ₽</p>
+                <p class="product_right_price_1"><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
             <?}?>
         </div>
         <div class="product_right_material">
