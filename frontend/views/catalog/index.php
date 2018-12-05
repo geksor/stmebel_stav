@@ -55,8 +55,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="sorting flex">
             <p>Сортировать по цене</p>
             <div class="sorting_img flex">
-                <img src="/public/img/up.svg" alt="по возрастанию">
-                <img src="/public/img/down.svg" alt="по убыванию">
+                <a href="<?= \yii\helpers\Url::to(['index', 'alias' => $model?$model->alias:null, 'orderPrice' => 1]) ?>">
+                    <img src="/public/img/up.svg" alt="по убыванию">
+                </a>
+                <a href="<?= \yii\helpers\Url::to(['index', 'alias' => $model?$model->alias:null, 'orderPrice' => 2]) ?>">
+                    <img src="/public/img/down.svg" alt="по возрастанию">
+                </a>
             </div>
         </div>
     </div>
