@@ -55,77 +55,73 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="sorting flex">
             <p>Сортировать по цене</p>
             <div class="sorting_img flex">
-                <a href="<?= \yii\helpers\Url::to(['index', 'alias' => $model?$model->alias:null, 'orderPrice' => 1]) ?>">
-                    <img src="/public/img/up.svg" alt="по убыванию">
-                </a>
-                <a href="<?= \yii\helpers\Url::to(['index', 'alias' => $model?$model->alias:null, 'orderPrice' => 2]) ?>">
-                    <img src="/public/img/down.svg" alt="по возрастанию">
-                </a>
+                <img src="/public/img/up.svg" alt="по возрастанию">
+                <img src="/public/img/down.svg" alt="по убыванию">
             </div>
         </div>
     </div>
     <div class="flex_4">
-    <? if ($products) {?>
-        <? foreach ($products as $product) {/* @var $product \common\models\Product */?>
-            <div class="product product_in">
-                <? if ($product->sale) {?>
-                    <div class="sale">
-                        <p>-<?= $product->sale ?>%</p>
-                    </div>
-                <?}?>
-                <? if ($product->hot) {?>
-                    <div class="sale hot">
-                        <p>Хит продаж</p>
-                    </div>
-                <?}?>
-                <? if ($product->new) {?>
-                    <div class="sale new">
-                        <p>Новинка</p>
-                    </div>
-                <?}?>
-                <div class="product_img">
-                    <? if ($model) {?>
-                        <a href="<?= \yii\helpers\Url::to(['item', 'alias' => $model->alias, 'item' => $product->alias]) ?>"><img src="<?= $product->getThumbMainImage() ?>" alt="<?= $product->title ?>"></a>
-                    <?}else{?>
-                        <a href="<?= \yii\helpers\Url::to(['item', 'alias' => $product->mainCat->alias, 'item' => $product->alias]) ?>"><img src="<?= $product->getThumbMainImage() ?>" alt="<?= $product->title ?>"></a>
-                    <?}?>
-                </div>
-                <div class="product_name">
-                    <?= $product->title ?>
-                </div>
-                <div class="product_description">
-                    <? if ($product->productOptionsList) {?>
-                        <? foreach ($product->productOptionsList as $productOption) {/* @var $productOption \common\models\ProductOptions */?>
-                            <?= $productOption->options->title ?>: <?= $productOption->options_value?$productOption->options_value:$productOption->optionsValue->value ?>
-                        <?}?>
-                    <?}?>
-                </div>
-                <div class="product_price flex">
+        <? if ($products) {?>
+            <? foreach ($products as $product) {/* @var $product \common\models\Product */?>
+                <div class="product product_in">
                     <? if ($product->sale) {?>
-                        <div class="price_1">
-                            <p><?= Yii::$app->formatter->asInteger($product->getNewPrice()) ?> ₽</p>
-                        </div>
-                        <div class="price_2">
-                            <p><?= Yii::$app->formatter->asInteger($product->price) ?> ₽</p>
-                        </div>
-                    <?}else{?>
-                        <div class="price_1">
-                            <p><?= Yii::$app->formatter->asInteger($product->price) ?> ₽</p>
+                        <div class="sale">
+                            <p>-<?= $product->sale ?>%</p>
                         </div>
                     <?}?>
-                </div>
-                <div class="product_read">
-                    <? if ($model) {?>
-                        <?= \yii\helpers\Html::a('Подробнее',['item', 'alias' => $model->alias, 'item' => $product->alias]) ?>
-                    <?}else{?>
-                        <?= \yii\helpers\Html::a('Подробнее',['item', 'alias' => $product->mainCat->alias, 'item' => $product->alias]) ?>
+                    <? if ($product->hot) {?>
+                        <div class="sale hot">
+                            <p>Хит продаж</p>
+                        </div>
                     <?}?>
+                    <? if ($product->new) {?>
+                        <div class="sale new">
+                            <p>Новинка</p>
+                        </div>
+                    <?}?>
+                    <div class="product_img">
+                        <? if ($model) {?>
+                            <a href="<?= \yii\helpers\Url::to(['item', 'alias' => $model->alias, 'item' => $product->alias]) ?>"><img src="<?= $product->getThumbMainImage() ?>" alt="<?= $product->title ?>"></a>
+                        <?}else{?>
+                            <a href="<?= \yii\helpers\Url::to(['item', 'alias' => $product->mainCat->alias, 'item' => $product->alias]) ?>"><img src="<?= $product->getThumbMainImage() ?>" alt="<?= $product->title ?>"></a>
+                        <?}?>
+                    </div>
+                    <div class="product_name">
+                        <?= $product->title ?>
+                    </div>
+                    <div class="product_description">
+                        <? if ($product->productOptionsList) {?>
+                            <? foreach ($product->productOptionsList as $productOption) {/* @var $productOption \common\models\ProductOptions */?>
+                                <?= $productOption->options->title ?>: <?= $productOption->options_value?$productOption->options_value:$productOption->optionsValue->value ?>
+                            <?}?>
+                        <?}?>
+                    </div>
+                    <div class="product_price flex">
+                        <? if ($product->sale) {?>
+                            <div class="price_1">
+                                <p><?= Yii::$app->formatter->asInteger($product->getNewPrice()) ?> ₽</p>
+                            </div>
+                            <div class="price_2">
+                                <p><?= Yii::$app->formatter->asInteger($product->price) ?> ₽</p>
+                            </div>
+                        <?}else{?>
+                            <div class="price_1">
+                                <p><?= Yii::$app->formatter->asInteger($product->price) ?> ₽</p>
+                            </div>
+                        <?}?>
+                    </div>
+                    <div class="product_read">
+                        <? if ($model) {?>
+                            <?= \yii\helpers\Html::a('Подробнее',['item', 'alias' => $model->alias, 'item' => $product->alias]) ?>
+                        <?}else{?>
+                            <?= \yii\helpers\Html::a('Подробнее',['item', 'alias' => $product->mainCat->alias, 'item' => $product->alias]) ?>
+                        <?}?>
+                    </div>
                 </div>
-            </div>
+            <?}?>
+        <?}else{?>
+            <h2>Нет товаров</h2>
         <?}?>
-    <?}else{?>
-        <h2>Нет товаров</h2>
-    <?}?>
     </div>
     <div class="nav_number">
         <?= \yii\widgets\LinkPager::widget([
