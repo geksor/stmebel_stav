@@ -79,6 +79,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     'add_price:decimal',
+                    [
+                        'attribute' => 'rank',
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\ProductAttr */
+                            return Html::input(
+                                    'number',
+                                    'rank' ,$data->rank,
+                                    [
+                                        'class' => 'form-control',
+                                        'id' => $data->product_id,
+                                        'data-attr_id' => $data->attr_id,
+                                        'data-attrValue_id' => $data->attrValue_id,
+                                    ]);
+                        }
+
+                    ],
+
 
                     [
                         'class' => 'yii\grid\ActionColumn',
@@ -86,6 +104,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]); ?>
+<?
+$js = <<< JS
+    $('[name = rank]').keypress(function(e){
+        if(e.keyCode==13){
+            $.ajax({
+                type: "GET",
+                url: "/admin/product-attr/rank",
+                data: 'product_id='+ $(this).attr('id') + '&attr_id=' + $(this).attr('data-attr_id') + '&attrValue_id=' + $(this).attr('data-attrValue_id')+'&rank=' + $(this).val(),
+            })
+        }
+    });
+JS;
+
+$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+?>
+
 
             <?php Pjax::end(); ?>
         </div>

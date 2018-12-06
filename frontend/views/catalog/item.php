@@ -82,10 +82,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="product_right_price">
             <p class="product_right_price_0">Цена</p>
             <? if ($model->sale) {?>
-                <p class="product_right_price_1"><?= Yii::$app->formatter->asInteger($model->newPrice) ?> Р</p>
+                <p class="product_right_price_1 main-price" data-base_price="<?= $model->newPrice ?>"><?= Yii::$app->formatter->asInteger($model->newPrice) ?> Р</p>
                 <p class="product_right_price_2"><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
             <?}else{?>
-                <p class="product_right_price_1"><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
+                <p class="product_right_price_1 main-price" data-base_price="<?= $model->price ?>"><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
             <?}?>
         </div>
         <div class="product_right_material">
@@ -101,27 +101,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                             type="radio"
                                             name="attr_id[<?= $attr->id ?>]"
                                             id="attr_id<?= $attr->id.$prodAttr->attrValue_id ?>"
-                                            value="<?
-                                                $price = $model->newPrice;
-                                                switch ($prodAttr->price_mod){
-                                                    case 0:
-                                                        $price = $price + $prodAttr->add_price;
-                                                        break;
-                                                    case 1:
-                                                        $price = $price - $prodAttr->add_price;
-                                                        break;
-                                                    case 2:
-                                                        $price = $price * $prodAttr->add_price;
-                                                        break;
-                                                    case 3:
-                                                        $price = $price / $prodAttr->add_price;
-                                                        break;
-                                                    case 4:
-                                                        $price = $prodAttr->add_price;
-                                                        break;
-                                                }
-                                                echo $price;
-                                            ?>"
+                                            value="<?= $prodAttr->add_price ?>"
+                                            data-mod="<?= $prodAttr->price_mod ?>"
                                             <?= $i===0?'checked="checked"':'' ?>
                                     >
                                     <label for="attr_id<?= $attr->id.$prodAttr->attrValue_id ?>">

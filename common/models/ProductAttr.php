@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
  * @property int $attrValue_id
  * @property int $price_mod
  * @property int $add_price
+ * @property int $rank
  *
  * @property AttrValue $attrValue
  * @property Attr $attr
@@ -35,11 +36,12 @@ class ProductAttr extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'attr_id', 'attrValue_id', 'price_mod', 'add_price'], 'required'],
-            [['product_id', 'attr_id', 'attrValue_id', 'price_mod', 'add_price'], 'integer'],
+            [['product_id', 'attr_id', 'attrValue_id', 'price_mod', 'add_price', 'rank'], 'integer'],
             [['product_id', 'attr_id', 'attrValue_id'], 'unique', 'targetAttribute' => ['product_id', 'attr_id', 'attrValue_id']],
             [['attrValue_id'], 'exist', 'skipOnError' => true, 'targetClass' => AttrValue::className(), 'targetAttribute' => ['attrValue_id' => 'id']],
             [['attr_id'], 'exist', 'skipOnError' => true, 'targetClass' => Attr::className(), 'targetAttribute' => ['attr_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
+            [['rank'], 'default', 'value' => 100],
         ];
     }
 
@@ -54,6 +56,7 @@ class ProductAttr extends \yii\db\ActiveRecord
             'attrValue_id' => 'Attr Value ID',
             'price_mod' => 'Price Mod',
             'add_price' => 'Add Price',
+            'rank' => 'Rank',
         ];
     }
 
