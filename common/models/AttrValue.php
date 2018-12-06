@@ -13,6 +13,7 @@ use Yii;
  * @property int $rank
  *
  * @property Attr $attr
+ * @property ProductAttr[] $productAttrs
  */
 class AttrValue extends \yii\db\ActiveRecord
 {
@@ -57,5 +58,26 @@ class AttrValue extends \yii\db\ActiveRecord
     public function getAttr()
     {
         return $this->hasOne(Attr::className(), ['id' => 'attr_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductAttrs()
+    {
+        return $this->hasMany(ProductAttr::className(), ['attrValue_id' => 'id']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($this->productAttrs){
+            foreach ($this->productAttrs as $productAttr){
+                if ($productAttr->rank !== $this->rank){
+                    $productAttr->rank = $this->rank;
+                    $productAttr->save();
+                }
+            }
+        }
+        return parent::beforeSave($insert);
     }
 }
