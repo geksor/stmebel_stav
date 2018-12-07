@@ -123,7 +123,7 @@
                                 <?}?>
                             </div>
                             <div class="product_read">
-                                <a href="/catalog/<?= $model->alias ?>">Подробнее</a>
+                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Подробнее</a>
                             </div>
                         </div>
                     <?}?>
@@ -178,7 +178,7 @@
                                 <?}?>
                             </div>
                             <div class="product_read">
-                                <a href="/catalog/<?= $model->alias ?>">Подробнее</a>
+                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Подробнее</a>
                             </div>
                         </div>
                     <?}?>

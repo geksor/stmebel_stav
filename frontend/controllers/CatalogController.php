@@ -3,9 +3,11 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use common\models\Product;
+use frontend\widgets\CartWidget;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 
@@ -160,10 +162,16 @@ class CatalogController extends Controller
             ->where(['alias' => $item])
             ->with([
                 'productAttrsCats'  => function (\yii\db\ActiveQuery $query) {
-                    $query->with(['attrValue', 'attr']);
+                    $query
+                        ->with(['attrValue', 'attr'])
+                        ->orderBy(['rank' => SORT_ASC]);
                 },
             ])
-            ->with(['attrsCats'])
+            ->with([
+                'attrsCats'  => function (\yii\db\ActiveQuery $query) {
+                    $query->orderBy(['rank' => SORT_ASC]);
+                },
+            ])
             ->with([
                 'productOptionsShort'  => function (\yii\db\ActiveQuery $query) {
                     $query->with(['options', 'optionsValue']);
@@ -183,36 +191,77 @@ class CatalogController extends Controller
             },])
             ->one();
 
+
         return $this->render('item', [
             'model' => $model,
             'modelCat' => $modelCat,
         ]);
     }
 
-    public function actionAddCart($prod_id, $prod_price, $prod_count)
+    public function actionAddCart($prod_id, $prod_price, $prod_count, $prod_attrValue)
     {
         $cart = Yii::$app->session->has('cart')
             ? Yii::$app->session->get('cart')
             : ['items' => [], 'item_count' => '0', 'prod_count' => '0', 'total_price' => '0'];
 
+        $prod_attrValue = Json::decode($prod_attrValue);
+        $attrCheck = '';
+        foreach ($prod_attrValue as $value){
+            $attrCheck .= $value;
+        }
+
         $prodAdd = true;
         foreach ($cart['items'] as $key => $item){
-            if ($item['prod_id'] === $prod_id){
+            $attrChecked = '';
+            if (ArrayHelper::keyExists('prod_attrValue', $item)){
+                foreach ($item['prod_attrValue'] as $value){
+                    $attrChecked .= $value;
+                }
+            }
+            if ($item['prod_id'] === $prod_id && (int)$attrCheck === (int)$attrChecked){
                 $prodAdd = false;
                 $cart['items'][$key]['prod_id'] = $item['prod_id'];
                 $cart['items'][$key]['prod_price'] = $item['prod_price'];
                 $cart['items'][$key]['prod_count'] = $item['prod_count'] + $prod_count;
+                $cart['items'][$key]['prod_attrValue'] = $item['prod_attrValue'];
                 break;
             }
         }
         if ($prodAdd){
-            $cart['items'][] = ['prod_id' => $prod_id, 'prod_price' => $prod_price, 'prod_count' => $prod_count];
+            $cart['items'][] = ['prod_id' => $prod_id, 'prod_price' => $prod_price, 'prod_count' => $prod_count, 'prod_attrValue' => $prod_attrValue];
+            $cart['item_count'] = $cart['item_count']+1;
         }
-        $cart['item_count'] = $cart['item_count']+1;
         $cart['prod_count'] = $cart['prod_count']+$prod_count;
 
         Yii::$app->session->set('cart', $cart);
 
+        return $this->renderAjax(CartWidget::widget());
+    }
+
+    public $valuesId;
+    public $attrsId;
+
+    public function actionCalcPrice($id, $attrsId, $valuesId)
+    {
+        if ($attrsId && $valuesId){
+            $this->valuesId = Json::decode($valuesId);
+            $this->attrsId = Json::decode($attrsId);
+
+            $model = Product::find()
+                ->where(['id' => $id])
+                ->with([
+                    'productAttrs' => function (\yii\db\ActiveQuery $query) {
+                        $query->andWhere(['attr_id' => $this->attrsId, 'attrValue_id' => $this->valuesId]);
+                    },
+                ])
+                ->one();
+
+
+            return $this->renderAjax('price', [
+                'model' => $model,
+            ]);
+
+        }
         return $this->redirect(Yii::$app->request->referrer);
     }
 }

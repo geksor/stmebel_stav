@@ -46,6 +46,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '/catalog/add-cart' => 'catalog/add-cart',
+                '/catalog/calc-price' => 'catalog/calc-price',
                 '/catalog/<alias>/page/<page:\d+>' => 'catalog/index',
                 '/catalog/<alias>/sort/<orderPrice:\d+>' => 'catalog/index',
                 '/catalog/sort/<orderPrice:\d+>' => 'catalog/index',

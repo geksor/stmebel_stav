@@ -81,12 +81,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="product_right">
         <div class="product_right_price">
             <p class="product_right_price_0">Цена</p>
-            <? if ($model->sale) {?>
-                <p class="product_right_price_1 main-price" data-base_price="<?= $model->newPrice ?>"><?= Yii::$app->formatter->asInteger($model->newPrice) ?> Р</p>
-                <p class="product_right_price_2"><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
-            <?}else{?>
-                <p class="product_right_price_1 main-price" data-base_price="<?= $model->price ?>"><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
-            <?}?>
+            <? \yii\widgets\Pjax::begin(['id' => 'price', 'options' => ['class' => 'product_right_price']]) ?>
+                <? if ($model->sale) {?>
+                    <p class="product_right_price_1 main-price" ><?= $model->getSaleAttrPrice(true) ?> Р</p>
+                    <p class="product_right_price_2"><?= $model->getAttrPrice(true) ?> Р</p>
+                <?}else{?>
+                    <p class="product_right_price_1 main-price" ><?= $model->getAttrPrice(true) ?> Р</p>
+                <?}?>
+            <? \yii\widgets\Pjax::end() ?>
         </div>
         <div class="product_right_material">
             <? if ($model->attrsCats) {?>
@@ -99,10 +101,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <span class="input_type_radio">
                                     <input
                                             type="radio"
+                                            class="attrInput"
                                             name="attr_id[<?= $attr->id ?>]"
                                             id="attr_id<?= $attr->id.$prodAttr->attrValue_id ?>"
-                                            value="<?= $prodAttr->add_price ?>"
-                                            data-mod="<?= $prodAttr->price_mod ?>"
+                                            value="<?= $prodAttr->attrValue_id ?>"
+                                            data-attr="<?= $attr->id ?>"
                                             <?= $i===0?'checked="checked"':'' ?>
                                     >
                                     <label for="attr_id<?= $attr->id.$prodAttr->attrValue_id ?>">
@@ -155,13 +158,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </div>
         <div class="product_right_cart flex">
-            <p class="product_right_cart_p">Количество:</p>
+            <p class="product_right_cart_p"><label for="prodCount">Количество:</label></p>
             <div>
                 <div class="number">
                     <span class="minus">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="21"><path class="owl_fill" fill-rule="evenodd" d="M11.787 1.838l-8.79 8.646 8.79 8.647a.756.756 0 0 1 0 1.081l-.549.54a.787.787 0 0 1-1.099 0L.25 11.025a.758.758 0 0 1 0-1.081L10.139.217a.785.785 0 0 1 1.099 0l.549.54a.756.756 0 0 1 0 1.081z"></path></svg>
                     </span>
-                    <input type="text" value="1" size="5"/>
+                    <input id="prodCount" type="text" value="1" size="5"/>
                     <span class="plus">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="21"><path class="owl_fill" fill-rule="evenodd" d="M11.778 11.041l-9.913 9.742a.79.79 0 0 1-1.102 0l-.55-.542a.754.754 0 0 1 0-1.082L9.024 10.5.213 1.841a.755.755 0 0 1 0-1.083l.55-.541a.79.79 0 0 1 1.102 0l9.913 9.742a.754.754 0 0 1 0 1.082z"></path></svg>
                             </span>
@@ -173,8 +176,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     id="addToCart"
                     class="fill_cart_by"
                     data-prod_id="<?= $model->id ?>"
-                    data-prod_price="<?= $model->newPrice ?>"
+                    data-prod_price="<?= $model->attrPrice ?>"
                     data-prod_count="1"
+                    data-prod_attrValue=""
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
                         <path class="fill_cart_product" fill-rule="evenodd" d="M34.332 5.76H8.943L7.481 2.328a1.204 1.204 0 0 0-.83-.698L1.94.524a1.2 1.2 0 1 0-.55 2.334l4.119.968L16.05 28.568a3.935 3.935 0 0 0-.513 1.947 3.972 3.972 0 0 0 7.943 0c0-.549-.113-1.072-.316-1.549h4.325c-.203.477-.315 1-.315 1.549a3.972 3.972 0 0 0 7.943 0 3.972 3.972 0 0 0-3.971-3.965l-13.337.018-1.645-3.86h18.169a1.2 1.2 0 0 0 1.201-1.199V6.96a1.201 1.201 0 0 0-1.202-1.2zm-3.185 23.189c.867 0 1.57.702 1.57 1.567a1.569 1.569 0 0 1-3.139 0c0-.865.703-1.567 1.569-1.567zm-11.633 0a1.568 1.568 0 1 1 0 3.134 1.569 1.569 0 0 1-1.569-1.567c0-.865.703-1.567 1.569-1.567zm13.618-15.914h-7.961a1.2 1.2 0 1 0 0 2.398h7.961v4.877h-17.99L9.965 8.158h23.167v4.877z"/>
@@ -303,23 +307,59 @@ $this->registerCssFile('/public/css/xzoom.css');
 <?
     $js = <<< JS
     $(document).ready(function (){
-        
+        var input = $('#prodCount');
         $('.minus').click(function () {
-                var input = $(this).parent().find('input');
                 var count = parseInt(input.val()) - 1;
                 count = count < 1 ? 1 : count;
                 input.val(count);
                 input.change();
                 return false;
             });
-            $('.plus').click(function () {
-                var input = $(this).parent().find('input');
-                input.val(parseInt(input.val()) + 1);
-                input.change();
-                return false;
-            });
+        $('.plus').click(function () {
+            input.val(parseInt(input.val()) + 1);
+            input.change();
+            return false;
+        });
+        
+        var prodAttrValue = [];
+        $('.attrInput:checked').each(function() {
+            prodAttrValue.push($(this).val());//data-attr = attrId, val = valueId
+        });
+        prodAttrValue = JSON.stringify(prodAttrValue);
+        $('#addToCart').attr('data-prod_attrValue', prodAttrValue);
+
+        input.on('change', function() {
+            $('#addToCart').attr('data-prod_count', input.val())
+        });
             
         $('selector').selectbox();
+        
+        $('.attrInput').on('change', function() {
+            var checkedAttr = [];
+            var checkedVal = [];
+            $('.attrInput:checked').each(function() {
+                checkedVal.push($(this).val());//data-attr = attrId, val = valueId
+                checkedAttr.push($(this).attr('data-attr'));//data-attr = attrId, val = valueId
+            });
+            checkedVal = JSON.stringify(checkedVal);
+            checkedAttr = JSON.stringify(checkedAttr);
+            $('#addToCart').attr('data-prod_attrValue', checkedVal);
+
+            
+            $.pjax.reload({
+                container: '#price',
+                type       : 'GET',
+                url        : '/catalog/calc-price',
+                data       : {
+                    id: $model->id,
+                    attrsId: checkedAttr,
+                    valuesId: checkedVal
+                },
+                push       : false,
+                replace    : false,
+                timeout    : 1000,
+            });
+        });
     });
 
 picker.init();

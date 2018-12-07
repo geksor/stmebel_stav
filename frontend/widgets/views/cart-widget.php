@@ -27,9 +27,10 @@ $('#addToCart').click(function(event) {
             data       : {
                 prod_id: $(this).attr('data-prod_id'),
                 prod_price: $(this).attr('data-prod_price'),
-                prod_count: $(this).attr('data-prod_count')
+                prod_count: $(this).attr('data-prod_count'),
+                prod_attrValue: $(this).attr('data-prod_attrValue')
             },
-            push       : true,
+            push       : false,
             replace    : false,
             timeout    : 1000,
         });

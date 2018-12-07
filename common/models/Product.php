@@ -43,6 +43,7 @@ use yii\helpers\Json;
  * @property int $oldMainCat
  * @property int $show_color
  * @property int $newPrice
+ * @property int $attrPrice
  *
  * @property CategoryProduct[] $categoryProducts
  * @property Category[] $categories
@@ -454,6 +455,71 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->sale?$this->price - ($this->price*$this->sale/100):$this->price;
     }
+
+    public function getSaleAttrPrice($format = false)
+    {
+        return $format?Yii::$app->formatter->asInteger($this->attrPrice - ($this->attrPrice*$this->sale/100)):$this->attrPrice - ($this->attrPrice*$this->sale/100);
+    }
+
+    public function getSaleCalcPrice($prodAttr, $format = false)
+    {
+        return $format?Yii::$app->formatter->asInteger($this->getCalcPrice($prodAttr) - ($this->attrPrice*$this->sale/100)):$this->getCalcPrice($prodAttr) - ($this->attrPrice*$this->sale/100);
+    }
+
+    /**
+     * @param bool $format
+     * @return int|mixed|string
+     */
+    public function getAttrPrice($format = false)
+    {
+        $basePrice = $this->price;
+        if ($this->productAttrsCats){
+            $attrArr = ArrayHelper::map($this->getProductAttrsCats()->orderBy(['attr_id' => SORT_ASC, 'rank' => SORT_ASC])->all(), 'attrValue_id', 'attr_id', 'attr_id');
+            foreach ($attrArr as $attr){
+                if (!empty($attr)){
+                    foreach ($attr as $attrValueId => $attrId){
+                        $model = ProductAttr::find()->where(['attrValue_id' => $attrValueId, 'attr_id' => $attrId])->one();
+                            switch ($model->price_mod){
+                                case 0:
+                                    $basePrice = $basePrice + $model->add_price;
+                                    break;
+                                case 1:
+                                    $basePrice = $basePrice - $model->add_price;
+                                    break;
+                            }
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $format?Yii::$app->formatter->asInteger($basePrice):$basePrice;
+    }
+
+    /**
+     * @param bool $format
+     * @return int|mixed|string
+     */
+    public function getCalcPrice($prodAttr, $format = false)
+    {
+        $basePrice = $this->price;
+        if ($prodAttr){
+            foreach ($prodAttr as $attr){/* @var $attr ProductAttr */
+                switch ($attr->price_mod){
+                    case 0:
+                        $basePrice = $basePrice + $attr->add_price;
+                        break;
+                    case 1:
+                        $basePrice = $basePrice - $attr->add_price;
+                        break;
+                }
+            }
+        }
+
+        return $format?Yii::$app->formatter->asInteger($basePrice):$basePrice;
+    }
+
+
 
     public function randCode()
     {
