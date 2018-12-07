@@ -120,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?}?>
         </div>
         <div class="product_right_material">
-            <? if ($model->show_color) {?>
+            <? if (!$model->show_color) {?>
                 <div>
                 Цвет:
                 <div class="prodColorBlock" style="
