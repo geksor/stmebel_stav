@@ -21,7 +21,7 @@ use yii\widgets\Pjax;
 
     <?= $form->field($model, 'attrValue_id')->dropDownList($attrValue, ['prompt' => 'Выбрать значение']) ?>
 
-    <?= $form->field($model, 'price_mod')->dropDownList([0 => '+', 1 => '-', 2 => '*', 3 => '/', 4 => '=']) ?>
+    <?= $form->field($model, 'price_mod')->dropDownList([0 => '+', 1 => '-',]) ?>
 
     <?= $form->field($model, 'add_price')->textInput() ?>
 

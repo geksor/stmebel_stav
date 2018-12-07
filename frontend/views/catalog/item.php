@@ -120,7 +120,21 @@ $this->params['breadcrumbs'][] = $this->title;
             <?}?>
         </div>
         <div class="product_right_material">
-            <p>Цвет: <img src="/public/img/gradien.jpeg" style="width: 20px; vertical-align: middle; margin: 5px;"><a id="opener">Выбрать</a></p>
+            <div>
+                Цвет:
+                <div class="prodColorBlock" style="
+                        width: 20px;
+                        height: 20px;
+                        line-height: 0;
+                        vertical-align: middle;
+                        margin: 5px;
+                        display: inline-block;
+                        background: url('/public/img/gradien.jpeg');
+                        background-size: cover;
+                ">
+                </div>
+                <a id="opener">Выбрать</a>
+            </div>
         </div>
         <!-- Руднев-->
 
@@ -362,13 +376,15 @@ $this->registerCssFile('/public/css/xzoom.css');
         });
     });
 
-picker.init();
-$('#opener').on('click',function() {
-$('#primary_block').addClass('picker_yes')
-});
-$('#closer').on('click',function() {
-$('#primary_block').removeClass('picker_yes')
-});
+    picker.init();
+    $('#opener').on('click',function() {
+        $('#primary_block').addClass('picker_yes')
+    });
+    $('#closer').on('click',function() {
+        $('#primary_block').removeClass('picker_yes');
+        var color = $('#out_color').css('background-color');
+        $('.prodColorBlock').css('background', color);
+    });
 JS;
 
     $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
