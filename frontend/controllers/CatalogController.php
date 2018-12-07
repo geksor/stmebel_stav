@@ -232,8 +232,10 @@ class CatalogController extends Controller
             $cart['item_count'] = $cart['item_count']+1;
         }
         $cart['prod_count'] = $cart['prod_count']+$prod_count;
+        $cart['total_price'] = $cart['total_price']+$prod_count*$prod_price;
 
         Yii::$app->session->set('cart', $cart);
+//        Yii::$app->session->destroy();
 
         return $this->renderAjax(CartWidget::widget());
     }

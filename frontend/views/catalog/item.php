@@ -192,7 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     id="addToCart"
                     class="fill_cart_by"
                     data-prod_id="<?= $model->id ?>"
-                    data-prod_price="<?= $model->attrPrice ?>"
+                    data-prod_price="<?= $model->sale?$model->saleAttrPrice:$model->attrPrice ?>"
                     data-prod_count="1"
                     data-prod_attrValue=""
                 >
@@ -376,6 +376,9 @@ $this->registerCssFile('/public/css/xzoom.css');
                 timeout    : 1000,
             });
         });
+        $('#price').on('pjax:end', function() {
+            $('#addToCart').attr('data-prod_price', $('.main-price').attr('data-price'));
+        })
     });
 
     picker.init();

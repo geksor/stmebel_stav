@@ -44,6 +44,7 @@ use yii\helpers\Json;
  * @property int $show_color
  * @property int $newPrice
  * @property int $attrPrice
+ * @property int $saleAttrPrice
  *
  * @property CategoryProduct[] $categoryProducts
  * @property Category[] $categories
