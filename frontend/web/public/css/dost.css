@@ -1,0 +1,96 @@
+.dost_flex{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    align-items: center;
+}
+.dost{
+    width: 100%;
+}
+.dost_full{
+    font-size: 20px;
+    line-height: 0.67;
+    letter-spacing: 0.9px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+.dost h2{
+    font-size: 24px;
+    font-family: 'RobotoBold';
+    line-height: 1.5;
+    letter-spacing: 0.4px;
+    text-align: left;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    color: #424242;
+}
+.dost_p{
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.4px;
+    margin-bottom: 10px;
+}
+.dost h1{
+    font-size: 36px;
+    font-family: 'RobotoBold';
+    letter-spacing: 1.4px;
+    line-height: 1;
+    text-align: left;
+    color: #424242;
+    margin-bottom: 40px;
+    display: block;
+    width: 100%;
+}
+.dost nav{
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #424242;
+}
+.dost h3{
+    font-family: 'RobotoBold';
+    margin-bottom: 20px;
+}
+.dost_left{
+    width: 50%;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.4px;
+    color: #424242;
+}
+.dost_left p{
+    margin-bottom: 20px;
+}
+.dost_right{
+    width: 49%;
+    padding: 30px;
+    font-size: 16px;
+    line-height: 2.25;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #424242;
+}
+.dost_right h2{
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.33;
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
+}
+.dost_right_1{
+    width: 49%;
+    line-height: 1.3;
+    text-align: center;
+    padding: 30px;
+    color: #fff;
+}
+.dost_right_1_1{
+    background: #00d081;
+}
+.dost_right_1_2{
+    background: #f65454;
+}
+@media (min-width: 1px) and (max-width: 980px) {
+    .dost_left, .dost_right{
+        width: 100%;
+    }
+}

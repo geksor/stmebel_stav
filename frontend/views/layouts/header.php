@@ -5,9 +5,9 @@
         <div class="cont flex">
             <div class="head_menu">
                 <ul class="flex">
-                    <li><a href="">О нас</a></li>
-                    <li><a href="">Доставка</a></li>
-                    <li><a href="">Контакты</a></li>
+                    <li><a href="about">О нас</a></li>
+                    <li><a href="delivery">Доставка</a></li>
+                    <li><a href="contact">Контакты</a></li>
                 </ul>
             </div>
             <div class="head_soc flex">

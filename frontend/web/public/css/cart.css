@@ -1,0 +1,233 @@
+.basket{
+    min-height: 500px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: end;
+}
+.basket h1{
+    font-size: 36px;
+    font-family: 'RobotoBold';
+    letter-spacing: 1.4px;
+    line-height: 1;
+    text-align: left;
+    color: #424242;
+    margin-bottom: 40px;
+    display: block;
+    width: 100%;
+}
+.basket_left{
+    border: 1px solid #dee3e1;
+    width: 65%;
+}
+.basket_product{
+    padding: 15px;
+    border-bottom: 1px solid #dee3e1;
+}
+.basket_price{
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    color: #00d181;
+}
+.basket_close{
+
+}
+.basket_product_img{
+    width: 90px;
+    padding: 5px;
+    border: 1px solid #dee3e1;
+}
+.basket_product_img img{
+    width: 100%;
+}
+.basket_product_name h2{
+    font-size: 16px;
+}
+.basket_product_name{
+    color: #424242;
+    font-family: Roboto;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #424242;
+}
+.basket_product_att{
+    width: 10px;
+    height: 10px;
+    background: #000;
+    display: inline-block;
+}
+.basket_right{
+    border: 1px solid #dee3e1;
+    width: 30%;
+    background: #f0f3f2;
+    padding: 15px;
+}
+.basket_right_price{
+    font-size: 36px;
+    font-family: 'RobotoBold';
+    line-height: 1.5;
+    color: #424242;
+}
+.basket_right_1{
+    padding: 20px 0;
+    border-bottom: 2px dotted #9fa4a2;
+}
+.basket_right_2{
+    padding: 20px 0 0 0;
+}
+.basket_right_2 h3{
+    font-size: 16px;
+    line-height: 2.25;
+    font-family: 'RobotoBold';
+    color: #424242;
+}
+.basket_right_2 .container a{
+    color: #f34e4e;
+}
+.basket_form{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.basket_form input{
+    background: #fff;
+    width: 30%;
+    border: 1px solid #bdbebe;
+    padding: 15px 10px;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    color: #9fa4a2;
+}
+.go_by{
+    background-color: #f34e4e;
+    font-size: 16px;
+    display: block;
+    line-height: 1.5;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+}
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 19px;
+    width: 19px;
+    border: 1px solid #dee3e1;
+    background-color: #fff;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #f9f9f9;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #fff;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: -6px;
+    width: 10px;
+    height: 19px;
+    border: solid #00d081;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.radiobtn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .radiobtn{
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .radiobtn{
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radiobtn:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .radiobtn:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .radiobtn:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+@media (min-width: 1px) and (max-width: 980px) {
+    .basket_left{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .basket_right{
+        border: 1px solid #dee3e1;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .basket_form input{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

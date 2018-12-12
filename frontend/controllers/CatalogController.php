@@ -198,7 +198,7 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function actionAddCart($prod_id, $prod_price, $prod_count, $prod_attrValue)
+    public function actionAddCart($prod_id, $prod_price, $prod_count, $prod_attrValue, $prodColor)
     {
         $cart = Yii::$app->session->has('cart')
             ? Yii::$app->session->get('cart')
@@ -218,17 +218,24 @@ class CatalogController extends Controller
                     $attrChecked .= $value;
                 }
             }
-            if ($item['prod_id'] === $prod_id && (int)$attrCheck === (int)$attrChecked){
+            if ($item['prod_id'] === $prod_id && (int)$attrCheck === (int)$attrChecked && $item['prod_color'] === $prodColor){
                 $prodAdd = false;
                 $cart['items'][$key]['prod_id'] = $item['prod_id'];
                 $cart['items'][$key]['prod_price'] = $item['prod_price'];
                 $cart['items'][$key]['prod_count'] = $item['prod_count'] + $prod_count;
                 $cart['items'][$key]['prod_attrValue'] = $item['prod_attrValue'];
+                $cart['items'][$key]['prod_color'] = $item['prod_color'];
                 break;
             }
         }
         if ($prodAdd){
-            $cart['items'][] = ['prod_id' => $prod_id, 'prod_price' => $prod_price, 'prod_count' => $prod_count, 'prod_attrValue' => $prod_attrValue];
+            $cart['items'][] = [
+                'prod_id' => $prod_id,
+                'prod_price' => $prod_price,
+                'prod_count' => $prod_count,
+                'prod_attrValue' => $prod_attrValue,
+                'prod_color' => $prodColor,
+            ];
             $cart['item_count'] = $cart['item_count']+1;
         }
         $cart['prod_count'] = $cart['prod_count']+$prod_count;

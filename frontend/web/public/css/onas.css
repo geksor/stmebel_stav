@@ -1,0 +1,53 @@
+.onas_flex{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    align-items: center;
+}
+.onas{
+    min-height: 500px;
+    width: 100%;
+}
+.onas h1{
+    font-size: 36px;
+    font-family: 'RobotoBold';
+    letter-spacing: 1.4px;
+    line-height: 1;
+    text-align: left;
+    color: #424242;
+    margin-bottom: 40px;
+    display: block;
+    width: 100%;
+}
+.onas_left{
+    width: 65%;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.4px;
+    color: #424242;
+}
+.onas_left p{
+    margin-bottom: 20px;
+}
+.onas_right{
+    width: 33%;
+    background: #ecf0ee;
+    padding: 30px;
+    font-size: 16px;
+    line-height: 2.25;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #424242;
+}
+.onas_right h2{
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.33;
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
+}
+@media (min-width: 1px) and (max-width: 980px) {
+    .kont_left, .kont_right{
+        width: 100%;
+    }
+}

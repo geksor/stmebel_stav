@@ -112,6 +112,11 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionDelivery()
+    {
+        return $this->render('delivery');
+    }
+
     public function actionPartner()
     {
         $model = WePartner::findOne(['id' => 1]);

@@ -1,0 +1,46 @@
+.kont_flex{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    align-items: center;
+}
+.kont{
+    min-height: 500px;
+    width: 100%;
+}
+.kont h1{
+    font-size: 36px;
+    font-family: 'RobotoBold';
+    letter-spacing: 1.4px;
+    line-height: 1;
+    text-align: left;
+    color: #424242;
+    margin-bottom: 40px;
+    display: block;
+    width: 100%;
+}
+.kont_left{
+    width: 35%;
+    font-size: 16px;
+    line-height: 2;
+    letter-spacing: 0.4px;
+    color: #424242;
+}
+.kont_left h2{
+    font-family: 'RobotoBold';
+    line-height: 1;
+    margin: 20px 0;
+    color: #424242;
+}
+.kont_right{
+    width: 60%;
+}
+.maps{
+    width: 100%;
+    height: 300px;
+}
+@media (min-width: 1px) and (max-width: 980px) {
+    .kont_left, .kont_right{
+        width: 100%;
+    }
+}
