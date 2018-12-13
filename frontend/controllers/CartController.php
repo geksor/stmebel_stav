@@ -51,7 +51,7 @@ class CartController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex($prod_id = null, $count = null, $attrValue = null, $color = null)
+    public function actionIndex($del = null, $prod_id = null, $count = null, $attrValue = null, $color = null)
     {
         if (Yii::$app->request->isPjax){
             $cartChange = Yii::$app->session->get('cart');
@@ -70,11 +70,17 @@ class CartController extends Controller
                     }
                 }
                 if ($item['prod_id'] === $prod_id && (int)$attrCheck === (int)$attrChecked && $item['prod_color'] === $color){
-                    $cartChange['items'][$key]['prod_id'] = $item['prod_id'];
-                    $cartChange['items'][$key]['prod_price'] = $item['prod_price'];
-                    $cartChange['items'][$key]['prod_count'] = $count;
-                    $cartChange['items'][$key]['prod_attrValue'] = $item['prod_attrValue'];
-                    $cartChange['items'][$key]['prod_color'] = $item['prod_color'];
+                    if ($del){
+                        unset($cartChange['items'][$key]);
+                        $cartChange['item_count'] = $cartChange['item_count']-1;
+                        $cartChange['prod_count'] = $cartChange['prod_count']-$count;
+                    }else {
+                        $cartChange['items'][$key]['prod_id'] = $item['prod_id'];
+                        $cartChange['items'][$key]['prod_price'] = $item['prod_price'];
+                        $cartChange['items'][$key]['prod_count'] = $count;
+                        $cartChange['items'][$key]['prod_attrValue'] = $item['prod_attrValue'];
+                        $cartChange['items'][$key]['prod_color'] = $item['prod_color'];
+                    }
                     break;
                 }
             }

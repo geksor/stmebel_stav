@@ -72,7 +72,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                             </div>
                             <div class="basket_close">
-                                <a href="" class="basket_close">
+                                <a href="" class="basket_close delProduct"
+                                   data-item="<?= $key ?>"
+                                   data-prod_id="<?= $productModel->id ?>"
+                                   data-attr_value='<?= \yii\helpers\Json::encode($item['attrValue']) ?>'
+                                   data-color='<?= $item['color'] ?>'
+                                >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23">
                                         <path fill="#BBC0BE" fill-rule="evenodd" d="M22.813 20.692l-2.121 2.122-9.192-9.193-9.193 9.193-2.121-2.122L9.378 11.5.186 2.307 2.307.186 11.5 9.379 20.692.186l2.121 2.121-9.192 9.193 9.192 9.192z"/>
                                     </svg>
@@ -172,6 +177,30 @@ $js = <<< JS
             });
             return false;
         });
+        
+        $('.delProduct').click(function () {
+            var count = parseInt($('#count'+$(this).attr('data-item')).val());
+            var prod_id = $(this).attr('data-prod_id');
+            var attrValue = $(this).attr('data-attr_value');
+            var color = $(this).attr('data-color');
+            $.pjax.reload({
+                container: '#cart',
+                type       : 'GET',
+                url        : '/cart',
+                data       : {
+                    del: true,
+                    prod_id: prod_id,
+                    count: count,
+                    attrValue: attrValue,
+                    color: color
+                },
+                push       : false,
+                replace    : false,
+                timeout    : 1000,
+            });
+            return false;
+        });
+
         
         
         // $('#price').on('pjax:end', function() {
