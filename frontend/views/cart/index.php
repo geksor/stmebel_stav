@@ -9,7 +9,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="content flex_1">
-    <div class="basket">
+    <? if ($cartProduct) {?>
+        <div class="basket">
         <h1>Оформление заказа</h1>
         <form action="" class="basket_form flex">
             <input type="text" placeholder="Введите ваше имя *">
@@ -103,4 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
+    <?}else{?>
+        <p>корзина пуста</p>
+    <?}?>
 </div>

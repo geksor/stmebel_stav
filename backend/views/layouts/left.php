@@ -9,6 +9,26 @@
                 'items' => [
                     ['label' => 'Меню админпанели', 'options' => ['class' => 'header']],
                     [
+                        'label' => 'Заказы',
+                        'icon' => 'reply',
+                        'url' => '#',
+                        'items' => [
+                            [
+                                'label' => 'Опции заказа',
+                                'icon' => 'phone-square',
+                                'url' => '#',
+                                'items' => [
+                                    ['label' => 'Одиночные', 'icon' => 'comments', 'url' => ['/order-opt-checkbox'], "active" => Yii::$app->controller->id === 'order-opt-checkbox',],
+                                    [
+                                        'label' => 'Выбор из нескольких',
+                                        'icon' => 'comments',
+                                        'url' => ['/order-opt-rb-sec'],
+                                        "active" => Yii::$app->controller->id === 'order-opt-rb-sec',],
+                                ]
+                           ],
+                            ['label' => 'Заказы', 'icon' => 'comments', 'url' => ['/order'], "active" => Yii::$app->controller->id === 'order',],
+                        ],
+                    ],[
                         'label' => 'Обратная связь',
                         'icon' => 'reply',
                         'url' => '#',
