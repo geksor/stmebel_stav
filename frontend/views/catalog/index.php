@@ -127,15 +127,15 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2>Нет товаров</h2>
         <?}?>
     </div>
-    <div class="nav_number">
-        <?= \yii\widgets\LinkPager::widget([
-            'pagination' => $pages,
-            'prevPageLabel' => false,
-            'nextPageLabel' => false,
-            'pageCssClass' => 'page-item',
-            'activePageCssClass' => 'active',
-            'maxButtonCount' => 5,
-        ]); ?>
-    </div>
+<!--    <div class="nav_number">-->
+<!--        --><?//= \yii\widgets\LinkPager::widget([
+//            'pagination' => $pages,
+//            'prevPageLabel' => false,
+//            'nextPageLabel' => false,
+//            'pageCssClass' => 'page-item',
+//            'activePageCssClass' => 'active',
+//            'maxButtonCount' => 5,
+//        ]); ?>
+<!--    </div>-->
 </div>
 

@@ -128,13 +128,13 @@ class CatalogController extends Controller
 
 
 
-        $countQuery = clone $query;
-        $pages = new Pagination([
-            'totalCount' => $countQuery->count(),
-            'pageSize' => 9
-        ]);
-        $pages->pageSizeParam = false;
-        $pages->forcePageParam = false;
+//        $countQuery = clone $query;
+//        $pages = new Pagination([
+//            'totalCount' => $countQuery->count(),
+//            'pageSize' => 9
+//        ]);
+//        $pages->pageSizeParam = false;
+//        $pages->forcePageParam = false;
 
         $products = $query
             ->with([
@@ -142,14 +142,14 @@ class CatalogController extends Controller
                     $query->with(['options', 'optionsValue']);
                 },
             ])
-            ->offset($pages->offset)
-            ->limit($pages->limit)
+//            ->offset($pages->offset)
+//            ->limit($pages->limit)
             ->all();
 
         return $this->render('index', [
             'model' => $model,
             'products' => $products,
-            'pages' => $pages,
+//            'pages' => $pages,
             'items' => $items
         ]);
     }
