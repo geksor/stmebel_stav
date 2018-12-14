@@ -48,10 +48,10 @@ $cssAlert = <<<CSS
         padding: 20px 10px;
     }
     .modalAlertSuccess{
-        background-color: rgba(126,160,92,0.9);
+        background-color: rgba(0,208,129,0.95);
     }
     .modalAlertError{
-        background-color: rgba(160,69,61,0.9);
+        background-color: rgba(243,78,78,0.95);
     }
     .messWrap{
         display: flex;
