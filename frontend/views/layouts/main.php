@@ -83,7 +83,7 @@ AppAsset::register($this);
 
 </div>
 
-<?//= $this->render('modals')?>
+<?= \frontend\widgets\ModalsWidget::widget() ?>
 
 <button id="buttonUp" class="buttonUp active">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

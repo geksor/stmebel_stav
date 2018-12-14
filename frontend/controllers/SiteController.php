@@ -7,6 +7,7 @@ use common\models\Certificate;
 use common\models\Comment;
 use common\models\WeDocs;
 use common\models\WePartner;
+use frontend\widgets\ModalsWidget;
 use Yii;
 use yii\web\Controller;
 
@@ -153,6 +154,14 @@ class SiteController extends Controller
             }else{
                 \Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз');
             }
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionAlertWidget()
+    {
+        if (Yii::$app->request->isPjax){
+            return $this->renderAjax(ModalsWidget::widget());
         }
         return $this->redirect(Yii::$app->request->referrer);
     }

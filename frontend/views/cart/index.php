@@ -96,7 +96,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="basket_right_2">
                         <? foreach ($orderCheckOptions as $checkOption) {/* @var $checkOption \common\models\OrderOptCheckbox */?>
                             <label class="container"><?= $checkOption->title ?> <a>( +<?= $checkOption->addPrice ?> руб.)</a>
-                                <input type="checkbox">
+                                <input class="checkboxCart"
+                                    <?=
+                                        \yii\helpers\ArrayHelper::isIn($checkOption->id, Yii::$app->session->get('cart')['select_option']['checkbox'])
+                                            ?'checked'
+                                            :'';
+                                    ?>
+                                    type="checkbox" data-id="<?= $checkOption->id ?>">
                                 <span class="checkmark"></span>
                             </label>
                         <?}?>
@@ -110,7 +116,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <h3><?= $radioOption->title ?>:</h3>
                                 <? foreach ($radioOption->orderOptRbItems as $optRbItem) {?>
                                     <label class="container"><?= $optRbItem->title ?> <a>( +<?= $optRbItem->addPrice ?> руб.)</a>
-                                        <input type="radio" name="radio<?= $radioOption->id ?>">
+                                        <input class="radioCart"
+                                            <?=
+                                            \yii\helpers\ArrayHelper::isIn($optRbItem->id, Yii::$app->session->get('cart')['select_option']['radio'])
+                                                ?'checked'
+                                                :'';
+                                            ?>
+                                        type="radio" name="radio<?= $radioOption->id ?>" data-id="<?= $optRbItem->id ?>">
                                         <span class="checkmark"></span>
                                     </label>
                                 <?}?>
@@ -130,6 +142,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 <?
+$cartOptCheckbox = Yii::$app->session->has('cart')?\yii\helpers\Json::encode(Yii::$app->session->get('cart')['select_option']['checkbox']):false;
+$cartOptRadio = Yii::$app->session->has('cart')?\yii\helpers\Json::encode(Yii::$app->session->get('cart')['select_option']['radio']):false;
+
 $js = <<< JS
     $(document).ready(function (){
         $('.minus').click(function () {
@@ -200,12 +215,71 @@ $js = <<< JS
             });
             return false;
         });
-
         
-        
-        // $('#price').on('pjax:end', function() {
-        //     $('#addToCart').attr('data-prod_price', $('.main-price').attr('data-price'));
-        // })
+        $('.checkboxCart').on('change', function() {
+            var checkboxArr = $cartOptCheckbox;
+            var optId = $(this).attr('data-id');
+            if ($(this).prop('checked')){
+                var isNewRecord = true;
+                $.each(checkboxArr, function(value) {
+                    if (+value === +optId){
+                        isNewRecord = false;
+                    } 
+                });
+                if (isNewRecord){
+                    checkboxArr.splice(0, 0, optId);
+                } 
+            }else{
+                checkboxArr = $.grep(checkboxArr, function(value) {
+                    return +value !== +optId;
+                })
+            }
+            checkboxArr = JSON.stringify(checkboxArr);
+            $.pjax.reload({
+                container: '#cart',
+                type       : 'GET',
+                url        : '/cart',
+                data       : {
+                    checkBox: checkboxArr,
+                },
+                push       : false,
+                replace    : false,
+                timeout    : 1000,
+            });
+        });        
+        $('.radioCart').on('change', function() {
+            var radioArr = $cartOptRadio;
+            $.each($('[name='+$(this).attr('name')+']'), function() {
+                var optId = $(this).attr('data-id');
+                if ($(this).prop('checked')){
+                    var isNewRecord = true;
+                    $.each(radioArr, function(value) {
+                        if (+value === +optId){
+                            isNewRecord = false;
+                        } 
+                    });
+                    if (isNewRecord){
+                        radioArr.splice(0, 0, optId);
+                    } 
+                }else{
+                    radioArr = $.grep(radioArr, function(value) {
+                        return +value !== +optId;
+                    })
+                }
+            });
+            radioArr = JSON.stringify(radioArr);
+            $.pjax.reload({
+                container: '#cart',
+                type       : 'GET',
+                url        : '/cart',
+                data       : {
+                    radio: radioArr,
+                },
+                push       : false,
+                replace    : false,
+                timeout    : 1000,
+            });
+        });
     });
 JS;
 
@@ -214,3 +288,20 @@ $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
 
 <? \yii\widgets\Pjax::end() ?>
 
+<?
+$jsNoReload = <<<JS
+    $(document).ready(function() {
+          $('#cart').on('pjax:end', function() {
+            $.pjax.reload({
+                container: '#cartWidget',
+                url        : '/cart/cart-widget',
+                push       : false,
+                replace    : false,
+                timeout    : 1000,
+            });
+        })
+
+    })
+JS;
+$this->registerJs($jsNoReload, $position = yii\web\View::POS_END, $key = null);
+?>

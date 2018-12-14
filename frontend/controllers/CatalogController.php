@@ -202,7 +202,7 @@ class CatalogController extends Controller
     {
         $cart = Yii::$app->session->has('cart')
             ? Yii::$app->session->get('cart')
-            : ['items' => [], 'item_count' => '0', 'prod_count' => '0', 'total_price' => '0'];
+            : ['items' => [], 'item_count' => '0', 'prod_count' => '0', 'total_price' => '0', 'select_option' => ['checkbox' => [], 'radio' => []]];
 
         $prod_attrValue = Json::decode($prod_attrValue);
         $attrCheck = '';
@@ -243,6 +243,7 @@ class CatalogController extends Controller
 
         Yii::$app->session->set('cart', $cart);
 //        Yii::$app->session->destroy();
+        Yii::$app->session->setFlash('success', 'Товар добавлен в корзину');
 
         return $this->renderAjax(CartWidget::widget());
     }

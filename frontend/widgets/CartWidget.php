@@ -1,7 +1,6 @@
 <?php
 namespace frontend\widgets;
 
-use common\models\Category;
 use yii\base\Widget;
 
 class CartWidget extends Widget

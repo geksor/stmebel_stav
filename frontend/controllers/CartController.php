@@ -4,9 +4,11 @@ namespace frontend\controllers;
 use backend\models\Contact;
 use common\models\CallBack;
 use common\models\OrderOptCheckbox;
+use common\models\OrderOptRbItem;
 use common\models\OrderOptRbSec;
 use common\models\Product;
 use common\models\ProductAttr;
+use frontend\widgets\CartWidget;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -51,38 +53,55 @@ class CartController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex($del = null, $prod_id = null, $count = null, $attrValue = null, $color = null)
+    public function actionIndex($del = null, $prod_id = null, $count = null, $attrValue = null, $color = null, $checkBox = null, $radio = null)
     {
         if (Yii::$app->request->isPjax){
             $cartChange = Yii::$app->session->get('cart');
 
-            $prod_attrValue = Json::decode($attrValue);
-            $attrCheck = '';
-            foreach ($prod_attrValue as $value){
-                $attrCheck .= $value;
+            if ($prod_id){
+                $prod_attrValue = Json::decode($attrValue);
+                $attrCheck = '';
+                foreach ($prod_attrValue as $value){
+                    $attrCheck .= $value;
+                }
+
+                foreach ($cartChange['items'] as $key => $item){
+                    $attrChecked = '';
+                    if (ArrayHelper::keyExists('prod_attrValue', $item)){
+                        foreach ($item['prod_attrValue'] as $value){
+                            $attrChecked .= $value;
+                        }
+                    }
+                    if ($item['prod_id'] === $prod_id && (int)$attrCheck === (int)$attrChecked && $item['prod_color'] === $color){
+                        if ($del){
+                            unset($cartChange['items'][$key]);
+                            $cartChange['item_count'] = $cartChange['item_count']-1;
+                            $cartChange['prod_count'] = $cartChange['prod_count']-$count;
+                            $cartChange['total_price'] = $cartChange['total_price']-$count*$item['prod_price'];
+                        }else {
+                            $cartChange['prod_count'] = $cartChange['prod_count']-$item['prod_count'];
+                            $cartChange['total_price'] = $cartChange['total_price']-$item['prod_count']*$item['prod_price'];
+
+                            $cartChange['items'][$key]['prod_id'] = $item['prod_id'];
+                            $cartChange['items'][$key]['prod_price'] = $item['prod_price'];
+                            $cartChange['items'][$key]['prod_count'] = $count;
+                            $cartChange['items'][$key]['prod_attrValue'] = $item['prod_attrValue'];
+                            $cartChange['items'][$key]['prod_color'] = $item['prod_color'];
+
+                            $cartChange['prod_count'] = $cartChange['prod_count']+$count;
+                            $cartChange['total_price'] = $cartChange['total_price']+$count*$item['prod_price'];
+
+                        }
+                        break;
+                    }
+                }
             }
 
-            foreach ($cartChange['items'] as $key => $item){
-                $attrChecked = '';
-                if (ArrayHelper::keyExists('prod_attrValue', $item)){
-                    foreach ($item['prod_attrValue'] as $value){
-                        $attrChecked .= $value;
-                    }
-                }
-                if ($item['prod_id'] === $prod_id && (int)$attrCheck === (int)$attrChecked && $item['prod_color'] === $color){
-                    if ($del){
-                        unset($cartChange['items'][$key]);
-                        $cartChange['item_count'] = $cartChange['item_count']-1;
-                        $cartChange['prod_count'] = $cartChange['prod_count']-$count;
-                    }else {
-                        $cartChange['items'][$key]['prod_id'] = $item['prod_id'];
-                        $cartChange['items'][$key]['prod_price'] = $item['prod_price'];
-                        $cartChange['items'][$key]['prod_count'] = $count;
-                        $cartChange['items'][$key]['prod_attrValue'] = $item['prod_attrValue'];
-                        $cartChange['items'][$key]['prod_color'] = $item['prod_color'];
-                    }
-                    break;
-                }
+            if ($checkBox){
+                $cartChange['select_option']['checkbox'] = Json::decode($checkBox);
+            }
+            if ($radio){
+                $cartChange['select_option']['radio'] = Json::decode($radio);
             }
 
             Yii::$app->session->set('cart', $cartChange);
@@ -115,6 +134,16 @@ class CartController extends Controller
 
                 $totalPrice += $itemProd->getCalcPrice($itemAttrProd)*$item['prod_count'];
             }
+
+            foreach ($cart['select_option']['checkbox'] as $checkbox){
+                $addPrice = OrderOptCheckbox::findOne(['id' => (integer)$checkbox])->addPrice;
+                $totalPrice += $addPrice;
+            }
+
+            foreach ($cart['select_option']['radio'] as $orderRadio){
+                $addPrice = OrderOptRbItem::findOne(['id' => (integer)$orderRadio])->addPrice;
+                $totalPrice += $addPrice;
+            }
         }
 
         $orderCheckOptions = OrderOptCheckbox::find()->orderBy(['rank' => SORT_ASC])->all();
@@ -143,35 +172,8 @@ class CartController extends Controller
         ]);
     }
 
-    public function actionCalcPrice($prod_id, $count, $attrValue = null, $color = null)
+    public function actionCartWidget()
     {
-        $cartChange = Yii::$app->session->get('cart');
-
-        $prod_attrValue = Json::decode($attrValue);
-        $attrCheck = '';
-        foreach ($prod_attrValue as $value){
-            $attrCheck .= $value;
-        }
-
-        foreach ($cartChange['items'] as $key => $item){
-            $attrChecked = '';
-            if (ArrayHelper::keyExists('prod_attrValue', $item)){
-                foreach ($item['prod_attrValue'] as $value){
-                    $attrChecked .= $value;
-                }
-            }
-            if ($item['prod_id'] === $prod_id && (int)$attrCheck === (int)$attrChecked && $item['prod_color'] === $color){
-                $cartChange['items'][$key]['prod_id'] = $item['prod_id'];
-                $cartChange['items'][$key]['prod_price'] = $item['prod_price'];
-                $cartChange['items'][$key]['prod_count'] = $count;
-                $cartChange['items'][$key]['prod_attrValue'] = $item['prod_attrValue'];
-                $cartChange['items'][$key]['prod_color'] = $item['prod_color'];
-                break;
-            }
-        }
-
-        Yii::$app->session->set('cart', $cartChange);
-
-        return $this->redirect('/cart');
+        return $this->renderAjax(CartWidget::widget());
     }
 }
