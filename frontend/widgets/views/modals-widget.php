@@ -46,6 +46,9 @@ $cssAlert = <<<CSS
         left: 0;
         width: 100%;
         padding: 20px 10px;
+        font-size: 16px;
+        color: #ffffff;
+        z-index: 100;
     }
     .modalAlertSuccess{
         background-color: rgba(0,208,129,0.95);
