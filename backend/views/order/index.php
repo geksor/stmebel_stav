@@ -28,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'id',
-                    'create_at',
+                    'create_at:datetime',
 //                    'checked_opt:ntext',
                     'customer_name',
                     'customer_phone',
-                    //'customer_email:email',
-                    'total_price',
+                    'customer_email:email',
+                    'total_price:integer',
                     'state',
 
                     ['class' => 'yii\grid\ActionColumn'],

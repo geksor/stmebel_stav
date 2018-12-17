@@ -2,12 +2,16 @@
 namespace frontend\controllers;
 
 use backend\models\Contact;
+use common\models\AttrValue;
 use common\models\CallBack;
+use common\models\Order;
+use common\models\OrderItem;
 use common\models\OrderOptCheckbox;
 use common\models\OrderOptRbItem;
 use common\models\OrderOptRbSec;
 use common\models\Product;
 use common\models\ProductAttr;
+use frontend\models\OrderEnd;
 use frontend\widgets\CartWidget;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -163,12 +167,25 @@ class CartController extends Controller
             ->all();
 //        VarDumper::dump($cartProduct,20,true);die;
 
+        $cartOptCheckbox = Yii::$app->session->has('cart')?\yii\helpers\Json::encode(Yii::$app->session->get('cart')['select_option']['checkbox']):false;
+        $cartOptRadio = Yii::$app->session->has('cart')?\yii\helpers\Json::encode(Yii::$app->session->get('cart')['select_option']['radio']):false;
+
+
+        $orderForm = new OrderEnd();
+        $orderForm->props_checkbox = $cartOptCheckbox;
+        $orderForm->props_radiobutton = $cartOptRadio;
+        $orderForm->products = Json::encode($cartProduct);
+        $orderForm->total_price = $totalPrice;
+
         if (Yii::$app->request->isPjax){
             return $this->renderAjax('index', [
                 'cartProduct' => $cartProduct,
                 'totalPrice' => $totalPrice,
                 'orderCheckOptions' => $orderCheckOptions,
                 'orderRadioOption' => $orderRadioOption,
+                'orderForm' => $orderForm,
+                'cartOptCheckbox' => $cartOptCheckbox,
+                'cartOptRadio' => $cartOptRadio,
             ]);
         }
 
@@ -177,11 +194,81 @@ class CartController extends Controller
             'totalPrice' => $totalPrice,
             'orderCheckOptions' => $orderCheckOptions,
             'orderRadioOption' => $orderRadioOption,
+            'orderForm' => $orderForm,
+            'cartOptCheckbox' => $cartOptCheckbox,
+            'cartOptRadio' => $cartOptRadio,
         ]);
     }
 
     public function actionCartWidget()
     {
         return $this->renderAjax(CartWidget::widget());
+    }
+
+    public function actionSaveOrder()
+    {
+        $cartModel = new OrderEnd();
+
+        if ($cartModel->load(Yii::$app->request->post())){
+
+            $cartModel->props_checkbox = Json::decode($cartModel->props_checkbox);
+            $cartModel->props_radiobutton = Json::decode($cartModel->props_radiobutton);
+            $cartModel->products = Json::decode($cartModel->products);
+
+            $order = new Order();
+
+            $checkedOpt = [];
+
+            foreach ($cartModel->props_checkbox as $checkbox_id){
+                $checkedOpt[] = OrderOptCheckbox::findOne($checkbox_id)->title;
+            }
+            foreach ($cartModel->props_radiobutton as $radio_id){
+                $rbItem = OrderOptRbItem::find()->where(['id' => $radio_id])->with(['section'])->one();
+                $checkedOpt[] = $rbItem->section->title . ': ' . $rbItem->title;
+            }
+
+            $order->create_at = time();
+            $order->checked_opt = Json::encode($checkedOpt);
+            $order->customer_name = $cartModel->customer_name;
+            $order->customer_phone = $cartModel->customer_phone;
+            $order->customer_email = $cartModel->customer_email;
+            $order->total_price = (integer)$cartModel->total_price;
+            $order->state = 0;
+
+            if ($order->save()){
+                foreach ($cartModel->products as $product){
+                    $modelProduct = Product::findOne($product['modelProduct']['id']); /* @var $modelProduct Product */
+
+                    if ($modelProduct){
+                        $orderItem = new OrderItem();
+
+                        $prodAttr = [];
+
+                        foreach ($product['attrValue'] as $attr_id){
+                            $value = AttrValue::findOne($attr_id)->value;
+                            $prodAttr[] = $value;
+                        }
+
+                        $orderItem->order_id = $order->id;
+                        $orderItem->title = $modelProduct->title;
+                        $orderItem->attr = Json::encode($prodAttr);
+                        $orderItem->color = $product['color'];
+                        $orderItem->count = (integer)$product['count'];
+                        $orderItem->price = (integer)$modelProduct->getCalcPrice($product['modelProductAttr'], false);
+
+                        $orderItem->save();
+                    }
+                }
+                Yii::$app->session->setFlash('success', 'Ваш заказ принят. В ближайшее время с вами свяжется менеджер для подтверждения заказа.');
+            }else{
+                Yii::$app->session->setFlash('error', 'Что то пошло не так. Попробуйте еще раз.');
+            }
+        }else{
+            Yii::$app->session->setFlash('error', 'Что то пошло не так. Попробуйте еще раз.');
+        }
+
+
+        return $this->redirect('/');
+
     }
 }

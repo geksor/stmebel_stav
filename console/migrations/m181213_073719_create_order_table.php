@@ -17,7 +17,7 @@ class m181213_073719_create_order_table extends Migration
             'create_at' => $this->integer(),
             'checked_opt' => $this->text(),
             'customer_name' => $this->string(),
-            'customer_phone' => $this->integer(),
+            'customer_phone' => $this->string(),
             'customer_email' => $this->string(),
             'total_price' => $this->integer(),
             'state' => $this->integer(),

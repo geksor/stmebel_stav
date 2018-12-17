@@ -34,9 +34,9 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['create_at', 'customer_phone', 'total_price', 'state'], 'integer'],
-            [['checked_opt'], 'string'],
-            [['customer_name', 'customer_email'], 'string', 'max' => 255],
+            [['create_at', 'total_price', 'state'], 'integer'],
+            [['checked_opt'], 'safe'],
+            [['customer_name', 'customer_email', 'customer_phone'], 'string', 'max' => 255],
         ];
     }
 

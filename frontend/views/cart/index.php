@@ -1,10 +1,16 @@
 <?php
 
 /* @var $this \frontend\components\View */
+
+use yii\widgets\ActiveForm;
+
 /* @var $cartProduct */
 /* @var $totalPrice */
+/* @var $cartOptCheckbox */
+/* @var $cartOptRadio */
 /* @var $orderCheckOptions \common\models\OrderOptCheckbox */
 /* @var $orderRadioOption \common\models\OrderOptRbSec */
+/* @var $orderForm \frontend\models\OrderEnd */
 
 $this->title = 'Корзина';
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,11 +21,36 @@ $this->params['breadcrumbs'][] = $this->title;
         <? if ($cartProduct) {?>
             <div class="basket">
             <h1>Оформление заказа</h1>
-            <form action="" class="basket_form flex">
-                <input type="text" placeholder="Введите ваше имя *">
-                <input type="text" placeholder="Номер телефона *">
-                <input type="text" placeholder="email (необязательно)">
-            </form>
+
+            <?php $form = ActiveForm::begin([
+                'action' => '/cart/save-order',
+                'options' => [
+                    'class' => 'basket_form flex'
+                ]
+            ]); ?>
+
+                <?= $form->field($orderForm, 'customer_name')->textInput(['maxlength' => true, 'placeholder' => 'Введите ваше имя *'])->label(false) ?>
+
+                <?= $form->field($orderForm, 'customer_phone')->textInput(['maxlength' => true, 'placeholder' => 'Номер телефона *'])->label(false) ?>
+
+                <?= $form->field($orderForm, 'customer_email')->textInput(['maxlength' => true, 'placeholder' => 'email (необязательно)'])->label(false) ?>
+
+                <div style="display: none!important;">
+
+                    <?= $form->field($orderForm, 'props_checkbox')->hiddenInput()->label(false) ?>
+
+                    <?= $form->field($orderForm, 'props_radiobutton')->hiddenInput()->label(false) ?>
+
+                    <?= $form->field($orderForm, 'products')->hiddenInput()->label(false) ?>
+
+                    <?= $form->field($orderForm, 'total_price')->hiddenInput()->label(false) ?>
+
+                    <?= \yii\helpers\Html::submitButton('', ['class' => 'orderFormSubmit']) ?>
+
+                </div>
+
+            <? ActiveForm::end() ?>
+
             <div class="basket_left">
                 <? if ($cartProduct) {?>
                     <? foreach ($cartProduct as $key => $item) {?>
@@ -132,7 +163,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?}?>
 
                 <div class="basket_right_2">
-                    <a href="" class="go_by">Заказать</a>
+                    <button class="go_by">Заказать</button>
                 </div>
             </div>
         </div>
@@ -142,8 +173,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 <?
-$cartOptCheckbox = Yii::$app->session->has('cart')?\yii\helpers\Json::encode(Yii::$app->session->get('cart')['select_option']['checkbox']):false;
-$cartOptRadio = Yii::$app->session->has('cart')?\yii\helpers\Json::encode(Yii::$app->session->get('cart')['select_option']['radio']):false;
 
 $js = <<< JS
     $(document).ready(function (){
@@ -279,6 +308,9 @@ $js = <<< JS
                 replace    : false,
                 timeout    : 1000,
             });
+        });
+        $('.go_by').on('click', function() {
+            $('.orderFormSubmit').trigger('click');
         });
     });
 JS;

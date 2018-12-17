@@ -89,9 +89,15 @@
     width: 100%;
     margin-bottom: 20px;
 }
+.basket_form .form-group{
+    width: 30%;
+}
+.basket_form .help-block{
+    min-height: 18px;
+}
 .basket_form input{
     background: #fff;
-    width: 30%;
+    width: 100%;
     border: 1px solid #bdbebe;
     padding: 15px 10px;
     font-size: 14px;
@@ -101,12 +107,14 @@
 .go_by{
     background-color: #f34e4e;
     font-size: 16px;
-    display: block;
     line-height: 1.5;
     letter-spacing: 0.4px;
     text-align: center;
     color: #fff;
     padding: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
 }
 .container {
     display: block;
@@ -226,7 +234,7 @@
         width: 100%;
         margin-bottom: 10px;
     }
-    .basket_form input{
+    .basket_form .form-group{
         width: 100%;
         margin-bottom: 10px;
     }

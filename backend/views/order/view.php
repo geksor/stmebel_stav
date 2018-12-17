@@ -35,12 +35,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'create_at',
-                    'checked_opt:ntext',
+                    'create_at:datetime',
+                    [
+                        'attribute' => 'checked_opt',
+                        'format' => 'html',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Order */
+                            $value = '';
+                            foreach (\yii\helpers\Json::decode($data->checked_opt) as $item){
+                                $value .= $item.'<br>';
+                            }
+                            return $value;
+                        }
+                    ],
                     'customer_name',
                     'customer_phone',
                     'customer_email:email',
-                    'total_price',
+                    'total_price:integer',
                     'state',
                 ],
             ]) ?>
@@ -60,10 +71,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'title',
-                    'attr:ntext',
+                    [
+                        'attribute' => 'attr',
+                        'format' => 'html',
+                        'value' => function ($data){
+                            /* @var $data \common\models\OrderItem */
+                            $value = '';
+                            foreach (\yii\helpers\Json::decode($data->attr) as $item){
+                                $value .= $item.', ';
+                            }
+                            return $value;
+                        }
+                    ],
+
                     'color',
                     'count',
-                    'price',
+                    'price:integer',
 
 //                    [
 //                        'class' => 'yii\grid\ActionColumn',
