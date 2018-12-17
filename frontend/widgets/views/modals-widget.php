@@ -12,6 +12,15 @@
     </div>
 </div>
 <?}?>
+<? if (Yii::$app->session->hasFlash('warning')) {?>
+<div class="modalAlertError modalAlert">
+    <div class="messWrap">
+        <p>
+            <?= Yii::$app->session->getFlash('warning') ?>
+        </p>
+    </div>
+</div>
+<?}?>
 <? if (Yii::$app->session->hasFlash('error')) {?>
 <div class="modalAlertError modalAlert">
     <div class="messWrap">

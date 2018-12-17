@@ -144,6 +144,14 @@ class CartController extends Controller
                 $addPrice = OrderOptRbItem::findOne(['id' => (integer)$orderRadio])->addPrice;
                 $totalPrice += $addPrice;
             }
+        }else{
+            Yii::$app->session->setFlash('warning', 'Корзина пуста');
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+
+        if (empty($cartProduct)){
+            Yii::$app->session->setFlash('warning', 'Корзина пуста');
+            return $this->redirect(Yii::$app->request->referrer);
         }
 
         $orderCheckOptions = OrderOptCheckbox::find()->orderBy(['rank' => SORT_ASC])->all();
