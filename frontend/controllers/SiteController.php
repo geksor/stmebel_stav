@@ -18,17 +18,6 @@ class SiteController extends Controller
 {
 
     /**
-     * @param $action
-     * @return bool
-     * @throws \yii\web\BadRequestHttpException
-     */
-    public function beforeAction($action)//Обязательно нужно отключить Csr валидацию, так не будет работать
-    {
-        $this->enableCsrfValidation = false;
-        return parent::beforeAction($action);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function actions()
