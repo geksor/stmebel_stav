@@ -263,7 +263,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                 <?}?>
                                 <div class="product_img">
-                                    <img src="<?= $recommProduct->getThumbMainImage() ?>" alt="<?= $recommProduct->title ?>">
+                                    <a href="<?= \yii\helpers\Url::to(['catalog/item', 'alias' => $recommProduct->mainCat->alias, 'item' => $recommProduct->alias]) ?>"><img src="<?= $recommProduct->getThumbMainImage() ?>" alt="<?= $recommProduct->title ?>"></a>
                                 </div>
                                 <div class="product_name">
                                     <?= $recommProduct->title ?>
@@ -278,14 +278,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="product_price flex">
                                     <? if ($recommProduct->sale) {?>
                                         <div class="price_1">
-                                            <p><?= Yii::$app->formatter->asInteger($recommProduct->getNewPrice()) ?> ₽</p>
+                                            <p><?= $recommProduct->getSaleAttrPrice(true) ?> Р</p>
                                         </div>
                                         <div class="price_2">
-                                            <p><?= Yii::$app->formatter->asInteger($recommProduct->price) ?> ₽</p>
+                                            <p><?= $recommProduct->getAttrPrice(true) ?> Р</p>
                                         </div>
                                     <?}else{?>
                                         <div class="price_1">
-                                            <p><?= Yii::$app->formatter->asDecimal($recommProduct->price) ?> ₽</p>
+                                            <p><?= $recommProduct->getAttrPrice(true) ?> Р</p>
                                         </div>
                                     <?}?>
                                 </div>

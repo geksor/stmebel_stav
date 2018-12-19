@@ -41,7 +41,7 @@
                                 </div>
                             <?}?>
                             <div class="product_img">
-                                <img src="<?= $model->getThumbMainImage() ?>" alt="<?= $model->title ?>">
+                                <a href="<?= \yii\helpers\Url::to(['catalog/item', 'alias' => $model->mainCat->alias, 'item' => $model->alias]) ?>"><img src="<?= $model->getThumbMainImage() ?>" alt="<?= $model->title ?>"></a>
                             </div>
                             <div class="product_name">
                                 <?= $model->title ?>
@@ -56,14 +56,14 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> Р</p>
+                                        <p><?= $model->getSaleAttrPrice(true) ?> Р</p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
+                                        <p><?= $model->getAttrPrice() ?> Р</p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
+                                        <p><?= $model->getAttrPrice() ?> Р</p>
                                     </div>
                                 <?}?>
                             </div>

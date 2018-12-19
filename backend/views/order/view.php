@@ -14,6 +14,22 @@ $this->title = 'Заказ №'.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
+$css = <<<CSS
+    .colorBox{
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+    }
+    .colorBox__content{
+        background-color: #ffffff;
+        padding: 2px 4px;
+    }
+CSS;
+
+
+$this->registerCss($css, ["type" => "text/css"], "orderView" );
 ?>
 <div class="order-view">
 
@@ -84,7 +100,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
 
-                    'color',
+                    [
+                        'attribute' => 'color',
+                        'format' => 'html',
+                        'value' => function ($data){
+                            /* @var $data \common\models\OrderItem */
+                            if ($data->color){
+                                $content = Html::tag('span', $data->color, ['class' => 'colorBox__content']);
+                                return Html::tag('div', $content, ['class' => 'colorBox', 'style' => "background-color:$data->color"]);
+                            }
+                            return 'Не выбран';
+                        }
+                    ],
                     'count',
                     'price:integer',
 

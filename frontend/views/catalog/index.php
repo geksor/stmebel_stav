@@ -103,14 +103,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="product_price flex">
                         <? if ($product->sale) {?>
                             <div class="price_1">
-                                <p><?= Yii::$app->formatter->asInteger($product->getNewPrice()) ?> Р</p>
+                                <p><?= $product->getSaleAttrPrice(true) ?> Р</p>
                             </div>
                             <div class="price_2">
-                                <p><?= Yii::$app->formatter->asInteger($product->price) ?> Р</p>
+                                <p><?= $product->getAttrPrice(true) ?> Р</p>
                             </div>
                         <?}else{?>
                             <div class="price_1">
-                                <p><?= Yii::$app->formatter->asInteger($product->price) ?> Р</p>
+                                <p><?= $product->getAttrPrice(true) ?> Р</p>
                             </div>
                         <?}?>
                     </div>
