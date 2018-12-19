@@ -259,6 +259,7 @@ class CartController extends Controller
                         $orderItem->save();
                     }
                 }
+                Yii::$app->session->destroy();
                 Yii::$app->session->setFlash('success', 'Ваш заказ принят. В ближайшее время с вами свяжется менеджер для подтверждения заказа.');
             }else{
                 Yii::$app->session->setFlash('error', 'Что то пошло не так. Попробуйте еще раз.');
@@ -266,7 +267,6 @@ class CartController extends Controller
         }else{
             Yii::$app->session->setFlash('error', 'Что то пошло не так. Попробуйте еще раз.');
         }
-
 
         return $this->redirect('/');
 

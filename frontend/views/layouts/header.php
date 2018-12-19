@@ -4,11 +4,7 @@
     <div class="head_1">
         <div class="cont flex">
             <div class="head_menu">
-                <ul class="flex">
-                    <li><a href="/about">О нас</a></li>
-                    <li><a href="/delivery">Доставка</a></li>
-                    <li><a href="/contact">Контакты</a></li>
-                </ul>
+                <?= \frontend\widgets\HeaderMenuWidget::widget() ?>
             </div>
             <div class="head_soc flex">
                 <div class="head_soc_img">

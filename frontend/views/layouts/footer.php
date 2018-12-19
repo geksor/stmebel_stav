@@ -33,14 +33,7 @@
             <p>Все права защищены (с) 2018 <a href="https://web-elitit.ru">design by ELIT-IT</a></p>
         </div>
         <div class="footer_menu">
-            <ul class="flex">
-                <li><a href="#">Каталог мебели</a></li>
-                <li><a href="#">Обзор категорий</a></li>
-                <li><a href="#">Отзывы</a></li>
-                <li><a href="#">О компании</a></li>
-                <li><a href="#">Контакты</a></li>
-                <li><a href="#">Доставка</a></li>
-            </ul>
+            <?= \frontend\widgets\HeaderMenuWidget::widget() ?>
         </div>
         <div class="footer_adress">
             <h5>Поддержка</h5>
