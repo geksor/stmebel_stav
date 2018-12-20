@@ -746,6 +746,8 @@ input[type=radio] {
 	border-top: 1px solid #bbc0be;
 	border-bottom: 1px solid #bbc0be;
 	transition: all 0.2s ease-in-out;
+}
+.product.carusel{
 	height: 100%;
 }
 .product_img{
@@ -771,6 +773,8 @@ input[type=radio] {
 	border: solid 2px #00d081;
 	z-index: 2;
 	box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.3);
+}
+.product.carusel:hover{
 	position: absolute;
 	height: auto;
 }

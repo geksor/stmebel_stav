@@ -246,7 +246,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="slider1 owl-carousel owl-theme flex">
                         <? $i = 1 ?>
                         <? foreach ($model->recommProducts as $recommProduct) {?>
-                            <div class="product item<?= $i === 5?' product_border':'' ?>">
+                            <div class="product item<?= $i === 5?' product_border':'' ?> carusel">
                                 <? if ($recommProduct->sale) {?>
                                     <div class="sale">
                                         <p>-<?= $recommProduct->sale ?>%</p>

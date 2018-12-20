@@ -24,7 +24,7 @@
             <div id="tabs-1">
                 <div class="slider1 owl-carousel owl-theme flex">
                     <? foreach ($modelsHot as $model) {/* @var $model \common\models\Product */?>
-                        <div class="product item">
+                        <div class="product item carusel">
                             <? if ($model->sale) {?>
                                 <div class="sale">
                                     <p>-<?= $model->sale ?>%</p>
@@ -79,7 +79,7 @@
             <div id="tabs-2">
                 <div class="slider1 owl-carousel owl-theme flex">
                     <? foreach ($modelsNew as $model) {/* @var $model \common\models\Product */?>
-                        <div class="product item">
+                        <div class="product item carusel">
                             <? if ($model->sale) {?>
                                 <div class="sale">
                                     <p>-<?= $model->sale ?>%</p>
@@ -134,7 +134,7 @@
             <div id="tabs-3">
                 <div class="slider1 owl-carousel owl-theme flex">
                     <? foreach ($modelsSale as $model) {/* @var $model \common\models\Product */?>
-                        <div class="product item">
+                        <div class="product item carusel">
                             <? if ($model->sale) {?>
                                 <div class="sale">
                                     <p>-<?= $model->sale ?>%</p>
