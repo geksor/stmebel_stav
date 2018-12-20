@@ -2,11 +2,11 @@
 namespace backend\controllers;
 
 use backend\models\WebVisitor;
-use backend\models\AboutHome;
-use backend\models\AboutPage;
 use backend\models\Advantage;
+use common\models\AboutPage;
 use common\models\Contact;
 use common\models\ImageUpload;
+use common\models\SiteSettings;
 use nox\components\http\userAgent\UserAgentParser;
 use Yii;
 use yii\helpers\VarDumper;
@@ -42,12 +42,9 @@ class SiteController extends Controller
                             'logout',
                             'error',
                             'index',
-                            'ya-map',
                             'contact',
-                            'about-home',
                             'about-page',
-                            'advantage',
-                            'set-image',
+                            'site-settings',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
@@ -135,27 +132,19 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
-
     /**
-     * @param null $image
      * @return string|\yii\web\Response
      */
-    public function actionAboutHome($image = null)
+    public function actionSiteSettings()
     {
-        $model = new AboutHome();
+        $model = new SiteSettings();
 
-        if ($model->load(Yii::$app->params)) {
-            if ($image){
-                $model->image = $image;
-                $model->save($model);
-            }
-            if (Yii::$app->request->post()) {
-                $model->save(Yii::$app->request->post('AboutHome'));
-                return $this->redirect(['about-home']);
-            }
+        if (Yii::$app->request->post()) {
+            $model->save(Yii::$app->request->post('SiteSettings'));
+            return $this->redirect(['site-settings']);
         }
 
-        return $this->render('about-home', [
+        return $this->render('site-settings', [
             'model' => $model,
         ]);
     }
@@ -164,15 +153,11 @@ class SiteController extends Controller
      * @param null $image
      * @return string|\yii\web\Response
      */
-    public function actionAboutPage($image = null)
+    public function actionAboutPage()
     {
         $model = new AboutPage();
 
         if ($model->load(Yii::$app->params)) {
-            if ($image){
-                $model->image = $image;
-                $model->save($model);
-            }
             if (Yii::$app->request->post()) {
                 $model->save(Yii::$app->request->post('AboutPage'));
                 return $this->redirect(['about-page']);
@@ -181,71 +166,6 @@ class SiteController extends Controller
 
         return $this->render('about-page', [
             'model' => $model,
-        ]);
-    }
-
-    /**
-     * @param null $image
-     * @param null $blockNum
-     * @return string|\yii\web\Response
-     */
-    public function actionAdvantage($image = null, $blockNum = null)
-    {
-        $model = new Advantage();
-
-        if ($model->load(Yii::$app->params)) {
-            if ($image && $blockNum){
-                switch ($blockNum){
-                    case 1:
-                        $model->image1 = $image;
-                        break;
-                    case 2:
-                        $model->image2 = $image;
-                        break;
-                    case 3:
-                        $model->image3 = $image;
-                        break;
-                    case 4:
-                        $model->image4 = $image;
-                        break;
-                }
-                $model->save($model);
-            }
-            if (Yii::$app->request->post()) {
-                $model->save(Yii::$app->request->post('Advantage'));
-                return $this->redirect(['advantage']);
-            }
-        }
-
-        return $this->render('advantage', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * @param $actionName
-     * @param $width
-     * @param $height
-     * @param null $oldImage
-     * @return string|\yii\web\Response
-     * @throws \yii\base\Exception
-     */
-    public function actionSetImage($actionName, $width, $height, $oldImage = null, $blockNum = null)
-    {
-        $model = new ImageUpload();
-
-        if (Yii::$app->request->isPost)
-        {
-            $file = UploadedFile::getInstance($model, 'image');
-            $cropInfo = Yii::$app->request->post('ImageUpload')['crop_info'];
-
-            return $this->redirect(['/site/'. $actionName, 'image' => $model->uploadFile($file, $oldImage, $cropInfo, 'params'), 'blockNum' => $blockNum]);
-        }
-
-        return $this->render('set-image', [
-            'model' => $model,
-            'width' => $width,
-            'height' => $height,
         ]);
     }
 

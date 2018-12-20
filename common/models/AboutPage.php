@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use yii\base\Model;
 use Yii;
@@ -9,13 +9,17 @@ use Yii;
  * Class Contact
  * @package backend\models
  *
+ * @property string $title
+ * @property string $meta_title
+ * @property string $meta_description
  * @property string $description
- * @property string $image
  */
 class AboutPage extends Model
 {
+    public $title;
+    public $meta_title;
+    public $meta_description;
     public $description;
-    public $image;
 
 
 
@@ -24,8 +28,10 @@ class AboutPage extends Model
         return [
             [
                 [
+                    'title',
+                    'meta_title',
+                    'meta_description',
                     'description',
-                    'image',
                 ],
                 'safe'
             ],
@@ -38,8 +44,10 @@ class AboutPage extends Model
     public function attributeLabels()
     {
         return [
+            'title' => 'Заголовок страницы',
+            'meta_title' => 'Meta-title',
+            'meta_description' => 'Meta-description',
             'description' => 'Текст',
-            'image' => 'Изображение',
         ];
     }
 
@@ -49,7 +57,7 @@ class AboutPage extends Model
         }else{
             $tempParams = '{}';
         }
-        $setPath = dirname(dirname(__DIR__)).'/common/config/about-page.json';
+        $setPath = dirname(dirname(__DIR__)) . '/common/config/about-page.json';
         file_put_contents($setPath , $tempParams);
     }
 }

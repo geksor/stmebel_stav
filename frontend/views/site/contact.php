@@ -4,12 +4,26 @@
 /* @var $model \common\models\Contact */
 
 
-$this->title = 'Контакты';
+if ($model->title){
+    $this->title = $model->title;
+}else{
+    $this->title = 'Контакты';
+}
+
+$this->registerMetaTag([
+    'name' => 'title',
+    'content' => $model->meta_title,
+]);
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => $model->meta_description,
+]);
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="content flex_1">
     <div class="kont flex">
-        <h1>Контакты</h1>
+        <h1><?= $this->title ?></h1>
         <div class="kont_left">
             <h2><?= $model->company_name ?></h2>
             <p class="kont_flex"><img src="/public/img/map.svg" alt=""><?= $model->address ?></p>

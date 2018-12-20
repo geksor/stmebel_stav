@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 
 /* @var $this yii\web\View */
-/* @var $model \backend\models\Contact */
+/* @var $model \common\models\Contact */
 
 $this->title = 'Контакты';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,11 +17,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php $form = ActiveForm::begin(); ?>
 
+            <h2>Настройки страницы</h2>
+
+            <?= $form->field($model, 'title') ?>
+            <?= $form->field($model, 'meta_title') ?>
+            <?= $form->field($model, 'meta_description') ?>
+
             <h2>Контакты</h2>
 
             <?= $form->field($model, 'address') ?>
+            <?= $form->field($model, 'addressShort') ?>
             <?= $form->field($model, 'mapScript') ?>
-
             <?= $form->field($model, 'phone_1') ?>
             <?= $form->field($model, 'phone_2') ?>
             <?= $form->field($model, 'email') ?>

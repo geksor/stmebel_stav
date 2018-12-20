@@ -1,14 +1,12 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\AboutPage;
 use common\models\CallBack;
-use common\models\Certificate;
-use common\models\Comment;
 use common\models\Contact;
-use common\models\WeDocs;
-use common\models\WePartner;
 use frontend\widgets\ModalsWidget;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 /**
@@ -44,38 +42,6 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Displays reviews
-     *
-     * @return string
-     */
-    public function actionReviews()
-    {
-        $model = Comment::find()->where(['publish' => 1])->orderBy(['created_at' => SORT_ASC])->all();
-
-        $formModel = new Comment();
-
-        if ($formModel->load(Yii::$app->request->post())){
-            if ($formModel->name){
-                return $this->redirect('reviews');
-            }
-            if ($formModel->save()){
-                Yii::$app->session->setFlash('popUp', 'Благодарим Вас за отзыв.');
-                $message = "Новый отзыв\n Имя: $formModel->user_name \n Текст отзыва: $formModel->text";
-                \Yii::$app->bot->sendMessage((integer)Yii::$app->params['Contact']['chatId'], $message);
-                $formModel->sendEmail();
-            }else{
-                Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз.');
-            }
-            return $this->redirect('reviews');
-        }
-
-        return $this->render('reviews', [
-            'model' => $model,
-            'formModel' => $formModel,
-        ]);
-    }
-
 
     /**
      * Displays about page.
@@ -84,7 +50,12 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $model = new AboutPage();
+        $model->load(Yii::$app->params);
+
+        return $this->render('about', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -107,26 +78,6 @@ class SiteController extends Controller
         return $this->render('delivery');
     }
 
-    public function actionPartner()
-    {
-        $model = WePartner::findOne(['id' => 1]);
-
-        return $this->render('partner', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionDocuments()
-    {
-        $modelDoc = WeDocs::find()->all();
-        $modelCert = Certificate::findOne(['id' => Yii::$app->params['SiteSettings']['certificate_id']]);
-
-        return $this->render('documents', [
-            'modelDoc' => $modelDoc,
-            'modelCert' => $modelCert,
-        ]);
-    }
-
     public function actionCallBack()
     {
         $model = new CallBack();
@@ -137,8 +88,10 @@ class SiteController extends Controller
             }
             if ($model->save()){
                 \Yii::$app->session->setFlash('popUp', 'Ваша заявка принята');
-                $message = "Запрос обратного звонка\n Имя: $model->name \n Телефон: $model->phone";
-                \Yii::$app->bot->sendMessage((integer)Yii::$app->params['Contact']['chatId'], $message);
+                if (ArrayHelper::keyExists('chatId', Yii::$app->params['Contact'])){
+                    $message = "Запрос обратного звонка\n Имя: $model->name \n Телефон: $model->phone";
+                    \Yii::$app->bot->sendMessage((integer)Yii::$app->params['Contact']['chatId'], $message);
+                }
                 $model->sendEmail();
             }else{
                 \Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз');

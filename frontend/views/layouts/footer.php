@@ -35,20 +35,7 @@
         <div class="footer_menu">
             <?= \frontend\widgets\HeaderMenuWidget::widget() ?>
         </div>
-        <div class="footer_adress">
-            <h5>Поддержка</h5>
-            <p>8 8652 218 - 113</p>
-            <p>8 928 3-218 - 113</p>
-            <p>218113@mail.ru</p>
-            <p></p>
-            <p></p>
-        </div>
-        <div class="footer_adress">
-            <h5>График работы:</h5>
-            <p>Пн-Сб: 9:00 - 17:00</p>
-            <p>Перерыв: 12:00 - 13:00</p>
-            <p>Вс: Выходной</p>
-        </div>
+        <?= \frontend\widgets\ContactFooterWidget::widget() ?>
     </div>
 </footer><!-- .footer -->
 
