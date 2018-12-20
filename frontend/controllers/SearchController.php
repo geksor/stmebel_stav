@@ -11,6 +11,7 @@ use common\models\OrderOptRbItem;
 use common\models\OrderOptRbSec;
 use common\models\Product;
 use common\models\ProductAttr;
+use common\models\SiteSettings;
 use frontend\models\OrderEnd;
 use frontend\models\SiteSearch;
 use frontend\widgets\CartWidget;
@@ -51,9 +52,12 @@ class SearchController extends Controller
 
         $products = $dataProvider->getModels();
 
+        $siteSettings = new SiteSettings();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'products' => $products,
+            'siteSettings' => $siteSettings,
         ]);
     }
 

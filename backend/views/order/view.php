@@ -68,7 +68,7 @@ $this->registerCss($css, ["type" => "text/css"], "orderView" );
                     'customer_phone',
                     'customer_email:email',
                     'total_price:integer',
-                    'state',
+//                    'state',
                 ],
             ]) ?>
 

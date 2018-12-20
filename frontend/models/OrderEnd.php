@@ -50,4 +50,6 @@ class OrderEnd extends Model
             'customer_email' => 'E-mail',
         ];
     }
+
+
 }

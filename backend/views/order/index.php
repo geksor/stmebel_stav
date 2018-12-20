@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'customer_phone',
                     'customer_email:email',
                     'total_price:integer',
-                    'state',
+//                    'state',
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],

@@ -2,6 +2,7 @@
 namespace frontend\widgets;
 
 use common\models\Category;
+use common\models\SiteSettings;
 use common\models\Slider;
 use yii\base\Widget;
 
@@ -17,6 +18,10 @@ class SliderWidget extends Widget
 
     public function run()
     {
+        $siteSettings = new SiteSettings();
+
+        $this->sliderId = $siteSettings->slider;
+
         if ($this->sliderId){
             $model = Slider::findOne(['id' => $this->sliderId]);
         }else{

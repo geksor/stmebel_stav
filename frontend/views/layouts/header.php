@@ -85,7 +85,7 @@
                         s-3.82-8.533-8.533-8.533H68.27z"/>
                     </svg></a>
             </div>
-            <div class="head_cart head_mobile flex">
+            <div class="head_cart head_mobile flex searchMobileButton">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
                     <path class="fill_cart" fill-rule="evenodd" d="M17.654 15.468l-2.11-2.101-1.682-1.673a7.333 7.333 0 0 0 1.379-4.282c0-4.09-3.342-7.416-7.448-7.416-4.109 0-7.45 3.326-7.45 7.416s3.341 7.417 7.45 7.417a7.432 7.432 0 0 0 4.553-1.56l2.888 2.875a.9.9 0 0 0 .114.092l.767.764 1.539-1.532zm-9.861-2.384c-3.142 0-5.698-2.544-5.698-5.672 0-3.127 2.556-5.671 5.698-5.671 3.14 0 5.696 2.544 5.696 5.671a5.63 5.63 0 0 1-1.19 3.457 5.7 5.7 0 0 1-4.506 2.215z"/>
                 </svg>
@@ -111,6 +111,29 @@ $(window).scroll(function(){
             $('.head_2').removeClass('header-fixed');
         }
     });
+
+    var closeMenu = function (){
+        $('.searchMobile').hide('blind', 400);
+        $('.searchMobileButton').removeClass('searchOpening');
+    };
+
+    $('.searchMobileButton').on('click', function() {
+        if ($(this).hasClass('searchOpening')){
+            closeMenu();
+        } else {
+            $(this).addClass('searchOpening');
+            $('.searchMobile').show('blind', 400);
+        }
+    });
+    $(document).on('click',function (ev) {
+    if ($('.searchMobileButton').hasClass('searchOpening')){
+        if($(ev.target).closest('.searchMobile').length || $(ev.target).closest('.searchMobileButton').length){
+            return;
+        }
+        closeMenu();
+    }
+    ev.stopPropagation();
+});
 JS;
 
 

@@ -64,4 +64,30 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasMany(OrderItem::className(), ['order_id' => 'id']);
     }
+
+    /**
+     * Sends an email to the specified email address using the information collected by this model.
+     *
+     * @param string $email the target email address
+     * @return bool whether the email was sent
+     */
+    public function sendEmail()
+    {
+        $body = '<h1>Оформление заказа</h1>
+                <p>
+                    <a href="'. Yii::$app->request->hostInfo .'/admin/order/'. $this->id .'">Ссылка на заказ</a>
+                </p>
+                <h2>Информация</h2>
+                <p> Дата оформления: '.Yii::$app->formatter->asDate($this->create_at, 'long').'</p>
+                <p> Имя: '.$this->customer_name.'</p>
+                <p> Телефон: '.$this->customer_phone . '</p>
+                <p> Сумма заказа: '.$this->total_price . '</p>';
+
+        return Yii::$app->mailer->compose()
+            ->setTo(Yii::$app->params['Contact']['email'])
+            ->setFrom(['info@st-mebel.ru' => 'ST-mebel'])
+            ->setSubject('Заказ с сайта: №'. $this->id)
+            ->setHtmlBody($body)
+            ->send();
+    }
 }

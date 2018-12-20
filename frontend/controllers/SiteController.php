@@ -4,6 +4,7 @@ namespace frontend\controllers;
 use common\models\AboutPage;
 use common\models\CallBack;
 use common\models\Contact;
+use common\models\SiteSettings;
 use frontend\widgets\ModalsWidget;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -38,8 +39,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $siteSettings = new SiteSettings();
 
-        return $this->render('index');
+        return $this->render('index', [
+            'siteSettings' => $siteSettings,
+        ]);
+    }
+
+    public function actionAgree()
+    {
+        $siteSettings = new SiteSettings();
+
+        return $this->render('agree', [
+            'siteSettings' => $siteSettings,
+        ]);
     }
 
 
@@ -75,7 +88,11 @@ class SiteController extends Controller
 
     public function actionDelivery()
     {
-        return $this->render('delivery');
+        $siteSettings = new SiteSettings();
+
+        return $this->render('delivery', [
+            'siteSettings' => $siteSettings,
+        ]);
     }
 
     public function actionCallBack()

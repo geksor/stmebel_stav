@@ -1,9 +1,8 @@
 <?php
 namespace frontend\controllers;
 
-use backend\models\Contact;
+use common\models\Contact;
 use common\models\AttrValue;
-use common\models\CallBack;
 use common\models\Order;
 use common\models\OrderItem;
 use common\models\OrderOptCheckbox;
@@ -196,6 +195,8 @@ class CartController extends Controller
 
     public function actionSaveOrder()
     {
+        $contactModel = new Contact();
+        $contactModel->load(Yii::$app->params);
         $cartModel = new OrderEnd();
 
         if ($cartModel->load(Yii::$app->request->post())){
@@ -250,6 +251,13 @@ class CartController extends Controller
                 }
                 Yii::$app->session->destroy();
                 Yii::$app->session->setFlash('success', 'Ваш заказ принят. В ближайшее время с вами свяжется менеджер для подтверждения заказа.');
+                if ($contactModel->chatId){
+                    $message = "Новый заказ с сайта\n Имя: $order->customer_name \n Телефон: $order->customer_phone \n Сумма заказа: $order->total_price";
+                    \Yii::$app->bot->sendMessage((integer)$contactModel->chatId, $message);
+                }
+                if ($contactModel->email) {
+                    $order->sendEmail();
+                }
             }else{
                 Yii::$app->session->setFlash('error', 'Что то пошло не так. Попробуйте еще раз.');
             }

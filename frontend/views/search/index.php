@@ -4,6 +4,17 @@
 
 /* @var $products \common\models\Product */
 /* @var $searchModel \frontend\models\SiteSearch */
+/* @var $siteSettings \common\models\SiteSettings */
+
+$this->registerMetaTag([
+    'name' => 'title',
+    'content' => $siteSettings->meta_title,
+]);
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => $siteSettings->meta_description,
+]);
+
 
 $addTitle = $searchModel->title?' по запросу: '.$searchModel->title:'';
 

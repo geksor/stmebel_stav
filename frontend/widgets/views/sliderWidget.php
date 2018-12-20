@@ -13,7 +13,7 @@
                 <div class="head_slide item">
                     <a href="<?= $image->description ?>">
                         <?= \yii\helpers\Html::img(
-                            $image->getUrl('medium'),
+                            $image->getUrl('original'),
                             [
                                 'class' => 'img-fluid',
                                 'alt' => $image->name,
