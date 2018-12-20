@@ -13,11 +13,15 @@ use yii\base\Widget;
  */
 class SliderWidget extends Widget
 {
-    public $sliderId = 1;
+    public $sliderId;
 
     public function run()
     {
-        $model = Slider::findOne(['id' => $this->sliderId]);
+        if ($this->sliderId){
+            $model = Slider::findOne(['id' => $this->sliderId]);
+        }else{
+            $model = Slider::find()->one();
+        }
 
         return $this->render('sliderWidget', [
             'model' => $model,

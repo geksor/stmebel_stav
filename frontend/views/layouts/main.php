@@ -50,16 +50,7 @@ AppAsset::register($this);
     <?= $this->render('header') ?>
 
     <? if (Yii::$app->request->url === Yii::$app->homeUrl) {?>
-        <div class="head_4 flex">
-            <div class="slider2 owl-carousel owl-theme flex">
-                <div class="head_slide item">
-                    <img src="public/img/slide.jpg" alt="">
-                </div>
-                <div class="head_slide item">
-                    <img src="public/img/slide.jpg" alt="">
-                </div>
-            </div>
-        </div><!--Код слайдера. Заменить на виджет-->
+        <?= \frontend\widgets\SliderWidget::widget() ?>
     <?}else{?>
         <div class="content cont">
             <div class="breads">
