@@ -1,10 +1,10 @@
 <?php
 namespace frontend\controllers;
 
-use backend\models\Contact;
 use common\models\CallBack;
 use common\models\Certificate;
 use common\models\Comment;
+use common\models\Contact;
 use common\models\WeDocs;
 use common\models\WePartner;
 use frontend\widgets\ModalsWidget;

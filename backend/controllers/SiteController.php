@@ -5,7 +5,7 @@ use backend\models\WebVisitor;
 use backend\models\AboutHome;
 use backend\models\AboutPage;
 use backend\models\Advantage;
-use backend\models\Contact;
+use common\models\Contact;
 use common\models\ImageUpload;
 use nox\components\http\userAgent\UserAgentParser;
 use Yii;
@@ -115,14 +115,6 @@ class SiteController extends Controller
             'labelsChart' => json_encode($labelsChart),
             'dataChart' => json_encode($dataChart),
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function actionYaMap()
-    {
-        return $this->render('ya-map');
     }
 
     /**
