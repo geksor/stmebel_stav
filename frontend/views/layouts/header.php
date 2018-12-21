@@ -92,6 +92,7 @@
             </div>
             <?= \frontend\widgets\CartWidget::widget() ?>
         </div>
+        <?= \frontend\widgets\SearchMobileWidget::widget() ?>
     </div>
     <div class="head_3">
         <div class="cont flex_1">

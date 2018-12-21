@@ -59,9 +59,9 @@ class Attr extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'all_cats' => 'All Cats',
-            'rank' => 'Rank',
+            'title' => 'Заголовок',
+            'all_cats' => 'Для всех категорий',
+            'rank' => 'Порядок вывода',
         ];
     }
 

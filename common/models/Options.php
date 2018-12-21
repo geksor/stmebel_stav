@@ -101,10 +101,10 @@ class Options extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'type' => 'Type',
-            'allCats' => 'All Cats',
-            'rank' => 'Rank',
+            'title' => 'Название',
+            'type' => 'Тип',
+            'allCats' => 'Для всех категорий',
+            'rank' => 'Порядок вывода',
         ];
     }
 

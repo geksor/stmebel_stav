@@ -47,13 +47,13 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'create_at' => 'Create At',
-            'checked_opt' => 'Checked Opt',
-            'customer_name' => 'Customer Name',
-            'customer_phone' => 'Customer Phone',
-            'customer_email' => 'Customer Email',
-            'total_price' => 'Total Price',
-            'state' => 'State',
+            'create_at' => 'Дата создания',
+            'checked_opt' => 'Выбранные опции',
+            'customer_name' => 'Имя покупателя',
+            'customer_phone' => 'Телефон покупателя',
+            'customer_email' => 'Email покупателя',
+            'total_price' => 'Итого',
+            'state' => 'Состояние заказа',
         ];
     }
 

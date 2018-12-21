@@ -50,13 +50,13 @@ class Reviews extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'user_name' => 'User Name',
+            'product_id' => 'Для товара',
+            'user_name' => 'Имя',
             'email' => 'Email',
-            'text' => 'Text',
-            'created_at' => 'Created At',
-            'done_at' => 'Done At',
-            'publish' => 'Publish',
+            'text' => 'Текст Отзыва',
+            'created_at' => 'Дата создания',
+            'done_at' => 'Дата изменения',
+            'publish' => 'Публикация',
             'viewed' => 'Viewed',
         ];
     }

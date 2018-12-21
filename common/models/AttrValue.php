@@ -46,9 +46,9 @@ class AttrValue extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'attr_id' => 'Attr ID',
-            'value' => 'Value',
-            'rank' => 'Rank',
+            'attr_id' => 'Атрибут',
+            'value' => 'Значение атрибута',
+            'rank' => 'Прядок вывода',
         ];
     }
 
