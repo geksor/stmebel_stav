@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?}?>
                             </div>
                             <div class="basket_price" id="<?= $key ?>">
-                                <?= Yii::$app->formatter->asInteger($productModel->getCalcPrice($item['modelProductAttr'], false)*$item['count']) ?> Р
+                                <?= Yii::$app->formatter->asInteger($productModel->getCalcPrice($item['modelProductAttr'], false)*$item['count']) ?> <i class="fas fa-ruble-sign"></i>
                             </div>
                             <div class="product_right_cart flex">
                                 <div>
@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="basket_right">
                 <div class="basket_right_1">
                     <p>Сумма к оплате:</p>
-                    <p class="basket_right_price"><?= Yii::$app->formatter->asInteger($totalPrice) ?> Р</p>
+                    <p class="basket_right_price"><?= Yii::$app->formatter->asInteger($totalPrice) ?> <i class="fas fa-ruble-sign"></i></p>
                 </div>
                 <? if ($orderCheckOptions) {?>
                     <div class="basket_right_2">

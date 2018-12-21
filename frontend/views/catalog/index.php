@@ -120,14 +120,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="product_price flex">
                         <? if ($product->sale) {?>
                             <div class="price_1">
-                                <p><?= $product->getSaleAttrPrice(true) ?> Р</p>
+                                <p><?= $product->getSaleAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                             </div>
                             <div class="price_2">
-                                <p><?= $product->getAttrPrice(true) ?> Р</p>
+                                <p><?= $product->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                             </div>
                         <?}else{?>
                             <div class="price_1">
-                                <p><?= $product->getAttrPrice(true) ?> Р</p>
+                                <p><?= $product->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                             </div>
                         <?}?>
                     </div>

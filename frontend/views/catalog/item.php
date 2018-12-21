@@ -83,10 +83,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <p class="product_right_price_0">Цена</p>
             <? \yii\widgets\Pjax::begin(['id' => 'price', 'options' => ['class' => 'product_right_price']]) ?>
                 <? if ($model->sale) {?>
-                    <p class="product_right_price_1 main-price" ><?= $model->getSaleAttrPrice(true) ?> Р</p>
-                    <p class="product_right_price_2"><?= $model->getAttrPrice(true) ?> Р</p>
+                    <p class="product_right_price_1 main-price" ><?= $model->getSaleAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
+                    <p class="product_right_price_2"><?= $model->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                 <?}else{?>
-                    <p class="product_right_price_1 main-price" ><?= $model->getAttrPrice(true) ?> Р</p>
+                    <p class="product_right_price_1 main-price" ><?= $model->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                 <?}?>
             <? \yii\widgets\Pjax::end() ?>
         </div>
@@ -278,14 +278,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="product_price flex">
                                     <? if ($recommProduct->sale) {?>
                                         <div class="price_1">
-                                            <p><?= $recommProduct->getSaleAttrPrice(true) ?> Р</p>
+                                            <p><?= $recommProduct->getSaleAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                         </div>
                                         <div class="price_2">
-                                            <p><?= $recommProduct->getAttrPrice(true) ?> Р</p>
+                                            <p><?= $recommProduct->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                         </div>
                                     <?}else{?>
                                         <div class="price_1">
-                                            <p><?= $recommProduct->getAttrPrice(true) ?> Р</p>
+                                            <p><?= $recommProduct->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                         </div>
                                     <?}?>
                                 </div>
