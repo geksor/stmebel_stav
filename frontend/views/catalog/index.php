@@ -66,6 +66,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <?}?>
     </div>
+    <? if ($model) {?>
+        <div class="categoryDescription">
+            <?= $model->description ?>
+        </div>
+    <?}?>
     <? if ($model->child) {?>
         <div class="content_catalog cont flex">
             <? foreach ($model->child as $child) {?>
