@@ -29,7 +29,7 @@ $this->title = 'Отзывы';
 <?}?>
 
 <?php $form = ActiveForm::begin([
-    'action' => '/site/send-reviews'
+    'action' => '/reviews/send-reviews'
 ]); ?>
 
 <div class="addInput" style="display: none">

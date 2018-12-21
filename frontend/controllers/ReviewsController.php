@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\AllReviews;
+use common\models\Contact;
 use common\models\SiteSettings;
 use frontend\models\SiteSearch;
 use Yii;
@@ -45,4 +46,26 @@ class ReviewsController extends Controller
         ]);
     }
 
+
+    public function actionSendReviews()
+    {
+        $reviewsModel = new AllReviews();
+        $contactModel = new Contact();
+
+        if ( $reviewsModel->load( Yii::$app->request->post() ) && !$reviewsModel->lastName ) {
+            if ($reviewsModel->save()){
+                Yii::$app->session->setFlash('success', 'Спасибо за ваш отзыв.');
+                $message = "Новый отзыв\n Имя: $reviewsModel->user_name \n Текст отзыва: $reviewsModel->text";
+                if ($contactModel->chatId){
+                    \Yii::$app->bot->sendMessage((integer)$contactModel->chatId, $message);
+                }
+                if ($contactModel->email){
+                    $reviewsModel->sendEmail();
+                }
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
+        Yii::$app->session->setFlash('error', 'Что то пошло не так.');
+        return $this->redirect(Yii::$app->request->referrer);
+    }
 }
