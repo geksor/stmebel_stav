@@ -46,6 +46,7 @@ class SiteController extends Controller
                             'site-settings',
                             'delivery-page',
                             'agree-page',
+                            'three-block'
                         ],
                         'allow' => true,
                         'roles' => ['@'],
