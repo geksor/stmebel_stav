@@ -21,17 +21,17 @@ $this->title = 'Отзывы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="reviews">
-    <div class="review">
         <? if ($models) {?>
             <? foreach ($models as $model) {/* @var $model \common\models\AllReviews */?>
-                <div class="flex">
-                    <p class="revew_name"><?= $model->user_name ?></p>
-                    <p class="revew_date"><?= Yii::$app->formatter->asDate($model->created_at, 'long') ?></p>
+                <div class="review">
+                    <div class="flex">
+                        <p class="revew_name"><?= $model->user_name ?></p>
+                        <p class="revew_date"><?= Yii::$app->formatter->asDate($model->created_at, 'long') ?></p>
+                    </div>
                 </div>
                 <p class="revew_text"><?= $model->text ?></p>
             <?}?>
         <?}?>
-    </div>
     <?php $form = ActiveForm::begin([
         'action' => '/reviews/send-reviews'
     ]); ?>
