@@ -93,6 +93,18 @@ strong{
 	line-height: 24px;
 	letter-spacing: 0.4px;
 }
+.reviews_form{
+	margin-top: 20px;
+}
+.reviewsGroup{
+	display: inline-block;
+	margin-right: 10px
+}
+.reviewsGroup .form_text{
+	padding: 10px;
+	width: 303px;
+	font-size: 14px;
+}
 .fa, .fas{
 	font-size: 16px;
 }
