@@ -39,7 +39,7 @@
                                                 <a href="<?= \yii\helpers\Url::to($item1['url']) ?>"><?= $item1['label'] ?></a>
                                                 <!--<ul class="is-hidden">
                                                     <li class="see-all"><a href="<?= \yii\helpers\Url::to($item1['url']) ?>">Перейти в <?= $item1['label'] ?></a></li>
-                                                </ul>-->
+                                                </ul>--->
                                             </li>
                                         <?}?>
                                     <?}?>
