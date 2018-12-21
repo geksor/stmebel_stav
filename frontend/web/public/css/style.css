@@ -122,6 +122,13 @@ strong{
 	color: #fff;
 	text-transform: uppercase;
 }
+.help-block{
+	padding: 5px;
+	margin: 5px;
+	background: #ff7373;
+	color: #fff;
+	border-radius: 4px;
+}
 .fa, .fas{
 	font-size: 16px;
 }
