@@ -11,7 +11,7 @@
     <div id="tabs">
         <ul>
             <? if ($modelsHot) {?>
-                <li><a href="#tabs-1">ХИТЫ П<i class="fas fa-ruble-sign"></i>ОДАЖ</a></li>
+                <li><a href="#tabs-1">ХИТЫ ПРОДАЖ</a></li>
             <?}?>
             <? if ($modelsNew) {?>
                 <li><a href="#tabs-2">НОВИНКИ</a></li>
@@ -32,7 +32,7 @@
                             <?}?>
                             <? if ($model->hot) {?>
                                 <div class="sale hot">
-                                    <p>Хит п<i class="fas fa-ruble-sign"></i>одаж</p>
+                                    <p>Хит продаж</p>
                                 </div>
                             <?}?>
                             <? if ($model->new) {?>
@@ -68,7 +68,7 @@
                                 <?}?>
                             </div>
                             <div class="product_read">
-                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Под<i class="fas fa-ruble-sign"></i>обнее</a>
+                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Подобнее</a>
                             </div>
                         </div>
                     <?}?>
@@ -87,7 +87,7 @@
                             <?}?>
                             <? if ($model->hot) {?>
                                 <div class="sale hot">
-                                    <p>Хит п<i class="fas fa-ruble-sign"></i>одаж</p>
+                                    <p>Хит продаж</p>
                                 </div>
                             <?}?>
                             <? if ($model->new) {?>
@@ -123,7 +123,7 @@
                                 <?}?>
                             </div>
                             <div class="product_read">
-                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Под<i class="fas fa-ruble-sign"></i>обнее</a>
+                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Подробнее</a>
                             </div>
                         </div>
                     <?}?>
