@@ -59,7 +59,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 	box-sizing: border-box;
 }
 body {
-	font: 12px/18px 'Roboto';
+	font: 14px/18px 'Roboto';
 	width: 100%;
 }
 input {outline:none;}
