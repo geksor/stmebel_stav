@@ -1100,6 +1100,7 @@ input[type=radio] {
 	border-top: 1px solid #bbc0be;
 	border-left: 1px solid #bbc0be;
 	border-right: 1px solid #bbc0be;
+	border-bottom: 1px solid #bbc0be;
 	margin-left: -1px;
 }
 .right_content_head h1{
