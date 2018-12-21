@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content flex_1">
     <div class="product_left">
         <h1><?= $model->title ?></h1>
-        <div class="rewiev"><a href="">Оставить отзыв</a></div>
         <div class="product_left_img">
             <section id="magnific">
                 <div class="row">
@@ -215,7 +214,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <? if ($model->description) {?>
                 <li><a href="#description">ОПИСАНИЕ</a></li>
             <?}?>
-            <li><a href="#reviews">Отзывы</a></li>
         </ul>
         <? if ($model->productOptionsAll) {?>
             <div id="alloptions">
