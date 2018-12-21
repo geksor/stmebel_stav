@@ -18,6 +18,7 @@ $this->registerMetaTag([
 ]);
 
 $this->title = 'Отзывы';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <? if ($models) {?>
