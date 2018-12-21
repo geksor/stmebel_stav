@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p class="revew_name"><?= $model->user_name ?></p>
                         <p class="revew_date"><?= Yii::$app->formatter->asDate($model->created_at, 'long') ?></p>
                     </div>
+                    <p class="revew_text"><?= $model->text ?></p>
                 </div>
-                <p class="revew_text"><?= $model->text ?></p>
             <?}?>
         <?}?>
     <?php $form = ActiveForm::begin([
