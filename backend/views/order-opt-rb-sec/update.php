@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\OrderOptRbSec */
 
-$this->title = 'Update Order Opt Rb Sec: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Order Opt Rb Secs', 'url' => ['index']];
+$this->title = 'Редактирование: '.$model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Выбор из нескольких', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="order-opt-rb-sec-update">
 

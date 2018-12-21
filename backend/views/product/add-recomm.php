@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $fromId */
 
-$this->title = 'Товары';
+$this->title = 'Выбор рекомендуемых товаров';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">
@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'filterCat',
+                        'label' => 'Категория',
                         'filter'=> $searchModel::getCatFromDropDown(),
                         'filterInputOptions' => ['prompt' => 'Все', 'class' => 'form-control form-control-sm'],
                         'headerOptions' => ['width' => 170],

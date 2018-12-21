@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\ProductOptionsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Product Options';
+$this->title = 'Характеристики товара';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-options-index">

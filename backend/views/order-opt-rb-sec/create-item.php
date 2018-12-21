@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\OrderOptRbItem */
 /* @var $parentTitle */
 
-$this->title = 'Create Order Opt Rb Item';
+$this->title = 'Создание варианта';
 $this->params['breadcrumbs'][] = ['label' => $parentTitle, 'url' => ['view', 'id' => $model->section_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

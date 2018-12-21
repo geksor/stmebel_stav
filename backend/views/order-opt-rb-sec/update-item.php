@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model common\models\OrderOptRbItem */
 /* @var $parentTitle */
 
-$this->title = 'Update Order Opt Rb Sec: '.$model->title;
+$this->title = 'Редактирование варианта: '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => $parentTitle, 'url' => ['view', 'id' => $model->section_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="order-opt-rb-sec-update">
 

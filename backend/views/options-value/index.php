@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\OptionsValueSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Options Values';
+$this->title = 'Значения характеристики';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="options-value-index">

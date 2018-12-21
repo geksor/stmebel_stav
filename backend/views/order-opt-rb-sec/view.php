@@ -12,7 +12,7 @@ use backend\widgets\grid\GridView;
 
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Order Opt Rb Secs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Выбор из нескольких', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -23,11 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <p>
                 <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['index'], ['class' => 'btn btn-default']) ?>
-                <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
+                        'confirm' => 'Продолжить удаление?',
                         'method' => 'post',
                     ],
                 ]) ?>
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
             <p>
-                <?= Html::a('Create Order Opt Rb Item', ['create-item', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Создать вариант', ['create-item', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
             </p>
 
             <?= GridView::widget([

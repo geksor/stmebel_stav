@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $attrValue */
 
-$this->title = 'Product Attrs';
+$this->title = 'Атрибуты товара';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-attr-index">

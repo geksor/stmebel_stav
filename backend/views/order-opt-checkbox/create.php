@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\OrderOptCheckbox */
 
-$this->title = 'Create Order Opt Checkbox';
-$this->params['breadcrumbs'][] = ['label' => 'Order Opt Checkboxes', 'url' => ['index']];
+$this->title = 'Создание опции';
+$this->params['breadcrumbs'][] = ['label' => 'Одиночные опции', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-opt-checkbox-create">

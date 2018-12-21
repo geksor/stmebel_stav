@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $fromId */
 
-$this->title = 'Товары';
+$this->title = 'Рекомендуемые товары';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">

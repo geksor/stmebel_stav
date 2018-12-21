@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\OptionsValue */
 
 $this->title = $model->value;
-$this->params['breadcrumbs'][] = ['label' => 'Options Values', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Значения характеристики', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

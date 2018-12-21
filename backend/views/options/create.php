@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Options */
 
-$this->title = 'Create Options';
-$this->params['breadcrumbs'][] = ['label' => 'Options', 'url' => ['index']];
+$this->title = 'Создание характеристики';
+$this->params['breadcrumbs'][] = ['label' => 'Характеристики', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="options-create">

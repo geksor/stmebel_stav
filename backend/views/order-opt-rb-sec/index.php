@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\OrderOptRbSecSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Order Opt Rb Secs';
+$this->title = 'Выбор из нескольких';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-opt-rb-sec-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
             <p>
-                <?= Html::a('Create Order Opt Rb Sec', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
             </p>
 
             <?= GridView::widget([

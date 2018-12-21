@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\ProductImagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Product Images';
+$this->title = 'Изображения товара';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-images-index">

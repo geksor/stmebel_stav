@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\ProductAttr */
 /* @var $attrValue */
 
-$this->title = 'Create Product Attr';
+$this->title = 'Создание';
 $this->params['breadcrumbs'][] = ['label' => 'Product Attrs', 'url' => ['index', 'par_id' => $model->product_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

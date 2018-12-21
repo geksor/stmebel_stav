@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\OrderOptCheckboxSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Order Opt Checkboxes';
+$this->title = 'Одиночные опции';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-opt-checkbox-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
             <p>
-                <?= Html::a('Create Order Opt Checkbox', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
             </p>
 
             <?= GridView::widget([

@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Orders';
+$this->title = 'Заказы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php Pjax::begin(); ?>
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-            <p>
-                <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
-            </p>
+<!--            <p>-->
+<!--                --><?//= Html::a('Создать заказ', ['create'], ['class' => 'btn btn-success']) ?>
+<!--            </p>-->
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Attributes */
+/* @var $model common\models\Attr */
 
 $this->title = 'Редактирование: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Атрибуты', 'url' => ['index']];
