@@ -756,11 +756,11 @@ input[type=radio] {
 .product{
 	z-index: 0;
 	font-family: 'Roboto';
-	padding: 14%;
+	padding: 10px;
 	margin-left: 0px;
-	border: 1px solid #bbc0be;
-	border-top: 2px solid #bbc0be;
-	border-bottom: 2px solid #bbc0be;
+	border-left: 1px solid #bbc0be;
+	border-top: 1px solid #bbc0be;
+	border-bottom: 1px solid #bbc0be;
 	transition: all 0.2s ease-in-out;
 }
 .product.carusel{
