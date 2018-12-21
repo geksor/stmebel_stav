@@ -165,7 +165,7 @@
                             </div>
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
-                                    <div class="price_1">s
+                                    <div class="price_1">
                                         <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                     <div class="price_2">
