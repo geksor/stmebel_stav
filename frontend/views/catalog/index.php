@@ -64,6 +64,16 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
+    <? if ($model->child) {?>
+        <div class="content_catalog cont flex">
+            <? foreach ($model->child as $child) {?>
+                <a class="category" href = "<?= \yii\helpers\Url::to($child->url) ?>">
+                    <?= $child->image ?>
+                    <h2><?= $child->title ?></h2>
+                </a>
+            <?}?>
+        </div>
+    <?}?>
     <div class="flex_4">
         <? if ($products) {?>
             <? foreach ($products as $product) {/* @var $product \common\models\Product */?>
