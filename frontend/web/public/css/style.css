@@ -745,7 +745,7 @@ input[type=radio] {
 	fill: #00c576;
 }
 .slider1 .owl-stage-outer{
-	padding: 50px 1px;
+	padding: 50px 3px;
 	width: calc(100% + 2px);
 	height: 500px;
 	position: relative;
@@ -758,10 +758,9 @@ input[type=radio] {
 	font-family: 'Roboto';
 	padding: 14%;
 	margin-left: 0px;
-	border-left: 1px solid #bbc0be;
-	border-right: 1px solid #fff;
-	border-top: 1px solid #bbc0be;
-	border-bottom: 1px solid #bbc0be;
+	border: 1px solid #bbc0be;
+	border-top: 2px solid #bbc0be;
+	border-bottom: 2px solid #bbc0be;
 	transition: all 0.2s ease-in-out;
 }
 .product.carusel{
