@@ -756,8 +756,8 @@ input[type=radio] {
 .product{
 	z-index: 0;
 	font-family: 'Roboto';
-	padding: 10px;
-	margin-left: -1px;
+	padding: 14%;
+	margin-left: 0px;
 	border-left: 1px solid #bbc0be;
 	border-right: 1px solid #fff;
 	border-top: 1px solid #bbc0be;
