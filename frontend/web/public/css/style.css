@@ -78,6 +78,12 @@ strong{
 .categoryDescription p{
 	padding: 10px 0px;
 }
+.content_catalog{
+	width: 100%;
+}
+.content_catalog .category{
+	width: 23%;
+}
 .usluga{
 	width: 33%;
 	margin-bottom: 50px;
