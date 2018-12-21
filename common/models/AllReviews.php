@@ -35,7 +35,7 @@ class AllReviews extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_name', 'created_at'], 'required'],
+            [['user_name', 'text', 'email'], 'required'],
             [['text'], 'string'],
             [['publish', 'viewed'], 'integer'],
             [['create_at', 'done_at',], 'safe'],
