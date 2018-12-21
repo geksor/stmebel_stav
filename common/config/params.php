@@ -17,6 +17,18 @@ if (!is_file($siteSettingsFile)){
 }
 $siteSettings = json_decode(file_get_contents($siteSettingsFile), true);
 
+$deliveryPageFile = __DIR__. '/delivery-page.json';
+if (!is_file($deliveryPageFile)){
+    file_put_contents($deliveryPageFile, '{}');
+}
+$deliveryPage = json_decode(file_get_contents($deliveryPageFile), true);
+
+$agreePageFile = __DIR__. '/agree-page.json';
+if (!is_file($agreePageFile)){
+    file_put_contents($agreePageFile, '{}');
+}
+$agreePage = json_decode(file_get_contents($agreePageFile), true);
+
 return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
@@ -24,4 +36,6 @@ return [
     'Contact' => $contact,
     'AboutPage' => $aboutPage,
     'SiteSettings' => $siteSettings,
+    'DeliveryPage' => $deliveryPage,
+    'AgreePage' => $agreePage,
 ];
