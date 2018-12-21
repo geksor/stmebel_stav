@@ -11,7 +11,7 @@
     <div id="tabs">
         <ul>
             <? if ($modelsHot) {?>
-                <li><a href="#tabs-1">ХИТЫ ПРОДАЖ</a></li>
+                <li><a href="#tabs-1">ХИТЫ П<i class="fa fa-rub" aria-hidden="true"></i>ОДАЖ</a></li>
             <?}?>
             <? if ($modelsNew) {?>
                 <li><a href="#tabs-2">НОВИНКИ</a></li>
@@ -32,7 +32,7 @@
                             <?}?>
                             <? if ($model->hot) {?>
                                 <div class="sale hot">
-                                    <p>Хит продаж</p>
+                                    <p>Хит п<i class="fa fa-rub" aria-hidden="true"></i>одаж</p>
                                 </div>
                             <?}?>
                             <? if ($model->new) {?>
@@ -56,19 +56,19 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= $model->getSaleAttrPrice(true) ?> Р</p>
+                                        <p><?= $model->getSaleAttrPrice(true) ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= $model->getAttrPrice() ?> Р</p>
+                                        <p><?= $model->getAttrPrice() ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= $model->getAttrPrice() ?> Р</p>
+                                        <p><?= $model->getAttrPrice() ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                 <?}?>
                             </div>
                             <div class="product_read">
-                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Подробнее</a>
+                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Под<i class="fa fa-rub" aria-hidden="true"></i>обнее</a>
                             </div>
                         </div>
                     <?}?>
@@ -87,7 +87,7 @@
                             <?}?>
                             <? if ($model->hot) {?>
                                 <div class="sale hot">
-                                    <p>Хит продаж</p>
+                                    <p>Хит п<i class="fa fa-rub" aria-hidden="true"></i>одаж</p>
                                 </div>
                             <?}?>
                             <? if ($model->new) {?>
@@ -111,19 +111,19 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> Р</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                 <?}?>
                             </div>
                             <div class="product_read">
-                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Подробнее</a>
+                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Под<i class="fa fa-rub" aria-hidden="true"></i>обнее</a>
                             </div>
                         </div>
                     <?}?>
@@ -142,7 +142,7 @@
                             <?}?>
                             <? if ($model->hot) {?>
                                 <div class="sale hot">
-                                    <p>Хит продаж</p>
+                                    <p>Хит п<i class="fa fa-rub" aria-hidden="true"></i>одаж</p>
                                 </div>
                             <?}?>
                             <? if ($model->new) {?>
@@ -166,19 +166,19 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> Р</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> Р</p>
+                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> <i class="fa fa-rub" aria-hidden="true"></i></p>
                                     </div>
                                 <?}?>
                             </div>
                             <div class="product_read">
-                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Подробнее</a>
+                                <a href="/catalog/<?= $model->mainCat->alias ?>/<?= $model->alias ?>">Под<i class="fa fa-rub" aria-hidden="true"></i>обнее</a>
                             </div>
                         </div>
                     <?}?>
