@@ -71,13 +71,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]); ?>
-            <?php Pjax::end(); ?>
-        </div>
-    </div>
-
-</div>
-<?
-$js = <<< JS
+            <?
+            $js = <<< JS
     $('[name = rank]').keypress(function(e){
         if(e.keyCode==13){
             $.ajax({
@@ -105,5 +100,10 @@ $js = <<< JS
     });
 JS;
 
-$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
-?>
+            $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+            ?>
+            <?php Pjax::end(); ?>
+        </div>
+    </div>
+
+</div>

@@ -222,16 +222,34 @@ class ProductController extends Controller
      */
     public function actionRank($id, $rank)
     {
-        if (Yii::$app->request->isAjax){
 
-            $model = $this->findModel($id);
+        $model = $this->findModel($id);
 
-            if ($model){
-                $model->rank = (integer) $rank;
+        if ($model){
+            $model->rank = (integer) $rank;
 
-                if ($model->save()){
-                    return $this->redirect(Yii::$app->request->referrer);
-                }
+            if ($model->save()){
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+    /**
+     * @param $id
+     * @param $price
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionPrice($id, $price)
+    {
+
+        $model = $this->findModel($id);
+
+        if ($model){
+            $model->price = (integer) $price;
+
+            if ($model->save()){
+                return $this->redirect(Yii::$app->request->referrer);
             }
         }
         return $this->redirect(Yii::$app->request->referrer);
