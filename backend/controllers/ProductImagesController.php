@@ -6,6 +6,7 @@ use common\models\Product;
 use Yii;
 use common\models\ProductImages;
 use common\models\ProductImagesSearch;
+use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -23,6 +24,34 @@ class ProductImagesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'login',
+                            'error',
+                        ],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [
+                            'logout',
+                            'error',
+                            'index',
+                            'view',
+                            'create',
+                            'update',
+                            'delete',
+                            'rank',
+                            'title',
+                            'set-main-image',
+                        ],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

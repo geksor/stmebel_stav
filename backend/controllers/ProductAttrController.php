@@ -6,6 +6,7 @@ use common\models\Product;
 use Yii;
 use common\models\ProductAttr;
 use common\models\ProductAttrSearch;
+use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -22,6 +23,29 @@ class ProductAttrController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'login',
+                            'error',
+                        ],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [
+                            'logout',
+                            'error',
+                            'index',
+                            'delete',
+                            'rank',
+                        ],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
