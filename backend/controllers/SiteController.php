@@ -7,6 +7,7 @@ use common\models\AgreePage;
 use common\models\Contact;
 use common\models\DeliveryPage;
 use common\models\SiteSettings;
+use common\models\ThreeBlock;
 use nox\components\http\userAgent\UserAgentParser;
 use Yii;
 use yii\web\Controller;
@@ -145,6 +146,22 @@ class SiteController extends Controller
         }
 
         return $this->render('site-settings', [
+            'model' => $model,
+        ]);
+    }
+    /**
+     * @return string|\yii\web\Response
+     */
+    public function actionThreeBlock()
+    {
+        $model = new ThreeBlock();
+
+        if (Yii::$app->request->post()) {
+            $model->save(Yii::$app->request->post('ThreeBlock'));
+            return $this->redirect(['three-block']);
+        }
+
+        return $this->render('three-block', [
             'model' => $model,
         ]);
     }

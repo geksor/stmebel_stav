@@ -48,6 +48,7 @@
                             ['label' => 'О нас', 'icon' => 'info', 'url' => ['/site/about-page']],
                             ['label' => 'Доставка', 'icon' => 'truck', 'url' => ['/site/delivery-page']],
                             ['label' => 'Соглашение', 'icon' => 'check-square', 'url' => ['/site/agree-page']],
+                            ['label' => 'Три блока', 'icon' => 'check-square', 'url' => ['/site/three-block']],
                         ],
                     ],
                     [

@@ -8,6 +8,7 @@ use common\models\CallBack;
 use common\models\Contact;
 use common\models\DeliveryPage;
 use common\models\SiteSettings;
+use common\models\ThreeBlock;
 use frontend\widgets\ModalsWidget;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -43,9 +44,11 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $siteSettings = new SiteSettings();
+        $threeBlock = new ThreeBlock();
 
         return $this->render('index', [
             'siteSettings' => $siteSettings,
+            'threeBlock' => $threeBlock,
         ]);
     }
 

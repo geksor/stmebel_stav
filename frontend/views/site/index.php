@@ -2,6 +2,7 @@
 
 /* @var $this \frontend\components\View */
 /* @var $siteSettings \common\models\SiteSettings */
+/* @var $threeBlock \common\models\ThreeBlock */
 
 $this->registerMetaTag([
     'name' => 'title',
@@ -19,18 +20,18 @@ $this->title = 'Главная';
 <?= \frontend\widgets\ProductsForMainWidget::widget() ?>
 <div class="uslugi cont flex_2">
     <div class="usluga">
-        <img src="public/img/usluga_1.svg" alt="">
-        <h4>ЛЮБЫЕ ФОРМЫ ОПЛАТЫ</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <img src="<?= $threeBlock->one_image?$threeBlock->one_image:'public/img/usluga_1.svg'?>" alt="<?= $threeBlock->one_title ?>">
+        <h4><?= $threeBlock->one_title ?></h4>
+        <p><?= $threeBlock->one_text ?></p>
     </div>
     <div class="usluga">
-        <img src="public/img/usluga_2.svg" alt="">
-        <h4>СБОРКА И ДОСТАВКА</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <img src="<?= $threeBlock->two_image?$threeBlock->two_image:'public/img/usluga_2.svg'?>" alt="<?= $threeBlock->two_title ?>">
+        <h4><?= $threeBlock->two_title ?></h4>
+        <p><?= $threeBlock->two_text ?></p>
     </div>
     <div class="usluga">
-        <img src="public/img/usluga_3.svg" alt="">
-        <h4>ГАРАНТИЯ КАЧЕСТВА</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <img src="<?= $threeBlock->three_image?$threeBlock->three_image:'public/img/usluga_3.svg'?>" alt="<?= $threeBlock->three_title ?>">
+        <h4><?= $threeBlock->three_title ?></h4>
+        <p><?= $threeBlock->three_text ?></p>
     </div>
 </div>

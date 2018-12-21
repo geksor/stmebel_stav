@@ -29,6 +29,12 @@ if (!is_file($agreePageFile)){
 }
 $agreePage = json_decode(file_get_contents($agreePageFile), true);
 
+$threeBlockFile = __DIR__. '/three-block.json';
+if (!is_file($threeBlockFile)){
+    file_put_contents($threeBlockFile, '{}');
+}
+$threeBlock = json_decode(file_get_contents($threeBlockFile), true);
+
 return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
@@ -38,4 +44,5 @@ return [
     'SiteSettings' => $siteSettings,
     'DeliveryPage' => $deliveryPage,
     'AgreePage' => $agreePage,
+    'ThreeBlock' => $threeBlock,
 ];
