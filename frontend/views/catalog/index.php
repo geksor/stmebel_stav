@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     <?}?>
     <? if ($model->child) {?>
-        <div class="content_catalog cont flex">
+        <div class="content_catalog categoryFromCatalog cont flex">
             <? foreach ($model->child as $child) {?>
                 <a class="category" href = "<?= \yii\helpers\Url::to($child->url) ?>">
                     <?= $child->image ?>

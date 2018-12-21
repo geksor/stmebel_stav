@@ -2,8 +2,10 @@
 namespace frontend\controllers;
 
 use common\models\AboutPage;
+use common\models\AgreePage;
 use common\models\CallBack;
 use common\models\Contact;
+use common\models\DeliveryPage;
 use common\models\SiteSettings;
 use frontend\widgets\ModalsWidget;
 use Yii;
@@ -49,9 +51,11 @@ class SiteController extends Controller
     public function actionAgree()
     {
         $siteSettings = new SiteSettings();
+        $model = new AgreePage();
 
         return $this->render('agree', [
             'siteSettings' => $siteSettings,
+            'model' => $model,
         ]);
     }
 
@@ -89,9 +93,11 @@ class SiteController extends Controller
     public function actionDelivery()
     {
         $siteSettings = new SiteSettings();
+        $model = new DeliveryPage();
 
         return $this->render('delivery', [
             'siteSettings' => $siteSettings,
+            'model' => $model,
         ]);
     }
 

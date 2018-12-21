@@ -4,7 +4,9 @@ namespace backend\controllers;
 use backend\models\WebVisitor;
 use backend\models\Advantage;
 use common\models\AboutPage;
+use common\models\AgreePage;
 use common\models\Contact;
+use common\models\DeliveryPage;
 use common\models\ImageUpload;
 use common\models\SiteSettings;
 use nox\components\http\userAgent\UserAgentParser;
@@ -45,6 +47,8 @@ class SiteController extends Controller
                             'contact',
                             'about-page',
                             'site-settings',
+                            'delivery-page',
+                            'agree-page',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
@@ -145,6 +149,38 @@ class SiteController extends Controller
         }
 
         return $this->render('site-settings', [
+            'model' => $model,
+        ]);
+    }
+    /**
+     * @return string|\yii\web\Response
+     */
+    public function actionDeliveryPage()
+    {
+        $model = new DeliveryPage();
+
+        if (Yii::$app->request->post()) {
+            $model->save(Yii::$app->request->post('DeliveryPage'));
+            return $this->redirect(['delivery-page']);
+        }
+
+        return $this->render('delivery-page', [
+            'model' => $model,
+        ]);
+    }
+    /**
+     * @return string|\yii\web\Response
+     */
+    public function actionAgreePage()
+    {
+        $model = new AgreePage();
+
+        if (Yii::$app->request->post()) {
+            $model->save(Yii::$app->request->post('AgreePage'));
+            return $this->redirect(['agree-page']);
+        }
+
+        return $this->render('agree-page', [
             'model' => $model,
         ]);
     }
