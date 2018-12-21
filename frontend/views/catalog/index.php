@@ -52,7 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="right_content flex">
     <div class="right_content_head flex">
         <h1><?= $this->title ?></h1>
-        <div class="sorting flex">
+        <? if ($products) {?>
+            <div class="sorting flex">
             <p>Сортировать по цене</p>
             <div class="sorting_img flex">
                 <a href="<?= \yii\helpers\Url::to(['index', 'alias' => $model?$model->alias:null, 'orderPrice' => 1]) ?>">
@@ -63,7 +64,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 </a>
             </div>
         </div>
+        <?}?>
     </div>
+    <? if ($model->child) {?>
+        <div class="content_catalog cont flex">
+            <? foreach ($model->child as $child) {?>
+                <a class="category" href = "<?= \yii\helpers\Url::to($child->url) ?>">
+                    <?= $child->image ?>
+                    <h2><?= $child->title ?></h2>
+                </a>
+            <?}?>
+        </div>
+    <?}?>
     <div class="flex_4">
         <? if ($products) {?>
             <? foreach ($products as $product) {/* @var $product \common\models\Product */?>
@@ -123,8 +135,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             <?}?>
-        <?}else{?>
-            <h2>Нет товаров</h2>
         <?}?>
     </div>
 <!--    <div class="nav_number">-->
