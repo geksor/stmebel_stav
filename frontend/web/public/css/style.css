@@ -77,11 +77,11 @@ strong{
 .categoryDescription p{
 	padding: 10px 0px;
 }
-.content_catalog{
+.categoryFromCatalog{
 	width: 100% !important;
 	justify-content: end !important;
 }
-.content_catalog .category{
+.categoryFromCatalog .category{
 	width: 23%;
 }
 .usluga{
