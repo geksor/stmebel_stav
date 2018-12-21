@@ -106,6 +106,12 @@ strong{
 	width: 303px;
 	font-size: 14px;
 }
+.reviewsGroup .form_area{
+	max-width: 619px;
+	width: 100%;
+	padding: 10px;
+	font-size: 14px;
+}
 .fa, .fas{
 	font-size: 16px;
 }
