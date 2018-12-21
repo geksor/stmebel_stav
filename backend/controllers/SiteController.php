@@ -2,21 +2,17 @@
 namespace backend\controllers;
 
 use backend\models\WebVisitor;
-use backend\models\Advantage;
 use common\models\AboutPage;
 use common\models\AgreePage;
 use common\models\Contact;
 use common\models\DeliveryPage;
-use common\models\ImageUpload;
 use common\models\SiteSettings;
 use nox\components\http\userAgent\UserAgentParser;
 use Yii;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use yii\web\UploadedFile;
 
 /**
  * Site controller
