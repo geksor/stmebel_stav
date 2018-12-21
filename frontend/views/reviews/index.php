@@ -20,32 +20,35 @@ $this->registerMetaTag([
 $this->title = 'Отзывы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="reviews">
+    <div class="review">
+        <? if ($models) {?>
+            <? foreach ($models as $model) {/* @var $model \common\models\AllReviews */?>
+                <div class="flex">
+                    <p class="revew_name"><?= $model->user_name ?></p>
+                    <p class="revew_date"><?= Yii::$app->formatter->asDate($model->created_at, 'long') ?></p>
+                </div>
+                <p class="revew_text"><?= $model->text ?></p>
+            <?}?>
+        <?}?>
+    </div>
+    <?php $form = ActiveForm::begin([
+        'action' => '/reviews/send-reviews'
+    ]); ?>
 
-<? if ($models) {?>
-    <? foreach ($models as $model) {/* @var $model \common\models\AllReviews */?>
-        <?= $model->user_name ?>
-        <?= Yii::$app->formatter->asDate($model->created_at, 'long') ?>
-        <?= $model->text ?>
-    <?}?>
-<?}?>
+    <div class="addInput" style="display: none">
+        <?= $form->field($formModel, 'lastName')->textInput([
+            'class' => 'addInput',
+        ])->label(false) ?>
+    </div>
 
-<?php $form = ActiveForm::begin([
-    'action' => '/reviews/send-reviews'
-]); ?>
+    <?= $form->field($formModel, 'user_name', ['options' => ['class' => 'reviewsGroup']])->textInput(['maxlength' => true, 'class' => 'form_text', 'placeholder' => 'Ваше имя'])->label(false) ?>
 
-<div class="addInput" style="display: none">
-    <?= $form->field($formModel, 'lastName')->textInput([
-        'class' => 'addInput',
-    ])->label(false) ?>
+    <?= $form->field($formModel, 'email', ['options' => ['class' => 'reviewsGroup']])->textInput(['maxlength' => true, 'class' => 'form_text', 'placeholder' => 'Ваш Email'])->label(false) ?>
+
+    <?= $form->field($formModel, 'text')->textarea(['class' => 'form_area', 'cols' => '30', 'rows' => '10', 'placeholder' => 'Текст отзыва...'])->label(false) ?>
+
+    <?= \yii\helpers\Html::submitButton('Оставить отзыв', ['class' => 'zabron_read']) ?>
+
+    <?php ActiveForm::end(); ?>
 </div>
-
-<?= $form->field($formModel, 'user_name', ['options' => ['class' => 'reviewsGroup']])->textInput(['maxlength' => true, 'class' => 'form_text', 'placeholder' => 'Ваше имя'])->label(false) ?>
-
-<?= $form->field($formModel, 'email', ['options' => ['class' => 'reviewsGroup']])->textInput(['maxlength' => true, 'class' => 'form_text', 'placeholder' => 'Ваш Email'])->label(false) ?>
-
-<?= $form->field($formModel, 'text')->textarea(['class' => 'form_area', 'cols' => '30', 'rows' => '10', 'placeholder' => 'Текст отзыва...'])->label(false) ?>
-
-<?= \yii\helpers\Html::submitButton('Оставить отзыв', ['class' => 'zabron_read']) ?>
-
-<?php ActiveForm::end(); ?>
-

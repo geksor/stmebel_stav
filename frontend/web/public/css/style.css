@@ -70,6 +70,28 @@ input {outline:none;}
 strong{
 	font-weight: bold;
 }
+.review{
+	padding: 20px;
+	border-bottom: 2px dotted #dee3e1;
+}
+.revew_name{
+	font-size: 16px;
+	color: #00d081;
+	line-height: 24px;
+	letter-spacing: 0.4px;
+}
+.revew_date{
+	font-size: 16px;
+	color: #9da19f;
+	line-height: 24px;
+	letter-spacing: 0.4px;
+}
+.revew_text{
+	font-size: 16px;
+	color: #424242;
+	line-height: 24px;
+	letter-spacing: 0.4px;
+}
 .fa, .fas{
 	font-size: 16px;
 }
