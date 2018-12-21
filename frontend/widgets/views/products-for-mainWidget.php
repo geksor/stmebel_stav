@@ -142,7 +142,7 @@
                             <?}?>
                             <? if ($model->hot) {?>
                                 <div class="sale hot">
-                                    <p>Хит п<i class="fas fa-ruble-sign"></i>одаж</p>
+                                    <p>Хит продаж</p>
                                 </div>
                             <?}?>
                             <? if ($model->new) {?>
