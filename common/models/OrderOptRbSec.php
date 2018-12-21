@@ -42,8 +42,8 @@ class OrderOptRbSec extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'rank' => 'Rank',
+            'title' => 'Заголовок',
+            'rank' => 'Порядок вывода',
         ];
     }
 

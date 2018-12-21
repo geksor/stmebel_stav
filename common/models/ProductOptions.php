@@ -51,10 +51,10 @@ class ProductOptions extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
-            'options_id' => 'Options ID',
-            'optionsValue_id' => 'Options Value ID',
-            'options_value' => 'Options Value',
+            'product_id' => 'Товар',
+            'options_id' => 'Характеристика',
+            'optionsValue_id' => 'Значение характеристики',
+            'options_value' => 'Значение характеристики',
         ];
     }
 

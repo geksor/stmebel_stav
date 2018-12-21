@@ -48,12 +48,12 @@ class OrderItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_id' => 'Order ID',
-            'title' => 'Title',
-            'attr' => 'Attr',
-            'color' => 'Color',
-            'count' => 'Count',
-            'price' => 'Price',
+            'order_id' => 'ID заказа',
+            'title' => 'Название',
+            'attr' => 'Выбранные атрибуты',
+            'color' => 'Цвет',
+            'count' => 'Количество',
+            'price' => 'Цена',
         ];
     }
 

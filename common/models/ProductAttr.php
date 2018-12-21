@@ -51,12 +51,12 @@ class ProductAttr extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
-            'attr_id' => 'Attr ID',
-            'attrValue_id' => 'Attr Value ID',
-            'price_mod' => 'Price Mod',
-            'add_price' => 'Add Price',
-            'rank' => 'Rank',
+            'product_id' => 'Товар',
+            'attr_id' => 'Атрибут',
+            'attrValue_id' => 'Значение атрибута',
+            'price_mod' => 'Режим изменения цены',
+            'add_price' => 'Значение изменения цены',
+            'rank' => 'Порядок вывода',
         ];
     }
 

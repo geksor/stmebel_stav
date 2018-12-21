@@ -44,8 +44,8 @@ class RecommendedProduct extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
-            'recommProduct_id' => 'Recomm Product ID',
+            'product_id' => 'Товар',
+            'recommProduct_id' => 'Рекомендуемый товар',
         ];
     }
 

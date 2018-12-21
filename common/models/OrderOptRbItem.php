@@ -46,10 +46,10 @@ class OrderOptRbItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'section_id' => 'Section ID',
-            'title' => 'Title',
-            'addPrice' => 'Add Price',
-            'rank' => 'Rank',
+            'section_id' => 'Группа',
+            'title' => 'Название',
+            'addPrice' => 'Добавить к цене',
+            'rank' => 'Порядок вывода',
         ];
     }
 

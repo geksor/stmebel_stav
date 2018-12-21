@@ -41,9 +41,9 @@ class OrderOptCheckbox extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'addPrice' => 'Add Price',
-            'rank' => 'Rank',
+            'title' => 'Название',
+            'addPrice' => 'Добавить к цене',
+            'rank' => 'Порядок вывода',
         ];
     }
 }

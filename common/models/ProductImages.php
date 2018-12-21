@@ -67,10 +67,10 @@ class ProductImages extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'image' => 'Image',
-            'title' => 'Title',
-            'rank' => 'Rank',
+            'product_id' => 'Товар',
+            'image' => 'Изображение',
+            'title' => 'Заголовок',
+            'rank' => 'Порядок вывода',
             'uploadImage' => 'Изображение',
         ];
     }
