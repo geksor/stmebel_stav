@@ -629,11 +629,13 @@ Main Components
   }
   .cd-dropdown-content .cd-secondary-dropdown > li > a {
     color: #3f8654;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     margin-bottom: 10px;
     line-height: 30px;
     height: 30px;
-    pointer-events: none;
+  }
+  .cd-dropdown-content .cd-secondary-dropdown > li > a:hover {
+    text-decoration: underline;
   }
   .cd-dropdown-content .cd-secondary-dropdown > li > a::after, .cd-dropdown-content .cd-secondary-dropdown > li > a::before {
     /* hide the arrow */
