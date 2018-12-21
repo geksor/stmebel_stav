@@ -98,7 +98,8 @@ strong{
 }
 .reviewsGroup{
 	display: inline-block;
-	margin-right: 10px
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 .reviewsGroup .form_text{
 	padding: 10px;
