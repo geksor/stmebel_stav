@@ -41,14 +41,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'addInput',
         ])->label(false) ?>
     </div>
+    <div class="reviews_form">
+        <?= $form->field($formModel, 'user_name', ['options' => ['class' => 'reviewsGroup']])->textInput(['maxlength' => true, 'class' => 'form_text', 'placeholder' => 'Ваше имя'])->label(false) ?>
 
-    <?= $form->field($formModel, 'user_name', ['options' => ['class' => 'reviewsGroup']])->textInput(['maxlength' => true, 'class' => 'form_text', 'placeholder' => 'Ваше имя'])->label(false) ?>
+        <?= $form->field($formModel, 'email', ['options' => ['class' => 'reviewsGroup']])->textInput(['maxlength' => true, 'class' => 'form_text', 'placeholder' => 'Ваш Email'])->label(false) ?>
 
-    <?= $form->field($formModel, 'email', ['options' => ['class' => 'reviewsGroup']])->textInput(['maxlength' => true, 'class' => 'form_text', 'placeholder' => 'Ваш Email'])->label(false) ?>
+        <?= $form->field($formModel, 'text')->textarea(['class' => 'form_area', 'cols' => '30', 'rows' => '10', 'placeholder' => 'Текст отзыва...'])->label(false) ?>
 
-    <?= $form->field($formModel, 'text')->textarea(['class' => 'form_area', 'cols' => '30', 'rows' => '10', 'placeholder' => 'Текст отзыва...'])->label(false) ?>
+        <?= \yii\helpers\Html::submitButton('Оставить отзыв', ['class' => 'zabron_read']) ?>
 
-    <?= \yii\helpers\Html::submitButton('Оставить отзыв', ['class' => 'zabron_read']) ?>
-
-    <?php ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
+    </div>
 </div>
