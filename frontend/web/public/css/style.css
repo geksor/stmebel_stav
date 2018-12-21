@@ -613,6 +613,15 @@ input[type=radio] {
 .head_search{
 	width: 80%;
 }
+.searchMobile .form_search{
+	width: 100%;
+	padding: 10px;
+	border-top: 1px solid #dee3e1;
+	border-bottom: 1px solid #dee3e1;
+}
+.searchMobile .button_search{
+	border-right: 0px solid #dee3e1;
+}
 .form_search{
 	width: 69%;
 	display: flex;
