@@ -33,7 +33,7 @@
             <p>Все права защищены (с) 2018 <a href="https://web-elitit.ru">design by ELIT-IT</a></p>
         </div>
         <div class="footer_menu">
-            <?= \frontend\widgets\HeaderMenuWidget::widget() ?>
+            <?= \frontend\widgets\FooterMenuWidget::widget() ?>
         </div>
         <?= \frontend\widgets\ContactFooterWidget::widget() ?>
     </div>

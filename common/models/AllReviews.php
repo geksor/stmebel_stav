@@ -37,7 +37,8 @@ class AllReviews extends \yii\db\ActiveRecord
         return [
             [['user_name', 'created_at'], 'required'],
             [['text'], 'string'],
-            [['created_at', 'done_at', 'publish', 'viewed'], 'integer'],
+            [['publish', 'viewed'], 'integer'],
+            [['create_at', 'done_at',], 'safe'],
             [['user_name', 'email', 'lastName'], 'string', 'max' => 255],
         ];
     }

@@ -29,15 +29,14 @@
                             ['label' => 'Заказы', 'icon' => 'comments', 'url' => ['/order'], "active" => Yii::$app->controller->id === 'order',],
                         ],
                     ],
-//                    [
-//                        'label' => 'Обратная связь',
-//                        'icon' => 'reply',
-//                        'url' => '#',
-//                        'items' => [
-//                            ['label' => 'Обратный звонок', 'icon' => 'phone-square', 'url' => ['/call-back'], "active" => Yii::$app->controller->id === 'call-back',],
-//                            ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/comment'], "active" => Yii::$app->controller->id === 'comment',],
-//                        ],
-//                    ],
+                    [
+                        'label' => 'Обратная связь',
+                        'icon' => 'reply',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/all-reviews'], "active" => Yii::$app->controller->id === 'all-reviews',],
+                        ],
+                    ],
                     [
                         'label' => 'Настройки сайта',
                         'icon' => 'cogs',

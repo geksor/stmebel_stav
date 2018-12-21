@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\AllReviews;
 use common\models\SiteSettings;
 use frontend\models\SiteSearch;
 use Yii;
@@ -9,7 +10,7 @@ use yii\web\Controller;
 /**
  * Site controller
  */
-class SearchController extends Controller
+class ReviewsController extends Controller
 {
 
     /**
@@ -31,17 +32,16 @@ class SearchController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SiteSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        $products = $dataProvider->getModels();
-
         $siteSettings = new SiteSettings();
 
+        $models = AllReviews::find()->where(['publish' => 1])->orderBy(['created_at' => SORT_ASC])->all();
+
+        $formModel = new AllReviews();
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'products' => $products,
             'siteSettings' => $siteSettings,
+            'models' => $models,
+            'formModel' => $formModel,
         ]);
     }
 
