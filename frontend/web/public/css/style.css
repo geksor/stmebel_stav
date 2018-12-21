@@ -71,7 +71,6 @@ strong{
 	font-weight: bold;
 }
 .categoryDescription{
-	padding: 10px;
 	font-size: 14px;
 	line-height: 24px;
 }
@@ -79,7 +78,8 @@ strong{
 	padding: 10px 0px;
 }
 .content_catalog{
-	width: 100%;
+	width: 100% !important;
+	justify-content: end !important;
 }
 .content_catalog .category{
 	width: 23%;
