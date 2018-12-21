@@ -106,11 +106,21 @@ strong{
 	width: 303px;
 	font-size: 14px;
 }
-.reviewsGroup .form_area{
+.reviews_form .form_area{
 	max-width: 619px;
 	width: 100%;
 	padding: 10px;
 	font-size: 14px;
+}
+.reviews_form .zabron_read{
+	max-width: 619px;
+	width: 100%;
+	padding: 20px;
+	font-size: 16px;
+	border: 0px;
+	background: #00d081;
+	color: #fff;
+	text-transform: uppercase;
 }
 .fa, .fas{
 	font-size: 16px;
