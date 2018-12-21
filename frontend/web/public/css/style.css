@@ -67,6 +67,9 @@ input {outline:none;}
 	outline: 0;
 	outline-offset: 0;
 }
+strong{
+	font-weight: bold;
+}
 .usluga{
 	width: 33%;
 	margin-bottom: 50px;
