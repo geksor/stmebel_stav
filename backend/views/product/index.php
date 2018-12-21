@@ -56,6 +56,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title',
 //                    'description:ntext',
                     [
+                        'attribute' => 'price',
+                        'format' => 'raw',
+                        'value' => function ($data){
+                            /* @var $data \common\models\Product */
+                            return Html::input('number', 'price' ,$data->price, ['class' => 'form-control', 'id' => $data->id]);
+                        }
+                    ],
+                    [
                         'attribute' => 'rank',
                         'format' => 'raw',
                         'value' => function ($data){
@@ -87,13 +95,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]); ?>
-            <?php Pjax::end(); ?>
-        </div>
-    </div>
-</div>
 
-<?
-$js = <<< JS
+            <?
+            $js = <<< JS
     $('[name = rank]').keypress(function(e){
         if(e.keyCode==13){
             $.ajax({
@@ -103,10 +107,24 @@ $js = <<< JS
             })
         }
     });
+    $('[name = price]').keypress(function(e){
+        if(e.keyCode==13){
+            $.ajax({
+                type: "GET",
+                url: "/admin/product/price",
+                data: 'id='+ $(this).attr('id') +'&price='+ $(this).val(),
+            })
+        }
+    });
 JS;
 
-$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
-?>
+            $this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+            ?>
+            <?php Pjax::end(); ?>
+        </div>
+    </div>
+</div>
+
 
 <?php
 $css= <<< CSS
