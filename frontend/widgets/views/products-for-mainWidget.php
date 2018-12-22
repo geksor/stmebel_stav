@@ -59,11 +59,11 @@
                                         <p><?= $model->getSaleAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= $model->getAttrPrice() ?> <i class="fas fa-ruble-sign"></i></p>
+                                        <p><?= $model->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= $model->getAttrPrice() ?> <i class="fas fa-ruble-sign"></i></p>
+                                        <p><?= $model->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                 <?}?>
                             </div>
@@ -111,14 +111,14 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> <i class="fas fa-ruble-sign"></i></p>
+                                        <p><?= $model->getSaleAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> <i class="fas fa-ruble-sign"></i></p>
+                                        <p><?= $model->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> <i class="fas fa-ruble-sign"></i></p>
+                                        <p><?= $model->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                 <?}?>
                             </div>
@@ -166,14 +166,14 @@
                             <div class="product_price flex">
                                 <? if ($model->sale) {?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->getNewPrice()) ?> <i class="fas fa-ruble-sign"></i></p>
+                                        <p><?= $model->getSaleAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                     <div class="price_2">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> <i class="fas fa-ruble-sign"></i></p>
+                                        <p><?= $model->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                 <?}else{?>
                                     <div class="price_1">
-                                        <p><?= Yii::$app->formatter->asInteger($model->price) ?> <i class="fas fa-ruble-sign"></i></p>
+                                        <p><?= $model->getAttrPrice(true) ?> <i class="fas fa-ruble-sign"></i></p>
                                     </div>
                                 <?}?>
                             </div>

@@ -60,9 +60,12 @@ class CatalogController extends Controller
             $prodArr = ArrayHelper::getColumn($model->categoryProducts, 'product_id');
 
             $query = Product::find()->where(['publish' => 1, 'id' => $prodArr])->orderBy($prodOrder);
+
+            $categories = null;
         }else{
             $model = null;
-            $query = Product::find()->where(['publish' => 1])->orderBy($prodOrder);
+            $query = null;
+            $categories = Category::find()->where(['publish' => 1])->orderBy(['rank' => SORT_ASC])->all();
         }
 
         $modelsFromLeft = Category::find()
@@ -136,21 +139,26 @@ class CatalogController extends Controller
 //        $pages->pageSizeParam = false;
 //        $pages->forcePageParam = false;
 
-        $products = $query
-            ->with([
-                'productOptionsList'  => function (\yii\db\ActiveQuery $query) {
-                    $query->with(['options', 'optionsValue']);
-                },
-            ])
+        if ($query){
+            $products = $query
+                ->with([
+                    'productOptionsList'  => function (\yii\db\ActiveQuery $query) {
+                        $query->with(['options', 'optionsValue']);
+                    },
+                ])
 //            ->offset($pages->offset)
 //            ->limit($pages->limit)
-            ->all();
+                ->all();
+        }else{
+            $products = null;
+        }
 
         return $this->render('index', [
             'model' => $model,
             'products' => $products,
 //            'pages' => $pages,
-            'items' => $items
+            'items' => $items,
+            'categories' => $categories,
         ]);
     }
 

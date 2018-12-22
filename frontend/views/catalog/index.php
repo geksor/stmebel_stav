@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 /* @var $products \common\models\Product */
 /* @var $pages \yii\data\Pagination */
 /* @var $modelsFromLeft \common\models\Category */
+/* @var $categories \common\models\Category */
 
 if ($model){
     $this->title = $model->title;
@@ -82,6 +83,16 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     <?}?>
     <div class="flex_4">
+        <? if ($categories) {?>
+            <div class="content_catalog categoryFromCatalog cont flex">
+                <? foreach ($categories as $category) {/* @var $category \common\models\Category */?>
+                    <a class="category" href = "<?= \yii\helpers\Url::to($category->url) ?>">
+                        <?= $category->image ?>
+                        <h2><?= $category->title ?></h2>
+                    </a>
+                <?}?>
+            </div>
+        <?}?>
         <? if ($products) {?>
             <? foreach ($products as $product) {/* @var $product \common\models\Product */?>
                 <div class="product product_in">
