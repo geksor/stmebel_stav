@@ -862,7 +862,6 @@ input[type=radio] {
 }
 .product.carusel:hover{
 	position: absolute;
-	height: auto;
 }
 .product_name{
 	font-size: 18px;
