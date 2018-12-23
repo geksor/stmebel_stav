@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = 'Редактирование';
         <div class="box-body">
 
             <p>
-                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['index', 'par_id' => $model->product_id], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('<i class="fa fa-reply" aria-hidden="true"></i>', ['index'], ['class' => 'btn btn-default']) ?>
             </p>
 
             <?= $this->render('_form', [

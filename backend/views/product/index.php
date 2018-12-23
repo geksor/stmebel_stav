@@ -65,6 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'rank',
+                        'label' => 'Сорт.',
                         'format' => 'raw',
                         'value' => function ($data){
                             /* @var $data \common\models\Product */
