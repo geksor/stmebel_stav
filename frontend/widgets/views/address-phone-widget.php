@@ -9,7 +9,7 @@
     <p class="head_map"><a href="/contact">Показать на карте</a></p>
 </div>
 <div class="head_phone">
-    <p>8 8652<span>218-113</span></p>
+    <p>8 928<span> 290-25-26</span></p>
     <p class="call_me">перезвони мне</p>
 </div>
 <div class="head_cart head_mobile flex">
