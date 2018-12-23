@@ -844,7 +844,7 @@ input[type=radio] {
 	margin-top: 10px;
 }
 .product .product_read a{
-	display: block;
+	display: none;
 	text-align: center;
 	background-color: #00d081;
 	color: #fff;
