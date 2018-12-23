@@ -9,7 +9,8 @@
     <p class="head_map"><a href="/contact">Показать на карте</a></p>
 </div>
 <div class="head_phone">
-    <p>8 928<span> 787-71-16</span></p>
+    <p><?= $model->phone_1 ?></p>
+    <p><?= $model->phone_2 ?></p>
     <p class="call_me">перезвони мне</p>
 </div>
 <div class="head_cart head_mobile flex">
