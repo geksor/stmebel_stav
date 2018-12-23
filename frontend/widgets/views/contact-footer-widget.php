@@ -13,6 +13,6 @@
 <div class="footer_adress">
     <h5>График работы:</h5>
     <p>Пн-Сб: <?= $model->mo_sa ?></p>
-    <p>Перерыв: <?= $model->su ?></p>
-    <p>Вс: <?= $model->break ?></p>
+    <p>Выходной: <?= $model->su ?></p>
+    <!--<p>Вс: <?= $model->break ?></p>-->
 </div>
