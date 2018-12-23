@@ -595,6 +595,7 @@ input[type=radio] {
 }
 .head_phone{
 	font-size: 24px;
+	line-size: 28px;
 	letter-spacing: normal;
 	color: #bbc0be;
 }
