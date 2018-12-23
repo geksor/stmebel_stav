@@ -891,7 +891,7 @@ input[type=radio] {
 	align-items: stretch;
 }
 .product_in .product_read{
-	display: block;
+	display: none;
 }
 .product_in:hover{
 	margin-bottom: -1px;
@@ -1038,7 +1038,6 @@ input[type=radio] {
 }
 
 .left_menu ul li>ul {
-	display: none;
 	top: 100%;
 	left: 0px;
 	background: #f0f3f2;
