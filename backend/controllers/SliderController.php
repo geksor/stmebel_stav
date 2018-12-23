@@ -41,6 +41,7 @@ class SliderController extends Controller
                             'create',
                             'update',
                             'delete',
+                            'galleryApi',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
