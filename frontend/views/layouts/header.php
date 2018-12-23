@@ -43,8 +43,8 @@
                 </a>
             </div>
             <div class="head_name">
-                <h1>Мебель для дома и офиса<br>в Ставрополе и крае</h1>
-            </div>
+                <h1>Мебель для дома и офиса<br>в Грозном</h1>
+            </div><!---->
             <?= \frontend\widgets\AddressPhoneWidget::widget() ?>
             <div class="head_cart head_mobile flex">
                 <a href="/contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
