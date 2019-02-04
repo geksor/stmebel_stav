@@ -13,7 +13,7 @@ $this->registerMetaTag([
     'content' => $siteSettings->meta_description,
 ]);
 
-$this->title = 'Главная';
+$this->title = 'Мебель в ставрополе';
 ?>
 
 <?= \frontend\widgets\CategoryForMainWidget::widget() ?>

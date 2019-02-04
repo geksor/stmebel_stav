@@ -5,7 +5,7 @@ return [
         '@npm'   => '@vendor/npm-asset',
         '@uploads'   => '@frontend/web/uploads',
     ],
-    'name' => 'Cupe-city.ru',
+    'name' => 'st-mebel.ru',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
