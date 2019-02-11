@@ -147,7 +147,7 @@ class CartController extends Controller
             if (Yii::$app->request->referrer === 'cart'){
                 return $this->redirect('/');
             }
-            VarDumper::dump(Yii::$app->request, 20,true);die;
+            VarDumper::dump(Yii::$app->request->pathInfo, 20,true);die;
             return $this->redirect(Yii::$app->request->referrer);
         }
 
