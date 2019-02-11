@@ -15,9 +15,7 @@ use frontend\widgets\CartWidget;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
-use yii\web\Request;
 
 /**
  * Site controller
@@ -144,10 +142,9 @@ class CartController extends Controller
 
         if (empty($cartProduct)){
             Yii::$app->session->setFlash('warning', 'Корзина пуста');
-            if (Yii::$app->request->referrer === 'cart'){
+            if (Yii::$app->request->pathInfo === 'cart'){
                 return $this->redirect('/');
             }
-            VarDumper::dump(Yii::$app->request->pathInfo, 20,true);die;
             return $this->redirect(Yii::$app->request->referrer);
         }
 
