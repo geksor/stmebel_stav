@@ -17,6 +17,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
+use yii\web\Request;
 
 /**
  * Site controller
@@ -146,6 +147,7 @@ class CartController extends Controller
             if (Yii::$app->request->referrer === 'cart'){
                 return $this->redirect('/');
             }
+            VarDumper::dump(Yii::$app->request->referrer, 20,true);die;
             return $this->redirect(Yii::$app->request->referrer);
         }
 
