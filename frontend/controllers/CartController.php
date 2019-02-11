@@ -142,9 +142,11 @@ class CartController extends Controller
 
         if (empty($cartProduct)){
             Yii::$app->session->setFlash('warning', 'Корзина пуста');
-            if (Yii::$app->request->pathInfo === 'cart'){
+
+            if (Yii::$app->request->referrer === Yii::$app->request->absoluteUrl){
                 return $this->redirect('/');
             }
+
             return $this->redirect(Yii::$app->request->referrer);
         }
 
