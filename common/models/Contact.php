@@ -126,9 +126,9 @@ class Contact extends Model
             'kpp' => 'КПП',
             'ogrn' => 'ОГРН',
 
-            'insta' => 'Инстаграмм',
-            'telegram' => 'Телеграм',
-            'whatsApp' => 'WhatsApp',
+            'insta' => 'Инстаграмм (Ссылка на профиль)',
+            'telegram' => 'Телеграм (Имя пользователя)',
+            'whatsApp' => 'WhatsApp (Номер телефона без плюса только цифры начинать с 7)',
 
             'chatId' => 'ID чата',
 
