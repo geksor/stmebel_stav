@@ -158,7 +158,7 @@ class ProductOptionsController extends Controller
     {
         $this->findModel($product_id, $options_id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'par_id' => $product_id]);
     }
 
     /**
