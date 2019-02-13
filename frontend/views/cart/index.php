@@ -146,7 +146,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             <? if ($radioOption->orderOptRbItems) {?>
                                 <h3><?= $radioOption->title ?>:</h3>
                                 <? foreach ($radioOption->orderOptRbItems as $optRbItem) {?>
-                                    <label class="container"><?= $optRbItem->title ?> <a>( +<?= $optRbItem->addPrice ?> руб.)</a>
+                                    <label class="container"><?= $optRbItem->title ?> <a>
+                                            (
+                                            <? if ($checkOption->addPrice) {?>
+                                                +<?= $checkOption->addPrice ?> руб.
+                                            <?}else{?>
+                                                Бесплатно
+                                            <?}?>
+                                            )
+                                        </a>
                                         <input class="radioCart"
                                             <?=
                                             \yii\helpers\ArrayHelper::isIn($optRbItem->id, Yii::$app->session->get('cart')['select_option']['radio'])
