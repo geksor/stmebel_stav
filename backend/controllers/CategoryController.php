@@ -48,7 +48,7 @@ class CategoryController extends Controller
                             'publish',
                             'rank',
                             'set-image',
-                            'option-show',
+                            'options-show',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
