@@ -479,7 +479,7 @@ class Product extends \yii\db\ActiveRecord
             foreach ($attrArr as $attr){
                 if (!empty($attr)){
                     foreach ($attr as $attrValueId => $attrId){
-                        $model = ProductAttr::find()->where(['attrValue_id' => $attrValueId, 'attr_id' => $attrId])->one();
+                        $model = ProductAttr::find()->where(['product_id' => $this->id,'attrValue_id' => $attrValueId, 'attr_id' => $attrId])->one();
                             switch ($model->price_mod){
                                 case 0:
                                     $basePrice = $basePrice + $model->add_price;
