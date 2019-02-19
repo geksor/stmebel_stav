@@ -154,8 +154,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <? foreach ($radioOption->orderOptRbItems as $optRbItem) {?>
                                     <label class="container"><?= $optRbItem->title ?> <a>
                                             (
-                                            <? if ($radioOption->addPrice) {?>
-                                                +<?= $radioOption->addPrice ?> руб.
+                                            <? if ($optRbItem->addPrice) {?>
+                                                +<?= $optRbItem->addPrice ?> руб.
                                             <?}else{?>
                                                 Бесплатно
                                             <?}?>
