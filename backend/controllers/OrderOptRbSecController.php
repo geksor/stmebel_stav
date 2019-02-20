@@ -147,7 +147,7 @@ class OrderOptRbSecController extends Controller
     {
         $model = $this->findModelItem($id);
 
-        $parentTitle = OrderOptRbSec::findOne($id)->title;
+        $parentTitle = $this->findModel($id)->title;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->section_id]);
