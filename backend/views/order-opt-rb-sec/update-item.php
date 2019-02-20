@@ -7,6 +7,7 @@ use yii\helpers\Html;
 /* @var $parentTitle */
 
 $this->title = 'Редактирование варианта: '.$model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Выбор из нескольких', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $parentTitle, 'url' => ['view', 'id' => $model->section_id]];
 $this->params['breadcrumbs'][] = 'Редактирование';
 ?>
