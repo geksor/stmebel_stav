@@ -18,9 +18,9 @@
                                 'icon' => 'phone-square',
                                 'url' => '#',
                                 'items' => [
-                                    ['label' => 'Одиночные', 'icon' => 'comments', 'url' => ['/order-opt-checkbox'], "active" => Yii::$app->controller->id === 'order-opt-checkbox',],
+                                    ['label' => 'Не одиночные', 'icon' => 'comments', 'url' => ['/order-opt-checkbox'], "active" => Yii::$app->controller->id === 'order-opt-checkbox',],
                                     [
-                                        'label' => 'Выбор из нескольких',
+                                        'label' => 'Одиночные',
                                         'icon' => 'comments',
                                         'url' => ['/order-opt-rb-sec'],
                                         "active" => Yii::$app->controller->id === 'order-opt-rb-sec',],
