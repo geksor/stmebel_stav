@@ -257,7 +257,11 @@ class CartController extends Controller
                 Yii::$app->session->setFlash('success', 'Ваш заказ принят. В ближайшее время с вами свяжется менеджер для подтверждения заказа.');
                 if ($contactModel->chatId){
                     $message = "Новый заказ с сайта\n Имя: $order->customer_name \n Телефон: $order->customer_phone \n Сумма заказа: $order->total_price";
-                    \Yii::$app->bot->sendMessage((integer)$contactModel->chatId, $message);
+                    try{
+                        \Yii::$app->bot->sendMessage((integer)$contactModel->chatId, $message);
+                    }catch (Exception $exception){
+
+                    }
                 }
                 if ($contactModel->email) {
                     $order->sendEmail();
