@@ -153,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <h3><?= $radioOption->title ?>:</h3>
                                 <? foreach ($radioOption->orderOptRbItems as $optRbItem) {?>
                                     <label class="container"><?= $optRbItem->title ?> <a>
-                                            <? if (!(integer)$optRbItem->rank === 999) {?>
+                                            <? if ($optRbItem->rank !== 999) {?>
                                                 (
                                                 <? if ($optRbItem->addPrice) {?>
                                                     +<?= $optRbItem->addPrice ?> руб.
