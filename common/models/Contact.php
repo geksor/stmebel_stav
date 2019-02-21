@@ -132,8 +132,8 @@ class Contact extends Model
 
             'chatId' => 'ID чата',
 
-            'mo_sa' => 'Пн-Вт',
-            'su' => 'Воскресенье',
+            'mo_sa' => 'Пн-Пт',
+            'su' => 'Сб-Вс',
             'break' => 'Перерыв',
         ];
     }

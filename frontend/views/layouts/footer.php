@@ -30,7 +30,7 @@
                          </g>
                     </svg>
             </a>
-            <p>Все права защищены (с) 2018 <a href="https://web-elitit.ru">design by ELIT-IT</a></p>
+            <p>Все права защищены (с) <?= date('Y') ?> <a href="https://web-elitit.ru">design by ELIT-IT</a></p>
         </div>
         <div class="footer_menu">
             <?= \frontend\widgets\FooterMenuWidget::widget() ?>

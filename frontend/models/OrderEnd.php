@@ -33,6 +33,7 @@ class OrderEnd extends Model
 
             ['customer_email', 'trim'],
             ['customer_email', 'email'],
+            ['customer_email', 'required'],
             ['customer_email', 'string', 'max' => 255],
 
             [['props_checkbox', 'props_radiobutton', 'products', 'total_price'], 'safe'],

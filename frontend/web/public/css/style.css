@@ -964,6 +964,9 @@ input[type=radio] {
 	padding: 0;
 	background: none;
 }
+.ui-tabs .ui-tabs-panel * {
+	margin: 10px 0;
+}
 .ui-widget.ui-widget-content{
 	border: 0;
 }
@@ -1084,7 +1087,6 @@ input[type=radio] {
 	flex-flow: row wrap;
 	justify-content: flex-start;
 	align-items: center;
-	text-transform: lowercase;
 	padding: 10px;
 	border-bottom: 1px solid #dee3e1;
 	transition: all 0.2s ease-in-out;
