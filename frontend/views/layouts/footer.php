@@ -30,6 +30,7 @@
                          </g>
                     </svg>
             </a>
+            <?= \frontend\widgets\SocIcoFooterWidget::widget() ?>
             <p>Все права защищены (с) <?= date('Y') ?> <a href="https://web-elitit.ru">design by ELIT-IT</a></p>
         </div>
         <div class="footer_menu">
