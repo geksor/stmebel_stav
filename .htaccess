@@ -23,7 +23,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ frontend/web/index.php [L]
 
 # redirect to the URL without a trailing slash (uncomment if necessary)
-RewriteRule ^admin/$ /admin [L,R=301]
+#RewriteRule ^admin/$ /admin [L,R=301]
 
 # rewrite the URI of the backend app
 RewriteCond %{ENV:APP} =backend
@@ -42,6 +42,6 @@ RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [L,R=301]
 RewriteCond %{HTTP_HOST} ^([^www].*)$
 RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteCond %{HTTPS} off
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
