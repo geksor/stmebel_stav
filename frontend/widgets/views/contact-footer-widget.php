@@ -12,7 +12,7 @@
 </div>
 <div class="footer_adress">
     <h5>График работы:</h5>
-    <p>Пн-Сб: <?= $model->mo_sa ?></p>
-    <p>Выходной: <?= $model->su ?></p>
+    <p>Пн-Пт: <?= $model->mo_sa ?></p>
+    <p>Сб-Вс: <?= $model->su ?></p>
     <!--<p>Вс: <?= $model->break ?></p>-->
 </div>
