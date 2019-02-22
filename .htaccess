@@ -41,4 +41,4 @@ RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [L,R=301]
 
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^(.*)$ https://%{REQUEST_URI}/ [L,R=301]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/ [L,R=301]
