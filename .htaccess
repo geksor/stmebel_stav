@@ -4,7 +4,7 @@ Options FollowSymLinks
 DirectoryIndex index.php index.html
 RewriteEngine on
 
-#RewriteCond %{HTTPS} off
+RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^(.*)$ https://%{REQUEST_URI} [L,R=301]
 
