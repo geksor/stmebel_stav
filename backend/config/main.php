@@ -70,7 +70,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'ya-map' => 'site/ya-map',
+                '/' => 'site/index',
                 'contact' => 'site/contact',
                 'about-home' => 'site/about-home',
                 'about-page' => 'site/about-page',
