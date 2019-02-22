@@ -596,10 +596,10 @@ input[type=radio] {
 	color: #9fa4a2;
 }
 .head_phone{
-	font-size: 24px;
 	line-height: 28px;
 	letter-spacing: normal;
 	color: #bbc0be;
+	font-size: 16px;
 }
 .head_phone span{
 	font-size: 24px;
