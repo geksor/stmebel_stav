@@ -27,7 +27,7 @@ RewriteRule ^ frontend/web/index.php [L]
 
 # rewrite the URI of the backend app
 RewriteCond %{ENV:APP} =backend
-RewriteRule ^admin/?(.*)$ backend/web/%{REQUEST_URI}
+RewriteRule ^ admin/backend/web/%{REQUEST_URI}
 # if a directory or a file exists, use the request directly
 RewriteCond %{ENV:APP} =backend
 RewriteCond %{REQUEST_FILENAME} !-f
