@@ -13,9 +13,6 @@ use yii\helpers\Html;
 $this->title = 'STMebel-Панель администратора';
 ?>
 <div class="site-index container-fluid">
-    <p>
-        <?= Html::a('Панель статистики', ['/dashboard'], ['class' => 'btn btn-success']) ?>
-    </p>
     <div class="row">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
             <div class="info-box">
