@@ -39,9 +39,8 @@ RewriteRule ^ backend/web/index.php [L]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [L,R=301]
 
-RewriteEngine on
 RewriteCond %{HTTP_HOST} !^www\.(.*) [NC]
-RewriteRule (.*) https://www.%{HTTP_HOST}%{REQUEST_URI}/ [L,R=301]
+RewriteRule ^(.*)$ https://www.%{REQUEST_URI}/ [L,R=301]
 
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
