@@ -820,7 +820,6 @@ input[type=radio] {
 .slider1 .owl-stage-outer{
 	padding: 50px 3px;
 	width: calc(100% + 2px);
-	height: 500px;
 	position: relative;
 }
 .products{
