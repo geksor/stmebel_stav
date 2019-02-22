@@ -4,6 +4,10 @@ Options FollowSymLinks
 DirectoryIndex index.php index.html
 RewriteEngine on
 
+#RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 RewriteRule /\. - [L,F]
 
 # define the app environment variable
@@ -38,7 +42,3 @@ RewriteRule ^ backend/web/index.php [L]
 # handle a directory trailing slash, redirect to the initial URI instead the rewritten one
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [L,R=301]
-
-#RewriteCond %{HTTPS} off
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
