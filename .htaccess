@@ -23,11 +23,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ frontend/web/index.php [L]
 
 # redirect to the URL without a trailing slash (uncomment if necessary)
-#RewriteRule ^admin/$ /admin [L,R=301]
+RewriteRule ^admin/$ /admin [L,R=301]
 
 # rewrite the URI of the backend app
 RewriteCond %{ENV:APP} =backend
-RewriteRule ^ admin/backend/web/%{REQUEST_URI}
+RewriteRule ^admin/?(.*)$ backend/web/$1
 # if a directory or a file exists, use the request directly
 RewriteCond %{ENV:APP} =backend
 RewriteCond %{REQUEST_FILENAME} !-f
