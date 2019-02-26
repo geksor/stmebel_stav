@@ -8,7 +8,7 @@
     <h5>Поддержка</h5>
     <p><?= $model->phone_1 ?></p>
     <p><?= $model->phone_2 ?></p>
-    <!--<p><?= $model->email ?></p>-->
+    <p><?= $model->email ?></p>
 </div>
 <div class="footer_adress">
     <h5>График работы:</h5>
