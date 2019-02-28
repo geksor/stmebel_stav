@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($orderForm, 'customer_phone')->textInput(['maxlength' => true, 'placeholder' => 'Номер телефона *'])->label(false) ?>
 
-                <?= $form->field($orderForm, 'customer_email')->textInput(['maxlength' => true, 'placeholder' => 'email (необязательно)'])->label(false) ?>
+                <?= $form->field($orderForm, 'customer_email')->textInput(['maxlength' => true, 'placeholder' => 'email *'])->label(false) ?>
 
                 <div style="display: none!important;">
 
