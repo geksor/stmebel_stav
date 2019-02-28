@@ -143,11 +143,8 @@ class CartController extends Controller
         }
 
         if (empty($cartProduct)){
-            VarDumper::dump(Yii::$app->request->referrer,10,true);
-            VarDumper::dump(Yii::$app->request->absoluteUrl,10,true);die;
             Yii::$app->session->setFlash('warning', 'Корзина пуста');
-            if (Yii::$app->request->referrer === Yii::$app->request->absoluteUrl){
-
+            if (Yii::$app->request->pathInfo === Yii::$app->controller->id){
                 return $this->redirect('/');
             }
 
