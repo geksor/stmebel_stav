@@ -35,7 +35,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-ol:not('productDescription'), ul:not('productDescription') {
+ol:not(productDescription ol), ul:not(productDescription ul) {
 	list-style: none;
 }
 blockquote, q {
