@@ -964,7 +964,7 @@ input[type=radio] {
 	padding: 0;
 	background: none;
 }
-.ui-tabs .ui-tabs-panel *:not('productDescription *') {
+.ui-tabs .ui-tabs-panel * {
 	margin: 0;
 }
 .ui-widget.ui-widget-content{
