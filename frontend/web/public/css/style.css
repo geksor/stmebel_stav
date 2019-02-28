@@ -7,19 +7,19 @@
 	src: url(../fonts/Robotobold.ttf);
 }
 /* Eric Meyer's CSS Reset */
-html, body, div:not('productDescription div'), span:not('productDescription span'), applet:not('productDescription applet'), object:not('productDescription object'), iframe:not('productDescription iframe'),
-h1:not('productDescription h1'), h2:not('productDescription h2'), h3:not('productDescription h3'), h4:not('productDescription h4'), h5:not('productDescription h5'), h6:not('productDescription h6'), p:not('productDescription p'), blockquote:not('productDescription blockquote'), pre:not('productDescription pre'),
-a:not('productDescription a'), abbr:not('productDescription addr'), acronym:not('productDescription acronym'), address:not('productDescription address'), big:not('productDescription big'), cite:not('productDescription cite'), code:not('productDescription code'),
-del:not('productDescription del'), dfn:not('productDescription dfn'), em:not('productDescription em'), img:not('productDescription img'), ins:not('productDescription ins'), kbd:not('productDescription kbd'), q:not('productDescription q'), s:not('productDescription s'), samp:not('productDescription samp'),
-small:not('productDescription small'), strike:not('productDescription strike'), strong:not('productDescription strong'), sub:not('productDescription sub'), sup:not('productDescription sup'), tt:not('productDescription tt'), var:not('productDescription var'),
-b:not('productDescription b'), u:not('productDescription u'), i:not('productDescription i'), center:not('productDescription center'),
-dl:not('productDescription dl'), dt:not('productDescription dt'), dd:not('productDescription dd'), ol:not('productDescription ol'), ul:not('productDescription ul'), li:not('productDescription li'),
-fieldset:not('productDescription fieldset'), form:not('productDescription form'), label:not('productDescription lable'), legend:not('productDescription legend'),
-table:not('productDescription table'), caption:not('productDescription caption'), tbody:not('productDescription tbody'), tfoot:not('productDescription tfoot'), thead:not('productDescription thead'), tr:not('productDescription tr'), th:not('productDescription th'), td:not('productDescription td'),
-article:not('productDescription article'), aside:not('productDescription aside'), canvas:not('productDescription canvas'), details:not('productDescription details'), embed:not('productDescription embet'),
-figure:not('productDescription figure'), figcaption:not('productDescription figcaption'), footer, header, hgroup:not('productDescription hgroup'),
-menu:not('productDescription menu'), nav:not('productDescription nav'), output:not('productDescription output'), ruby, section:not('productDescription section'), summary:not('productDescription summary'),
-time:not('productDescription time'), mark:not('productDescription mark'), audio:not('productDescription audio'), video:not('productDescription video') {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
