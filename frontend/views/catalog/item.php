@@ -323,7 +323,7 @@ $this->registerCssFile('/public/css/xzoom.css');
     $js = <<< JS
     $(document).ready(function (){
         
-        $('.productDescription').find('ul').each(function() {
+        $('.productDescription').find('*').each(function() {
             $(this).addClass('productDescription');
         });
         
