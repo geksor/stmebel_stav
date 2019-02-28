@@ -226,7 +226,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         <?}?>
         <? if ($model->description) {?>
-            <div id="description">
+            <div id="description" class="productDescription">
                 <?= $model->description ?>
             </div>
         <?}?>
