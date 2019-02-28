@@ -219,8 +219,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div id="alloptions">
                 <? foreach ($model->productOptionsAll as $option) {/* @var $option \common\models\ProductOptions */?>
                     <div class="product_full_description">
-                        <h4><?= $option->options->title ?>:</h4>
-                        <p><?= $option->optionsValue_id?$option->optionsValue->value:$option->options_value ?></p>
+                        <h4 style="display: inline-block"><?= $option->options->title ?>:</h4>
+                        <p style="display: inline-block"><?= $option->optionsValue_id?$option->optionsValue->value:$option->options_value ?></p>
                     </div>
                 <?}?>
             </div>
