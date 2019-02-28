@@ -7,7 +7,7 @@
 	src: url(../fonts/Robotobold.ttf);
 }
 /* Eric Meyer's CSS Reset */
-html:not(.productDescription), body:not(.productDescription), div:not(.productDescription), span:not(.productDescription), applet:not(.productDescription), object:not(.productDescription), iframe:not(.productDescription),
+html, body, div:not(.productDescription), span:not(.productDescription), applet:not(.productDescription), object:not(.productDescription), iframe:not(.productDescription),
 h1:not(.productDescription), h2:not(.productDescription), h3:not(.productDescription), h4:not(.productDescription), h5:not(.productDescription), h6:not(.productDescription), p:not(.productDescription), blockquote:not(.productDescription), pre:not(.productDescription),
 a:not(.productDescription), abbr:not(.productDescription), acronym:not(.productDescription), address:not(.productDescription), big:not(.productDescription), cite:not(.productDescription), code:not(.productDescription),
 del:not(.productDescription), dfn:not(.productDescription), em:not(.productDescription), img:not(.productDescription), ins:not(.productDescription), kbd:not(.productDescription), q:not(.productDescription), s:not(.productDescription), samp:not(.productDescription),
