@@ -7,19 +7,19 @@
 	src: url(../fonts/Robotobold.ttf);
 }
 /* Eric Meyer's CSS Reset */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html:not(.productDescription), body:not(.productDescription), div:not(.productDescription), span:not(.productDescription), applet:not(.productDescription), object:not(.productDescription), iframe:not(.productDescription),
+h1:not(.productDescription), h2:not(.productDescription), h3:not(.productDescription), h4:not(.productDescription), h5:not(.productDescription), h6:not(.productDescription), p:not(.productDescription), blockquote:not(.productDescription), pre:not(.productDescription),
+a:not(.productDescription), abbr:not(.productDescription), acronym:not(.productDescription), address:not(.productDescription), big:not(.productDescription), cite:not(.productDescription), code:not(.productDescription),
+del:not(.productDescription), dfn:not(.productDescription), em:not(.productDescription), img:not(.productDescription), ins:not(.productDescription), kbd:not(.productDescription), q:not(.productDescription), s:not(.productDescription), samp:not(.productDescription),
+small:not(.productDescription), strike:not(.productDescription), strong:not(.productDescription), sub:not(.productDescription), sup:not(.productDescription), tt:not(.productDescription), var:not(.productDescription),
+b:not(.productDescription), u:not(.productDescription), i:not(.productDescription), center:not(.productDescription),
+dl:not(.productDescription), dt:not(.productDescription), dd:not(.productDescription), ol:not(.productDescription), ul:not(.productDescription), li:not(.productDescription),
+fieldset:not(.productDescription), form:not(.productDescription), label:not(.productDescription), legend:not(.productDescription),
+table:not(.productDescription), caption:not(.productDescription), tbody:not(.productDescription), tfoot:not(.productDescription), thead:not(.productDescription), tr:not(.productDescription), th:not(.productDescription), td:not(.productDescription),
+article:not(.productDescription), aside:not(.productDescription), canvas:not(.productDescription), details:not(.productDescription), embed:not(.productDescription),
+figure:not(.productDescription), figcaption:not(.productDescription), footer:not(.productDescription), header:not(.productDescription), hgroup:not(.productDescription),
+menu:not(.productDescription), nav:not(.productDescription), output:not(.productDescription), ruby:not(.productDescription), section:not(.productDescription), summary:not(.productDescription),
+time:not(.productDescription), mark:not(.productDescription), audio:not(.productDescription), video:not(.productDescription) {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -964,7 +964,7 @@ input[type=radio] {
 	padding: 0;
 	background: none;
 }
-.ui-tabs .ui-tabs-panel * {
+.ui-tabs .ui-tabs-panel *:not(.productDescription) {
 	margin: 0;
 }
 .ui-widget.ui-widget-content{
