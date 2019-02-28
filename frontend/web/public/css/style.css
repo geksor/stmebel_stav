@@ -7,19 +7,19 @@
 	src: url(../fonts/Robotobold.ttf);
 }
 /* Eric Meyer's CSS Reset */
-html:not('productDescription *'), body:not('productDescription *'), div:not('productDescription *'), span:not('productDescription *'), applet:not('productDescription *'), object:not('productDescription *'), iframe:not('productDescription *'),
-h1:not('productDescription *'), h2:not('productDescription *'), h3:not('productDescription *'), h4:not('productDescription *'), h5:not('productDescription *'), h6:not('productDescription *'), p:not('productDescription *'), blockquote:not('productDescription *'), pre:not('productDescription *'),
-a:not('productDescription *'), abbr:not('productDescription *'), acronym:not('productDescription *'), address:not('productDescription *'), big:not('productDescription *'), cite:not('productDescription *'), code:not('productDescription *'),
-del:not('productDescription *'), dfn:not('productDescription *'), em:not('productDescription *'), img:not('productDescription *'), ins:not('productDescription *'), kbd:not('productDescription *'), q:not('productDescription *'), s:not('productDescription *'), samp:not('productDescription *'),
-small:not('productDescription *'), strike:not('productDescription *'), strong:not('productDescription *'), sub:not('productDescription *'), sup:not('productDescription *'), tt:not('productDescription *'), var:not('productDescription *'),
-b:not('productDescription *'), u:not('productDescription *'), i:not('productDescription *'), center:not('productDescription *'),
-dl:not('productDescription *'), dt:not('productDescription *'), dd:not('productDescription *'), ol:not('productDescription *'), ul:not('productDescription *'), li:not('productDescription *'),
-fieldset:not('productDescription *'), form:not('productDescription *'), label:not('productDescription *'), legend:not('productDescription *'),
-table:not('productDescription *'), caption:not('productDescription *'), tbody:not('productDescription *'), tfoot:not('productDescription *'), thead:not('productDescription *'), tr:not('productDescription *'), th:not('productDescription *'), td:not('productDescription *'),
-article:not('productDescription *'), aside:not('productDescription *'), canvas:not('productDescription *'), details:not('productDescription *'), embed:not('productDescription *'),
-figure:not('productDescription *'), figcaption:not('productDescription *'), footer:not('productDescription *'), header:not('productDescription *'), hgroup:not('productDescription *'),
-menu:not('productDescription *'), nav:not('productDescription *'), output:not('productDescription *'), ruby:not('productDescription *'), section:not('productDescription *'), summary:not('productDescription *'),
-time:not('productDescription *'), mark:not('productDescription *'), audio:not('productDescription *'), video:not('productDescription *') {
+html, body, div:not('productDescription div'), span:not('productDescription span'), applet:not('productDescription applet'), object:not('productDescription object'), iframe:not('productDescription iframe'),
+h1:not('productDescription h1'), h2:not('productDescription h2'), h3:not('productDescription h3'), h4:not('productDescription h4'), h5:not('productDescription h5'), h6:not('productDescription h6'), p:not('productDescription p'), blockquote:not('productDescription blockquote'), pre:not('productDescription pre'),
+a:not('productDescription a'), abbr:not('productDescription addr'), acronym:not('productDescription acronym'), address:not('productDescription address'), big:not('productDescription big'), cite:not('productDescription cite'), code:not('productDescription code'),
+del:not('productDescription del'), dfn:not('productDescription dfn'), em:not('productDescription em'), img:not('productDescription img'), ins:not('productDescription ins'), kbd:not('productDescription kbd'), q:not('productDescription q'), s:not('productDescription s'), samp:not('productDescription samp'),
+small:not('productDescription small'), strike:not('productDescription strike'), strong:not('productDescription strong'), sub:not('productDescription sub'), sup:not('productDescription sup'), tt:not('productDescription tt'), var:not('productDescription var'),
+b:not('productDescription b'), u:not('productDescription u'), i:not('productDescription i'), center:not('productDescription center'),
+dl:not('productDescription dl'), dt:not('productDescription dt'), dd:not('productDescription dd'), ol:not('productDescription ol'), ul:not('productDescription ul'), li:not('productDescription li'),
+fieldset:not('productDescription fieldset'), form:not('productDescription form'), label:not('productDescription lable'), legend:not('productDescription legend'),
+table:not('productDescription table'), caption:not('productDescription caption'), tbody:not('productDescription tbody'), tfoot:not('productDescription tfoot'), thead:not('productDescription thead'), tr:not('productDescription tr'), th:not('productDescription th'), td:not('productDescription td'),
+article:not('productDescription article'), aside:not('productDescription aside'), canvas:not('productDescription canvas'), details:not('productDescription details'), embed:not('productDescription embet'),
+figure:not('productDescription figure'), figcaption:not('productDescription figcaption'), footer, header, hgroup:not('productDescription hgroup'),
+menu:not('productDescription menu'), nav:not('productDescription nav'), output:not('productDescription output'), ruby, section:not('productDescription section'), summary:not('productDescription summary'),
+time:not('productDescription time'), mark:not('productDescription mark'), audio:not('productDescription audio'), video:not('productDescription video') {
 	margin: 0;
 	padding: 0;
 	border: 0;
