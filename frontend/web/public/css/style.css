@@ -929,11 +929,11 @@ input[type=radio] {
 	line-height: 1.33;
 	letter-spacing: 0.5px;
 	color: #424242;
-	min-height: 48px;
+	flex: 1;
 }
 .product_description{
 	font-size: 12px;
-	min-height: 30px;
+	/*min-height: 30px;*/
 	line-height: 1.33;
 	letter-spacing: 0.3px;
 	text-align: left;
@@ -947,7 +947,7 @@ input[type=radio] {
 	margin-left: -1px;
 	display: flex;
 	flex-flow: column;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: stretch;
 }
 .product_in .product_read{
