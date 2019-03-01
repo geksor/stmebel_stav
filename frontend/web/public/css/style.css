@@ -929,7 +929,7 @@ input[type=radio] {
 }
 .product_name{
 	font-size: 18px;
-	margin: 10px;
+	margin: 10px 0;
 	line-height: 1.33;
 	letter-spacing: 0.5px;
 	color: #424242;
