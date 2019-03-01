@@ -884,6 +884,10 @@ input[type=radio] {
 	margin-top: 50px;
 }
 .product{
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	align-items: stretch;
 	z-index: 0;
 	font-family: 'Roboto';
 	padding: 10px;
@@ -938,6 +942,7 @@ input[type=radio] {
 	letter-spacing: 0.3px;
 	text-align: left;
 	color: #9da19f;
+	flex: 1;
 }
 .product_in{
 	position: relative;
