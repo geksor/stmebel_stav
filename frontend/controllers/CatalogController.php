@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 /**
  * Site controller
@@ -162,11 +163,17 @@ class CatalogController extends Controller
         ]);
     }
 
+    /**
+     * @param $alias
+     * @param $item
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionItem($alias, $item)
     {
         $modelCat = Category::findOne(['alias' => $alias]);
 
-        $model = Product::find()
+        if (($model = Product::find()
             ->where(['alias' => $item])
             ->with([
                 'productAttrsCats'  => function (\yii\db\ActiveQuery $query) {
@@ -197,13 +204,16 @@ class CatalogController extends Controller
                     },
                 ]);
             },])
-            ->one();
+            ->one()) !== null){
+            return $this->render('item', [
+                'model' => $model,
+                'modelCat' => $modelCat,
+            ]);
+        }
+
+        throw new NotFoundHttpException('Запрошенная страница не найдена.');
 
 
-        return $this->render('item', [
-            'model' => $model,
-            'modelCat' => $modelCat,
-        ]);
     }
 
     public function actionAddCart($prod_id, $prod_price, $prod_count, $prod_attrValue, $prodColor)
