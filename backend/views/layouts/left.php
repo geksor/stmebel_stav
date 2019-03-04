@@ -35,6 +35,7 @@
                         'url' => '#',
                         'items' => [
                             ['label' => 'Отзывы', 'icon' => 'comments', 'url' => ['/all-reviews'], "active" => Yii::$app->controller->id === 'all-reviews',],
+                            ['label' => 'Обратная связь', 'icon' => 'phone', 'url' => ['/call-back'], "active" => Yii::$app->controller->id === 'call-back',],
                         ],
                     ],
                     [
