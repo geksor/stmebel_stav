@@ -11,7 +11,7 @@
 <div class="head_phone">
     <p><?= $model->phone_1 ?></p>
     <p><?= $model->phone_2 ?></p>
-    <p class="call_me">перезвони мне</p>
+    <p class="call_me callBackModalShow" style="cursor: pointer;">перезвони мне</p>
 </div>
 <div class="head_cart head_mobile flex">
     <a href="tel:<?= preg_replace("/[^0-9]/", '', $model->phone_2)?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473.806 473.806">

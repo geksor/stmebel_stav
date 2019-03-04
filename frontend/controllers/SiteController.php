@@ -107,6 +107,8 @@ class SiteController extends Controller
 
     public function actionCallBack()
     {
+        $contactModel = new Contact();
+        $contactModel->load(Yii::$app->params);
         $model = new CallBack();
 
         if ($model->load(Yii::$app->request->post())){
@@ -114,14 +116,17 @@ class SiteController extends Controller
                 return $this->redirect(Yii::$app->request->referrer);
             }
             if ($model->save()){
-                \Yii::$app->session->setFlash('popUp', 'Ваша заявка принята');
-                if (ArrayHelper::keyExists('chatId', Yii::$app->params['Contact'])){
+                \Yii::$app->session->setFlash('success', 'Ваша заявка принята');
+                if ($contactModel->chatId){
                     $message = "Запрос обратного звонка\n Имя: $model->name \n Телефон: $model->phone";
-                    \Yii::$app->bot->sendMessage((integer)Yii::$app->params['Contact']['chatId'], $message);
+                    \Yii::$app->bot->sendMessage((integer)$contactModel->chatId, $message);
                 }
-                $model->sendEmail();
+                if ($contactModel->email) {
+                    $model->sendEmail();
+                }
+
             }else{
-                \Yii::$app->session->setFlash('popUp', 'Ошибка. Попробуйте еще раз');
+                \Yii::$app->session->setFlash('error', 'Ошибка. Попробуйте еще раз');
             }
         }
         return $this->redirect(Yii::$app->request->referrer);

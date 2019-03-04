@@ -1,11 +1,8 @@
 
 
+<?php if (Yii::$app->session->hasFlash('success')) {?>
 
-
-
-<? if (Yii::$app->session->hasFlash('success')) {?>
-
-<?
+<?php
     $js = <<< JS
     $('#popUp').modal('show');
 JS;

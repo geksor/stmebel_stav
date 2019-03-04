@@ -75,6 +75,7 @@ AppAsset::register($this);
 </div>
 
 <?= \frontend\widgets\ModalsWidget::widget() ?>
+<?= \frontend\widgets\CallBackWidget::widget() ?>
 
 <button id="buttonUp" class="buttonUp active">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
