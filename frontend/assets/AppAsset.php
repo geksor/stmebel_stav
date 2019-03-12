@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         'public/css/mobile.css',
         'public/css/jquery.fancybox.min.css',
         'public/css/owl.carousel.min.css',
+        'public/pickr-master/dist/pickr.min.css',
 
     ];
     public $js = [
@@ -39,6 +40,7 @@ class AppAsset extends AssetBundle
         'public/js/setup.js',
         'public/js/Lib.js',
         'public/js/picker.js',
+        'public/pickr-master/dist/pickr.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

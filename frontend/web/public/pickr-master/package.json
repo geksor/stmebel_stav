@@ -1,0 +1,42 @@
+{
+    "name": "pickr-widget",
+    "version": "0.3.2",
+    "license": "MIT",
+    "author": "Simon Reinisch <toports@gmx.de>",
+    "description": "Flat, Simple, Hackable Color-Picker.",
+    "keywords": [
+        "ux",
+        "color",
+        "color-picker"
+    ],
+    "main": "./dist/pickr.min.js",
+    "scripts": {
+        "build": "webpack --mode production",
+        "dev": "webpack-dev-server --mode development",
+        "lint": "eslint ./src"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.1.5",
+        "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+        "@babel/preset-env": "^7.1.5",
+        "babel-loader": "^8.0.4",
+        "css-loader": "^1.0.1",
+        "eslint": "^5.9.0",
+        "eslint-loader": "^2.1.1",
+        "mini-css-extract-plugin": "^0.4.4",
+        "node-sass": "^4.10.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.1",
+        "sass-loader": "^7.1.0",
+        "webpack": "^4.25.1",
+        "webpack-cli": "^3.1.2",
+        "webpack-dev-server": "^3.1.10"
+    },
+    "homepage": "https://github.com/Simonwep/pickr#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Simonwep/pickr.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Simonwep/pickr/issues"
+    }
+}
