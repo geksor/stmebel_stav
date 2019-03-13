@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
  * Class Contact
  * @package backend\models
  *
+ * @property string $title_home
  * @property string $meta_title
  * @property string $meta_description
  * @property int $slider
@@ -17,6 +18,7 @@ use yii\helpers\ArrayHelper;
  */
 class SiteSettings extends Model
 {
+    public $title_home;
     public $meta_title;
     public $meta_description;
     public $slider;
@@ -32,6 +34,7 @@ class SiteSettings extends Model
         return [
             [
                 [
+                    'title_home',
                     'meta_title',
                     'meta_description',
                 ],
@@ -52,6 +55,7 @@ class SiteSettings extends Model
     public function attributeLabels()
     {
         return [
+            'title_home' => 'Заголовок главной страницы',
             'meta_title' => 'Meta-title по умолчанию',
             'meta_description' => 'Meta-description по умолчанию',
             'slider' => 'Слайдер на главную'

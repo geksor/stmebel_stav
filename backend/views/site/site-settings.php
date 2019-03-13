@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php $form = ActiveForm::begin(); ?>
 
+            <?= $form->field($model, 'title_home') ?>
+
             <?= $form->field($model, 'meta_title') ?>
 
             <?= $form->field($model, 'meta_description') ?>
