@@ -763,6 +763,25 @@ input[type=radio] {
 .head_slide img{
 	width: 100%;
 }
+
+@media (max-width: 1070px) {
+	.head_catalog{
+		width: 30%;
+	}
+	.head_search{
+		width: 60%;
+	}
+}
+
+@media (max-width: 700px) {
+	.head_catalog{
+		width: 40%;
+	}
+	.head_search{
+		width: 50%;
+	}
+}
+
 /* Middle
 -----------------------------------------------------------------------------*/
 .head_mobile{
