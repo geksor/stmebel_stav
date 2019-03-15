@@ -43,7 +43,7 @@
                 </a>
             </div>
             <div class="head_name">
-                <?php if (Yii::$app->request->url !== Yii::$app->homeUrl) {?>
+                <?php if (Yii::$app->request->url === Yii::$app->homeUrl) {?>
                     <h1 class="h1">Мебель для дома и офиса<br>в Ставрополе</h1>
                 <?} else {?>
                     <div class="h1">Мебель для дома и офиса<br>в Ставрополе</div>
