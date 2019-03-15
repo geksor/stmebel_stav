@@ -9,7 +9,7 @@
     <div class="cd-dropdown-wrapper">
         <a class="cd-dropdown-trigger" href="#0">Каталог мебели</a>
         <nav class="cd-dropdown">
-            <div class="h2">Каталог мебели</div>
+<!--            <h2">Каталог мебели</div>-->
             <a href="#0" class="cd-close">Закрыть</a>
             <ul class="cd-dropdown-content">
                 <? if ($items) {?>
