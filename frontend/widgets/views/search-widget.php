@@ -6,22 +6,22 @@ use yii\widgets\ActiveForm;
 
 ?>
 <div class="head_search flex">
-    <div id=selectBox>
-        <!-- стрелка по правому краю для анимации, показывающая, что div-блок можно развернуть -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14.665" class="arrow">
-            <path fill="#00D17D" fill-rule="evenodd" d="M17.485 2l-7.071 7.071-1.415 1.414-1.414-1.414L.514 2 1.929.586l7.07 7.071L16.07.586 17.485 2z"/>
-        </svg>
-        <!-- текст, который будет виден в боксе -->
-        <p class=valueTag name=select>Все категории</p>
-        <!-- тот самый выпадающий список -->
-        <ul id=selectMenuBox>
-            <? if ($selectBox) {?>
-                <? foreach ($selectBox as $key => $option) {?>
-                    <li class='option searchOption' data-id="<?= $key ?>"><?= $option ?></li>
-                <?}?>
-            <?}?>
-        </ul>
-    </div> <!-- конец бокса -->
+<!--    <div id=selectBox>-->
+<!--        <!-- стрелка по правому краю для анимации, показывающая, что div-блок можно развернуть -->-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14.665" class="arrow">-->
+<!--            <path fill="#00D17D" fill-rule="evenodd" d="M17.485 2l-7.071 7.071-1.415 1.414-1.414-1.414L.514 2 1.929.586l7.07 7.071L16.07.586 17.485 2z"/>-->
+<!--        </svg>-->
+<!--        <!-- текст, который будет виден в боксе -->-->
+<!--        <p class=valueTag name=select>Все категории</p>-->
+<!--        <!-- тот самый выпадающий список -->-->
+<!--        <ul id=selectMenuBox>-->
+<!--            --><?// if ($selectBox) {?>
+<!--                --><?// foreach ($selectBox as $key => $option) {?>
+<!--                    <li class='option searchOption' data-id="--><?//= $key ?><!--">--><?//= $option ?><!--</li>-->
+<!--                --><?//}?>
+<!--            --><?//}?>
+<!--        </ul>-->
+<!--    </div> <!-- конец бокса -->-->
     <? $form = ActiveForm::begin([
             'action' => '/search/index',
             'method' => 'get',
@@ -43,13 +43,13 @@ use yii\widgets\ActiveForm;
     <? ActiveForm::end() ?>
 </div>
 
-<?
-
-$js = <<< JS
-    $('.searchOption').on('click', function() {
-        $('.filterCat').val($(this).attr('data-id'));
-    });
-JS;
-
-$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
-?>
+<?//
+//
+//$js = <<< JS
+//    $('.searchOption').on('click', function() {
+//        $('.filterCat').val($(this).attr('data-id'));
+//    });
+//JS;
+//
+//$this->registerJs($js, $position = yii\web\View::POS_END, $key = null);
+//?>
