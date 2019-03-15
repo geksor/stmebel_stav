@@ -703,7 +703,7 @@ input[type=radio] {
 	color: #9fa4a2;
 }
 .head_3{
-	height: 50px;
+	/*height: 50px;*/
 	border-top: 1px solid #dee3e1;
 	border-bottom: 1px solid #dee3e1;
 }
@@ -729,7 +729,7 @@ input[type=radio] {
 	margin-right: 20px;
 }
 .head_search{
-	width: 80%;
+	width: 70%;
 }
 .searchMobile .form_search{
 	width: 100%;
@@ -741,7 +741,7 @@ input[type=radio] {
 	border-right: 0px solid #dee3e1;
 }
 .form_search{
-	width: 69%;
+	width: 100%;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
