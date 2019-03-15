@@ -38,7 +38,7 @@ if ($breads){
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="left_menu" id = "nav">
-    <h2>Каталог мебели</h2>
+    <div class="h2">Каталог мебели</div>
     <?= \yii\widgets\Menu::widget([
         'items' => $items,
         'activateItems' => true,
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <? foreach ($model->child as $child) {?>
                 <a class="category" href = "<?= \yii\helpers\Url::to($child->url) ?>">
                     <?= $child->image ?>
-                    <h2><?= $child->title ?></h2>
+                    <div class="h2"><?= $child->title ?></div>
                 </a>
             <?}?>
         </div>
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <? foreach ($categories as $category) {/* @var $category \common\models\Category */?>
                     <a class="category" href = "<?= \yii\helpers\Url::to($category->url) ?>">
                         <?= $category->image ?>
-                        <h2><?= $category->title ?></h2>
+                        <div class="h2"><?= $category->title ?></div>
                     </a>
                 <?}?>
             </div>

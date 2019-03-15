@@ -96,7 +96,7 @@ $this->registerCss($css, ["type" => "text/css"], "callBackWidget" );
         <div class="callBackFormWrap">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Заказ обратного звонка</h5>
+                    <div class="modal-title">Заказ обратного звонка</div>
                     <button type="button" class="callBackBtn close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

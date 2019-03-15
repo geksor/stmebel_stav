@@ -102,7 +102,7 @@ h1.productDescription {
 	margin-inline-end: 0px;
 	font-weight: bold;
 }
-h2.productDescription {
+.h2.productDescription {
 	display: block;
 	font-size: 1.5em;
 	margin-block-start: 0.83em;
@@ -111,7 +111,7 @@ h2.productDescription {
 	margin-inline-end: 0px;
 	font-weight: bold;
 }
-h3.productDescription {
+.h3.productDescription {
 	display: block;
 	font-size: 1.17em;
 	margin-block-start: 1em;
@@ -120,7 +120,7 @@ h3.productDescription {
 	margin-inline-end: 0px;
 	font-weight: bold;
 }
-h4.productDescription {
+.h4.productDescription {
 	display: block;
 	margin-block-start: 1.33em;
 	margin-block-end: 1.33em;
@@ -208,7 +208,7 @@ h4.productDescription {
 	width: 33%;
 	margin-bottom: 50px;
 }
-.usluga h4{
+.usluga .h4{
 	font-size: 24px;
 	font-family: 'RobotoBold';
 	letter-spacing: 0.6px;
@@ -538,13 +538,13 @@ input[type=radio] {
 	letter-spacing: 0.4px;
 	border-bottom: 2px dotted #dee3e1;
 }
-.product_full_description h4{
+.product_full_description .h4{
 	font-family: 'RobotoBold';
 	color: #9da19f;
 	line-height: 1.5;
 	letter-spacing: 0.4px;
 }
-.product_full_description h4{
+.product_full_description .h4{
 	color: #424242;
 }
 /* Header
@@ -790,7 +790,7 @@ input[type=radio] {
 	background: #eef2f0;
 	color: #bbc0be;
 }
-.category h2{
+.category .h2{
 	font-family: 'RobotoBold';
 	width: 100%;
 	font-size: 15px;
@@ -1131,7 +1131,7 @@ input[type=radio] {
 	border: 1px solid #dee3e1;
 	margin-bottom: 30px;
 }
-.left_menu h2{
+.left_menu .h2{
 	padding: 10px 10px 10px 55px;
 	background: #00d081;
 	font-size: 16px;
@@ -1160,7 +1160,7 @@ input[type=radio] {
 	color: #424242;
 	cursor: pointer;
 }
-.left_menu ul li a h3{
+.left_menu ul li a .h3{
 	width: 80%;
 	text-align: left;
 }
@@ -1254,7 +1254,7 @@ input[type=radio] {
 	border-bottom: 1px solid #bbc0be;
 	margin-left: -1px;
 }
-.right_content_head h1{
+.right_content_head .h1{
 	font-family: 'RobotoBold';
 	font-size: 16px;
 	line-height: 1.5;
@@ -1321,7 +1321,7 @@ input[type=radio] {
 	letter-spacing: 0.4px;
 	text-align: left;
 }
-.footer_adress h5{
+.footer_adress .h5{
 	font-size: 24px;
 	font-family: 'RobotoBold';
 	letter-spacing: 0.6px;

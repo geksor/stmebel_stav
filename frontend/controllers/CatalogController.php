@@ -117,7 +117,7 @@ class CatalogController extends Controller
                 $items[] = [
                     'label' => $item->title,
                     'url' => $item->url,
-                    'template' => '<a href="{url}">'.$item->image.'<h3>{label}</h3></a>',
+                    'template' => '<a href="{url}">'.$item->image.'<div class="h3">{label}</div></a>',
                     'items' => $itemsChild,
                 ];
 
@@ -125,7 +125,7 @@ class CatalogController extends Controller
                 $items[] = [
                     'label' => $item->title,
                     'url' => $item->url,
-                    'template' => '<a href="{url}">'.$item->image.'<h3>{label}</h3></a>',
+                    'template' => '<a href="{url}">'.$item->image.'<div class="h3">{label}</div></a>',
                 ];
             }
         }

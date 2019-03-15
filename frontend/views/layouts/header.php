@@ -43,7 +43,11 @@
                 </a>
             </div>
             <div class="head_name">
-                <h1>Мебель для дома и офиса<br>в Ставрополе</h1>
+                <?php if (Yii::$app->request->url !== Yii::$app->homeUrl) {?>
+                    <h1 class="h1">Мебель для дома и офиса<br>в Ставрополе</h1>
+                <?} else {?>
+                    <div class="h1">Мебель для дома и офиса<br>в Ставрополе</div>
+                <?}?>
             </div><!---->
             <?= \frontend\widgets\AddressPhoneWidget::widget() ?>
             <div class="head_cart head_mobile flex">
