@@ -347,7 +347,7 @@ $this->registerCssFile('/public/css/xzoom.css');
     $js = <<< JS
     $(document).ready(function (){
         
-        if ($('.color-picker')){
+        if (!$model->show_color){
             console.log('pkr_run');
             const pickr = Pickr.create({
                 el: '.color-picker',
