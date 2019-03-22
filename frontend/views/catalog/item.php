@@ -348,7 +348,6 @@ $this->registerCssFile('/public/css/xzoom.css');
     $(document).ready(function (){
         
         if (!$model->show_color){
-            console.log('pkr_run');
             const pickr = Pickr.create({
                 el: '.color-picker',
                 comparison: false,
@@ -389,7 +388,7 @@ $this->registerCssFile('/public/css/xzoom.css');
                     $('#colorImgHide').hide();
                 },
             });
-        } 
+        }
         
         $('.productDescription').find('*').each(function() {
             $(this).addClass('productDescription');
