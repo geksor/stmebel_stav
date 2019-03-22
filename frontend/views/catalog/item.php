@@ -347,46 +347,48 @@ $this->registerCssFile('/public/css/xzoom.css');
     $js = <<< JS
     $(document).ready(function (){
         
-        const pickr = Pickr.create({
-            el: '.color-picker',
-            comparison: false,
-            useAsButton: true,
-            parent: '.product_right',
-            default: '#f0f3f2',
-                    
-            components: {
-        
-                // Main components
-                preview: false,
-                opacity: false,
-                hue: true,
-        
-                // Input / output Options
-                interaction: {
-                    hex: false,
-                    rgba: false,
-                    hsla: false,
-                    hsva: false,
-                    cmyk: false,
-                    input: false,
-                    clear: false,
-                    save: true
-                }
-            },
-            strings: {
-               save: 'Выбрать'
-            },
-            onChange(hsva, instance) {
-                $('#addToCart').attr('data-color', hsva.toHEX().toString());
-                $('.color-picker').css('color', hsva.toHEX().toString());
-                $('#colorImgHide').hide();
-            },
-            onSave(hsva, instance) {
-                $('#addToCart').attr('data-color', hsva.toHEX().toString());
-                $('.color-picker').css('color', hsva.toHEX().toString());
-                $('#colorImgHide').hide();
-            },
-        });
+        if ($('.color-picker')){
+            const pickr = Pickr.create({
+                el: '.color-picker',
+                comparison: false,
+                useAsButton: true,
+                parent: '.product_right',
+                default: '#f0f3f2',
+                        
+                components: {
+            
+                    // Main components
+                    preview: false,
+                    opacity: false,
+                    hue: true,
+            
+                    // Input / output Options
+                    interaction: {
+                        hex: false,
+                        rgba: false,
+                        hsla: false,
+                        hsva: false,
+                        cmyk: false,
+                        input: false,
+                        clear: false,
+                        save: true
+                    }
+                },
+                strings: {
+                   save: 'Выбрать'
+                },
+                onChange(hsva, instance) {
+                    $('#addToCart').attr('data-color', hsva.toHEX().toString());
+                    $('.color-picker').css('color', hsva.toHEX().toString());
+                    $('#colorImgHide').hide();
+                },
+                onSave(hsva, instance) {
+                    $('#addToCart').attr('data-color', hsva.toHEX().toString());
+                    $('.color-picker').css('color', hsva.toHEX().toString());
+                    $('#colorImgHide').hide();
+                },
+            });
+        } 
         
         $('.productDescription').find('*').each(function() {
             $(this).addClass('productDescription');
