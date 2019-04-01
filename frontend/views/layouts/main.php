@@ -175,6 +175,7 @@ $js = <<< JS
         nav:true,
         autoplay:true,
         autoplayHoverPause:true,
+        autoplaySpeed:500,
         responsive:{
             0:{
                 items:1
