@@ -126,7 +126,8 @@ class CartController extends Controller
                     'attrValue' => $item['prod_attrValue'],
                 ];
 
-                $totalPrice += $itemProd->sale?$itemProd->getSaleCalcPrice($itemAttrProd):$itemProd->getCalcPrice($itemAttrProd)*$item['prod_count'];
+                $itemPrice = $itemProd->sale?$itemProd->getSaleCalcPrice($itemAttrProd):$itemProd->getCalcPrice($itemAttrProd);
+                $totalPrice += $itemPrice*$item['prod_count'];
             }
 
             foreach ($cart['select_option']['checkbox'] as $checkbox){
