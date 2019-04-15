@@ -77,7 +77,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?}?>
                             </div>
                             <div class="basket_price" id="<?= $key ?>">
-                                <?= Yii::$app->formatter->asInteger($productModel->getCalcPrice($item['modelProductAttr'], false)*$item['count']) ?> <i class="fas fa-ruble-sign"></i>
+                                <? $prodAttr =  $item['modelProductAttr']?>
+                                <?= Yii::$app->formatter->asInteger($productModel->sale?$productModel->getSaleCalcPrice($prodAttr):$productModel->getCalcPrice($prodAttr, false)*$item['count']) ?> <i class="fas fa-ruble-sign"></i>
                             </div>
                             <div class="product_right_cart flex">
                                 <div>
