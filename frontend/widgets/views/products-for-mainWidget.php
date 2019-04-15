@@ -96,7 +96,7 @@
                                 </div>
                             <?}?>
                             <div class="product_img">
-                                <img src="<?= $model->getThumbMainImage() ?>" alt="<?= $model->title ?>">
+                                <a href="<?= \yii\helpers\Url::to(['catalog/item', 'alias' => $model->mainCat->alias, 'item' => $model->alias]) ?>"><img src="<?= $model->getThumbMainImage() ?>" alt="<?= $model->title ?>"></a>
                             </div>
                             <div class="product_name">
                                 <?= $model->title ?>
@@ -151,7 +151,7 @@
                                 </div>
                             <?}?>
                             <div class="product_img">
-                                <img src="<?= $model->getThumbMainImage() ?>" alt="<?= $model->title ?>">
+                                <a href="<?= \yii\helpers\Url::to(['catalog/item', 'alias' => $model->mainCat->alias, 'item' => $model->alias]) ?>"><img src="<?= $model->getThumbMainImage() ?>" alt="<?= $model->title ?>"></a>
                             </div>
                             <div class="product_name">
                                 <?= $model->title ?>
