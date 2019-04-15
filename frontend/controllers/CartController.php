@@ -105,6 +105,7 @@ class CartController extends Controller
         $totalPrice = 0;
         if ($cart){
             foreach ($cart['items'] as $item){
+                /* @var $itemProd Product */
                 $itemProd = Product::find()
                     ->where(['id' => $item['prod_id']])
                     ->one();
@@ -125,7 +126,7 @@ class CartController extends Controller
                     'attrValue' => $item['prod_attrValue'],
                 ];
 
-                $totalPrice += $itemProd->getCalcPrice($itemAttrProd)*$item['prod_count'];
+                $totalPrice += $itemProd->sale?$itemProd->getSaleCalcPrice($itemAttrProd):$itemProd->getCalcPrice($itemAttrProd)*$item['prod_count'];
             }
 
             foreach ($cart['select_option']['checkbox'] as $checkbox){
