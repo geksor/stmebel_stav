@@ -6,6 +6,16 @@ RewriteEngine on
 
 RewriteRule /\. - [L,F]
 
+#RewriteCond %{HTTP_HOST} !^www\.(.*) [NC]
+#RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} !^www\.(.*) [NC]
+RewriteRule ^(.*)$ http://www.%1/$1 [R=301,L]
+
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 # define the app environment variable
 RewriteCond %{REQUEST_URI} !^/((frontend|backend)/web|admin)
 RewriteRule ^ - [E=APP:frontend]
@@ -39,14 +49,7 @@ RewriteRule ^ backend/web/index.php [L]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [L,R=301]
 
-RewriteCond %{ENV:APP} =frontend
-RewriteCond %{HTTP_HOST} !^www\.(.*) [NC]
-RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-RewriteCond %{ENV:APP} =frontend
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 #
 #RewriteCond %{ENV:APP} =backend
 #RewriteCond %{HTTPS} off
