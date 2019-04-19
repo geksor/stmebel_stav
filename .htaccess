@@ -41,7 +41,7 @@ RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [L,R=301]
 
 RewriteCond %{ENV:APP} =frontend
 RewriteCond %{HTTP_HOST} !^www\.(.*) [NC]
-RewriteRule ^(.*)$ https://www.%1/$1 [R=301,L]
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%/$1 [R=301,L]
 
 RewriteCond %{ENV:APP} =frontend
 RewriteCond %{HTTPS} off
