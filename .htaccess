@@ -6,11 +6,8 @@ RewriteEngine on
 
 RewriteRule /\. - [L,F]
 
-#RewriteCond %{HTTP_HOST} !^www\.(.*) [NC]
-#RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
 RewriteCond %{HTTP_HOST} !^www\.(.*) [NC]
-RewriteRule ^(.*)$ http://www.%1/$1 [R=301,L]
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
